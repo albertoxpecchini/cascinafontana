@@ -1,22 +1,51 @@
 # Cascina Fontana
 
-Sito ufficiale statico per Cascina Fontana.
+Landing page per Cascina Fontana — azienda agricola a gestione diretta.
+
+## Stack
+
+- **Next.js 16** (App Router)
+- **React 19**
+- **Framer Motion** — animazioni e transizioni
+- **Mapbox GL** — mappa interattiva
+- **Resend** — invio email dal form contatti
 
 ## Struttura
 
-- `index.html` — homepage
-- `VERSION` — versione corrente
-- `CHANGELOG.md` — registro modifiche
-- `script/release.sh` — script di rilascio
-- `documentazione/README.md` — documentazione dettagliata
+```
+app/            → pagine e API routes
+components/site → sezioni della landing page
+public/         → immagini, icone, grafiche SVG
+```
 
-## Versione
+## Setup
 
-La versione è in `VERSION`.
+```bash
+npm install
+cp .env.example .env.local
+```
 
-## Rilascio
+Compilare `.env.local` con:
 
-1. Aggiungi le modifiche: `git add <files>`
-2. Esegui: `sh script/release.sh`
+| Variabile | Descrizione |
+|-----------|-------------|
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Token Mapbox per la mappa |
+| `RESEND_API_KEY` | API key Resend |
+| `CONTACT_TO` | Email destinatario form contatti |
 
-Questo aggiorna `VERSION`, crea il commit e il tag.
+## Sviluppo
+
+```bash
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+npm start
+```
+
+## Deploy
+
+Configurato per Vercel. Impostare le variabili d'ambiente nel dashboard.
