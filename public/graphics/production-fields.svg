@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="800" y1="0" x2="800" y2="1200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B120D"/>
+      <stop offset="1" stop-color="#030503"/>
+    </linearGradient>
+    <linearGradient id="block1" x1="160" y1="260" x2="680" y2="1040" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A3A2C"/>
+      <stop offset="1" stop-color="#121913"/>
+    </linearGradient>
+    <linearGradient id="block2" x1="900" y1="220" x2="1420" y2="980" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E2A22"/>
+      <stop offset="1" stop-color="#101510"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <path d="M110 180H710V1060H110V180Z" fill="url(#block1)" stroke="#C5F17F" stroke-opacity="0.22"/>
+  <path d="M860 140H1490V960H860V140Z" fill="url(#block2)" stroke="#C5F17F" stroke-opacity="0.22"/>
+  <path d="M800 240H1480V1110H800V240Z" fill="#0D140F" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <path d="M170 260L650 260" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M170 430L650 430" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M170 600L650 600" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M170 770L650 770" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M170 940L650 940" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M910 240L1435 240" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M910 420L1435 420" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M910 600L1435 600" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M910 780L1435 780" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M910 960L1435 960" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <path d="M280 180V1060" stroke="#C5F17F" stroke-opacity="0.2"/>
+  <path d="M450 180V1060" stroke="#C5F17F" stroke-opacity="0.2"/>
+  <path d="M1070 140V960" stroke="#C5F17F" stroke-opacity="0.2"/>
+  <path d="M1240 140V960" stroke="#C5F17F" stroke-opacity="0.2"/>
+  <path d="M960 240V1110" stroke="#FFFFFF" stroke-opacity="0.06"/>
+  <path d="M1130 240V1110" stroke="#FFFFFF" stroke-opacity="0.06"/>
+  <path d="M1300 240V1110" stroke="#FFFFFF" stroke-opacity="0.06"/>
+  <g fill="#C5F17F" opacity="0.42">
+    <circle cx="450" cy="430" r="6"/>
+    <circle cx="1070" cy="420" r="6"/>
+    <circle cx="1240" cy="780" r="6"/>
+    <circle cx="960" cy="960" r="6"/>
+  </g>
+  <g opacity="0.2">
+    <path d="M420 430H1120" stroke="#C5F17F"/>
+    <path d="M1070 780H1240" stroke="#C5F17F"/>
+    <path d="M960 960H1290" stroke="#C5F17F"/>
+  </g>
+</svg>

@@ -1,0 +1,239 @@
+@import "mapbox-gl/dist/mapbox-gl.css";
+
+:root {
+  color-scheme: dark;
+  /* ★ JDM Tokyo Drift neon palette ★ */
+  --neon-pink: #ff1493;
+  --neon-hot: #ff006e;
+  --neon-magenta: #ff00ff;
+  --neon-purple: #8a2be2;
+  --neon-violet: #9d00ff;
+  --neon-cyan: #00ffff;
+  --neon-teal: #00ffd5;
+  --neon-blue: #0066ff;
+  --neon-electric: #0ff;
+  --neon-green: #39ff14;
+  --neon-lime: #ccff00;
+  --neon-yellow: #ffee00;
+  --neon-orange: #ff6a00;
+  --neon-red: #ff003c;
+  --retro-black: #050010;
+  --retro-void: #0a0018;
+  --retro-white: #ffffff;
+  --retro-gray: #c0c0c0;
+
+  --text: #ffffff;
+  --text-secondary: #00ffff;
+  --muted: #ff1493;
+  --bg: #050010;
+  --bg-soft: #12002a;
+  --bg-muted: #1a0033;
+
+  --max-width: 800px;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: var(--font-body), "MS Gothic", "Osaka", monospace, sans-serif;
+  /* Saturated neon Tokyo BG: grid + sunburst + scanlines */
+  background-color: #050010;
+  background-image:
+    /* horizon grid */
+    linear-gradient(180deg, transparent 0%, transparent 55%, rgba(255, 20, 147, 0.25) 55%, transparent 70%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 60px,
+      rgba(255, 0, 255, 0.15) 60px 61px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 60px,
+      rgba(0, 255, 255, 0.12) 60px 61px
+    ),
+    /* sunburst rays */
+    repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(255, 20, 147, 0.22) 0deg 9deg,
+      transparent 9deg 18deg
+    ),
+    /* radial glow */
+    radial-gradient(ellipse at 50% 30%, rgba(255, 238, 0, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(0, 255, 255, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(255, 20, 147, 0.2) 0%, transparent 50%),
+    linear-gradient(180deg, #1a0033 0%, #050010 50%, #330022 100%);
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
+  image-rendering: pixelated;
+  text-rendering: geometricPrecision;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── CRT scanlines ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.25) 0 2px,
+    transparent 2px 4px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* ── Vignette + chromatic aberration feel ── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background:
+    radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.75) 100%),
+    linear-gradient(180deg, transparent 0%, rgba(255, 0, 255, 0.06) 50%, transparent 100%);
+}
+
+a {
+  color: var(--neon-cyan);
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--neon-purple);
+}
+
+a:hover {
+  color: var(--neon-yellow);
+  background: var(--neon-hot);
+  text-shadow: 0 0 6px var(--neon-yellow);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  image-rendering: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  font-family: var(--font-mono), "MS Gothic", monospace;
+}
+
+::selection {
+  background: var(--neon-pink);
+  color: #000;
+}
+
+/* ── keyframes ── */
+@keyframes retro-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes retro-rainbow {
+  0%   { color: var(--neon-red); }
+  16%  { color: var(--neon-orange); }
+  33%  { color: var(--neon-yellow); }
+  50%  { color: var(--neon-green); }
+  66%  { color: var(--neon-cyan); }
+  83%  { color: var(--neon-purple); }
+  100% { color: var(--neon-pink); }
+}
+
+@keyframes retro-marquee {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes retro-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+@keyframes retro-star-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 4px var(--neon-pink),
+      0 0 10px var(--neon-pink),
+      0 0 20px var(--neon-pink),
+      3px 3px 0 #000;
+  }
+  50% {
+    text-shadow:
+      0 0 4px var(--neon-cyan),
+      0 0 10px var(--neon-cyan),
+      0 0 20px var(--neon-cyan),
+      3px 3px 0 #000;
+  }
+}
+
+@keyframes neon-flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  20%, 24%, 55% {
+    opacity: 0.6;
+    filter: none;
+  }
+}
+
+@keyframes jdm-slide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes drift-across {
+  0%   { transform: translateX(-20vw) rotate(-4deg); }
+  50%  { transform: translateX(50vw) rotate(8deg); }
+  100% { transform: translateX(120vw) rotate(-3deg); }
+}
+
+@keyframes drift-across-rev {
+  0%   { transform: translateX(120vw) scaleX(-1) rotate(4deg); }
+  100% { transform: translateX(-20vw) scaleX(-1) rotate(-4deg); }
+}
+
+@keyframes smoke-puff {
+  0%   { opacity: 0.8; transform: scale(0.6); }
+  100% { opacity: 0;   transform: scale(1.6) translateY(-6px); }
+}
+
+@keyframes popup-in {
+  0%   { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+  70%  { transform: scale(1.1) rotate(3deg);   opacity: 1; }
+  100% { transform: scale(1)   rotate(0deg);   opacity: 1; }
+}
+
+@keyframes popup-shake {
+  0%, 100% { transform: translateX(0); }
+  10%,30%,50%,70%,90% { transform: translateX(-2px) rotate(-1deg); }
+  20%,40%,60%,80%     { transform: translateX(2px)  rotate(1deg); }
+}
