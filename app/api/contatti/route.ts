@@ -5,7 +5,12 @@ const MAX_NOME = 60;
 const MAX_EMAIL = 60;
 const MAX_MESSAGGIO = 20000;
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// lazy init — evita crash al build se RESEND_API_KEY manca
+let resend: Resend | null = null;
+function getResend() {
+  if (!resend) resend = new Resend(process.env.RESEND_API_KEY);
+  return resend;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,7 +34,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-const { error } = await resend.emails.send({
+const { error } = await getResend().emails.send({
       from: "Cascina Fontana <onboarding@resend.dev>",
       replyTo: email,
       to: process.env.CONTACT_TO!,
