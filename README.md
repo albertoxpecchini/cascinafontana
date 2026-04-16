@@ -148,4 +148,4 @@ Il bottone **F** rosso (logo Adobe Flash Player) in fondo al footer porta a `/fl
 
 ---
 
-*v1.2 — 2026*
+*v1.3 — 2026*
