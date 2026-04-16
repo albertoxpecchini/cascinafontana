@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1440" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="600" y1="0" x2="600" y2="1440" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A120C"/>
+      <stop offset="1" stop-color="#020402"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="180" y1="320" x2="1020" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#26362A"/>
+      <stop offset="1" stop-color="#121912"/>
+    </linearGradient>
+    <linearGradient id="water" x1="180" y1="820" x2="1020" y2="1260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A3027"/>
+      <stop offset="1" stop-color="#0B140F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1440" fill="url(#bg)"/>
+  <path d="M110 240H1090V760H110V240Z" fill="#0C120D" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <path d="M150 300H530V660H150V300Z" fill="url(#panel)" stroke="#C5F17F" stroke-opacity="0.25"/>
+  <path d="M580 300H960V660H580V300Z" fill="url(#panel)" stroke="#C5F17F" stroke-opacity="0.25"/>
+  <path d="M220 820H980V1260H220V820Z" fill="url(#water)" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <g opacity="0.22" stroke="#FFFFFF">
+    <path d="M150 390H530"/>
+    <path d="M150 480H530"/>
+    <path d="M150 570H530"/>
+    <path d="M580 390H960"/>
+    <path d="M580 480H960"/>
+    <path d="M580 570H960"/>
+    <path d="M220 930H980"/>
+    <path d="M220 1040H980"/>
+    <path d="M220 1150H980"/>
+  </g>
+  <g opacity="0.24" stroke="#C5F17F">
+    <path d="M277 300V660"/>
+    <path d="M404 300V660"/>
+    <path d="M707 300V660"/>
+    <path d="M834 300V660"/>
+  </g>
+  <g opacity="0.45" fill="#C5F17F">
+    <circle cx="340" cy="478" r="6"/>
+    <circle cx="770" cy="478" r="6"/>
+    <circle cx="600" cy="930" r="6"/>
+    <circle cx="600" cy="1150" r="6"/>
+  </g>
+  <g opacity="0.38">
+    <path d="M340 478H770" stroke="#C5F17F"/>
+    <path d="M600 930V1150" stroke="#C5F17F"/>
+  </g>
+  <g opacity="0.7" fill="#29452E">
+    <rect x="200" y="720" width="22" height="200" rx="11"/>
+    <rect x="265" y="690" width="22" height="230" rx="11"/>
+    <rect x="330" y="740" width="22" height="180" rx="11"/>
+    <rect x="395" y="705" width="22" height="215" rx="11"/>
+    <rect x="460" y="735" width="22" height="185" rx="11"/>
+    <rect x="525" y="690" width="22" height="230" rx="11"/>
+  </g>
+  <path d="M220 960C360 910 490 1015 600 980C760 925 830 1040 980 1000" stroke="#C5F17F" stroke-opacity="0.26" stroke-width="12"/>
+</svg>
