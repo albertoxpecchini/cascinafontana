@@ -1,51 +1,73 @@
 # Cascina Fontana
 
-Landing page per Cascina Fontana — azienda agricola a gestione diretta.
+Sito istituzionale della Società Agricola Cascina Fontana S.S. — produzione agricola gestita con precisione, Rodigo (MN).
+
+**→ [cascinafontana.xyz](https://cascinafontana.xyz)**
+
+---
 
 ## Stack
 
-- **Next.js 16** (App Router)
-- **React 19**
-- **Framer Motion** — animazioni e transizioni
-- **Mapbox GL** — mappa interattiva
-- **Resend** — invio email dal form contatti
+Sito statico puro — zero framework, zero dipendenze runtime.
+
+| Layer | Tecnologia |
+|-------|-----------|
+| Markup | HTML5 semantico |
+| Stile | CSS3 (custom properties, grid, keyframes) |
+| Script | Vanilla JS — IntersectionObserver, Web3Forms |
+| Font | NType-82 · Lettera Mono LL · Ndot-57 ([nothingfont](https://github.com/xeji01/nothingfont)) |
+| Deploy | Vercel (static, no build step) |
+| Form | [Web3Forms](https://web3forms.com) → pzkko@yahoo.com |
+
+## Palette
+
+```
+#F9F7F7  background
+#DBE2EF  bordi / sezioni secondarie
+#3F72AF  accento blu
+#112D4E  testo / dark sections
+```
 
 ## Struttura
 
 ```
-app/            → pagine e API routes
-components/site → sezioni della landing page
-public/         → immagini, icone, grafiche SVG
+index.html        → pagina unica
+style.css         → tutti gli stili
+main.js           → nav scroll, reveal, form submit
+public/images/    → foto (da completare)
+vercel.json       → routing statico + redirect /jdm
 ```
 
-## Setup
+## Sezioni
 
-```bash
-npm install
-cp .env.example .env.local
+`Hero` → `Sistema` → `Attività` → `Produzione` → `Filiera` → `Strutture` → `Sostenibilità` → `Gelsi` → `Fontana` → `Galleria` → `Chiusura` → `Contatti`
+
+## Form contatti
+
+Il form usa [Web3Forms](https://web3forms.com). Per attivarlo:
+
+1. Vai su web3forms.com/create
+2. Inserisci `pzkko@yahoo.com`
+3. Ottieni `access_key`
+4. Sostituisci `YOUR_KEY` in `index.html` → `<input name="access_key">`
+
+## Dati societari
+
+```
+Società Agricola Cascina Fontana S.S.
+P.IVA / CF: 02196490201
+VAT EU: IT02196490201
+Via Belvedere 1 — 46040 Rodigo (MN) — Italia
+PEC: cascinafontana@pec.it
 ```
 
-Compilare `.env.local` con:
+## Branch
 
-| Variabile | Descrizione |
-|-----------|-------------|
-| `NEXT_PUBLIC_MAPBOX_TOKEN` | Token Mapbox per la mappa |
-| `RESEND_API_KEY` | API key Resend |
-| `CONTACT_TO` | Email destinatario form contatti |
+| Branch | Cosa serve |
+|--------|-----------|
+| `main` | Sito statico corrente → cascinafontana.xyz |
+| `jdm` | Versione precedente Next.js → cascinafontana.xyz/jdm |
 
-## Sviluppo
+---
 
-```bash
-npm run dev
-```
-
-## Build
-
-```bash
-npm run build
-npm start
-```
-
-## Deploy
-
-Configurato per Vercel. Impostare le variabili d'ambiente nel dashboard.
+*Versione 1.2 — 2026*
