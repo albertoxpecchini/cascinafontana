@@ -51,11 +51,8 @@ cascinafontana/
 ├── main.js             # Nav scroll · reveal · form submit
 ├── vercel.json         # Routing statico + redirect /jdm
 ├── public/
-│   ├── images/         # Foto (campo, capannone, fontana…)
-│   ├── icons/          # SVG icone
-│   └── graphics/       # SVG decorativi
-└── app/                # Next.js legacy (branch jdm)
-    └── api/contatti/   # API route email (Resend)
+│   └── images/         # Foto (campo, capannone, fontana)
+└── jdm/                # Versione precedente (Next.js static export) servita su /jdm
 ```
 
 ---
@@ -140,6 +137,8 @@ Per aggiungere una foto, sostituire il blocco placeholder in `index.html`:
 <!-- DOPO -->
 <img src="public/images/trattori.jpg" alt="Trattori" loading="lazy" decoding="async">
 ```
+
+Foto già presenti in `public/images/`: `campo.jpg`, `capannone.jpg`, `fontana.JPG`.
 
 ---
 
