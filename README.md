@@ -1,88 +1,77 @@
-# Cascina Fontana
+﻿# CASCINA FONTANA v1.3.2
 
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fcascinafontana.xyz&label=cascinafontana.xyz&style=flat-square)
-![GitHub last commit](https://img.shields.io/github/last-commit/albertoxpecchini/cascinafontana?style=flat-square)
-![Repo size](https://img.shields.io/github/repo-size/albertoxpecchini/cascinafontana?style=flat-square)
-![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen?style=flat-square)
-![Vercel](https://img.shields.io/badge/deployed%20on-Vercel-black?style=flat-square&logo=vercel)
+> OFFICIAL WEBSITE PROJECT
+> Societa Agricola Cascina Fontana S.S. - Rodigo (MN)
 
-> Sito istituzionale della Società Agricola Cascina Fontana S.S. — produzione agricola gestita con precisione, Rodigo (MN).
+### QUICK LINKS
 
----
-
-## ⚡ Stack
-
-Zero framework. Zero dipendenze runtime. Carica in meno di un secondo.
-
-| | Tecnologia | Motivo |
-|--|-----------|--------|
-| 📄 | **HTML5** semantico | Struttura accessibile, SEO nativo |
-| 🎨 | **CSS3** puro | Custom properties, Grid, Keyframes — niente librerie |
-| ⚙️ | **Vanilla JS** | IntersectionObserver, form async — ~3 KB |
-| 🔤 | **NType-82** | Display heading font (Nothing) |
-| 🔤 | **Lettera Mono LL** | Mono body + labels |
-| 🔤 | **Ndot-57** | Dot-matrix per dati numerici |
-| 📬 | **Web3Forms** | Form contatti serverless |
-| 🚀 | **Vercel** | Deploy statico, no build step |
-
-Font caricati da [`xeji01/nothingfont`](https://github.com/xeji01/nothingfont) via `@font-face`.
+- HOME: [https://cascinafontana.xyz](https://cascinafontana.xyz)
+- FLASH MODE: [https://cascinafontana.xyz/flashplayer](https://cascinafontana.xyz/flashplayer)
 
 ---
 
-## 🎨 Design system
+## WEBSITE STATUS (2012 STYLE)
 
-```
-Background  #F9F7F7  ░░░  Warm off-white
-Borders     #DBE2EF  ░░░  Blue-grey light
-Accent      #3F72AF  ███  Medium blue
-Dark        #112D4E  ███  Deep navy
-```
-
-Tipografia: **NType-82** per headings, **Lettera Mono LL** per body e labels, **Ndot-57** per numeri e dati.
+- Project type: Static website
+- Dependencies: 0 runtime dependencies
+- Framework: none
+- Build step: none
+- Hosting: Vercel
+- Browser target: modern desktop + mobile
 
 ---
 
-## 📁 Struttura
+## TECH SPECS
 
-```
+- HTML5 semantic layout
+- CSS3 custom properties + grid + animations
+- Vanilla JavaScript (navigation, reveal effects, form submit)
+- Web3Forms for contact form delivery
+
+---
+
+## FILE MAP
+
+```txt
 cascinafontana/
-├── index.html          # Pagina unica — tutte le sezioni
-├── style.css           # Stylesheet completo (~600 righe)
-├── main.js             # Nav scroll · reveal · form submit
-├── vercel.json         # Routing statico + redirect /jdm → /flashplayer
-├── public/
-│   └── images/         # Foto (campo, capannone, fontana)
-└── flashplayer/        # Easter egg: clone Adobe Flash Player install page (2012)
+|-- index.html
+|-- style.css
+|-- main.js
+|-- vercel.json
+|-- public/
+|   `-- images/
+`-- flashplayer/
+    |-- index.html
+    `-- style.css
 ```
 
 ---
 
-## 🗂️ Sezioni
+## MAIN SECTIONS
 
-```
-Hero          Headline + statistiche (63 biolche · 8 trattori · 30 pannelli · 2007)
-Sistema       Principi operativi + diagramma orbitale animato
-Attività      6 card numerate (fieno, territorio, bosco, strade, gelsi, filiera)
-Produzione    Colture: fieno · mais · soia · grano · patate
-Filiera       Catena 4 step → Grana Padano DOP
-Strutture     Capannone, portico, corte
-Sostenibilità Fotovoltaico (30 kW) + fitodepurazione bambù
-Gelsi         Patrimonio arboreo secolare
-Fontana       Identità — "un segno, non decorazione"
-Galleria      12 slot foto con didascalie (hover reveal)
-Contatti      Form serverless + indirizzo + recapiti
+```txt
+Hero
+Sistema
+Attivita
+Produzione
+Filiera
+Strutture
+Sostenibilita
+Gelsi
+Fontana
+Galleria
+Contatti
 ```
 
 ---
 
-## 📬 Form contatti — setup
+## CONTACT FORM SETUP
 
-Il form usa [Web3Forms](https://web3forms.com) (gratuito, no backend).
+The form uses [Web3Forms](https://web3forms.com) (no backend needed).
 
-1. Vai su **web3forms.com/create**
-2. Inserisci l'email destinatario
-3. Copia l'`access_key` generato
-4. In `index.html` cerca e sostituisci:
+1. Create a key at `https://web3forms.com/create`
+2. Open `index.html`
+3. Replace the placeholder key:
 
 ```html
 <input type="hidden" name="access_key" value="YOUR_KEY">
@@ -90,9 +79,9 @@ Il form usa [Web3Forms](https://web3forms.com) (gratuito, no backend).
 
 ---
 
-## 🚀 Deploy
+## DEPLOY
 
-Il sito è servito come **static** tramite `vercel.json`:
+Vercel serves the project as static files with no build process.
 
 ```json
 {
@@ -102,50 +91,27 @@ Il sito è servito come **static** tramite `vercel.json`:
 }
 ```
 
-Nessun build step — Vercel serve i file direttamente.
+Important routes in `vercel.json`:
 
-### Branch
-
-| Branch | URL | Descrizione |
-|--------|-----|-------------|
-| `main` | [cascinafontana.xyz](https://cascinafontana.xyz) | Sito statico corrente |
-| `flashplayer` | [cascinafontana.xyz/flashplayer](https://cascinafontana.xyz/flashplayer) | Easter egg — clone pagina install Adobe Flash Player (2012) |
+- `/` -> `/index.html`
+- `/flashplayer` -> `/flashplayer/index.html`
+- `/jdm` redirects to `/flashplayer`
 
 ---
 
-## 🖼️ Galleria — foto mancanti
+## FLASH EASTER EGG
 
-La galleria contiene 12 slot. Quelli ancora da scattare:
-
-| # | Soggetto | Note |
-|---|----------|------|
-| 1 | **Trattori** | Tutti e 8 in fila o in campo, luce laterale |
-| 2 | **Gelsi centenari** | Rami contro cielo, no strutture |
-| 3 | **Archi del portico** | Primo piano cotto, prospettiva |
-| 4 | **Alba sul campo** | Nebbia padana, luce bassa |
-| 6 | **Interno capannone** | Fieno stoccato, profondità |
-| 8 | **Bambù** | Sistema fitodepurazione, fitto |
-| 9 | **Coltura in stagione** | Mais o grano maturo |
-| 11 | **Strada rurale** | Sterrato mantenuto, alberi ai lati |
-
-Per aggiungere una foto, sostituire il blocco placeholder in `index.html`:
-
-```html
-<!-- PRIMA -->
-<div class="img-ph">Trattori · da scattare</div>
-
-<!-- DOPO -->
-<img src="public/images/trattori.jpg" alt="Trattori" loading="lazy" decoding="async">
-```
-
-Foto già presenti in `public/images/`: `campo.jpg`, `capannone.jpg`, `fontana.JPG`.
+The footer button (red Flash icon) opens `/flashplayer`, a 2012-style tribute page inspired by classic Adobe Flash installer screens.
 
 ---
 
-## 🕹️ Easter egg
+## CHANGELOG
 
-Il bottone **F** rosso (logo Adobe Flash Player) in fondo al footer porta a `/flashplayer` — clone fedele della pagina di installazione Adobe Flash Player del 2012, con la "Cascina Fontana Toolbar" come optional offer.
+### 1.3.2 (2026)
+
+- README rewritten in full 2012 style
+- Retro structure retained with updated setup/deploy notes
 
 ---
 
-*v1.3 — 2026*
+Best viewed with passion for old-school web.
