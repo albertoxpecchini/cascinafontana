@@ -49,10 +49,10 @@ cascinafontana/
 ├── index.html          # Pagina unica — tutte le sezioni
 ├── style.css           # Stylesheet completo (~600 righe)
 ├── main.js             # Nav scroll · reveal · form submit
-├── vercel.json         # Routing statico + redirect /jdm
+├── vercel.json         # Routing statico + redirect /jdm → /flashplayer
 ├── public/
 │   └── images/         # Foto (campo, capannone, fontana)
-└── jdm/                # Versione precedente (Next.js static export) servita su /jdm
+└── flashplayer/        # Easter egg: clone Adobe Flash Player install page (2012)
 ```
 
 ---
@@ -109,7 +109,7 @@ Nessun build step — Vercel serve i file direttamente.
 | Branch | URL | Descrizione |
 |--------|-----|-------------|
 | `main` | [cascinafontana.xyz](https://cascinafontana.xyz) | Sito statico corrente |
-| `jdm` | [cascinafontana.xyz/jdm](https://cascinafontana.xyz/jdm) | Versione precedente (Next.js) |
+| `flashplayer` | [cascinafontana.xyz/flashplayer](https://cascinafontana.xyz/flashplayer) | Easter egg — clone pagina install Adobe Flash Player (2012) |
 
 ---
 
@@ -144,7 +144,7 @@ Foto già presenti in `public/images/`: `campo.jpg`, `capannone.jpg`, `fontana.J
 
 ## 🕹️ Easter egg
 
-Il bottone **改 JDM** in fondo al footer porta alla versione precedente del sito.
+Il bottone **F** rosso (logo Adobe Flash Player) in fondo al footer porta a `/flashplayer` — clone fedele della pagina di installazione Adobe Flash Player del 2012, con la "Cascina Fontana Toolbar" come optional offer.
 
 ---
 

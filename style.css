@@ -1038,71 +1038,30 @@ figcaption {
   max-width: none;
 }
 
-/* ── JDM EASTER EGG ───────────────────────────────────────── */
-.jdm-btn {
+/* ── FLASH PLAYER EASTER EGG ──────────────────────────────── */
+.flash-btn {
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1px;
-  background: #000;
-  border: 2px solid #ff0000;
-  padding: 5px 9px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
   text-decoration: none;
-  box-shadow: 2px 2px 0 #ff0000, inset 0 0 10px rgba(255,0,0,0.15);
-  animation: jdm-pulse 1.1s step-end infinite;
   cursor: pointer;
   flex-shrink: 0;
-  position: relative;
+  background: transparent;
+  transition: transform 0.15s ease, filter 0.15s ease;
 }
 
-.jdm-btn::before {
-  content: '▶ ';
-  position: absolute;
-  top: -8px; left: 50%;
-  transform: translateX(-50%);
-  font-size: 6px;
-  color: #ff0000;
-  letter-spacing: 0;
-  animation: jdm-pulse 1.1s step-end infinite reverse;
-}
-
-.jdm-kanji {
+.flash-btn__icon {
   display: block;
-  font-family: 'MS Gothic', 'Yu Gothic', 'Hiragino Kaku Gothic Pro', monospace;
-  font-size: 18px;
-  line-height: 1;
-  color: #ffcc00;
-  text-shadow: 0 0 8px #ff4400, 0 0 2px #fff;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.18));
 }
 
-.jdm-label {
-  display: block;
-  font-family: var(--dot);
-  font-size: 7px;
-  letter-spacing: 0.22em;
-  color: #ff3300;
-  text-shadow: 0 0 4px #ff0000;
+.flash-btn:hover {
+  transform: scale(1.08);
+  filter: brightness(1.05);
 }
-
-@keyframes jdm-pulse {
-  0%, 100% {
-    border-color: #ff0000;
-    box-shadow: 2px 2px 0 #ff0000, inset 0 0 10px rgba(255,0,0,0.15);
-  }
-  50% {
-    border-color: #ffcc00;
-    box-shadow: 2px 2px 0 #ffcc00, inset 0 0 14px rgba(255,204,0,0.2);
-  }
-}
-
-.jdm-btn:hover {
-  background: #ff0000;
-  box-shadow: 3px 3px 0 #ffcc00;
-  animation: none;
-}
-
-.jdm-btn:hover .jdm-kanji { text-shadow: none; color: #ffcc00; }
-.jdm-btn:hover .jdm-label  { color: #000; text-shadow: none; }
 
 /* ── REVEAL ANIMATIONS ────────────────────────────────────── */
 .reveal {
