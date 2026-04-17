@@ -1,32 +1,117 @@
-# Cascina Fontana
+﻿# CASCINA FONTANA v1.3.2
 
-Sito della Società Agricola Cascina Fontana — Rodigo, Mantova.
+> OFFICIAL WEBSITE PROJECT
+> Societa Agricola Cascina Fontana S.S. - Rodigo (MN)
 
-Stile 2012 "presentazione" · deck a slide fullscreen · shop integrato per annunci di vendita.
+### QUICK LINKS
 
-## Stack
+- HOME: [https://cascinafontana.xyz](https://cascinafontana.xyz)
+- FLASH MODE: [https://cascinafontana.xyz/flashplayer](https://cascinafontana.xyz/flashplayer)
 
-Statico: HTML + CSS + JS vanilla. Nessun build step. Deploy su Vercel.
+---
 
-## Struttura
+## WEBSITE STATUS (2012 STYLE)
 
+- Project type: Static website
+- Dependencies: 0 runtime dependencies
+- Framework: none
+- Build step: none
+- Hosting: Vercel
+- Browser target: modern desktop + mobile
+
+---
+
+## TECH SPECS
+
+- HTML5 semantic layout
+- CSS3 custom properties + grid + animations
+- Vanilla JavaScript (navigation, reveal effects, form submit)
+- Web3Forms for contact form delivery
+
+---
+
+## FILE MAP
+
+```txt
+cascinafontana/
+|-- index.html
+|-- style.css
+|-- main.js
+|-- vercel.json
+|-- public/
+|   `-- images/
+`-- flashplayer/
+    |-- index.html
+    `-- style.css
 ```
-.
-├── index.html       # deck (7 slide) + shop + contatti + footer
-├── style.css        # palette terra/oro, Playfair Display + Lato
-├── main.js          # nav, pager, filtro shop, form web3forms
-├── public/images/   # campo.jpg, capannone.jpg, fontana.JPG
-└── vercel.json      # rewrites
+
+---
+
+## MAIN SECTIONS
+
+```txt
+Hero
+Sistema
+Attivita
+Produzione
+Filiera
+Strutture
+Sostenibilita
+Gelsi
+Fontana
+Galleria
+Contatti
 ```
 
-## Sezioni
+---
 
-1. Hero
-2. Sistema
-3. Attività
-4. Produzione
-5. Filiera
-6. Strutture
-7. Identità
-- Shop (annunci: macchinari, prodotti, materiali)
-- Contatti (form web3forms — sostituire `YOUR_KEY` in `index.html`)
+## CONTACT FORM SETUP
+
+The form uses [Web3Forms](https://web3forms.com) (no backend needed).
+
+1. Create a key at `https://web3forms.com/create`
+2. Open `index.html`
+3. Replace the placeholder key:
+
+```html
+<input type="hidden" name="access_key" value="YOUR_KEY">
+```
+
+---
+
+## DEPLOY
+
+Vercel serves the project as static files with no build process.
+
+```json
+{
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "framework": null
+}
+```
+
+Important routes in `vercel.json`:
+
+- `/` -> `/index.html`
+- `/flashplayer` -> `/flashplayer/index.html`
+- `/jdm` redirects to `/flashplayer`
+
+---
+
+## FLASH EASTER EGG
+
+The footer button (red Flash icon) opens `/flashplayer`, a 2012-style tribute page inspired by classic Adobe Flash installer screens.
+
+---
+
+## CHANGELOG
+
+### 1.3.2 (2026)
+
+- README rewritten in full 2012 style
+- Retro structure retained with updated setup/deploy notes
+
+---
+
+Best viewed with passion for old-school web.

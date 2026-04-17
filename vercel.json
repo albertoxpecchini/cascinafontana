@@ -2,8 +2,12 @@
   "buildCommand": "",
   "outputDirectory": ".",
   "framework": null,
+  "redirects": [
+    { "source": "/jdm", "destination": "/flashplayer", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
+    { "source": "/flashplayer", "destination": "/flashplayer/index.html" },
     { "source": "/(.*)", "destination": "/$1" }
   ]
 }

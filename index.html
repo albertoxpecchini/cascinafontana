@@ -3,350 +3,498 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cascina Fontana — Società Agricola · Rodigo, Mantova">
-  <title>Cascina Fontana · Società Agricola</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Playfair+Display:400,700italic">
+  <meta name="description" content="1.3">
+  <title>1.3</title>
+  <link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
+  <link rel="apple-touch-icon" href="/public/images/flash_128.jpg">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ═══ TOP BAR ═══ -->
-<header class="topbar" id="topbar">
-  <div class="shell">
-    <a href="#slide-1" class="brand">
-      <span class="brand__crest">CF</span>
-      <span class="brand__name">Cascina Fontana</span>
-      <span class="brand__tag">est. 2007</span>
+<!-- ═══ NAV ═══ -->
+<header class="nav" id="nav">
+  <div class="nav__inner container">
+    <a href="#" class="nav__logo">
+      <span class="logo-mark">CF</span>
+      <span class="logo-name">Cascina Fontana</span>
     </a>
-    <nav class="menu" id="menu">
-      <a href="#slide-1" class="is-active">Intro</a>
-      <a href="#slide-2">Sistema</a>
-      <a href="#slide-3">Attività</a>
-      <a href="#slide-4">Produzione</a>
-      <a href="#slide-5">Filiera</a>
-      <a href="#slide-6">Strutture</a>
-      <a href="#shop">Shop</a>
-      <a href="#contatti" class="menu__cta">Contatti</a>
+    <nav class="nav__links" id="navLinks" role="navigation" aria-label="Menu principale">
+      <a href="#sistema">Sistema</a>
+      <a href="#attivita">Attività</a>
+      <a href="#produzione">Produzione</a>
+      <a href="#filiera">Filiera</a>
+      <a href="#strutture">Strutture</a>
+      <a href="#contatti" class="nav__cta">Contatti</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+    <button class="nav__burger" id="burger" aria-label="Apri menu" aria-expanded="false">
+      <span></span>
+      <span></span>
     </button>
   </div>
 </header>
 
-<!-- ═══ DECK ═══ -->
-<main class="deck" id="deck">
-
-  <!-- slide 1 · HERO -->
-  <section class="slide slide--hero" id="slide-1">
-    <div class="slide__bg slide__bg--hero"></div>
-    <div class="slide__veil"></div>
-    <div class="slide__body">
-      <p class="eyebrow">Rodigo · Mantova · Pianura Padana</p>
-      <h1 class="display">
-        <em>Cascina</em><br>
-        <strong>Fontana.</strong>
-      </h1>
-      <p class="lead">Produzione agricola gestita con precisione.<br>Dal 2007, una filiera, un sistema, un segno.</p>
-      <div class="hero-cta">
-        <a href="#slide-2" class="btn btn--primary">Scopri il sistema</a>
-        <a href="#shop" class="btn btn--ghost">Visita lo shop</a>
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="container hero__body">
+    <p class="hero__eyebrow">
+      <span>Rodigo</span>
+      <span class="sep">·</span>
+      <span>Mantova</span>
+      <span class="sep">·</span>
+      <span>Est. 2007</span>
+    </p>
+    <h1 class="hero__title">
+      <span class="t-light">Cascina</span>
+      <span class="t-bold">Fontana.</span>
+    </h1>
+    <p class="hero__tagline">Produzione agricola gestita con precisione.</p>
+    <div class="hero__rule" role="separator"></div>
+    <div class="hero__stats">
+      <div class="stat">
+        <span class="stat__n">63</span>
+        <span class="stat__l">Biolche</span>
+      </div>
+      <div class="stat__div"></div>
+      <div class="stat">
+        <span class="stat__n">8</span>
+        <span class="stat__l">Trattori</span>
+      </div>
+      <div class="stat__div"></div>
+      <div class="stat">
+        <span class="stat__n">30</span>
+        <span class="stat__l">Pannelli</span>
+      </div>
+      <div class="stat__div"></div>
+      <div class="stat">
+        <span class="stat__n">2007</span>
+        <span class="stat__l">Fondazione</span>
       </div>
     </div>
-    <a href="#slide-2" class="slide__next" aria-label="Prossima">▼</a>
-    <span class="slide__num">01 / 07</span>
-  </section>
+  </div>
+  <a href="#sistema" class="hero__scroll" aria-label="Scorri in basso">↓</a>
+</section>
 
-  <!-- slide 2 · SISTEMA -->
-  <section class="slide slide--pale" id="slide-2">
-    <div class="shell slide__grid">
-      <div class="slide__col">
-        <p class="eyebrow">Capitolo 01</p>
-        <h2 class="title"><em>Stabilità.</em><br>Precisione.</h2>
-        <p class="copy">Ogni parte esiste per mantenere continuità e controllo nel tempo. Non eventi singoli — un sistema che riduce il rumore e mantiene costanza.</p>
-        <ul class="pillar">
-          <li><span>01</span><div><strong>Sequenze chiare</strong><em>Flussi operativi definiti, non improvvisati.</em></div></li>
-          <li><span>02</span><div><strong>Risorse sincronizzate</strong><em>Campi, strutture, macchine, energia, acqua.</em></div></li>
-          <li><span>03</span><div><strong>Decisioni misurabili</strong><em>Ogni intervento pianificato e verificato.</em></div></li>
-        </ul>
-      </div>
-      <div class="slide__col slide__col--stats">
-        <div class="bigstat">
-          <span class="bigstat__n">63</span>
-          <span class="bigstat__l">biolche coltivate</span>
-        </div>
-        <div class="bigstat">
-          <span class="bigstat__n">8</span>
-          <span class="bigstat__l">trattori operativi</span>
-        </div>
-        <div class="bigstat">
-          <span class="bigstat__n">30</span>
-          <span class="bigstat__l">pannelli fotovoltaici</span>
-        </div>
-        <div class="bigstat">
-          <span class="bigstat__n">2007</span>
-          <span class="bigstat__l">anno di fondazione</span>
-        </div>
-      </div>
-    </div>
-    <span class="slide__num">02 / 07</span>
-  </section>
-
-  <!-- slide 3 · ATTIVITÀ -->
-  <section class="slide slide--dark" id="slide-3">
-    <div class="shell">
-      <div class="slide__head">
-        <p class="eyebrow eyebrow--light">Capitolo 02</p>
-        <h2 class="title title--light">Il lavoro.</h2>
-        <p class="copy copy--light">Sei ambiti distinti, un'unica disciplina.</p>
-      </div>
-      <div class="deck-cards">
-        <article class="dcard"><span>01</span><h3>Fieno</h3><p>Prato stabile, taglio programmato.</p></article>
-        <article class="dcard"><span>02</span><h3>Territorio</h3><p>Cura continua del paesaggio.</p></article>
-        <article class="dcard"><span>03</span><h3>Bosco</h3><p>Rivalta: gestione e tutela.</p></article>
-        <article class="dcard"><span>04</span><h3>Strade</h3><p>Manutenzione rurale.</p></article>
-        <article class="dcard"><span>05</span><h3>Gelsi</h3><p>Patrimonio monumentale.</p></article>
-        <article class="dcard"><span>06</span><h3>Filiera</h3><p>Materia prima per Grana Padano DOP.</p></article>
-      </div>
-    </div>
-    <span class="slide__num slide__num--light">03 / 07</span>
-  </section>
-
-  <!-- slide 4 · PRODUZIONE -->
-  <section class="slide slide--split" id="slide-4">
-    <div class="split__image">
-      <img src="public/images/campo.jpg" alt="Prato stabile" loading="lazy">
-      <span class="split__caption">Prato stabile · Rodigo</span>
-    </div>
-    <div class="split__text">
-      <p class="eyebrow">Capitolo 03</p>
-      <h2 class="title"><em>Colture.</em></h2>
-      <p class="copy">Cinque produzioni centrali, rotazione annuale, selezione rigorosa delle sementi.</p>
-      <ul class="crops">
-        <li><b>01</b> Fieno</li>
-        <li><b>02</b> Mais</li>
-        <li><b>03</b> Soia</li>
-        <li><b>04</b> Grano</li>
-        <li><b>05</b> Patate</li>
+<!-- ═══ SISTEMA ═══ -->
+<section class="section section--alt" id="sistema">
+  <div class="container grid-2">
+    <div class="section__text reveal">
+      <span class="label">Sistema</span>
+      <h2>Stabilità.<br>Precisione.</h2>
+      <p>Ogni parte esiste per mantenere continuità e controllo nel tempo. Non eventi singoli — un sistema che riduce il rumore e mantiene costanza.</p>
+      <ul class="sys-list">
+        <li>
+          <span class="sys-n">01</span>
+          <div>
+            <strong>Sequenze chiare</strong>
+            <span>Flussi operativi definiti, non improvvisati.</span>
+          </div>
+        </li>
+        <li>
+          <span class="sys-n">02</span>
+          <div>
+            <strong>Risorse sincronizzate</strong>
+            <span>Campi, strutture, macchine, energia, acqua — coordinati.</span>
+          </div>
+        </li>
+        <li>
+          <span class="sys-n">03</span>
+          <div>
+            <strong>Decisioni misurabili</strong>
+            <span>Ogni intervento pianificato, monitorato, verificato.</span>
+          </div>
+        </li>
       </ul>
     </div>
-    <span class="slide__num">04 / 07</span>
-  </section>
-
-  <!-- slide 5 · FILIERA -->
-  <section class="slide slide--pale" id="slide-5">
-    <div class="shell">
-      <div class="slide__head slide__head--center">
-        <p class="eyebrow">Capitolo 04</p>
-        <h2 class="title"><em>Origine.</em> Filiera.</h2>
-        <p class="copy">Dal prato al formaggio a denominazione protetta.</p>
+    <div class="sistema-visual reveal reveal--delay" aria-hidden="true">
+      <div class="od">
+        <div class="od__center">Gestione</div>
+        <!-- inner ring CW: 3 nodi, 120° offset via negative delay -->
+        <div class="od__node od__node--in" style="animation-delay:0s">Campi</div>
+        <div class="od__node od__node--in" style="animation-delay:-4.67s">Strutture</div>
+        <div class="od__node od__node--in" style="animation-delay:-9.33s">Macchine</div>
+        <!-- outer ring CCW: 2 nodi, 180° offset -->
+        <div class="od__node od__node--out" style="animation-delay:0s">Energia</div>
+        <div class="od__node od__node--out" style="animation-delay:-11s">Acqua</div>
       </div>
-      <ol class="chain">
-        <li><span class="chain__n">01</span><h3>Cascina</h3><p>Prato stabile.</p></li>
-        <li class="chain__arrow">→</li>
-        <li><span class="chain__n">02</span><h3>Fieno</h3><p>Raccolta e stoccaggio.</p></li>
-        <li class="chain__arrow">→</li>
-        <li><span class="chain__n">03</span><h3>Allevamento</h3><p>Bovini da latte.</p></li>
-        <li class="chain__arrow">→</li>
-        <li><span class="chain__n">04</span><h3>Caseificio</h3><p>Grana Padano DOP.</p></li>
-      </ol>
-      <p class="chain__note">Il risultato finale non è visibile qui. Ma inizia qui.</p>
-    </div>
-    <span class="slide__num">05 / 07</span>
-  </section>
-
-  <!-- slide 6 · STRUTTURE -->
-  <section class="slide slide--split slide--split-rev" id="slide-6">
-    <div class="split__text">
-      <p class="eyebrow">Capitolo 05</p>
-      <h2 class="title"><em>Strutture.</em><br>Continuità.</h2>
-      <p class="copy">Capannoni, portici, fontana. Architettura rurale padana. Funzione prima della forma.</p>
-      <div class="sus">
-        <div><b>30</b><span>pannelli fotovoltaici</span></div>
-        <div><b>∞</b><span>fitodepurazione a bambù</span></div>
-      </div>
-    </div>
-    <div class="split__image">
-      <img src="public/images/capannone.jpg" alt="Capannone con pannelli fotovoltaici" loading="lazy">
-      <span class="split__caption">Capannone · Fotovoltaico integrato</span>
-    </div>
-    <span class="slide__num">06 / 07</span>
-  </section>
-
-  <!-- slide 7 · IDENTITÀ -->
-  <section class="slide slide--identity" id="slide-7">
-    <div class="slide__bg slide__bg--identity"></div>
-    <div class="slide__veil slide__veil--dark"></div>
-    <div class="slide__body slide__body--center">
-      <p class="eyebrow eyebrow--light">Capitolo 06</p>
-      <h2 class="display display--sm">
-        <em>Un segno.</em><br>
-        <strong>Non decorazione.</strong>
-      </h2>
-      <p class="lead lead--light">Costanza. Presenza. Radicamento.</p>
-    </div>
-    <span class="slide__num slide__num--light">07 / 07</span>
-  </section>
-
-</main>
-
-<!-- ═══ SHOP ═══ -->
-<section class="shop" id="shop">
-  <div class="shell">
-    <div class="shop__head">
-      <p class="eyebrow">Annunci</p>
-      <h2 class="title"><em>Shop.</em> Vendite della cascina.</h2>
-      <p class="copy">Macchinari, attrezzature, produzioni in eccedenza. Prezzi su richiesta, ritiro sul posto salvo diverso accordo.</p>
-    </div>
-
-    <div class="shop__filter">
-      <button class="chip is-on" data-cat="all">Tutti</button>
-      <button class="chip" data-cat="macchine">Macchinari</button>
-      <button class="chip" data-cat="prodotti">Prodotti</button>
-      <button class="chip" data-cat="materiali">Materiali</button>
-    </div>
-
-    <div class="shop__grid" id="shopGrid">
-
-      <article class="product" data-cat="macchine">
-        <div class="product__img"><span>Trattore · foto</span><em class="badge">Usato</em></div>
-        <div class="product__body">
-          <h3>Trattore Landini 85 CV</h3>
-          <p class="product__meta">Anno 2004 · 4200 h · buono stato</p>
-          <p class="product__price">€ 14.500</p>
-          <a class="btn btn--sm" href="#contatti">Richiedi info</a>
-        </div>
-      </article>
-
-      <article class="product" data-cat="macchine">
-        <div class="product__img"><span>Rotoimballatrice</span></div>
-        <div class="product__body">
-          <h3>Rotoimballatrice Claas</h3>
-          <p class="product__meta">Camera variabile · revisionata 2024</p>
-          <p class="product__price">€ 8.900</p>
-          <a class="btn btn--sm" href="#contatti">Richiedi info</a>
-        </div>
-      </article>
-
-      <article class="product" data-cat="prodotti">
-        <div class="product__img"><span>Fieno · ballone</span><em class="badge badge--green">Stagione</em></div>
-        <div class="product__body">
-          <h3>Fieno di prato stabile</h3>
-          <p class="product__meta">Balloni 2,5 q · taglio primaverile</p>
-          <p class="product__price">€ 18 / ql</p>
-          <a class="btn btn--sm" href="#contatti">Richiedi info</a>
-        </div>
-      </article>
-
-      <article class="product" data-cat="prodotti">
-        <div class="product__img"><span>Mais essiccato</span></div>
-        <div class="product__body">
-          <h3>Mais da granella</h3>
-          <p class="product__meta">Essiccato · in sacconi o sfuso</p>
-          <p class="product__price">Prezzo giornaliero</p>
-          <a class="btn btn--sm" href="#contatti">Richiedi info</a>
-        </div>
-      </article>
-
-      <article class="product" data-cat="materiali">
-        <div class="product__img"><span>Legna</span></div>
-        <div class="product__body">
-          <h3>Legna da ardere</h3>
-          <p class="product__meta">Bosco di Rivalta · stagionata 2 anni</p>
-          <p class="product__price">€ 140 / ql</p>
-          <a class="btn btn--sm" href="#contatti">Richiedi info</a>
-        </div>
-      </article>
-
-      <article class="product" data-cat="materiali">
-        <div class="product__img"><span>Letame</span></div>
-        <div class="product__body">
-          <h3>Letame bovino</h3>
-          <p class="product__meta">Maturo · carico in azienda</p>
-          <p class="product__price">Da concordare</p>
-          <a class="btn btn--sm" href="#contatti">Richiedi info</a>
-        </div>
-      </article>
-
     </div>
   </div>
 </section>
 
+<!-- ═══ ATTIVITÀ ═══ -->
+<section class="section" id="attivita">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="label">Attività</span>
+      <h2>Lavoro.</h2>
+    </div>
+    <div class="cards reveal reveal--delay">
+      <div class="card">
+        <span class="card__n">01</span>
+        <h3>Fieno</h3>
+        <p>Prato stabile.</p>
+      </div>
+      <div class="card">
+        <span class="card__n">02</span>
+        <h3>Territorio</h3>
+        <p>Cura.</p>
+      </div>
+      <div class="card">
+        <span class="card__n">03</span>
+        <h3>Bosco</h3>
+        <p>Rivalta.</p>
+      </div>
+      <div class="card">
+        <span class="card__n">04</span>
+        <h3>Strade</h3>
+        <p>Manutenzione.</p>
+      </div>
+      <div class="card">
+        <span class="card__n">05</span>
+        <h3>Gelsi</h3>
+        <p>Patrimonio.</p>
+      </div>
+      <div class="card">
+        <span class="card__n">06</span>
+        <h3>Filiera</h3>
+        <p>Grana Padano.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRODUZIONE ═══ -->
+<section class="section section--dark" id="produzione">
+  <div class="container grid-2 grid-2--rev">
+    <div class="section__text reveal">
+      <span class="label label--on-dark">Produzione</span>
+      <h2>Colture.</h2>
+      <ul class="crop-list">
+        <li>Fieno</li>
+        <li>Mais</li>
+        <li>Soia</li>
+        <li>Grano</li>
+        <li>Patate</li>
+      </ul>
+    </div>
+    <div class="img-wrap reveal reveal--delay">
+      <!-- <img src="public/images/campo.jpg" alt="Campo di prato stabile" loading="lazy" decoding="async"> -->
+      <div class="img-ph">Campo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FILIERA ═══ -->
+<section class="section" id="filiera">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="label">Filiera</span>
+      <h2>Origine.</h2>
+    </div>
+    <div class="chain reveal reveal--delay" role="list">
+      <div class="chain__step" role="listitem">
+        <span class="chain__n">01</span>
+        <h3>Cascina</h3>
+        <p>Prato.</p>
+      </div>
+      <span class="chain__arrow" aria-hidden="true">→</span>
+      <div class="chain__step" role="listitem">
+        <span class="chain__n">02</span>
+        <h3>Fieno</h3>
+        <p>Raccolta.</p>
+      </div>
+      <span class="chain__arrow" aria-hidden="true">→</span>
+      <div class="chain__step" role="listitem">
+        <span class="chain__n">03</span>
+        <h3>Allevamento</h3>
+        <p>Bovini.</p>
+      </div>
+      <span class="chain__arrow" aria-hidden="true">→</span>
+      <div class="chain__step" role="listitem">
+        <span class="chain__n">04</span>
+        <h3>Caseificio</h3>
+        <p>Grana Padano DOP.</p>
+      </div>
+    </div>
+    <p class="chain__caption reveal reveal--delay-2">
+      Il risultato finale non è visibile qui. Ma inizia qui.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ STRUTTURE ═══ -->
+<section class="section section--alt" id="strutture">
+  <div class="container grid-2">
+    <div class="img-wrap reveal">
+      <!-- <img src="public/images/capannone.jpg" alt="Capannone" loading="lazy" decoding="async"> -->
+      <div class="img-ph">Capannone</div>
+    </div>
+    <div class="section__text reveal reveal--delay">
+      <span class="label">Strutture</span>
+      <h2>Continuità.</h2>
+      <p>Funzione.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SOSTENIBILITÀ ═══ -->
+<section class="section" id="sostenibilita">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="label">Sostenibilità</span>
+      <h2>Efficienza.</h2>
+    </div>
+    <div class="sus-grid reveal reveal--delay">
+      <div class="sus-item">
+        <span class="sus-n">30</span>
+        <h3>Fotovoltaico</h3>
+        <p>Pannelli solari.</p>
+      </div>
+      <div class="sus-item">
+        <h3>Fitodepurazione</h3>
+        <p>Bambù.</p>
+      </div>
+      <div class="sus-item">
+        <h3>Impatto</h3>
+        <p>Monitorato.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GELSI ═══ -->
+<section class="section section--gelsi" id="gelsi">
+  <div class="container grid-2">
+    <div class="section__text reveal">
+      <span class="label">Patrimonio</span>
+      <h2>Gelsi.</h2>
+      <p>Memoria agricola.</p>
+    </div>
+    <div class="img-wrap reveal reveal--delay">
+      <!-- <img src="public/images/gelsi.jpg" alt="Gelsi centenari" loading="lazy" decoding="async"> -->
+      <div class="img-ph">Gelsi</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FONTANA / IDENTITÀ ═══ -->
+<section class="section section--identity" id="fontana">
+  <div class="img-wrap img-wrap--cover">
+    <!-- <img src="public/images/fontana.JPG" alt="Fontana della Cascina" loading="lazy" decoding="async"> -->
+    <div class="img-ph img-ph--dark">Fontana</div>
+  </div>
+  <div class="identity-text reveal">
+    <span class="label label--on-dark">Identità</span>
+    <h2>Un segno.<br>Non decorazione.</h2>
+    <p>Costanza. Presenza. Radicamento.</p>
+  </div>
+</section>
+
+<!-- ═══ GALLERIA ═══ -->
+<!--
+  SLOT FOTO — sostituire ogni <div class="img-ph"> con <img src="..." alt="...">
+  quando le foto sono pronte.
+-->
+<section class="section section--alt" id="galleria">
+  <div class="container">
+    <div class="section__header reveal">
+      <span class="label">Galleria</span>
+      <h2>La cascina.</h2>
+    </div>
+    <div class="gallery reveal reveal--delay">
+
+      <!-- SLOT 1 · large — TRATTORI in campo/fila -->
+      <figure class="gal-item gal-item--lg">
+        <div class="img-wrap gal-img">
+          <div class="img-ph">Trattori · da scattare</div>
+        </div>
+        <figcaption>Flotta operativa. Otto trattori calibrati sulle fasi reali del lavoro.</figcaption>
+      </figure>
+
+      <!-- SLOT 2 · small — GELSI centenari, rami contro cielo -->
+      <figure class="gal-item">
+        <div class="img-wrap gal-img">
+          <div class="img-ph">Gelsi · da scattare</div>
+        </div>
+        <figcaption>Gelsi centenari. Memoria agricola radicata nel territorio.</figcaption>
+      </figure>
+
+      <!-- SLOT 3 · small — ARCHI del portico, primo piano cotto -->
+      <figure class="gal-item">
+        <div class="img-wrap gal-img">
+          <div class="img-ph">Archi · da scattare</div>
+        </div>
+        <figcaption>Portico ad archi in cotto. Architettura rurale padana.</figcaption>
+      </figure>
+
+      <!-- SLOT 4 · large — CAMPO all'alba, nebbia padana -->
+      <figure class="gal-item gal-item--lg">
+        <div class="img-wrap gal-img">
+          <div class="img-ph">Alba sul campo · da scattare</div>
+        </div>
+        <figcaption>Prato stabile di Rodigo. Materia prima primaria per la filiera del Grana Padano DOP.</figcaption>
+      </figure>
+
+      <!-- SLOT 5 · small — CAPANNONE + pannelli, tramonto [foto esistente] -->
+      <figure class="gal-item">
+        <div class="img-wrap gal-img">
+          <!-- <img src="public/images/capannone.jpg" alt="Capannone con pannelli fotovoltaici" loading="lazy" decoding="async"> -->
+          <div class="img-ph">Capannone</div>
+        </div>
+        <figcaption>Impianto fotovoltaico integrato sul capannone. Tetto a coppi, luce di tramonto.</figcaption>
+      </figure>
+
+      <!-- SLOT 6 · small — INTERNO capannone, fieno stoccato -->
+      <figure class="gal-item">
+        <div class="img-wrap gal-img">
+          <div class="img-ph">Interno · da scattare</div>
+        </div>
+        <figcaption>Stoccaggio fieno. Capacità immediata, non scenografia.</figcaption>
+      </figure>
+
+      <!-- SLOT 7 · large — PORTICO struttura principale [foto esistente] -->
+      <figure class="gal-item gal-item--lg">
+        <div class="img-wrap gal-img">
+          <!-- <img src="public/images/struttura.jpg" alt="Struttura principale con portico" loading="lazy" decoding="async"> -->
+          <div class="img-ph">Struttura principale</div>
+        </div>
+        <figcaption>Struttura principale con portico ad archi. Corte aperta, integrazione nel paesaggio padano.</figcaption>
+      </figure>
+
+      <!-- SLOT 8 · small — BAMBÙ, sistema fitodepurazione -->
+      <figure class="gal-item">
+        <div class="img-wrap gal-img">
+          <div class="img-ph">Bambù · da scattare</div>
+        </div>
+        <figcaption>Fitodepurazione naturale. Bambù come sistema di trattamento integrato.</figcaption>
+      </figure>
+
+      <!-- SLOT 9 · small — COLTURA in stagione, grano o mais -->
+      <figure class="gal-item">
+        <div class="img-wrap gal-img">
+          <div class="img-ph">Coltura · da scattare</div>
+        </div>
+        <figcaption>Colture in stagione. Ogni intervento pianificato, monitorato, verificato.</figcaption>
+      </figure>
+
+      <!-- SLOT 10 · small — FONTANA, getto d'acqua ravvicinato [foto esistente] -->
+      <figure class="gal-item">
+        <div class="img-wrap gal-img">
+          <!-- <img src="public/images/fontana.JPG" alt="La fontana della cascina" loading="lazy" decoding="async"> -->
+          <div class="img-ph">Fontana</div>
+        </div>
+        <figcaption>La fontana. Sistema di raccolta e depurazione dell'acqua. Un segno nel paesaggio.</figcaption>
+      </figure>
+
+      <!-- SLOT 11 · small — STRADA RURALE mantenuta -->
+      <figure class="gal-item">
+        <div class="img-wrap gal-img">
+          <div class="img-ph">Strada · da scattare</div>
+        </div>
+        <figcaption>Strade rurali. Manutenzione come cura del territorio, non solo produzione.</figcaption>
+      </figure>
+
+      <!-- SLOT 12 · large — CAMPO verde [foto esistente] -->
+      <figure class="gal-item gal-item--lg">
+        <div class="img-wrap gal-img">
+          <!-- <img src="public/images/campo.jpg" alt="Prato stabile Rodigo" loading="lazy" decoding="async"> -->
+          <div class="img-ph">Campo verde</div>
+        </div>
+        <figcaption>Rodigo, Mantova. 63 biolche di prato stabile nella pianura padana.</figcaption>
+      </figure>
+
+    </div><!-- /gallery -->
+  </div>
+</section>
+
+<!-- ═══ CHIUSURA ═══ -->
+<section class="section section--closing">
+  <div class="container">
+    <p class="closing-title reveal">
+      Costanza.<br>
+      Controllo.<br>
+      <em>Risultato.</em>
+    </p>
+    <p class="closing-sub reveal reveal--delay">Rodigo, Mantova.</p>
+  </div>
+</section>
+
 <!-- ═══ CONTATTI ═══ -->
-<section class="contact" id="contatti">
-  <div class="shell contact__grid">
-    <div class="contact__info">
-      <p class="eyebrow">Contatti</p>
-      <h2 class="title">Scrivici.</h2>
-      <address>
-        <p>Via Belvedere 1<br>46040 Rodigo (MN) · Italia</p>
-        <p><a href="mailto:cascinafontana@pec.it">cascinafontana@pec.it</a></p>
-        <p><a href="mailto:pzkko@yahoo.com">pzkko@yahoo.com</a></p>
-        <p><a href="tel:+390376681052">+39 0376 681052</a></p>
+<section class="section section--alt" id="contatti">
+  <div class="container grid-2 grid-2--contact">
+    <div class="section__text reveal">
+      <span class="label">Contatti</span>
+      <h2>Scrivici.</h2>
+      <address class="contact-info">
+        <p>Via Belvedere 1<br>46040 Rodigo (MN)<br>Italia</p>
+        <a href="mailto:cascinafontana@pec.it">cascinafontana@pec.it</a>
+        <a href="mailto:pzkko@yahoo.com">pzkko@yahoo.com</a>
+        <a href="tel:+390376681052">+39 0376 681052</a>
       </address>
     </div>
-    <form class="contact__form" id="contactForm" method="POST" action="https://api.web3forms.com/submit" novalidate>
+    <form class="form reveal reveal--delay" id="contactForm" method="POST" action="https://api.web3forms.com/submit" novalidate>
+      <!-- Web3Forms: sostituire YOUR_KEY con la chiave da web3forms.com/create -->
       <input type="hidden" name="access_key" value="YOUR_KEY">
       <input type="hidden" name="subject" value="Contatto — Cascina Fontana">
       <input type="hidden" name="from_name" value="Sito Cascina Fontana">
       <input type="hidden" name="redirect" value="false">
       <input type="checkbox" name="botcheck" style="display:none">
-      <div class="field"><label for="nome">Nome</label><input type="text" id="nome" name="nome" required maxlength="120" autocomplete="name"></div>
-      <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" required maxlength="254" autocomplete="email"></div>
-      <div class="field"><label for="oggetto">Oggetto</label>
-        <select id="oggetto" name="oggetto">
-          <option>Informazioni generali</option>
-          <option>Annuncio shop</option>
-          <option>Filiera / forniture</option>
-          <option>Altro</option>
-        </select>
+      <div class="form__group">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" required maxlength="120" autocomplete="name">
       </div>
-      <div class="field"><label for="messaggio">Messaggio</label><textarea id="messaggio" name="messaggio" required maxlength="2000" rows="5"></textarea></div>
-      <button type="submit" class="btn btn--primary">Invia messaggio</button>
+      <div class="form__group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required maxlength="254" autocomplete="email">
+      </div>
+      <div class="form__group">
+        <label for="messaggio">Messaggio</label>
+        <textarea id="messaggio" name="messaggio" required maxlength="2000" rows="5"></textarea>
+      </div>
+      <button type="submit" class="btn">Invia</button>
     </form>
   </div>
 </section>
 
 <!-- ═══ FOOTER ═══ -->
-<footer class="foot">
-  <div class="shell foot__inner">
-    <div class="foot__brand">
-      <span class="brand__crest">CF</span>
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="logo-mark logo-mark--sm">CF</span>
       <div>
-        <p><strong>Cascina Fontana</strong></p>
-        <p>Società Agricola S.S. · Rodigo, Mantova</p>
+        <p class="footer__name">Cascina Fontana</p>
+        <p class="footer__sub">Società Agricola · Rodigo, Mantova</p>
       </div>
     </div>
-    <nav class="foot__nav">
-      <a href="#slide-2">Sistema</a>
-      <a href="#slide-3">Attività</a>
-      <a href="#slide-4">Produzione</a>
-      <a href="#slide-5">Filiera</a>
-      <a href="#shop">Shop</a>
+    <nav class="footer__nav" aria-label="Footer navigation">
+      <a href="#sistema">Sistema</a>
+      <a href="#attivita">Attività</a>
+      <a href="#produzione">Produzione</a>
+      <a href="#filiera">Filiera</a>
+      <a href="#strutture">Strutture</a>
       <a href="#contatti">Contatti</a>
     </nav>
-    <div class="foot__social">
+    <div class="footer__social">
       <a href="https://www.ufficiocamerale.it/9790/societa-agricola-cascina-fontana-ss" target="_blank" rel="noopener">Registro Imprese</a>
-      <a href="https://www.instagram.com/albertoxpecchini/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://github.com/albertoxpecchini/" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.instagram.com/albertoxpecchini/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.vinted.it/member/237170304" target="_blank" rel="noopener">Vinted</a>
     </div>
   </div>
-  <div class="foot__bottom shell">
+  <div class="footer__bottom container">
     <p>© 2007–2026 Società Agricola Cascina Fontana S.S.</p>
-    <p>P.IVA 02196490201 · VAT IT02196490201 · Via Belvedere 1, 46040 Rodigo (MN)</p>
+    <p>P.IVA 02196490201 · CF 02196490201 · VAT IT02196490201 · Via Belvedere 1, 46040 Rodigo (MN) · <a href="mailto:cascinafontana@pec.it">cascinafontana@pec.it</a></p>
+    <a href="/flashplayer" class="flash-btn" title="Get Adobe Flash Player" target="_blank" rel="noopener" aria-label="Adobe Flash Player">
+      <img
+        class="flash-btn__icon"
+        src="/public/images/flash_128.jpg"
+        width="28"
+        height="28"
+        alt=""
+      >
+    </a>
   </div>
 </footer>
-
-<!-- slide pager -->
-<aside class="pager" id="pager" aria-hidden="true">
-  <a href="#slide-1" data-p="1"></a>
-  <a href="#slide-2" data-p="2"></a>
-  <a href="#slide-3" data-p="3"></a>
-  <a href="#slide-4" data-p="4"></a>
-  <a href="#slide-5" data-p="5"></a>
-  <a href="#slide-6" data-p="6"></a>
-  <a href="#slide-7" data-p="7"></a>
-</aside>
 
 <script src="main.js"></script>
 </body>

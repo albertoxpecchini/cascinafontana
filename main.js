@@ -1,71 +1,73 @@
+/* Cascina Fontana — main.js — zero dependencies */
 'use strict';
 
-/* mobile menu */
-const burger = document.getElementById('burger');
-const menu = document.getElementById('menu');
-if (burger && menu) {
-  burger.addEventListener('click', () => {
-    const open = menu.classList.toggle('is-open');
-    burger.setAttribute('aria-expanded', open);
-  });
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    menu.classList.remove('is-open');
+/* ── NAV: transparent → solid on scroll ─────────────────── */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ── MOBILE MENU ─────────────────────────────────────────── */
+const burger   = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+
+burger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+navLinks.querySelectorAll('a').forEach(link =>
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
     burger.setAttribute('aria-expanded', 'false');
-  }));
+    document.body.style.overflow = '';
+  })
+);
+
+/* ── REVEAL ON SCROLL ────────────────────────────────────── */
+const reveals = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
+  );
+  reveals.forEach(el => observer.observe(el));
+} else {
+  /* fallback: show all immediately */
+  reveals.forEach(el => el.classList.add('visible'));
 }
 
-/* active menu + pager via IntersectionObserver */
-const sections = document.querySelectorAll('.slide');
-const menuLinks = menu ? menu.querySelectorAll('a') : [];
-const pager = document.getElementById('pager');
-const pagerLinks = pager ? pager.querySelectorAll('a') : [];
-
-if ('IntersectionObserver' in window && sections.length) {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const id = e.target.id;
-      menuLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + id));
-      pagerLinks.forEach(a => a.classList.toggle('is-on', a.getAttribute('href') === '#' + id));
-    });
-  }, { threshold: 0.5 });
-  sections.forEach(s => io.observe(s));
-}
-
-/* shop filter */
-const chips = document.querySelectorAll('.chip');
-const products = document.querySelectorAll('.product');
-chips.forEach(chip => chip.addEventListener('click', () => {
-  chips.forEach(c => c.classList.remove('is-on'));
-  chip.classList.add('is-on');
-  const cat = chip.dataset.cat;
-  products.forEach(p => {
-    const match = cat === 'all' || p.dataset.cat === cat;
-    p.classList.toggle('is-hidden', !match);
-  });
-}));
-
-/* contact form → web3forms */
+/* ── FORM → Web3Forms ────────────────────────────────────── */
 const form = document.getElementById('contactForm');
 if (form) {
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    const btn = form.querySelector('button[type="submit"]');
+    const btn = form.querySelector('.btn');
     const orig = btn.textContent;
     btn.textContent = 'Invio…';
     btn.disabled = true;
+
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res  = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(Object.fromEntries(new FormData(form))),
       });
       const data = await res.json();
       if (data.success) {
-        btn.textContent = 'Inviato ✓';
+        btn.textContent = 'Inviato';
         form.reset();
         setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 4000);
-      } else throw new Error(data.message || 'error');
+      } else {
+        throw new Error(data.message || 'error');
+      }
     } catch (err) {
       console.error(err);
       btn.textContent = 'Errore — riprova';
