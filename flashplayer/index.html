@@ -475,71 +475,169 @@
   /* shop filter */
   const chips = document.querySelectorAll('.chip');
   const products = document.querySelectorAll('.product');
-  /* quote form — AJAX to formsubmit.co, inline result */
+  /* ── CF Mailer: validate, sanitize, rate-limit, offline queue, retry, mailto fallback, log ── */
+  var CFMailer = (function(){
+    var ENDPOINT = 'https://formsubmit.co/ajax/pzkko@yahoo.com';
+    var MAILTO   = 'pzkko@yahoo.com';
+    var RATE_MS  = 30 * 1000;            // min interval between sends per form
+    var MAX_LOG  = 50;
+    var MAX_Q    = 20;
+    var RETRY    = [2000, 6000, 15000];  // backoff ms
+    var QKEY = 'cf_mail_queue', LKEY = 'cf_mail_log', RKEY = 'cf_mail_rate';
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    function ls(k, def){ try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch(e){ return def; } }
+    function save(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
+    function log(entry){
+      var a = ls(LKEY, []); a.unshift(Object.assign({ t: Date.now() }, entry));
+      if (a.length > MAX_LOG) a.length = MAX_LOG; save(LKEY, a);
+    }
+    function sanitize(s, max){
+      if (s == null) return '';
+      s = String(s).replace(/[\u0000-\u001F\u007F]/g, '').trim();
+      if (max && s.length > max) s = s.slice(0, max);
+      return s;
+    }
+    function rateOk(kind){
+      var r = ls(RKEY, {}); var last = r[kind] || 0;
+      return (Date.now() - last) >= RATE_MS;
+    }
+    function rateMark(kind){ var r = ls(RKEY, {}); r[kind] = Date.now(); save(RKEY, r); }
+    function mailtoHref(data){
+      var subj = data._subject || 'Cascina Fontana';
+      var body = Object.keys(data).filter(function(k){ return k[0] !== '_' && k !== 'consenso' && k !== '_honey'; })
+        .map(function(k){ return k + ': ' + data[k]; }).join('\n');
+      return 'mailto:' + MAILTO + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+    }
+    function send(data){
+      return fetch(ENDPOINT, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify(data)
+      }).then(function(r){ return r.json().then(function(j){ return { ok:r.ok, j:j }; }); });
+    }
+    function enqueue(item){
+      var q = ls(QKEY, []);
+      if (q.length >= MAX_Q) q.shift();
+      q.push(item); save(QKEY, q);
+    }
+    function drain(){
+      var q = ls(QKEY, []); if (!q.length || !navigator.onLine) return;
+      var item = q[0];
+      send(item.data).then(function(res){
+        if (res.ok && (res.j.success === 'true' || res.j.success === true)) {
+          q.shift(); save(QKEY, q);
+          log({ kind: item.kind, status: 'sent-queued' });
+          if (q.length) setTimeout(drain, 500);
+        } else {
+          log({ kind: item.kind, status: 'queued-err', msg: res.j && res.j.message });
+        }
+      }).catch(function(){ /* stay queued */ });
+    }
+    window.addEventListener('online', drain);
+    window.addEventListener('load', drain);
+
+    function submit(opts){
+      // opts: { kind, data, validate, out, btn, onSuccess }
+      var out = opts.out, btn = opts.btn;
+      function say(color, msg){ out.style.color = color; out.textContent = msg; }
+      var err = opts.validate(opts.data);
+      if (err) { say('#a33', err); return Promise.resolve({ ok:false, validation:true }); }
+      if (!rateOk(opts.kind)) { say('#a33', 'Troppe richieste. Attendi 30s.'); return Promise.resolve({ ok:false, rate:true }); }
+      if (opts.data._honey) { log({ kind: opts.kind, status: 'honeypot' }); return Promise.resolve({ ok:false, spam:true }); }
+      if (!navigator.onLine) {
+        enqueue({ kind: opts.kind, data: opts.data });
+        log({ kind: opts.kind, status: 'queued-offline' });
+        say('#c80', 'Offline: inviata alla coda, partirà quando torni online.');
+        rateMark(opts.kind); opts.onSuccess && opts.onSuccess();
+        return Promise.resolve({ ok:true, queued:true });
+      }
+      btn.disabled = true; say('#555', 'Invio in corso…');
+      var attempt = 0;
+      function tryOnce(){
+        return send(opts.data).then(function(res){
+          if (res.ok && (res.j.success === 'true' || res.j.success === true)) {
+            rateMark(opts.kind);
+            log({ kind: opts.kind, status: 'sent' });
+            say('#2a6', opts.okMsg);
+            opts.onSuccess && opts.onSuccess();
+            return res;
+          }
+          throw new Error((res.j && res.j.message) || 'server error');
+        }).catch(function(e){
+          if (attempt < RETRY.length){
+            var wait = RETRY[attempt++];
+            say('#c80', 'Errore rete, nuovo tentativo in ' + (wait/1000) + 's…');
+            return new Promise(function(r){ setTimeout(r, wait); }).then(tryOnce);
+          }
+          enqueue({ kind: opts.kind, data: opts.data });
+          log({ kind: opts.kind, status: 'failed', msg: e.message });
+          out.innerHTML = '';
+          var s = document.createElement('span');
+          s.style.color = '#a33';
+          s.textContent = 'Invio fallito (' + e.message + '). Messaggio in coda — ';
+          var a = document.createElement('a');
+          a.href = mailtoHref(opts.data); a.textContent = 'invia per email';
+          a.style.textDecoration = 'underline';
+          out.appendChild(s); out.appendChild(a);
+          return { ok:false };
+        });
+      }
+      return tryOnce().then(function(r){ btn.disabled = false; return r; });
+    }
+    return { submit: submit, sanitize: sanitize, EMAIL_RE: EMAIL_RE, log: function(){ return ls(LKEY, []); } };
+  })();
+
+  /* quote form */
   (function(){
     var form = document.getElementById('q-form');
     if (!form) return;
     var btn = document.getElementById('q-btn');
     var out = document.getElementById('q-result');
-    var re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var data = {};
-      new FormData(form).forEach(function(v,k){ data[k] = v; });
-      if (data._honey) return;
-      if (!data.nome || !data.nome.trim()) { out.style.color='#a33'; out.textContent='Nome richiesto.'; return; }
-      if (!re.test((data.email||'').trim())) { out.style.color='#a33'; out.textContent='Email non valida.'; return; }
-      if (!data.messaggio || !data.messaggio.trim()) { out.style.color='#a33'; out.textContent='Messaggio richiesto.'; return; }
-      if (!form.querySelector('input[name="consenso"]').checked) { out.style.color='#a33'; out.textContent='Consenso richiesto.'; return; }
-      btn.disabled = true; out.style.color='#555'; out.textContent='Invio in corso…';
-      fetch('https://formsubmit.co/ajax/pzkko@yahoo.com', {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
-        body: JSON.stringify(data)
-      })
-      .then(function(r){ return r.json().then(function(j){ return { ok:r.ok, j:j }; }); })
-      .then(function(res){
-        if (res.ok && (res.j.success === 'true' || res.j.success === true)) {
-          out.style.color='#2a6'; out.textContent='Richiesta inviata. Ti rispondiamo via email.';
-          form.reset();
-        } else {
-          out.style.color='#a33'; out.textContent='Errore: ' + (res.j.message || 'riprova più tardi.');
-        }
-      })
-      .catch(function(){ out.style.color='#a33'; out.textContent='Rete non disponibile. Riprova.'; })
-      .then(function(){ btn.disabled=false; });
+      var raw = {}; new FormData(form).forEach(function(v,k){ raw[k] = v; });
+      var data = {
+        _subject: raw._subject, _captcha: raw._captcha, _template: raw._template, _honey: raw._honey || '',
+        nome:      CFMailer.sanitize(raw.nome, 120),
+        email:     CFMailer.sanitize(raw.email, 200),
+        tel:       CFMailer.sanitize(raw.tel, 40),
+        oggetto:   CFMailer.sanitize(raw.oggetto, 80),
+        messaggio: CFMailer.sanitize(raw.messaggio, 4000),
+        consenso:  raw.consenso ? 'sì' : ''
+      };
+      CFMailer.submit({
+        kind: 'quote', data: data, out: out, btn: btn,
+        okMsg: 'Richiesta inviata. Ti rispondiamo via email.',
+        validate: function(d){
+          if (!d.nome) return 'Nome richiesto.';
+          if (!CFMailer.EMAIL_RE.test(d.email)) return 'Email non valida.';
+          if (!d.messaggio || d.messaggio.length < 5) return 'Messaggio troppo breve.';
+          if (!form.querySelector('input[name="consenso"]').checked) return 'Consenso richiesto.';
+          return null;
+        },
+        onSuccess: function(){ form.reset(); }
+      });
     });
   })();
-  /* newsletter — AJAX to formsubmit.co, inline result */
+
+  /* newsletter */
   (function(){
     var form = document.getElementById('nl-form');
     if (!form) return;
     var input = document.getElementById('nl-email');
     var btn = document.getElementById('nl-btn');
     var out = document.getElementById('nl-result');
-    var re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var email = (input.value || '').trim();
-      out.style.color = '#a33';
-      if (!re.test(email)) { out.textContent = 'Email non valida.'; return; }
-      btn.disabled = true; out.style.color = '#555'; out.textContent = 'Invio in corso…';
-      fetch('https://formsubmit.co/ajax/pzkko@yahoo.com', {
-        method: 'POST',
-        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
-        body: JSON.stringify({ email: email, _subject: 'Newsletter · Cascina Fontana', _captcha: 'false' })
-      })
-      .then(function(r){ return r.json().then(function(j){ return { ok:r.ok, j:j }; }); })
-      .then(function(res){
-        if (res.ok && (res.j.success === 'true' || res.j.success === true)) {
-          out.style.color = '#2a6'; out.textContent = 'Iscrizione registrata. Controlla la casella per confermare.';
-          form.reset();
-        } else {
-          out.style.color = '#a33'; out.textContent = 'Errore: ' + (res.j.message || 'riprova più tardi.');
-        }
-      })
-      .catch(function(){ out.style.color = '#a33'; out.textContent = 'Rete non disponibile. Riprova.'; })
-      .then(function(){ btn.disabled = false; });
+      var email = CFMailer.sanitize(input.value, 200);
+      var data = { email: email, _subject: 'Newsletter · Cascina Fontana', _captcha: 'false' };
+      CFMailer.submit({
+        kind: 'newsletter', data: data, out: out, btn: btn,
+        okMsg: 'Iscrizione registrata. Controlla la casella per confermare.',
+        validate: function(d){ return CFMailer.EMAIL_RE.test(d.email) ? null : 'Email non valida.'; },
+        onSuccess: function(){ form.reset(); }
+      });
     });
   })();
   chips.forEach(c => c.addEventListener('click', () => {
