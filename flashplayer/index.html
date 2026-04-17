@@ -361,9 +361,11 @@
             <li><b>Instagram</b> <a href="https://www.instagram.com/albertoxpecchini/" target="_blank" rel="noopener">@albertoxpecchini</a></li>
           </ul>
         </div>
-        <form class="quote" action="https://formsubmit.co/pzkko@yahoo.com" method="POST">
+        <form class="quote" id="q-form" novalidate>
           <input type="hidden" name="_subject" value="Richiesta preventivo · Cascina Fontana">
           <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <div class="field"><label>Nome e cognome</label><input name="nome" required></div>
           <div class="field"><label>Email</label><input type="email" name="email" required></div>
           <div class="field"><label>Telefono <span>(facoltativo)</span></label><input name="tel"></div>
@@ -379,8 +381,9 @@
             </select>
           </div>
           <div class="field"><label>Messaggio</label><textarea name="messaggio" rows="5" required></textarea></div>
-          <label class="consent"><input type="checkbox" required> Ho letto l'informativa privacy e acconsento al trattamento dei dati per rispondere alla mia richiesta.</label>
-          <button class="Button ButtonGrey" type="submit">Invia richiesta ▸</button>
+          <label class="consent"><input type="checkbox" name="consenso" required> Ho letto l'informativa privacy e acconsento al trattamento dei dati per rispondere alla mia richiesta.</label>
+          <button class="Button ButtonGrey" type="submit" id="q-btn">Invia richiesta ▸</button>
+          <p id="q-result" role="status" aria-live="polite" style="font-size:12px;margin-top:8px;min-height:16px"></p>
         </form>
       </div>
     </article>
@@ -472,6 +475,41 @@
   /* shop filter */
   const chips = document.querySelectorAll('.chip');
   const products = document.querySelectorAll('.product');
+  /* quote form — AJAX to formsubmit.co, inline result */
+  (function(){
+    var form = document.getElementById('q-form');
+    if (!form) return;
+    var btn = document.getElementById('q-btn');
+    var out = document.getElementById('q-result');
+    var re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var data = {};
+      new FormData(form).forEach(function(v,k){ data[k] = v; });
+      if (data._honey) return;
+      if (!data.nome || !data.nome.trim()) { out.style.color='#a33'; out.textContent='Nome richiesto.'; return; }
+      if (!re.test((data.email||'').trim())) { out.style.color='#a33'; out.textContent='Email non valida.'; return; }
+      if (!data.messaggio || !data.messaggio.trim()) { out.style.color='#a33'; out.textContent='Messaggio richiesto.'; return; }
+      if (!form.querySelector('input[name="consenso"]').checked) { out.style.color='#a33'; out.textContent='Consenso richiesto.'; return; }
+      btn.disabled = true; out.style.color='#555'; out.textContent='Invio in corso…';
+      fetch('https://formsubmit.co/ajax/pzkko@yahoo.com', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(function(r){ return r.json().then(function(j){ return { ok:r.ok, j:j }; }); })
+      .then(function(res){
+        if (res.ok && (res.j.success === 'true' || res.j.success === true)) {
+          out.style.color='#2a6'; out.textContent='Richiesta inviata. Ti rispondiamo via email.';
+          form.reset();
+        } else {
+          out.style.color='#a33'; out.textContent='Errore: ' + (res.j.message || 'riprova più tardi.');
+        }
+      })
+      .catch(function(){ out.style.color='#a33'; out.textContent='Rete non disponibile. Riprova.'; })
+      .then(function(){ btn.disabled=false; });
+    });
+  })();
   /* newsletter — AJAX to formsubmit.co, inline result */
   (function(){
     var form = document.getElementById('nl-form');
