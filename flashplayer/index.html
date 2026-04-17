@@ -7,6 +7,10 @@
   <link rel="icon" type="image/svg+xml" href="/flashplayer/logo.svg">
   <link rel="stylesheet" href="https://adobe-fonts.github.io/source-serif/source-serif.css">
   <link rel="stylesheet" href="/flashplayer/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
 
@@ -295,16 +299,22 @@
           </address>
         </div>
         <div>
-          <div class="map">
-            <iframe
-              title="Mappa Cascina Fontana"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=10.6700%2C45.1500%2C10.7200%2C45.1900&amp;layer=mapnik&amp;marker=45.170%2C10.695"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
+          <div class="map" id="cf-map" role="img" aria-label="Mappa Cascina Fontana"></div>
           <p class="TextGrey" style="font-size:11px;margin-top:8px">
-            © OpenStreetMap contributors · <a href="https://www.openstreetmap.org/?mlat=45.170&amp;mlon=10.695#map=13/45.170/10.695" target="_blank" rel="noopener">Apri la mappa</a>
+            © OpenStreetMap contributors · <a href="https://www.openstreetmap.org/?mlat=45.178311&amp;mlon=10.660775#map=16/45.178311/10.660775" target="_blank" rel="noopener">Apri la mappa</a>
           </p>
+          <script>
+            window.addEventListener('load', function(){
+              if (typeof L === 'undefined') return;
+              var lat = 45.178311, lon = 10.660775;
+              var map = L.map('cf-map', { scrollWheelZoom:false }).setView([lat, lon], 16);
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+              }).addTo(map);
+              L.marker([lat, lon]).addTo(map).bindPopup('Cascina Fontana<br>Via Belvedere 1, Rodigo (MN)');
+            });
+          </script>
         </div>
       </div>
     </article>
