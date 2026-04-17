@@ -1,59 +1,8 @@
 /* ============================================================
    CASCINA FONTANA — Stylesheet v2
-   Fonts : NType-82 · Lettera Mono LL · Ndot-57
+   Fonts : Apple system (SF Pro / SF Mono)
    Palette: #F9F7F7 / #DBE2EF / #3F72AF / #112D4E
    ============================================================ */
-
-/* ── FONTS ────────────────────────────────────────────────── */
-@font-face {
-  font-family: 'NType82';
-  src: url('https://raw.githubusercontent.com/xeji01/nothingfont/main/fonts/NType82-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'NType82';
-  src: url('https://raw.githubusercontent.com/xeji01/nothingfont/main/fonts/NType82-Headline.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'LetteraMono';
-  src: url('https://raw.githubusercontent.com/xeji01/nothingfont/main/fonts/LetteraMonoLL-Light.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'LetteraMono';
-  src: url('https://raw.githubusercontent.com/xeji01/nothingfont/main/fonts/LetteraMonoLL-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'LetteraMono';
-  src: url('https://raw.githubusercontent.com/xeji01/nothingfont/main/fonts/LetteraMonoLL-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'LetteraMono';
-  src: url('https://raw.githubusercontent.com/xeji01/nothingfont/main/fonts/LetteraMonoLL-LightItalic.otf') format('opentype');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Ndot57';
-  src: url('https://raw.githubusercontent.com/xeji01/nothingfont/main/fonts/Ndot57-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* ── TOKENS ───────────────────────────────────────────────── */
 :root {
@@ -65,9 +14,12 @@
   --muted:    rgba(17, 45, 78, 0.45);
   --border:   #DBE2EF;
 
-  --display: 'NType82',     system-ui, sans-serif;
-  --mono:    'LetteraMono', 'Courier New', monospace;
-  --dot:     'Ndot57',      monospace;
+  --apple-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, "Helvetica Neue", Arial, sans-serif;
+  --apple-mono: ui-monospace, "SF Mono", Menlo, Monaco, "Courier New", monospace;
+
+  --display: var(--apple-sans);
+  --mono:    var(--apple-mono);
+  --dot:     var(--apple-mono);
 
   --max-w:  1200px;
   --pad-x:  clamp(20px, 5vw, 64px);
