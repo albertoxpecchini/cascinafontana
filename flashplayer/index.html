@@ -338,12 +338,11 @@
       <p class="TextStep TextStep--alt">Newsletter</p>
       <h2 class="step__title">Aggiornamenti, solo quando servono.</h2>
       <p class="TextGrey">Riceverai solo nuovi annunci dello shop e novità operative. Niente altro, niente spam.</p>
-      <form class="newsletter" action="https://formsubmit.co/pzkko@yahoo.com" method="POST" onsubmit="return subscribeOk(event)">
-        <input type="hidden" name="_subject" value="Newsletter · Cascina Fontana">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="email" name="email" placeholder="tua.email@esempio.it" required aria-label="Email">
-        <button class="Button ButtonGrey" type="submit">Iscriviti ▸</button>
+      <form class="newsletter" id="nl-form" novalidate>
+        <input type="email" name="email" id="nl-email" placeholder="tua.email@esempio.it" required aria-label="Email" autocomplete="email">
+        <button class="Button ButtonGrey" type="submit" id="nl-btn">Iscriviti ▸</button>
       </form>
+      <p id="nl-result" role="status" aria-live="polite" style="font-size:12px;margin-top:8px;min-height:16px"></p>
       <p class="TextGrey" style="font-size:11px;margin-top:10px">Cliccando accetti di essere contattato solo per scopi informativi. Puoi disiscriverti quando vuoi.</p>
     </article>
 
@@ -473,9 +472,38 @@
   /* shop filter */
   const chips = document.querySelectorAll('.chip');
   const products = document.querySelectorAll('.product');
-  /* newsletter fake handler */
-  function subscribeOk(e){ /* let native submit proceed */ return true; }
-  window.subscribeOk = subscribeOk;
+  /* newsletter — AJAX to formsubmit.co, inline result */
+  (function(){
+    var form = document.getElementById('nl-form');
+    if (!form) return;
+    var input = document.getElementById('nl-email');
+    var btn = document.getElementById('nl-btn');
+    var out = document.getElementById('nl-result');
+    var re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var email = (input.value || '').trim();
+      out.style.color = '#a33';
+      if (!re.test(email)) { out.textContent = 'Email non valida.'; return; }
+      btn.disabled = true; out.style.color = '#555'; out.textContent = 'Invio in corso…';
+      fetch('https://formsubmit.co/ajax/pzkko@yahoo.com', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify({ email: email, _subject: 'Newsletter · Cascina Fontana', _captcha: 'false' })
+      })
+      .then(function(r){ return r.json().then(function(j){ return { ok:r.ok, j:j }; }); })
+      .then(function(res){
+        if (res.ok && (res.j.success === 'true' || res.j.success === true)) {
+          out.style.color = '#2a6'; out.textContent = 'Iscrizione registrata. Controlla la casella per confermare.';
+          form.reset();
+        } else {
+          out.style.color = '#a33'; out.textContent = 'Errore: ' + (res.j.message || 'riprova più tardi.');
+        }
+      })
+      .catch(function(){ out.style.color = '#a33'; out.textContent = 'Rete non disponibile. Riprova.'; })
+      .then(function(){ btn.disabled = false; });
+    });
+  })();
   chips.forEach(c => c.addEventListener('click', () => {
     chips.forEach(x => x.classList.remove('is-on'));
     c.classList.add('is-on');
