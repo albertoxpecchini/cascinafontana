@@ -5,7 +5,9 @@
 - Home: https://cascinafontana.xyz
 - Flash mode: https://cascinafontana.xyz/flashplayer
 
-Versioning: `YYYY.MM.DD.N` (date + daily sequence). Current: `2026.04.18.5`.
+Versioning: `AAAA.MM.GG.N` (data + numero del giorno). Attuale: `2026.04.18.8`.
+
+**Regola di lavoro:** ogni modifica → si aggiorna `README.md` dove serve **e** si scrive una voce in `CHANGELOG.md` in italiano semplice. Il messaggio del commit è solo il numero di versione.
 
 ---
 
