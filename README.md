@@ -124,14 +124,8 @@ Push su `main` → deploy automatico Vercel. Nessun build command.
 
 ---
 
-## Changelog recente
+## Changelog
 
-- `2026.04.18.5` — purge stale font names from CSS comments
-- `2026.04.18.4` — drop `/jdm` route + folder, sync root map coords
-- `2026.04.18.3` — root: Apple system font stack, rimosso nothingfont `@font-face`
-- `2026.04.18.2` — CFMailer module (sanitize, rate-limit, queue, retry, mailto, log)
-- `2026.04.18.1` — quote form AJAX con honeypot e validazione client
-- `2026.04.17.1` — newsletter AJAX formsubmit + inline result
-- `1.4.1` — `/flashplayer` Leaflet map
-- `1.4` — root: storia, certificazioni, shop, testimonial, mappa, FAQ, newsletter, downloads
-- `1.3.5` — `/flashplayer` espansione completa
+Vedi [`CHANGELOG.md`](./CHANGELOG.md).
+
+Convenzione commit: messaggio = versione sola (`AAAA.MM.GG.N`). Tutti i dettagli nel changelog.
