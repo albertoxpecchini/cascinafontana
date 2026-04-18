@@ -95,7 +95,6 @@ Important routes in `vercel.json`:
 
 - `/` -> `/index.html`
 - `/flashplayer` -> `/flashplayer/index.html`
-- `/jdm` redirects to `/flashplayer`
 
 ---
 
