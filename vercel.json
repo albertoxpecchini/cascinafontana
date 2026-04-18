@@ -4,7 +4,7 @@
   "framework": null,
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/home", "destination": "/home/index.html" },
+    { "source": "/home", "destination": "/index.html" },
     { "source": "/flashplayer", "destination": "/flashplayer/index.html" },
     { "source": "/(.*)", "destination": "/$1" }
   ]
