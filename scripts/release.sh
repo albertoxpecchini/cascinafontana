@@ -29,6 +29,6 @@ if git diff --cached --quiet; then
 fi
 
 git commit -m "$ver"
-git tag "$ver"
+git tag -a "$ver" -m "$ver"
 git push origin HEAD --follow-tags
 echo "released $ver"

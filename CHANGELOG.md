@@ -5,6 +5,9 @@ Ogni voce racconta cosa è cambiato in parole semplici.
 
 ---
 
+## 2026.04.18.12
+- `scripts/release.sh`: i tag ora sono annotati (`git tag -a`) così `push --follow-tags` li spinge automaticamente.
+
 ## 2026.04.18.11
 - Sistema di release pulito: file `VERSION` nella root tiene la versione corrente.
 - Script `scripts/release.sh` calcola automaticamente la prossima sequenza del giorno (`NN` zero-padded), scrive `VERSION`, committa (messaggio = versione), crea il tag e fa push.
