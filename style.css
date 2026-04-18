@@ -105,7 +105,7 @@ p {
   line-height: 1.75;
 }
 
-/* Labels — Lettera Mono caps */
+/* Labels — mono caps */
 .label {
   display: inline-block;
   font-family: var(--mono);
@@ -266,7 +266,7 @@ p {
 
 .sep { opacity: 0.4; }
 
-/* Hero title: NType82 */
+/* Hero title */
 .hero__title {
   font-family: var(--display);
   font-size: clamp(68px, 13vw, 168px);
@@ -302,7 +302,7 @@ p {
   background: var(--border);
 }
 
-/* Stats — Ndot57 numbers */
+/* Stats — numeric */
 .hero__stats {
   display: flex;
   align-items: center;
