@@ -5,6 +5,11 @@ Ogni voce racconta cosa è cambiato in parole semplici.
 
 ---
 
+## 2026.04.18.10
+- Riscritta la storia recente di `main` (da `1.4` in poi): ogni commit ora porta solo il numero di versione, niente descrizioni nel messaggio.
+- Aggiunto un hook `commit-msg` tracciato in `.githooks/` che rifiuta messaggi non conformi al formato versione.
+- `README.md` spiega come attivare l'hook dopo un clone (`git config core.hooksPath .githooks`).
+
 ## 2026.04.18.9
 - Regola di lavoro esplicita nel `README.md`: ogni modifica tocca anche il `README.md` (se pertinente) e lascia una voce in questo `CHANGELOG.md`.
 - Le voci del changelog d'ora in avanti sono in italiano semplice, leggibili anche da chi non fa il mestiere.

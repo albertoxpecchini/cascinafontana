@@ -9,6 +9,17 @@ Versioning: `AAAA.MM.GG.N` (data + numero del giorno). Attuale: `2026.04.18.8`.
 
 **Regola di lavoro:** ogni modifica → si aggiorna `README.md` dove serve **e** si scrive una voce in `CHANGELOG.md` in italiano semplice. Il messaggio del commit è solo il numero di versione.
 
+### Hook di validazione commit
+
+Un hook `commit-msg` blocca i messaggi che non rispettano il formato versione.
+
+File tracciato: `.githooks/commit-msg`. Per attivarlo dopo un clone:
+
+```sh
+git config core.hooksPath .githooks
+chmod +x .githooks/commit-msg
+```
+
 ---
 
 ## Stato
