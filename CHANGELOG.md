@@ -5,6 +5,13 @@ Ogni voce racconta cosa è cambiato in parole semplici.
 
 ---
 
+## 2026.04.18.14
+- Nuova home root: schermata iniziale minimale — sfondo scuro con blob animati, card in vetro e unico CTA "Enter Flash Mode" verso `/flashplayer`.
+- `index.html` ora è autonomo: CSS tutto inline, nessun riferimento a `style.css` o `main.js`.
+- `style.css` e `main.js` in root restano nel repo ma sono dormienti: non più caricati da nessuna pagina.
+- Tutto il contenuto esteso (shop, certificazioni, newsletter, preventivo, mappa, ecc.) rimane su `/flashplayer`, invariato.
+- `README.md` aggiornato: nuova struttura file + nota sui file legacy dormienti.
+
 ## 2026.04.18.13
 - Unificato lo stack dei font su un'unica famiglia di sistema: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif`.
 - Rimossi tutti i font personalizzati residui (Source Serif, SF Pro/Mono come nomi espliciti, Arial/Helvetica hardcoded).

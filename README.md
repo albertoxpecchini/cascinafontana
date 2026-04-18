@@ -72,20 +72,25 @@ Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif
 
 ```
 cascinafontana/
-├── index.html            # home root
-├── style.css             # stili root
-├── main.js               # JS root
+├── index.html            # splash minimale + CTA a /flashplayer (CSS inline, zero asset esterni)
+├── style.css             # [dormiente] vecchi stili root, non referenziato da index.html
+├── main.js               # [dormiente] vecchio JS root, non referenziato da index.html
 ├── vercel.json           # rewrites
-├── public/images/        # asset home
+├── public/images/        # asset legacy (favicon usata da index.html)
 └── flashplayer/
-    ├── index.html        # singlepage Flash-style
+    ├── index.html        # singlepage con tutti i contenuti
     ├── style.css
     └── logo.svg
 ```
 
-## Sezioni root
+> Nota: `style.css` e `main.js` in root sono conservati ma **non più referenziati** dalla nuova home. Tutto il contenuto esteso vive in `/flashplayer`.
 
-Hero · Sistema · Attività · Produzione · Filiera · Strutture · Sostenibilità · Gelsi · Fontana · Galleria · Contatti
+## Home root (`/`)
+
+Schermata iniziale minimale in stile landing:
+- Sfondo scuro con gradient-blob animati e grain SVG
+- Card in vetro (backdrop-filter) con titolo, sottotitolo e unico CTA → `/flashplayer`
+- CSS tutto inline in `<head>`, nessun file o font esterno caricato
 
 ## Sezioni `/flashplayer`
 
@@ -96,8 +101,8 @@ Topnav · Storia · Certificazioni · Galleria · Shop · Testimonial · Orari &
 ## Mappa
 
 - Coordinate: `45.178311, 10.660775` (Via Belvedere 1, 46040 Rodigo MN)
-- Root: iframe OpenStreetMap embed
 - `/flashplayer`: Leaflet + OSM tiles, marker con popup indirizzo
+- Root: nessuna mappa (splash minimale)
 
 ---
 
