@@ -5,9 +5,23 @@
 - Home: https://cascinafontana.xyz
 - Flash mode: https://cascinafontana.xyz/flashplayer
 
-Versioning: `AAAA.MM.GG.N` (data + numero del giorno). Attuale: `2026.04.18.8`.
+Versioning: `AAAA.MM.GG.NN` (data + numero del giorno, zero-padded). Attuale: vedi [`VERSION`](./VERSION).
 
 **Regola di lavoro:** ogni modifica → si aggiorna `README.md` dove serve **e** si scrive una voce in `CHANGELOG.md` in italiano semplice. Il messaggio del commit è solo il numero di versione.
+
+### Script di release
+
+Un solo comando per versionare, committare, taggare e pushare:
+
+```sh
+# stage delle modifiche reali
+git add <files>
+
+# release: scrive VERSION, commit con messaggio = versione, tag, push
+sh scripts/release.sh
+```
+
+Lo script calcola automaticamente la prossima sequenza del giorno (`NN` zero-padded) leggendo tag e log.
 
 ### Hook di validazione commit
 

@@ -5,6 +5,12 @@ Ogni voce racconta cosa è cambiato in parole semplici.
 
 ---
 
+## 2026.04.18.11
+- Sistema di release pulito: file `VERSION` nella root tiene la versione corrente.
+- Script `scripts/release.sh` calcola automaticamente la prossima sequenza del giorno (`NN` zero-padded), scrive `VERSION`, committa (messaggio = versione), crea il tag e fa push.
+- Tag Git visibile sul repository → versione unica senza toccare file non correlati.
+- Formato aggiornato a `AAAA.MM.GG.NN` con sequenza zero-padded a due cifre.
+
 ## 2026.04.18.10
 - Riscritta la storia recente di `main` (da `1.4` in poi): ogni commit ora porta solo il numero di versione, niente descrizioni nel messaggio.
 - Aggiunto un hook `commit-msg` tracciato in `.githooks/` che rifiuta messaggi non conformi al formato versione.
