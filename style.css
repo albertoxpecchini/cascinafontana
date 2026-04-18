@@ -11,7 +11,8 @@
   --blue:     #3F72AF;
   --dark:     #112D4E;
   --white:    #FFFFFF;
-  --muted:    rgba(17, 45, 78, 0.45);
+  --muted:    rgba(17, 45, 78, 0.72);
+  --muted-2:  rgba(17, 45, 78, 0.5);
   --border:   #DBE2EF;
 
   --apple-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, "Helvetica Neue", Arial, sans-serif;
@@ -23,7 +24,7 @@
 
   --max-w:  1200px;
   --pad-x:  clamp(20px, 5vw, 64px);
-  --sec-y:  clamp(80px, 10vw, 144px);
+  --sec-y:  clamp(56px, 7vw, 104px);
 
   --ease:   cubic-bezier(0.16, 1, 0.3, 1);
   --t-fast: 180ms;
@@ -1345,3 +1346,33 @@ figcaption {
   .timeline{padding-left:24px}
   .timeline li::before{left:-31px}
 }
+
+/* ── HERO CTA ─────────────────────────────────────────────── */
+.hero__cta{
+  display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:28px;
+}
+.btn--primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--dark);color:var(--bg);
+  padding:13px 26px;border-radius:100px;
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;border:1px solid var(--dark);
+  transition:background var(--t-fast),color var(--t-fast),transform var(--t-fast);
+}
+.btn--primary:hover{background:var(--blue);border-color:var(--blue);transform:translateY(-1px)}
+.btn--ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--dark);
+  padding:13px 26px;border-radius:100px;
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;border:1px solid var(--dark);
+  transition:background var(--t-fast),color var(--t-fast);
+}
+.btn--ghost:hover{background:var(--dark);color:var(--bg)}
+.btn--link{
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.1em;
+  color:var(--blue);padding:13px 12px;text-transform:uppercase;
+  border-bottom:1px solid transparent;transition:border-color var(--t-fast);
+}
+.btn--link:hover{border-bottom-color:var(--blue)}
+.hero__scroll{font-size:11px;letter-spacing:.2em}
