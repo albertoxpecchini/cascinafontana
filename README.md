@@ -51,13 +51,16 @@ chmod +x .githooks/commit-msg
 - CDN esterne caricate dal browser:
   - Leaflet 1.9.4 (solo `/flashplayer`, mappa)
   - OpenStreetMap tile server (mappa)
-  - Adobe Source Serif (solo `/flashplayer`)
   - FormSubmit AJAX (invio form)
 
 ## Font
 
-- Root (`/`): Apple system stack — `-apple-system`, `BlinkMacSystemFont`, `SF Pro Text/Display`, `SF Mono`, fallback sans/mono
-- `/flashplayer`: Source Serif 4 + Arial/Helvetica system
+Stack unico di sistema per l'intero sito — nessun font esterno caricato:
+
+```
+ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif
+```
 
 ## Palette
 

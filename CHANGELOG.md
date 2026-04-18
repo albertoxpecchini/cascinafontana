@@ -5,6 +5,13 @@ Ogni voce racconta cosa è cambiato in parole semplici.
 
 ---
 
+## 2026.04.18.13
+- Unificato lo stack dei font su un'unica famiglia di sistema: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif`.
+- Rimossi tutti i font personalizzati residui (Source Serif, SF Pro/Mono come nomi espliciti, Arial/Helvetica hardcoded).
+- Rimosso il caricamento esterno di Source Serif da `/flashplayer`.
+- Le variabili CSS `--display`, `--mono`, `--dot` ora puntano tutte a `--sans`: zero cambi di markup.
+- `README.md` aggiornato per riflettere l'unico stack di font.
+
 ## 2026.04.18.12
 - `scripts/release.sh`: i tag ora sono annotati (`git tag -a`) così `push --follow-tags` li spinge automaticamente.
 

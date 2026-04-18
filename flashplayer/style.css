@@ -1,17 +1,21 @@
 /* Cascina Fontana · /flashplayer · 2012 download-center style
-   Source Serif (headings) · system sans (body) · white / grey / blue */
+   System sans stack · white / grey / blue */
+
+:root{
+  --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
 
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:var(--sans);
   font-size:13px;line-height:1.5;color:#333;background:#fff;
 }
 img{display:block;max-width:100%}
 a{color:#1473e6;text-decoration:none}
 a:hover{text-decoration:underline}
-h1,h2,h3{margin:0;font-family:'Source Serif 4','Source Serif Pro',Georgia,serif;font-weight:600;color:#222}
+h1,h2,h3{margin:0;font-family:var(--sans);font-weight:600;color:#222}
 h2{font-size:28px;line-height:1.2}
 h3{font-size:16px;line-height:1.3;margin-bottom:.4rem}
 p{margin:0 0 14px}
@@ -33,7 +37,7 @@ ol,ul{margin:0;padding:0;list-style:none}
 }
 .home-logo{display:flex;align-items:center;gap:12px;color:#222}
 .home-logo img{width:36px;height:36px}
-.home-logo span{font-family:'Source Serif 4','Source Serif Pro',Georgia,serif;font-size:20px;font-weight:600;letter-spacing:-.01em}
+.home-logo span{font-family:var(--sans);font-size:20px;font-weight:600;letter-spacing:-.01em}
 .text-step{
   margin:0;font-size:11px;color:#666;letter-spacing:.05em;text-transform:uppercase;
   background:#fff;border:1px solid #d0d0d0;border-radius:2px;padding:6px 12px;
@@ -85,7 +89,7 @@ ol,ul{margin:0;padding:0;list-style:none}
 /* Adobe-style grey button */
 .Button{
   display:inline-block;padding:10px 28px;
-  font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;
+  font-family:var(--sans);font-size:14px;font-weight:700;
   color:#fff;text-decoration:none;cursor:pointer;border-radius:3px;
   text-shadow:0 -1px 0 rgba(0,0,0,.25);
   border:1px solid #4f4f4f;
@@ -119,7 +123,7 @@ ol,ul{margin:0;padding:0;list-style:none}
 .pillar{margin-top:14px}
 .pillar li{display:flex;gap:14px;padding:12px 0;border-bottom:1px dotted #d5d5d5;font-size:14px}
 .pillar li:last-child{border-bottom:0}
-.pillar b{color:#1473e6;font-family:'Source Serif 4',Georgia,serif;font-weight:600;font-size:18px;min-width:30px}
+.pillar b{color:#1473e6;font-family:var(--sans);font-weight:600;font-size:18px;min-width:30px}
 .pillar em{font-style:normal;color:#777}
 
 /* stats */
@@ -132,7 +136,7 @@ ol,ul{margin:0;padding:0;list-style:none}
   padding:22px 14px;text-align:center;
 }
 .stat b{
-  display:block;font-family:'Source Serif 4',Georgia,serif;
+  display:block;font-family:var(--sans);
   font-size:46px;line-height:1;color:#222;font-weight:600;
 }
 .stat span{
@@ -149,7 +153,7 @@ ol,ul{margin:0;padding:0;list-style:none}
   box-shadow:inset 0 1px 0 #fff;
 }
 .chain li span{
-  display:inline-block;font-family:'Source Serif 4',Georgia,serif;
+  display:inline-block;font-family:var(--sans);
   color:#1473e6;font-size:18px;margin-bottom:4px;font-weight:600;
 }
 .chain h3{font-size:17px;margin:0 0 3px}
@@ -161,7 +165,7 @@ ol,ul{margin:0;padding:0;list-style:none}
   box-shadow:none !important;
 }
 .chain__note{
-  text-align:center;margin:22px 0 0;font-family:'Source Serif 4',Georgia,serif;
+  text-align:center;margin:22px 0 0;font-family:var(--sans);
   font-style:italic;color:#555;font-size:16px;
 }
 
@@ -197,7 +201,7 @@ ol,ul{margin:0;padding:0;list-style:none}
   background:
     repeating-linear-gradient(45deg,#e9e9e9 0 10px,#efefef 10px 20px);
   display:grid;place-items:center;
-  color:#888;font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:16px;
+  color:#888;font-family:var(--sans);font-style:italic;font-size:16px;
   border-bottom:1px solid #d5d5d5;
 }
 .badge{
@@ -212,7 +216,7 @@ ol,ul{margin:0;padding:0;list-style:none}
 .product h3{font-size:17px;margin:0 0 2px}
 .product__meta{font-size:12px;color:#888;margin:0 0 4px}
 .product__price{
-  font-family:'Source Serif 4',Georgia,serif;font-size:20px;font-weight:700;
+  font-family:var(--sans);font-size:20px;font-weight:700;
   color:#222;margin:6px 0 12px;
 }
 .product .Button{align-self:flex-start;margin-top:auto;padding:7px 18px;font-size:12px}
@@ -253,7 +257,7 @@ ol,ul{margin:0;padding:0;list-style:none}
   box-shadow:0 0 0 1px #c0c0c0;
 }
 .timeline b{
-  font-family:'Source Serif 4',Georgia,serif;font-size:22px;color:#1473e6;
+  font-family:var(--sans);font-size:22px;color:#1473e6;
   display:block;margin-bottom:2px;
 }
 .timeline h4{margin:0 0 4px;font-size:15px;color:#222}
@@ -269,7 +273,7 @@ ol,ul{margin:0;padding:0;list-style:none}
 .cert__seal{
   display:inline-grid;place-items:center;width:56px;height:56px;border-radius:50%;
   background:linear-gradient(135deg,#1473e6,#0d5cb8);color:#fff;
-  font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:13px;
+  font-family:var(--sans);font-weight:700;font-size:13px;
   letter-spacing:.05em;margin-bottom:10px;
   box-shadow:0 2px 4px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.3);
   text-shadow:0 -1px 0 rgba(0,0,0,.3);
@@ -285,7 +289,7 @@ ol,ul{margin:0;padding:0;list-style:none}
   aspect-ratio:1/1;
   background:repeating-linear-gradient(45deg,#e2e2e2 0 10px,#eaeaea 10px 20px);
   display:grid;place-items:center;color:#999;
-  font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:13px;
+  font-family:var(--sans);font-style:italic;font-size:13px;
   border:1px solid #d5d5d5;
 }
 .gal__item--lg .gal__ph{font-size:17px}
@@ -303,10 +307,10 @@ ol,ul{margin:0;padding:0;list-style:none}
 }
 .tm::before{
   content:"\201C";position:absolute;top:-4px;left:10px;
-  font-family:'Source Serif 4',Georgia,serif;font-size:54px;color:#1473e6;line-height:1;
+  font-family:var(--sans);font-size:54px;color:#1473e6;line-height:1;
 }
 .tm p{
-  margin:12px 0 10px;font-family:'Source Serif 4',Georgia,serif;
+  margin:12px 0 10px;font-family:var(--sans);
   font-style:italic;font-size:15px;color:#333;line-height:1.5;
 }
 .tm footer{font-size:11px;color:#888;letter-spacing:.04em;text-transform:uppercase}
@@ -361,7 +365,7 @@ ol,ul{margin:0;padding:0;list-style:none}
 .channels li{padding:8px 0;border-bottom:1px dotted #d5d5d5;font-size:13px}
 .channels b{
   display:inline-block;min-width:80px;color:#1473e6;
-  font-family:'Source Serif 4',Georgia,serif;font-weight:600;
+  font-family:var(--sans);font-weight:600;
 }
 .quote{display:grid;gap:12px;background:#fdfdfd;border:1px solid #d5d5d5;border-radius:3px;padding:20px}
 .field{display:flex;flex-direction:column;gap:4px}
@@ -394,14 +398,14 @@ ol,ul{margin:0;padding:0;list-style:none}
 .foot-col h5{
   margin:0 0 10px;font-size:11px;color:#444;font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:var(--sans);
 }
 .foot-col ul{display:flex;flex-direction:column;gap:4px}
 .foot-col li{font-size:13px}
 .foot-col a{color:#1473e6}
 .foot-brand{display:flex;gap:12px;align-items:flex-start}
 .foot-brand p{margin:0;font-size:13px;color:#444;line-height:1.5}
-.foot-brand strong{font-family:'Source Serif 4',Georgia,serif;font-size:16px;color:#222}
+.foot-brand strong{font-family:var(--sans);font-size:16px;color:#222}
 
 /* ── responsive ── */
 @media (max-width:800px){
