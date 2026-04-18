@@ -71,14 +71,25 @@
       </div>
     </div>
     <div class="hero__right glass-card" aria-hidden="true">
-      <div class="od">
-        <div class="od__center">Gestione</div>
-        <div class="od__node od__node--in" style="animation-delay:0s">Campi</div>
-        <div class="od__node od__node--in" style="animation-delay:-4.67s">Strutture</div>
-        <div class="od__node od__node--in" style="animation-delay:-9.33s">Macchine</div>
-        <div class="od__node od__node--out" style="animation-delay:0s">Energia</div>
-        <div class="od__node od__node--out" style="animation-delay:-11s">Acqua</div>
-      </div>
+      <svg class="hero-diagram" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <radialGradient id="ringGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(159,180,255,0.0)"/>
+            <stop offset="70%" stop-color="rgba(159,180,255,0.12)"/>
+            <stop offset="100%" stop-color="rgba(159,180,255,0)"/>
+          </radialGradient>
+        </defs>
+        <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 6"/>
+        <circle cx="200" cy="200" r="90" fill="none" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 6"/>
+        <circle cx="200" cy="200" r="150" fill="url(#ringGrad)"/>
+        <line x1="200" y1="200" x2="200" y2="50" stroke="rgba(255,255,255,0.05)"/>
+        <line x1="200" y1="200" x2="70" y2="275" stroke="rgba(255,255,255,0.05)"/>
+        <line x1="200" y1="200" x2="330" y2="275" stroke="rgba(255,255,255,0.05)"/>
+      </svg>
+      <span class="node node--center">Gestione</span>
+      <span class="node node--top">Campi</span>
+      <span class="node node--bl">Risorse</span>
+      <span class="node node--br">Strutture</span>
     </div>
   </div>
 </section>
