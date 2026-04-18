@@ -199,6 +199,43 @@
     outline-offset: 3px;
   }
 
+  .flash-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 8px 14px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    border-radius: 999px;
+    border: 1px solid var(--stroke);
+    background: rgba(255,255,255,0.02);
+    transition: color .25s ease, border-color .25s ease, background .25s ease;
+  }
+
+  .flash-link:hover {
+    color: var(--fg);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .flash-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ff6b35;
+    box-shadow: 0 0 8px #ff6b35;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
   .foot {
     margin-top: 28px;
     font-size: 12px;
@@ -239,9 +276,12 @@
       <span class="eyebrow"><span class="dot"></span>Rodigo · Mantova</span>
       <h1>Cascina Fontana</h1>
       <p class="sub">Società agricola dal 2007. Un sistema che mantiene costanza nel tempo.</p>
-      <a href="/flashplayer" class="cta" aria-label="Entra in Flash Mode">
-        <span>Enter Flash Mode</span>
+      <a href="/home" class="cta" aria-label="Entra nel sito">
+        <span>Enter Site</span>
         <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="/flashplayer" class="flash-link" aria-label="Flash Mode">
+        <span class="flash-dot"></span>Flash Mode
       </a>
       <p class="foot">Est. 2007 <span class="sep">·</span> Via Belvedere 1</p>
     </section>
