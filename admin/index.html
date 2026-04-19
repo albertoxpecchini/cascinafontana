@@ -42,13 +42,28 @@
     border: 1px solid rgba(199, 167, 99, 0.12);
   }
   input, select, textarea { color-scheme: dark; }
+  .tab-btn { transition: all .2s; }
+  .tab-btn.active { background: rgba(199, 167, 99, 0.12); color: #c7a763; border-color: rgba(199, 167, 99, 0.4); }
+  .thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #2a2920; }
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    padding: 12px 18px; border-radius: 12px;
+    background: rgba(23, 23, 15, 0.95); backdrop-filter: blur(12px);
+    border: 1px solid rgba(199, 167, 99, 0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    opacity: 0; transform: translateY(8px); transition: all .3s ease;
+    max-width: 360px;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.success { border-color: rgba(34, 197, 94, 0.4); }
+  .toast.error { border-color: rgba(239, 68, 68, 0.4); }
 </style>
 </head>
 <body class="min-h-screen bg-dark-bg text-dark-text">
 
 <!-- Top bar -->
 <header class="sticky top-0 z-40 bg-dark-bg/90 backdrop-blur border-b border-dark-border">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap gap-3">
     <a href="/" class="flex items-center gap-2 group">
       <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center font-heading font-bold text-dark-bg text-xs">CF</span>
       <span class="font-heading font-bold text-sm group-hover:text-primary transition">Admin · Cascina Fontana</span>
@@ -60,113 +75,240 @@
   </div>
 </header>
 
-<main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+<main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6">
 
   <!-- Boot loader -->
   <div id="bootLoader" class="text-center text-dark-muted py-20">Verifica sessione…</div>
 
-  <div id="adminRoot" class="hidden space-y-8">
+  <div id="adminRoot" class="hidden space-y-6">
 
-    <!-- Form create/edit -->
-    <section class="glass rounded-2xl p-5 sm:p-6">
-      <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
-        <div>
-          <div class="text-xs font-medium text-primary tracking-widest">ANNUNCI</div>
-          <h2 id="formTitle" class="font-heading text-2xl font-bold">Nuovo <span class="gradient-text">annuncio</span></h2>
-        </div>
-        <button id="cancelEditBtn" class="hidden px-3 py-1.5 text-xs rounded-lg border border-dark-border hover:border-primary hover:text-primary transition">Annulla modifica</button>
-      </div>
+    <!-- Tabs -->
+    <nav class="flex items-center gap-2 glass rounded-xl p-1 w-fit">
+      <button data-tab="listings" class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium border border-transparent">Annunci</button>
+      <button data-tab="updates"  class="tab-btn px-4 py-2 rounded-lg text-sm font-medium border border-transparent">Aggiornamenti</button>
+    </nav>
 
-      <form id="listingForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input type="hidden" id="listingId" name="id">
+    <!-- ============================================== -->
+    <!-- TAB: LISTINGS                                  -->
+    <!-- ============================================== -->
+    <div id="tab-listings" class="space-y-6">
 
-        <div class="md:col-span-2">
-          <label class="block text-xs font-medium text-dark-muted mb-1">Titolo *</label>
-          <input type="text" id="title" name="title" required maxlength="200"
-            class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
-        </div>
-
-        <div>
-          <label class="block text-xs font-medium text-dark-muted mb-1">Prezzo</label>
-          <input type="text" id="price" name="price" placeholder="€ 14.500 · € 18/ql · Su richiesta"
-            class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+      <!-- Listings form -->
+      <section class="glass rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <div>
+            <div class="text-xs font-medium text-primary tracking-widest">ANNUNCI</div>
+            <h2 id="listingFormTitle" class="font-heading text-2xl font-bold">Nuovo <span class="gradient-text">annuncio</span></h2>
+          </div>
+          <button id="listingCancelEdit" class="hidden px-3 py-1.5 text-xs rounded-lg border border-dark-border hover:border-primary hover:text-primary transition">Annulla modifica</button>
         </div>
 
-        <div>
-          <label class="block text-xs font-medium text-dark-muted mb-1">Categoria *</label>
-          <select id="category" name="category" required
-            class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
-            <option value="macchine">Macchinari</option>
-            <option value="prodotti">Prodotti</option>
-            <option value="materiali">Materiali</option>
-          </select>
-        </div>
+        <form id="listingForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="hidden" id="l_id">
 
-        <div class="md:col-span-2">
-          <label class="block text-xs font-medium text-dark-muted mb-1">Descrizione</label>
-          <textarea id="description" name="description" rows="3" maxlength="2000"
-            class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition resize-none"></textarea>
-        </div>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Titolo *</label>
+            <input type="text" id="l_title" required maxlength="200"
+              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
 
-        <div>
-          <label class="block text-xs font-medium text-dark-muted mb-1">Stato</label>
-          <select id="status" name="status"
-            class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
-            <option value="available">Disponibile</option>
-            <option value="sold">Venduto</option>
-          </select>
-        </div>
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Categoria</label>
+            <select id="l_category"
+              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+              <option value="macchine">Macchinari</option>
+              <option value="prodotti">Prodotti</option>
+              <option value="materiali">Materiali</option>
+            </select>
+          </div>
 
-        <div>
-          <label class="block text-xs font-medium text-dark-muted mb-1">Immagine (URL)</label>
-          <input type="url" id="image_url" name="image_url" placeholder="https://… oppure carica sotto"
-            class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
-        </div>
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Marca</label>
+            <input type="text" id="l_brand" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
 
-        <div class="md:col-span-2">
-          <label class="block text-xs font-medium text-dark-muted mb-1">Oppure carica un file</label>
-          <div class="flex items-center gap-3 flex-wrap">
-            <input type="file" id="imageFile" accept="image/*"
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Modello</label>
+            <input type="text" id="l_model" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Cilindrata</label>
+            <input type="text" id="l_displacement" placeholder="es. 2500 cc" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Cavalli (HP)</label>
+            <input type="text" id="l_hp" placeholder="es. 85 CV" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Alimentazione</label>
+            <select id="l_fuel"
+              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+              <option value="">—</option>
+              <option value="diesel">Diesel</option>
+              <option value="benzina">Benzina</option>
+              <option value="gpl">GPL</option>
+              <option value="metano">Metano</option>
+              <option value="elettrico">Elettrico</option>
+              <option value="ibrido">Ibrido</option>
+              <option value="altro">Altro</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Ore di utilizzo</label>
+            <input type="text" id="l_usage_hours" placeholder="es. 4200 h" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Condizione</label>
+            <select id="l_condition"
+              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+              <option value="">—</option>
+              <option value="nuovo">Nuovo</option>
+              <option value="ottimo">Ottimo</option>
+              <option value="buono">Buono</option>
+              <option value="discreto">Discreto</option>
+              <option value="da_revisionare">Da revisionare</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Colore</label>
+            <input type="text" id="l_color" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label class="flex items-center gap-2 text-sm bg-dark-bg border border-dark-border rounded-lg px-3 py-2.5 cursor-pointer hover:border-primary transition">
+              <input type="checkbox" id="l_registered" class="accent-primary">
+              <span>Immatricolato</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm bg-dark-bg border border-dark-border rounded-lg px-3 py-2.5 cursor-pointer hover:border-primary transition">
+              <input type="checkbox" id="l_documents" class="accent-primary">
+              <span>Documenti</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm bg-dark-bg border border-dark-border rounded-lg px-3 py-2.5 cursor-pointer hover:border-primary transition">
+              <input type="checkbox" id="l_insured" class="accent-primary">
+              <span>Assicurato</span>
+            </label>
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Immagini (più file — compressione automatica)</label>
+            <input type="file" id="l_images" accept="image/*" multiple
               class="text-sm text-dark-muted file:mr-3 file:px-3 file:py-2 file:rounded-lg file:border-0 file:bg-primary file:text-dark-bg file:font-medium file:cursor-pointer hover:file:bg-primary-dark">
-            <span id="uploadStatus" class="text-xs text-dark-muted"></span>
+            <div id="l_imagesPreview" class="mt-3 flex flex-wrap gap-2"></div>
+            <p id="l_uploadStatus" class="text-xs text-dark-muted mt-2"></p>
           </div>
-          <div id="imagePreview" class="mt-3 hidden">
-            <img id="imagePreviewImg" class="w-32 h-32 object-cover rounded-lg border border-dark-border" alt="Anteprima">
+
+          <div id="l_formError" class="hidden md:col-span-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"></div>
+
+          <div class="md:col-span-2 flex items-center gap-3 flex-wrap">
+            <button type="submit" id="l_saveBtn"
+              class="px-6 py-3 rounded-xl bg-primary text-dark-bg font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
+              Salva annuncio
+            </button>
+            <button type="reset" id="l_resetBtn"
+              class="px-6 py-3 rounded-xl border border-dark-border hover:border-primary hover:text-primary transition">
+              Pulisci
+            </button>
           </div>
+        </form>
+      </section>
+
+      <!-- Listings list -->
+      <section class="glass rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <h2 class="font-heading text-xl font-bold">Annunci esistenti <span id="l_count" class="text-dark-muted text-sm font-normal"></span></h2>
+          <button id="l_refreshBtn" class="text-xs px-3 py-1.5 rounded-lg border border-dark-border hover:border-primary hover:text-primary transition">↻ Aggiorna</button>
+        </div>
+        <div id="listingsContainer" class="space-y-3">
+          <div class="text-center text-dark-muted py-6 text-sm">Caricamento…</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- TAB: UPDATES                                   -->
+    <!-- ============================================== -->
+    <div id="tab-updates" class="hidden space-y-6">
+
+      <!-- Updates form -->
+      <section class="glass rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <div>
+            <div class="text-xs font-medium text-primary tracking-widest">AGGIORNAMENTI</div>
+            <h2 id="updateFormTitle" class="font-heading text-2xl font-bold">Nuovo <span class="gradient-text">aggiornamento</span></h2>
+          </div>
+          <button id="updateCancelEdit" class="hidden px-3 py-1.5 text-xs rounded-lg border border-dark-border hover:border-primary hover:text-primary transition">Annulla modifica</button>
         </div>
 
-        <div id="formError" class="hidden md:col-span-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"></div>
+        <form id="updateForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="hidden" id="u_id">
 
-        <div class="md:col-span-2 flex items-center gap-3">
-          <button type="submit" id="saveBtn"
-            class="px-6 py-3 rounded-xl bg-primary text-dark-bg font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
-            Salva annuncio
-          </button>
-          <button type="reset" id="resetBtn"
-            class="px-6 py-3 rounded-xl border border-dark-border hover:border-primary hover:text-primary transition">
-            Pulisci
-          </button>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Titolo *</label>
+            <input type="text" id="u_title" required maxlength="200"
+              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Descrizione</label>
+            <textarea id="u_description" rows="4" maxlength="4000"
+              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition resize-none"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Città</label>
+            <input type="text" id="u_city" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Paese</label>
+            <input type="text" id="u_country" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Immagini (più file — compressione automatica)</label>
+            <input type="file" id="u_images" accept="image/*" multiple
+              class="text-sm text-dark-muted file:mr-3 file:px-3 file:py-2 file:rounded-lg file:border-0 file:bg-primary file:text-dark-bg file:font-medium file:cursor-pointer hover:file:bg-primary-dark">
+            <div id="u_imagesPreview" class="mt-3 flex flex-wrap gap-2"></div>
+            <p id="u_uploadStatus" class="text-xs text-dark-muted mt-2"></p>
+          </div>
+
+          <div id="u_formError" class="hidden md:col-span-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"></div>
+
+          <div class="md:col-span-2 flex items-center gap-3 flex-wrap">
+            <button type="submit" id="u_saveBtn"
+              class="px-6 py-3 rounded-xl bg-primary text-dark-bg font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
+              Salva aggiornamento
+            </button>
+            <button type="reset" id="u_resetBtn"
+              class="px-6 py-3 rounded-xl border border-dark-border hover:border-primary hover:text-primary transition">
+              Pulisci
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Updates list -->
+      <section class="glass rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <h2 class="font-heading text-xl font-bold">Aggiornamenti pubblicati <span id="u_count" class="text-dark-muted text-sm font-normal"></span></h2>
+          <button id="u_refreshBtn" class="text-xs px-3 py-1.5 rounded-lg border border-dark-border hover:border-primary hover:text-primary transition">↻ Aggiorna</button>
         </div>
-      </form>
-    </section>
-
-    <!-- Listings table -->
-    <section class="glass rounded-2xl p-5 sm:p-6">
-      <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
-        <div>
-          <div class="text-xs font-medium text-primary tracking-widest">ESISTENTI</div>
-          <h2 class="font-heading text-2xl font-bold">Annunci <span id="countBadge" class="text-dark-muted text-base font-normal"></span></h2>
+        <div id="updatesContainer" class="space-y-3">
+          <div class="text-center text-dark-muted py-6 text-sm">Caricamento…</div>
         </div>
-        <button id="refreshBtn" class="text-xs px-3 py-1.5 rounded-lg border border-dark-border hover:border-primary hover:text-primary transition">↻ Aggiorna</button>
-      </div>
-
-      <div id="listingsContainer" class="space-y-3">
-        <div class="text-center text-dark-muted py-6 text-sm">Caricamento…</div>
-      </div>
-    </section>
+      </section>
+    </div>
 
   </div>
 </main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-client.js"></script>

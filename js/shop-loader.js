@@ -17,8 +17,9 @@
 
   function cardHTML(l) {
     const sold = l.status === 'sold';
-    const img = l.image_url
-      ? `<img src="${esc(l.image_url)}" alt="${esc(l.title)}" loading="lazy" class="absolute inset-0 w-full h-full object-cover">`
+    const firstImg = (Array.isArray(l.image_urls) && l.image_urls[0]) || l.image_url;
+    const img = firstImg
+      ? `<img src="${esc(firstImg)}" alt="${esc(l.title)}" loading="lazy" class="absolute inset-0 w-full h-full object-cover">`
       : `<span class="font-heading text-2xl font-bold text-primary/60 relative z-10">${esc(l.title)}</span>`;
     const badge = sold
       ? `<span class="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-medium bg-red-500 text-white rounded-full z-10">VENDUTO</span>`
