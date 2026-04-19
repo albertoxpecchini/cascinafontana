@@ -26,7 +26,7 @@
       : (CAT_LABEL[l.category]
           ? `<span class="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-medium bg-primary text-dark-bg rounded-full z-10">${CAT_LABEL[l.category]}</span>`
           : '');
-    const subj = encodeURIComponent(`Shop | ${l.title}`);
+    const subj = encodeURIComponent(`Richiesta disponibilita | ${l.title}`);
     return `
       <article class="product glass rounded-2xl overflow-hidden hover:-translate-y-1 transition-all duration-300 ${sold ? 'opacity-70' : ''}" data-cat="${esc(l.category)}">
         <div class="aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center relative overflow-hidden">
@@ -38,7 +38,7 @@
           <p class="text-xs text-dark-muted mb-3 line-clamp-2">${esc(l.description)}</p>
           <div class="flex items-center justify-between">
             <span class="font-heading text-xl font-bold text-primary">${esc(l.price) || '—'}</span>
-            <a href="mailto:pzkko@yahoo.com?subject=${subj}" class="text-xs text-primary hover:underline">Info →</a>
+            <a href="mailto:pzkko@yahoo.com?subject=${subj}" class="text-xs text-primary hover:underline">Richiedi informazioni</a>
           </div>
         </div>
       </article>
@@ -51,17 +51,17 @@
 
   function render() {
     const list = currentCat === 'all' ? allListings : allListings.filter(l => l.category === currentCat);
-    if (!list.length) { empty('Nessun annuncio disponibile.'); return; }
+    if (!list.length) { empty('Nessuna disponibilita pubblicata al momento.'); return; }
     grid.innerHTML = list.map(cardHTML).join('');
   }
 
   async function load() {
-    if (!window.sb) { empty('Backend non configurato.'); return; }
+    if (!window.sb) { empty('Archivio non disponibile.'); return; }
     const { data, error } = await window.sb
       .from('listings')
       .select('*')
       .order('created_at', { ascending: false });
-    if (error) { empty('Errore: ' + error.message); return; }
+    if (error) { empty('Errore di caricamento: ' + error.message); return; }
     allListings = data || [];
     render();
   }

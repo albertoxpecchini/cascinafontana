@@ -4,98 +4,250 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<meta name="description" content="Cascina Fontana — azienda agricola a Rodigo (MN). 63 biolche di prato stabile, fornitore della filiera Grana Padano DOP.">
+<meta name="description" content="Cascina Fontana — azienda agricola a Rodigo (MN). 63 biolche di prato stabile, filiera Grana Padano DOP, shop e aggiornamenti in tempo reale.">
 <title>Cascina Fontana · Società Agricola · Rodigo (MN)</title>
 <link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
 <link rel="apple-touch-icon" href="/public/images/flash_128.jpg">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
   tailwind.config = {
     darkMode: 'class',
     theme: {
       extend: {
         colors: {
-          primary: '#6f8b57',
-          'primary-dark': '#557244',
-          'light-bg': '#f4f7ef',
+          primary: '#0052ff',
+          'primary-dark': '#578bfa',
+          'light-bg': '#ffffff',
           'light-card': '#ffffff',
-          'light-text': '#2f3b2d',
-          'light-muted': '#657060',
-          'light-border': '#d7dfcd',
-          'dark-bg': '#f4f7ef',
-          'dark-card': '#ffffff',
-          'dark-text': '#2f3b2d',
-          'dark-muted': '#657060',
-          'dark-border': '#d7dfcd'
+          'light-text': '#0a0b0d',
+          'light-muted': '#5b616e',
+          'light-border': 'rgba(91, 97, 110, 0.2)',
+          'dark-bg': '#ffffff',
+          'dark-card': '#eef0f3',
+          'dark-text': '#0a0b0d',
+          'dark-muted': '#5b616e',
+          'dark-border': 'rgba(91, 97, 110, 0.2)',
+          surface: '#eef0f3',
+          slate: '#282b31',
+          ink: '#0a0b0d',
+          link: '#0667d0'
         },
         fontFamily: {
-          sans: ['DM Sans', 'system-ui', 'sans-serif'],
-          heading: ['Space Grotesk', 'DM Sans', 'sans-serif']
+          sans: ['Public Sans', 'system-ui', 'sans-serif'],
+          heading: ['Manrope', 'Public Sans', 'sans-serif']
+        },
+        boxShadow: {
+          panel: '0 20px 48px rgba(10, 11, 13, 0.06)'
         }
       }
     }
-  }
+  };
 </script>
 <style>
-  body { font-family: 'DM Sans', system-ui, sans-serif; background: #f4f7ef; color: #2f3b2d; }
-  .font-heading { font-family: 'Space Grotesk', 'DM Sans', sans-serif; letter-spacing: -0.02em; }
-  .gradient-text {
-    background: linear-gradient(135deg, #8da776 0%, #6f8b57 45%, #4f6841 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+  :root {
+    --cb-blue: #0052ff;
+    --cb-hover: #578bfa;
+    --cb-white: #ffffff;
+    --cb-ink: #0a0b0d;
+    --cb-link: #0667d0;
+    --cb-surface: #eef0f3;
+    --cb-dark-card: #282b31;
+    --cb-muted: #5b616e;
+    --cb-border: rgba(91, 97, 110, 0.2);
+    --cb-pill: 56px;
+    --cb-shadow: 0 20px 48px rgba(10, 11, 13, 0.06);
   }
-  .glass {
-    background: rgba(255, 255, 255, 0.76);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(111, 139, 87, 0.22);
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Public Sans', system-ui, sans-serif;
+    background: var(--cb-white);
+    color: var(--cb-ink);
   }
-  .glass:hover { border-color: rgba(111, 139, 87, 0.42); }
-  .bg-grid {
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(127, 160, 100, 0.2), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 30%, rgba(191, 208, 171, 0.25), transparent),
-      linear-gradient(rgba(127, 160, 100, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(127, 160, 100, 0.05) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-  }
-  details[open] summary svg { transform: rotate(180deg); }
+  a { color: inherit; text-decoration: none; }
+  input, select, textarea { color-scheme: light; }
   summary { list-style: none; }
   summary::-webkit-details-marker { display: none; }
-  .hidden-cat { display: none !important; }
-  html { scroll-behavior: smooth; }
-  .nav-scrolled { background: rgba(244, 247, 239, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(111, 139, 87, 0.18); }
-  input, select, textarea { color-scheme: light; }
+  details[open] summary svg { transform: rotate(180deg); }
+  .font-heading {
+    font-family: 'Manrope', 'Public Sans', sans-serif;
+    letter-spacing: -0.04em;
+  }
+  .nav-scrolled {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--cb-border);
+  }
+  .section-surface { background: var(--cb-surface); }
+  .section-dark { background: var(--cb-ink); color: var(--cb-white); }
+  .section-dark .section-copy { color: rgba(255, 255, 255, 0.72); }
+  .section-dark .section-label {
+    color: #93b5ff;
+    border-color: rgba(147, 181, 255, 0.24);
+    background: rgba(0, 82, 255, 0.12);
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid rgba(0, 82, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(0, 82, 255, 0.05);
+    color: var(--cb-link);
+    font-family: 'Manrope', 'Public Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .section-heading {
+    margin: 0;
+    font-family: 'Manrope', 'Public Sans', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4.9rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.05em;
+  }
+  .section-copy {
+    margin: 0;
+    max-width: 42rem;
+    font-size: clamp(1rem, 1.35vw, 1.125rem);
+    line-height: 1.56;
+    color: var(--cb-muted);
+  }
+  .display-title {
+    margin: 0;
+    font-family: 'Manrope', 'Public Sans', sans-serif;
+    font-size: clamp(3.4rem, 8vw, 6rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.07em;
+    max-width: 12ch;
+  }
+  .body-lead {
+    margin: 0;
+    max-width: 42rem;
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    line-height: 1.56;
+    color: var(--cb-muted);
+  }
+  .pill-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--cb-pill);
+    padding: 0 26px;
+    border-radius: var(--cb-pill);
+    border: 1px solid transparent;
+    font-family: 'Manrope', 'Public Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: lowercase;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .pill-btn:hover { transform: translateY(-1px); }
+  .pill-btn--primary {
+    background: var(--cb-blue);
+    border-color: var(--cb-blue);
+    color: var(--cb-white);
+  }
+  .pill-btn--primary:hover {
+    background: var(--cb-hover);
+    border-color: var(--cb-hover);
+  }
+  .pill-btn--secondary {
+    background: var(--cb-surface);
+    border-color: var(--cb-surface);
+    color: var(--cb-ink);
+  }
+  .pill-btn--secondary:hover {
+    background: #dce4ee;
+    border-color: #dce4ee;
+  }
+  .pill-btn--outline {
+    background: transparent;
+    border-color: var(--cb-blue);
+    color: var(--cb-blue);
+  }
+  .pill-btn--outline:hover {
+    background: rgba(0, 82, 255, 0.06);
+  }
+  .coin-panel {
+    background: var(--cb-white);
+    border: 1px solid var(--cb-border);
+    border-radius: 32px;
+    box-shadow: var(--cb-shadow);
+  }
+  .coin-panel--dark {
+    background: var(--cb-dark-card);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+  .metric-value {
+    font-family: 'Manrope', 'Public Sans', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.06em;
+  }
+  .metric-copy {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--cb-muted);
+  }
+  .section-dark .metric-copy { color: rgba(255, 255, 255, 0.72); }
+  .chip {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    font-family: 'Manrope', 'Public Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .glass {
+    background: var(--cb-white);
+    border: 1px solid var(--cb-border);
+    box-shadow: var(--cb-shadow);
+  }
+  .glass:hover { box-shadow: 0 24px 56px rgba(10, 11, 13, 0.08); }
+  .stat-strip {
+    border-top: 1px solid var(--cb-border);
+    border-bottom: 1px solid var(--cb-border);
+  }
   .home-gallery {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 18px;
   }
   .home-gallery__item {
     position: relative;
+    grid-column: span 4;
     display: block;
+    min-height: 300px;
     overflow: hidden;
-    min-height: 280px;
     border-radius: 28px;
-    border: 1px solid rgba(111, 139, 87, 0.2);
-    background: #ffffff;
-    box-shadow: 0 24px 60px rgba(111, 139, 87, 0.12);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--cb-border);
+    background: var(--cb-white);
+    box-shadow: var(--cb-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .home-gallery__item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 28px 70px rgba(111, 139, 87, 0.18);
+    transform: translateY(-3px);
+    box-shadow: 0 24px 56px rgba(10, 11, 13, 0.08);
   }
-  .home-gallery__item--featured { grid-column: span 2; }
+  .home-gallery__item--featured { grid-column: span 8; }
   .home-gallery__media {
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    background: rgba(111, 139, 87, 0.1);
+    background: var(--cb-surface);
   }
   .home-gallery__image {
     width: 100%;
@@ -107,684 +259,683 @@
   .home-gallery__overlay {
     position: absolute;
     inset: auto 0 0 0;
-    padding: 56px 20px 20px;
-    background: linear-gradient(to top, rgba(19, 34, 14, 0.92) 0%, rgba(19, 34, 14, 0.52) 52%, rgba(19, 34, 14, 0) 100%);
-    color: #ffffff;
+    padding: 64px 22px 22px;
+    background: linear-gradient(to top, rgba(10, 11, 13, 0.94) 0%, rgba(10, 11, 13, 0.6) 54%, rgba(10, 11, 13, 0) 100%);
+    color: var(--cb-white);
   }
   .home-gallery__kicker {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    font-family: 'Manrope', 'Public Sans', sans-serif;
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-weight: 700;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.56);
+    color: rgba(255, 255, 255, 0.58);
   }
   .home-gallery__title {
     margin: 0;
-    font-family: 'Space Grotesk', 'DM Sans', sans-serif;
-    font-size: clamp(1.5rem, 2vw, 2rem);
-    line-height: 1.1;
-    color: #ffffff;
+    font-family: 'Manrope', 'Public Sans', sans-serif;
+    font-size: clamp(1.45rem, 2vw, 2rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
   }
   .home-gallery__caption {
     margin: 10px 0 0;
-    max-width: 40ch;
+    max-width: 38ch;
     font-size: 0.95rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.78);
+    color: rgba(255, 255, 255, 0.76);
   }
   @media (max-width: 1100px) {
     .home-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .home-gallery__item--featured { grid-column: span 2; }
+    .home-gallery__item,
+    .home-gallery__item--featured { grid-column: span 1; }
+  }
+  @media (max-width: 768px) {
+    .display-title { max-width: none; }
   }
   @media (max-width: 640px) {
     .home-gallery { grid-template-columns: 1fr; }
+    .home-gallery__item,
     .home-gallery__item--featured { grid-column: auto; }
   }
 </style>
 </head>
-<body class="font-sans antialiased bg-dark-bg text-dark-text">
+<body class="font-sans antialiased bg-light-bg text-light-text">
 
-<!-- NAV -->
-<header id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 sm:h-18">
-      <a href="#" class="flex items-center gap-2 sm:gap-3 group">
-        <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center font-heading font-bold text-dark-bg text-sm">CF</span>
-        <span class="font-heading font-bold text-base sm:text-lg text-dark-text group-hover:text-primary transition-colors">Cascina Fontana</span>
+<header id="nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between gap-6 py-5">
+      <a href="#" class="flex items-center gap-3">
+        <span class="flex h-11 w-11 items-center justify-center rounded-full border border-primary/15 bg-surface font-heading text-sm font-bold text-primary">CF</span>
+        <span class="font-heading text-[18px] font-semibold tracking-[-0.04em] text-light-text">Cascina Fontana</span>
       </a>
-      <nav class="hidden md:flex items-center gap-7 text-sm text-dark-muted">
-        <a href="#attivita" class="hover:text-primary transition">Attività</a>
-        <a href="#produzione" class="hover:text-primary transition">Produzione</a>
-        <a href="#filiera" class="hover:text-primary transition">Filiera</a>
-        <a href="#galleria" class="hover:text-primary transition">Galleria</a>
-        <a href="#shop" class="hover:text-primary transition">Shop</a>
-        <a href="#aggiornamenti" class="hover:text-primary transition">Aggiornamenti</a>
-        <a href="#faq" class="hover:text-primary transition">FAQ</a>
-        <a href="#contatti" class="px-4 py-2 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition">Contatti</a>
+
+      <nav class="hidden items-center gap-7 text-[15px] font-semibold text-light-muted lg:flex">
+        <a href="#attivita" class="transition hover:text-primary">Attività</a>
+        <a href="#produzione" class="transition hover:text-primary">Produzione</a>
+        <a href="#filiera" class="transition hover:text-primary">Filiera</a>
+        <a href="#galleria" class="transition hover:text-primary">Galleria</a>
+        <a href="#shop" class="transition hover:text-primary">Shop</a>
+        <a href="#aggiornamenti" class="transition hover:text-primary">Aggiornamenti</a>
+        <a href="#faq" class="transition hover:text-primary">FAQ</a>
+        <a id="campinosNav" href="#campinos" class="hidden transition hover:text-primary">Campino's</a>
+        <a href="#contatti" class="pill-btn pill-btn--primary">contatti</a>
       </nav>
-      <button id="burger" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5" aria-label="Menu">
-        <span class="block w-5 h-0.5 bg-dark-text transition"></span>
-        <span class="block w-5 h-0.5 bg-dark-text transition"></span>
+
+      <button id="burger" class="flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-full border border-light-border text-light-text lg:hidden" aria-label="Menu">
+        <span class="block h-0.5 w-5 bg-current"></span>
+        <span class="block h-0.5 w-5 bg-current"></span>
       </button>
     </div>
-    <nav id="mobileNav" class="hidden md:hidden pb-4 flex-col gap-3 text-sm text-dark-muted bg-light-card/80 rounded-xl px-3">
-      <a href="#attivita" class="block py-2 hover:text-primary">Attività</a>
-      <a href="#produzione" class="block py-2 hover:text-primary">Produzione</a>
-      <a href="#filiera" class="block py-2 hover:text-primary">Filiera</a>
-      <a href="#galleria" class="block py-2 hover:text-primary">Galleria</a>
-      <a href="#shop" class="block py-2 hover:text-primary">Shop</a>
-      <a href="#aggiornamenti" class="block py-2 hover:text-primary">Aggiornamenti</a>
-      <a href="#faq" class="block py-2 hover:text-primary">FAQ</a>
-      <a href="#contatti" class="block py-2 text-primary font-medium">Contatti</a>
+
+    <nav id="mobileNav" class="hidden flex-col gap-2 rounded-[28px] border border-light-border bg-white p-4 text-sm font-semibold text-light-muted shadow-panel lg:hidden">
+      <a href="#attivita" class="rounded-full px-4 py-3 transition hover:bg-surface hover:text-primary">Attività</a>
+      <a href="#produzione" class="rounded-full px-4 py-3 transition hover:bg-surface hover:text-primary">Produzione</a>
+      <a href="#filiera" class="rounded-full px-4 py-3 transition hover:bg-surface hover:text-primary">Filiera</a>
+      <a href="#galleria" class="rounded-full px-4 py-3 transition hover:bg-surface hover:text-primary">Galleria</a>
+      <a href="#shop" class="rounded-full px-4 py-3 transition hover:bg-surface hover:text-primary">Shop</a>
+      <a href="#aggiornamenti" class="rounded-full px-4 py-3 transition hover:bg-surface hover:text-primary">Aggiornamenti</a>
+      <a href="#faq" class="rounded-full px-4 py-3 transition hover:bg-surface hover:text-primary">FAQ</a>
+      <a id="campinosNavMobile" href="#campinos" class="hidden rounded-full px-4 py-3 transition hover:bg-surface hover:text-primary">Campino's</a>
+      <a href="#contatti" class="pill-btn pill-btn--primary mt-2">contatti</a>
     </nav>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="relative pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden bg-grid">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <div class="max-w-4xl mx-auto text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-6">
-        <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-        Fondata nel 2007, a Rodigo (MN)
-      </div>
-      <h1 class="font-heading font-bold text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-dark-text mb-6 leading-[1.05]">
-        <span class="block">Società Agricola</span>
-        <span class="gradient-text">Cascina Fontana</span>
-      </h1>
-      <p class="text-base sm:text-lg md:text-xl text-dark-muted max-w-2xl mx-auto mb-8 leading-relaxed">
-        63 biolche di prato stabile al servizio della filiera Grana Padano DOP, con un impegno costante per qualità e continuità.
-      </p>
-      <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
-        <span class="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20">Grana Padano DOP</span>
-        <span class="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20">Prato Stabile</span>
-        <span class="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20">Fotovoltaico</span>
-        <span class="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20">Filiera Tracciabile</span>
-        <span class="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20">Pianura Padana</span>
-      </div>
-      <div class="flex flex-wrap items-center justify-center gap-3">
-        <a href="#shop" class="px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">Vedi lo Shop</a>
-        <a href="#contatti" class="px-6 py-3 rounded-xl glass text-dark-text font-semibold hover:bg-primary/10 transition-all">Contattaci →</a>
-      </div>
-    </div>
-
-    <!-- Stat cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-16 max-w-5xl mx-auto">
-      <div class="glass rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300">
-        <div class="text-xs font-medium text-primary mb-2">BIOLCHE</div>
-        <div class="font-heading text-4xl sm:text-5xl font-bold text-dark-text mb-1">63</div>
-        <p class="text-sm text-dark-muted">Prato stabile · ≈42 ha dedicati alla filiera Grana Padano DOP.</p>
-      </div>
-      <div class="glass rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300">
-        <div class="text-xs font-medium text-primary mb-2">FLOTTA</div>
-        <div class="font-heading text-4xl sm:text-5xl font-bold text-dark-text mb-1">8</div>
-        <p class="text-sm text-dark-muted">Trattori calibrati sulle fasi reali del lavoro di campo.</p>
-      </div>
-      <div class="glass rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300">
-        <div class="text-xs font-medium text-primary mb-2">ENERGIA</div>
-        <div class="font-heading text-4xl sm:text-5xl font-bold text-dark-text mb-1">30</div>
-        <p class="text-sm text-dark-muted">Pannelli fotovoltaici sul capannone. Autonomia dal 2013.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ATTIVITÀ (6 feature cards) -->
-<section id="attivita" class="py-20 sm:py-28">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">ATTIVITÀ</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-        Tutto ciò che serve per
-        <span class="gradient-text">il territorio</span>
-      </h2>
-      <p class="text-dark-muted max-w-2xl mx-auto">Sei ambiti di lavoro quotidiano. Ogni intervento pianificato, monitorato, verificato.</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="glass rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 group">
-        <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5a2 2 0 012 2v12M3 17h14"/></svg>
+<main>
+  <section class="pb-16 pt-32 sm:pb-24 sm:pt-40">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] lg:px-8">
+      <div class="flex flex-col justify-end">
+        <div class="section-label mb-6">
+          <span class="h-2 w-2 rounded-full bg-primary"></span>
+          Rodigo, Mantova · dal 2007
         </div>
-        <h3 class="font-heading text-xl font-bold text-dark-text mb-2">Fieno</h3>
-        <p class="text-sm text-dark-muted mb-3">Prato stabile di Rodigo. Materia prima primaria per la filiera del Grana Padano DOP.</p>
-        <span class="text-xs text-primary font-medium">01 / Produzione principale</span>
-      </div>
-      <div class="glass rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 group">
-        <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18zm0 0V9m0 0l4-4m-4 4L8 5"/></svg>
+        <h1 class="display-title mb-8">Cascina Fontana, struttura agricola leggibile e verificabile.</h1>
+        <p class="body-lead mb-8">Sessantatré biolche di prato stabile, filiera Grana Padano DOP, manutenzione del territorio e una presenza digitale costruita per esporre in modo ordinato disponibilità, aggiornamenti, contatti e tracciabilità.</p>
+        <div class="mb-12 flex flex-wrap items-center gap-4">
+          <a href="#shop" class="pill-btn pill-btn--primary">consulta annunci</a>
+          <a href="#contatti" class="pill-btn pill-btn--secondary">richiedi contatto</a>
+          <a href="#aggiornamenti" class="pill-btn pill-btn--outline">leggi aggiornamenti</a>
         </div>
-        <h3 class="font-heading text-xl font-bold text-dark-text mb-2">Territorio</h3>
-        <p class="text-sm text-dark-muted mb-3">Cura della pianura padana. Manutenzione come parte integrante dell'attività agricola.</p>
-        <span class="text-xs text-primary font-medium">02 / Cura ambientale</span>
-      </div>
-      <div class="glass rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 group">
-        <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22V12m0 0L7 7m5 5l5-5M5 3h14a2 2 0 012 2v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
+
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div class="coin-panel p-6">
+            <div class="section-label !border-0 !bg-transparent !px-0 !py-0 !text-[11px] !tracking-[0.18em]">BIOLCHE</div>
+            <div class="metric-value mt-4">63</div>
+            <p class="metric-copy mt-3">Prato stabile dedicato alla filiera DOP con raccolte pianificate e stoccaggio interno.</p>
+          </div>
+          <div class="coin-panel p-6">
+            <div class="section-label !border-0 !bg-transparent !px-0 !py-0 !text-[11px] !tracking-[0.18em]">FLOTTA</div>
+            <div class="metric-value mt-4">8</div>
+            <p class="metric-copy mt-3">Trattori e mezzi tarati sul lavoro quotidiano, senza parco macchine ridondante.</p>
+          </div>
+          <div class="coin-panel p-6">
+            <div class="section-label !border-0 !bg-transparent !px-0 !py-0 !text-[11px] !tracking-[0.18em]">ENERGIA</div>
+            <div class="metric-value mt-4">30</div>
+            <p class="metric-copy mt-3">Pannelli fotovoltaici installati sul capannone per ridurre il carico energetico operativo.</p>
+          </div>
         </div>
-        <h3 class="font-heading text-xl font-bold text-dark-text mb-2">Bosco</h3>
-        <p class="text-sm text-dark-muted mb-3">Bosco di Rivalta. Produzione legna stagionata e cura del bosco ceduo.</p>
-        <span class="text-xs text-primary font-medium">03 / Rivalta</span>
       </div>
-      <div class="glass rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 group">
-        <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 6h18M3 18h18"/></svg>
+
+      <aside class="coin-panel coin-panel--dark overflow-hidden p-8 sm:p-10">
+        <div class="section-label mb-5 !border-white/10 !bg-white/5 !text-[#93b5ff]">Sistema operativo</div>
+        <h2 class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-white sm:text-5xl">Produzione, territorio, energia, disponibilità.</h2>
+        <p class="mt-5 text-[17px] leading-[1.56] text-white/72">L'azienda non viene presentata come immagine simbolica. Ogni blocco corrisponde a una funzione verificabile: produzione, manutenzione, certificazione, archivio e contatto diretto.</p>
+
+        <div class="mt-8 space-y-4">
+          <div class="rounded-[24px] border border-white/10 bg-white/5 p-5">
+            <div class="text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Prato stabile</div>
+            <p class="mt-2 text-sm leading-6 text-white/78">Fieno come produzione primaria, raccolto e destinato alla filiera Grana Padano DOP.</p>
+          </div>
+          <div class="rounded-[24px] border border-white/10 bg-white/5 p-5">
+            <div class="text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Territorio</div>
+            <p class="mt-2 text-sm leading-6 text-white/78">Bosco di Rivalta, strade rurali, fitodepurazione e tutela dei gelsi centenari.</p>
+          </div>
+          <div class="rounded-[24px] border border-white/10 bg-white/5 p-5">
+            <div class="text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Disponibilità</div>
+            <p class="mt-2 text-sm leading-6 text-white/78">Shop pubblico collegato a Supabase con annunci aggiornati in tempo reale e contatto diretto.</p>
+          </div>
         </div>
-        <h3 class="font-heading text-xl font-bold text-dark-text mb-2">Strade</h3>
-        <p class="text-sm text-dark-muted mb-3">Manutenzione strade rurali. Cura del territorio come responsabilità, non solo produzione.</p>
-        <span class="text-xs text-primary font-medium">04 / Manutenzione</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="stat-strip py-7">
+    <div class="mx-auto grid max-w-7xl gap-6 px-4 text-sm text-light-muted sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+      <div>
+        <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">Assetto</div>
+        <p class="mt-2 leading-6">Società Agricola Cascina Fontana S.S. · Rodigo (MN).</p>
       </div>
-      <div class="glass rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 group">
-        <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M5 8c0-3 3-6 7-6s7 3 7 6-7 8-7 8-7-5-7-8z"/></svg>
+      <div>
+        <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">Filiera</div>
+        <p class="mt-2 leading-6">Fornitore della catena Grana Padano DOP con origine tracciabile.</p>
+      </div>
+      <div>
+        <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">Operatività</div>
+        <p class="mt-2 leading-6">Vendita diretta di fieno, legna, prodotti stagionali e macchinari selezionati.</p>
+      </div>
+      <div>
+        <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">Interfaccia</div>
+        <p class="mt-2 leading-6">Archivio fotografico, aggiornamenti e contatti organizzati come moduli leggibili.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="attivita" class="section-surface py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-14 max-w-3xl">
+        <div class="section-label mb-4">Attività</div>
+        <h2 class="section-heading mb-5">Sei ambiti operativi, un'unica linea di continuità.</h2>
+        <p class="section-copy">La cascina viene descritta attraverso moduli reali dell'attività agricola: produzione primaria, cura del territorio, patrimonio, filiera e servizi collegati.</p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">01 · Fieno</div>
+          <h3 class="mt-4 font-heading text-[32px] font-normal leading-[1.05] tracking-[-0.05em] text-light-text">Produzione principale.</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Prato stabile a Rodigo, tagli pianificati, essiccazione e stoccaggio orientati alla continuità della filiera DOP.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">02 · Territorio</div>
+          <h3 class="mt-4 font-heading text-[32px] font-normal leading-[1.05] tracking-[-0.05em] text-light-text">Cura ambientale diretta.</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Strade rurali, fitodepurazione a bambù e manutenzione ordinaria come parte strutturale del lavoro, non come extra.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">03 · Bosco</div>
+          <h3 class="mt-4 font-heading text-[32px] font-normal leading-[1.05] tracking-[-0.05em] text-light-text">Rivalta e legna stagionata.</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Gestione del bosco ceduo e preparazione della legna come estensione naturale dell'azienda agricola.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">04 · Patrimonio</div>
+          <h3 class="mt-4 font-heading text-[32px] font-normal leading-[1.05] tracking-[-0.05em] text-light-text">Gelsi centenari censiti.</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">I gelsi storici diventano parte dell'interfaccia: segni concreti di continuità agricola e memoria territoriale.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">05 · Energia</div>
+          <h3 class="mt-4 font-heading text-[32px] font-normal leading-[1.05] tracking-[-0.05em] text-light-text">Fotovoltaico integrato.</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Trenta pannelli sul capannone: meno dispersione operativa, più stabilità energetica nel tempo.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">06 · Vendita</div>
+          <h3 class="mt-4 font-heading text-[32px] font-normal leading-[1.05] tracking-[-0.05em] text-light-text">Shop e contatto diretto.</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Macchinari, prodotti e materiali pubblicati online con disponibilità leggibile e canale di richiesta immediato.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="produzione" class="section-dark py-20 sm:py-28">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:px-8">
+      <div>
+        <div class="section-label mb-4">Produzione</div>
+        <h2 class="section-heading mb-5 text-white">Rotazioni, rese, continuità.</h2>
+        <p class="section-copy">La palette scura concentra l'attenzione sui moduli produttivi: cinque colture, funzioni distinte, stesso approccio operativo. Il blu resta l'accento dei segnali utili, non un ornamento diffuso.</p>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <article class="coin-panel coin-panel--dark p-6 xl:col-span-1">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Core</div>
+          <h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em] text-white">Fieno</h3>
+          <p class="mt-4 text-sm leading-6 text-white/72">Prato stabile destinato alla filiera lattiero-casearia.</p>
+        </article>
+        <article class="coin-panel coin-panel--dark p-6 xl:col-span-1">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Rotazione</div>
+          <h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em] text-white">Mais</h3>
+          <p class="mt-4 text-sm leading-6 text-white/72">Granella e supporto alla continuità agronomica aziendale.</p>
+        </article>
+        <article class="coin-panel coin-panel--dark p-6 xl:col-span-1">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Equilibrio</div>
+          <h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em] text-white">Soia</h3>
+          <p class="mt-4 text-sm leading-6 text-white/72">Coltura di supporto per alternanza e gestione del suolo.</p>
+        </article>
+        <article class="coin-panel coin-panel--dark p-6 xl:col-span-1">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Stagione</div>
+          <h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em] text-white">Grano</h3>
+          <p class="mt-4 text-sm leading-6 text-white/72">Tenero, integrato nella pianificazione annuale dei campi.</p>
+        </article>
+        <article class="coin-panel coin-panel--dark p-6 xl:col-span-1">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Stagionali</div>
+          <h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em] text-white">Patate</h3>
+          <p class="mt-4 text-sm leading-6 text-white/72">Disponibilità limitata, lavorazione semplice, vendita diretta.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="filiera" class="py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-14 max-w-3xl">
+        <div class="section-label mb-4">Filiera</div>
+        <h2 class="section-heading mb-5">Quattro passaggi, origine leggibile.</h2>
+        <p class="section-copy">Il racconto della filiera viene ridotto a una sequenza netta: origine, raccolta, alimentazione, risultato. La logica è più vicina a una pipeline che a una brochure.</p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">01 · Origine</div>
+          <h3 class="mt-4 font-heading text-[28px] font-normal leading-[1.06] tracking-[-0.05em]">Cascina</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Suolo padano, acqua di fontana, prato stabile e logica produttiva consolidata dal 2007.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">02 · Raccolta</div>
+          <h3 class="mt-4 font-heading text-[28px] font-normal leading-[1.06] tracking-[-0.05em]">Fieno</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Taglio, essiccazione, rotoimballatura e stoccaggio eseguiti con controllo diretto.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">03 · Alimentazione</div>
+          <h3 class="mt-4 font-heading text-[28px] font-normal leading-[1.06] tracking-[-0.05em]">Stalle</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Fornitura a realtà della filiera DOP con tracciabilità per lotto e continuità qualitativa.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-[13px] font-semibold uppercase tracking-[0.18em] text-primary">04 · Risultato</div>
+          <h3 class="mt-4 font-heading text-[28px] font-normal leading-[1.06] tracking-[-0.05em]">Grana Padano</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Il prodotto finale non nasce sul sito, ma il suo punto di partenza viene reso leggibile qui.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificazioni" class="section-surface py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-14 max-w-3xl">
+        <div class="section-label mb-4">Certificazioni</div>
+        <h2 class="section-heading mb-5">Tracciabilità verificata, senza rumore visivo.</h2>
+        <p class="section-copy">Le attestazioni vengono mostrate come segnali compatti: meno decorazione, più informazioni rilevanti per chi deve valutare affidabilità e conformità.</p>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div class="coin-panel p-6"><div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">DOP</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Grana Padano</h3><p class="mt-4 text-sm leading-7 text-light-muted">Fornitore della filiera DOP con prato stabile di Rodigo.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">REA</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Registro Imprese</h3><p class="mt-4 text-sm leading-7 text-light-muted">Iscrizione e assetto societario leggibili e verificabili.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">PAC</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Condizionalità</h3><p class="mt-4 text-sm leading-7 text-light-muted">Pratiche coerenti con le richieste della politica agricola comunitaria.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">ISO</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Gestione ambientale</h3><p class="mt-4 text-sm leading-7 text-light-muted">Approccio operativo orientato alla riduzione degli impatti agricoli.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">BIO</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Pratiche integrate</h3><p class="mt-4 text-sm leading-7 text-light-muted">Rotazioni, fertilità del suolo e uso ragionato delle risorse.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">HACCP</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Filiera sicura</h3><p class="mt-4 text-sm leading-7 text-light-muted">Controllo dei punti critici lungo i passaggi essenziali della catena.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="shop" class="py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl">
+          <div class="section-label mb-4">Shop</div>
+          <h2 class="section-heading mb-5">Disponibilità pubbliche con lettura immediata.</h2>
+          <p class="section-copy">Macchinari, prodotti e materiali sono presentati con una gerarchia essenziale: immagine, stato, prezzo e richiesta informazioni. Nessun catalogo astratto, solo disponibilità reale.</p>
         </div>
-        <h3 class="font-heading text-xl font-bold text-dark-text mb-2">Gelsi</h3>
-        <p class="text-sm text-dark-muted mb-3">Gelsi centenari. Memoria agricola radicata nel territorio, censita dal 2022.</p>
-        <span class="text-xs text-primary font-medium">05 / Patrimonio</span>
-      </div>
-      <div class="glass rounded-2xl p-6 hover:-translate-y-1 transition-all duration-300 group">
-        <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition">
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div class="coin-panel max-w-md p-6">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">Regola operativa</div>
+          <p class="mt-3 text-sm leading-7 text-light-muted">Prezzi su richiesta quando necessario, ritiro sul posto salvo accordi specifici. Gli annunci vengono aggiornati in tempo reale da Supabase.</p>
         </div>
-        <h3 class="font-heading text-xl font-bold text-dark-text mb-2">Filiera</h3>
-        <p class="text-sm text-dark-muted mb-3">Fornitura tracciabile per la filiera Grana Padano DOP. Origine certa, verificata.</p>
-        <span class="text-xs text-primary font-medium">06 / Grana Padano</span>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- COLTURE (tech stack style) -->
-<section id="produzione" class="py-20 sm:py-28 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">PRODUZIONE</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-        <span class="gradient-text">5 Colture</span> · una direzione
-      </h2>
-      <p class="text-dark-muted max-w-2xl mx-auto">Rotazioni pianificate. Suolo protetto. Ogni raccolto tracciato dalla semina alla consegna.</p>
-    </div>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-      <div class="glass rounded-2xl p-5 text-center hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center text-2xl group-hover:bg-primary/20 transition">🌾</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Fieno</h3>
-        <p class="text-xs text-dark-muted">Prato stabile</p>
+      <div id="shopFilter" class="mb-10 flex flex-wrap items-center gap-3">
+        <button data-cat="all" class="chip cursor-pointer bg-primary text-dark-bg font-medium">Tutti</button>
+        <button data-cat="macchine" class="chip cursor-pointer border border-dark-border bg-dark-card text-dark-muted hover:bg-primary/5 hover:text-primary">Macchinari</button>
+        <button data-cat="prodotti" class="chip cursor-pointer border border-dark-border bg-dark-card text-dark-muted hover:bg-primary/5 hover:text-primary">Prodotti</button>
+        <button data-cat="materiali" class="chip cursor-pointer border border-dark-border bg-dark-card text-dark-muted hover:bg-primary/5 hover:text-primary">Materiali</button>
       </div>
-      <div class="glass rounded-2xl p-5 text-center hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center text-2xl group-hover:bg-primary/20 transition">🌽</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Mais</h3>
-        <p class="text-xs text-dark-muted">Da granella</p>
-      </div>
-      <div class="glass rounded-2xl p-5 text-center hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center text-2xl group-hover:bg-primary/20 transition">🫘</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Soia</h3>
-        <p class="text-xs text-dark-muted">Rotazione</p>
-      </div>
-      <div class="glass rounded-2xl p-5 text-center hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center text-2xl group-hover:bg-primary/20 transition">🌾</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Grano</h3>
-        <p class="text-xs text-dark-muted">Tenero</p>
-      </div>
-      <div class="glass rounded-2xl p-5 text-center hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center text-2xl group-hover:bg-primary/20 transition">🥔</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Patate</h3>
-        <p class="text-xs text-dark-muted">Stagionali</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- FILIERA (How It Works) -->
-<section id="filiera" class="py-20 sm:py-28">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">FILIERA</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-        Come funziona <span class="gradient-text">la catena</span>
-      </h2>
-      <p class="text-dark-muted max-w-2xl mx-auto">Dalla cascina al caseificio. Quattro passaggi tracciati per il Grana Padano DOP.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
-      <div class="glass rounded-2xl p-6 relative z-10">
-        <div class="text-xs font-medium text-primary mb-2">01 · ORIGINE</div>
-        <h3 class="font-heading text-lg font-bold text-dark-text mb-2">Cascina</h3>
-        <p class="text-sm text-dark-muted">63 biolche di prato stabile a Rodigo. Suolo padano, acqua di fontana, rotazioni storiche.</p>
-      </div>
-      <div class="glass rounded-2xl p-6 relative z-10">
-        <div class="text-xs font-medium text-primary mb-2">02 · RACCOLTA</div>
-        <h3 class="font-heading text-lg font-bold text-dark-text mb-2">Fieno</h3>
-        <p class="text-sm text-dark-muted">Tagli primaverile ed estivo. Essiccazione, rotoimballatura, stoccaggio nel capannone.</p>
-      </div>
-      <div class="glass rounded-2xl p-6 relative z-10">
-        <div class="text-xs font-medium text-primary mb-2">03 · ALIMENTAZIONE</div>
-        <h3 class="font-heading text-lg font-bold text-dark-text mb-2">Allevamento</h3>
-        <p class="text-sm text-dark-muted">Fornitura a stalle bovine della filiera DOP. Tracciabilità completa per lotto.</p>
-      </div>
-      <div class="glass rounded-2xl p-6 relative z-10">
-        <div class="text-xs font-medium text-primary mb-2">04 · RISULTATO</div>
-        <h3 class="font-heading text-lg font-bold text-dark-text mb-2">Caseificio</h3>
-        <p class="text-sm text-dark-muted">Grana Padano DOP. Il risultato finale non è visibile qui. Ma inizia qui.</p>
+      <div id="shopGrid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="col-span-full py-12 text-center text-dark-muted">Caricamento annunci…</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SHOP (filter chips + product cards) -->
-<section id="shop" class="py-20 sm:py-28 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-10">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">SHOP</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-        <span class="gradient-text">Annunci</span> di vendita
-      </h2>
-      <p class="text-dark-muted max-w-2xl mx-auto">Macchinari, prodotti, materiali. Prezzi su richiesta, ritiro sul posto salvo diverso accordo.</p>
-    </div>
+  <section id="aggiornamenti" class="section-dark py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl">
+          <div class="section-label mb-4">Aggiornamenti</div>
+          <h2 class="section-heading mb-5 text-white">Registro aggiornamenti dal lavoro in azienda.</h2>
+          <p class="section-copy">Gli aggiornamenti funzionano come un registro pubblico: lavori in corso, immagini, eventi e note di avanzamento dal territorio, senza dispersione editoriale.</p>
+        </div>
+        <div class="coin-panel coin-panel--dark max-w-md border border-white/10 p-6">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Realtime</div>
+          <p class="mt-3 text-sm leading-7 text-white/72">Le card qui sotto vengono ricaricate automaticamente quando arrivano nuovi aggiornamenti. L'interfaccia resta sobria, ma i dati restano vivi.</p>
+        </div>
+      </div>
 
-    <div id="shopFilter" class="flex flex-wrap items-center justify-center gap-2 mb-10">
-      <button data-cat="all" class="chip px-3 py-1.5 text-sm rounded-lg transition-all duration-200 cursor-pointer bg-primary text-dark-bg font-medium">Tutti</button>
-      <button data-cat="macchine" class="chip px-3 py-1.5 text-sm rounded-lg transition-all duration-200 cursor-pointer bg-dark-card text-dark-muted hover:bg-primary/10 hover:text-primary border border-dark-border">Macchinari</button>
-      <button data-cat="prodotti" class="chip px-3 py-1.5 text-sm rounded-lg transition-all duration-200 cursor-pointer bg-dark-card text-dark-muted hover:bg-primary/10 hover:text-primary border border-dark-border">Prodotti</button>
-      <button data-cat="materiali" class="chip px-3 py-1.5 text-sm rounded-lg transition-all duration-200 cursor-pointer bg-dark-card text-dark-muted hover:bg-primary/10 hover:text-primary border border-dark-border">Materiali</button>
+      <div id="updatesGrid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="col-span-full py-12 text-center text-white/56">Caricamento aggiornamenti…</div>
+      </div>
     </div>
+  </section>
 
-    <div id="shopGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="col-span-full text-center py-12 text-dark-muted">Caricamento annunci…</div>
-    </div>
-  </div>
-</section>
+  <section id="storia" class="py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-14 max-w-3xl">
+        <div class="section-label mb-4">Storia</div>
+        <h2 class="section-heading mb-5">Diciotto anni, una traiettoria netta.</h2>
+        <p class="section-copy">La timeline resta, ma viene compressa in un sistema di card leggibili come milestone operative. Ogni passaggio segna un cambio di assetto, non una semplice data.</p>
+      </div>
 
-<!-- AGGIORNAMENTI (news / blog) -->
-<section id="aggiornamenti" class="py-20 sm:py-28">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-10">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">AGGIORNAMENTI</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-        Dalla <span class="gradient-text">cascina</span>
-      </h2>
-      <p class="text-dark-muted max-w-2xl mx-auto">Novità, lavori in campo, eventi. Piccoli frammenti di vita rurale in tempo reale.</p>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="coin-panel p-6"><div class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-primary">2007</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Fondazione</h3><p class="mt-4 text-sm leading-7 text-light-muted">Nasce la società agricola a Rodigo.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-primary">2010</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Prato stabile</h3><p class="mt-4 text-sm leading-7 text-light-muted">63 biolche consolidate verso la filiera DOP.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-primary">2013</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Fotovoltaico</h3><p class="mt-4 text-sm leading-7 text-light-muted">Installazione dei 30 pannelli sul capannone.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-primary">2016</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Fitodepurazione</h3><p class="mt-4 text-sm leading-7 text-light-muted">Sistema a bambù per il trattamento naturale delle acque.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-primary">2019</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Flotta</h3><p class="mt-4 text-sm leading-7 text-light-muted">Otto trattori calibrati sulle fasi reali del lavoro.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-primary">2022</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Gelsi</h3><p class="mt-4 text-sm leading-7 text-light-muted">Censimento e tutela dei gelsi centenari.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-primary">2025</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Shop</h3><p class="mt-4 text-sm leading-7 text-light-muted">Apertura pubblica degli annunci online.</p></div>
+        <div class="coin-panel p-6"><div class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-primary">2026</div><h3 class="mt-4 font-heading text-2xl font-normal leading-none tracking-[-0.05em]">Interfaccia</h3><p class="mt-4 text-sm leading-7 text-light-muted">Redesign completo: più rigore, meno rumore, dati più leggibili.</p></div>
+      </div>
     </div>
+  </section>
 
-    <div id="updatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="col-span-full text-center py-12 text-dark-muted">Caricamento aggiornamenti…</div>
-    </div>
-  </div>
-</section>
+  <section id="galleria" class="section-surface py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl">
+          <div class="section-label mb-4">Galleria</div>
+          <h2 class="section-heading mb-5">Archivio visivo, organizzato come una libreria.</h2>
+          <p class="section-copy">Le immagini non sono più un fondale generico. Vengono trattate come asset documentali: card leggibili, gerarchia precisa, apertura diretta del file originale.</p>
+        </div>
+        <div class="coin-panel max-w-md p-6">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">Stato archivio</div>
+          <p id="galleryCount" class="mt-3 font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-light-text">Caricamento foto...</p>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Le immagini si aprono in una nuova scheda e restano sincronizzate con la variante Flash Mode.</p>
+        </div>
+      </div>
 
-<!-- STORIA / TIMELINE -->
-<section id="storia" class="py-20 sm:py-28">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">STORIA</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-        Diciotto anni, <span class="gradient-text">una direzione</span>
-      </h2>
-      <p class="text-dark-muted max-w-2xl mx-auto">Una linea continua. Dalla fondazione alle scelte energetiche, dalle prime rotazioni alla filiera oggi.</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="glass rounded-2xl p-5">
-        <div class="font-heading text-3xl font-bold gradient-text mb-2">2007</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Fondazione</h3>
-        <p class="text-xs text-dark-muted">Nasce la Società Agricola Cascina Fontana S.S. a Rodigo (MN).</p>
-      </div>
-      <div class="glass rounded-2xl p-5">
-        <div class="font-heading text-3xl font-bold gradient-text mb-2">2010</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Prato stabile</h3>
-        <p class="text-xs text-dark-muted">Conversione definitiva di 63 biolche per la filiera DOP.</p>
-      </div>
-      <div class="glass rounded-2xl p-5">
-        <div class="font-heading text-3xl font-bold gradient-text mb-2">2013</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Fotovoltaico</h3>
-        <p class="text-xs text-dark-muted">30 pannelli sul capannone — autonomia energetica.</p>
-      </div>
-      <div class="glass rounded-2xl p-5">
-        <div class="font-heading text-3xl font-bold gradient-text mb-2">2016</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Fitodepurazione</h3>
-        <p class="text-xs text-dark-muted">Sistema a bambù per il trattamento naturale delle acque.</p>
-      </div>
-      <div class="glass rounded-2xl p-5">
-        <div class="font-heading text-3xl font-bold gradient-text mb-2">2019</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Flotta</h3>
-        <p class="text-xs text-dark-muted">Otto trattori calibrati sulle fasi reali del lavoro.</p>
-      </div>
-      <div class="glass rounded-2xl p-5">
-        <div class="font-heading text-3xl font-bold gradient-text mb-2">2022</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Gelsi</h3>
-        <p class="text-xs text-dark-muted">Censimento e tutela dei gelsi centenari.</p>
-      </div>
-      <div class="glass rounded-2xl p-5">
-        <div class="font-heading text-3xl font-bold gradient-text mb-2">2025</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Shop</h3>
-        <p class="text-xs text-dark-muted">Apertura shop annunci per macchinari e prodotti.</p>
-      </div>
-      <div class="glass rounded-2xl p-5 border-primary/30">
-        <div class="font-heading text-3xl font-bold gradient-text mb-2">2026</div>
-        <h3 class="font-heading text-base font-bold text-dark-text mb-1">Oggi</h3>
-        <p class="text-xs text-dark-muted">Sistema consolidato. Fornitura DOP attiva, shop online.</p>
+      <div id="galleryGrid" class="home-gallery">
+        <div style="grid-column:1/-1;text-align:center;padding:3rem 0;color:#5b616e;">Caricamento galleria...</div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CERTIFICAZIONI (Other Products style) -->
-<section id="certificazioni" class="py-20 sm:py-28 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">CERTIFICAZIONI</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-        Tracciabilità <span class="gradient-text">verificata</span>
-      </h2>
-      <p class="text-dark-muted max-w-2xl mx-auto">Sei attestati che testimoniano la filiera, la gestione ambientale e il rispetto dei punti critici.</p>
-    </div>
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-      <div class="glass rounded-2xl p-5 hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center font-heading font-bold text-primary text-sm mb-3 group-hover:bg-primary/20 transition">DOP</div>
-        <h3 class="text-base font-semibold text-dark-text mb-1">Grana Padano</h3>
-        <p class="text-xs text-dark-muted">Fornitore della filiera DOP — prato stabile di Rodigo.</p>
+  <section id="testimonial" class="py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-14 max-w-3xl">
+        <div class="section-label mb-4">Voci dalla filiera</div>
+        <h2 class="section-heading mb-5">Affidabilità percepita da chi lavora davvero con noi.</h2>
       </div>
-      <div class="glass rounded-2xl p-5 hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center font-heading font-bold text-primary text-sm mb-3 group-hover:bg-primary/20 transition">REA</div>
-        <h3 class="text-base font-semibold text-dark-text mb-1">Registro Imprese</h3>
-        <p class="text-xs text-dark-muted">Iscritta alla CCIAA di Mantova.</p>
-      </div>
-      <div class="glass rounded-2xl p-5 hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center font-heading font-bold text-primary text-sm mb-3 group-hover:bg-primary/20 transition">PAC</div>
-        <h3 class="text-base font-semibold text-dark-text mb-1">Politica Agricola</h3>
-        <p class="text-xs text-dark-muted">Condizionalità ambientale e benessere animale.</p>
-      </div>
-      <div class="glass rounded-2xl p-5 hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center font-heading font-bold text-primary text-sm mb-3 group-hover:bg-primary/20 transition">ISO</div>
-        <h3 class="text-base font-semibold text-dark-text mb-1">Gestione ambientale</h3>
-        <p class="text-xs text-dark-muted">Principi ISO 14001 — rifiuti agricoli.</p>
-      </div>
-      <div class="glass rounded-2xl p-5 hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center font-heading font-bold text-primary text-sm mb-3 group-hover:bg-primary/20 transition">BIO</div>
-        <h3 class="text-base font-semibold text-dark-text mb-1">Pratiche integrate</h3>
-        <p class="text-xs text-dark-muted">Uso razionale, rotazioni, fertilità del suolo.</p>
-      </div>
-      <div class="glass rounded-2xl p-5 hover:-translate-y-1 transition-all group">
-        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center font-heading font-bold text-primary text-sm mb-3 group-hover:bg-primary/20 transition">HACCP</div>
-        <h3 class="text-base font-semibold text-dark-text mb-1">Filiera sicura</h3>
-        <p class="text-xs text-dark-muted">Controllo dei punti critici lungo la catena.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- GALLERIA -->
-<section id="galleria" class="py-20 sm:py-28">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between mb-12">
-      <div class="max-w-3xl">
-        <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">GALLERIA</div>
-        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-          Archivio <span class="gradient-text">fotografico</span>
-        </h2>
-        <p class="text-dark-muted max-w-2xl">Scatti reali della cascina: campi, strutture, mezzi e dettagli raccolti dall'archivio immagini e pubblicati sia qui sia in Flash Mode.</p>
+      <div class="grid gap-5 lg:grid-cols-3">
+        <blockquote class="coin-panel p-7">
+          <p class="font-heading text-3xl leading-none text-primary">“</p>
+          <p class="mt-4 text-base leading-8 text-light-text">Fieno costante, raccolta puntuale. Dieci anni di fornitura senza un passo falso.</p>
+          <footer class="mt-6 text-sm text-light-muted">Casearia padana · cliente dal 2015</footer>
+        </blockquote>
+        <blockquote class="coin-panel p-7">
+          <p class="font-heading text-3xl leading-none text-primary">“</p>
+          <p class="mt-4 text-base leading-8 text-light-text">Rapporto diretto, prezzi chiari, qualità visibile già al ritiro.</p>
+          <footer class="mt-6 text-sm text-light-muted">Allevamento bovino · Mantova</footer>
+        </blockquote>
+        <blockquote class="coin-panel p-7">
+          <p class="font-heading text-3xl leading-none text-primary">“</p>
+          <p class="mt-4 text-base leading-8 text-light-text">La manutenzione del territorio che fanno è esemplare. Mano ferma, tempi giusti.</p>
+          <footer class="mt-6 text-sm text-light-muted">Amministrazione locale</footer>
+        </blockquote>
       </div>
-      <div class="glass rounded-2xl p-5 max-w-sm">
-        <div class="text-xs font-medium text-primary mb-2 tracking-widest">STATO ARCHIVIO</div>
-        <p id="galleryCount" class="font-heading text-2xl text-dark-text mb-2">Caricamento foto...</p>
-        <p class="text-sm text-dark-muted">Le immagini si aprono in grande in una nuova scheda, senza cambiare il layout della pagina.</p>
+    </div>
+  </section>
+
+  <section id="faq" class="section-surface py-20 sm:py-28">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-14 text-center">
+        <div class="section-label mb-4">FAQ</div>
+        <h2 class="section-heading mb-5">Domande frequenti, risposte essenziali.</h2>
+      </div>
+
+      <div class="space-y-4">
+        <details class="coin-panel p-6" open>
+          <summary class="flex cursor-pointer items-center justify-between gap-4 font-heading text-xl font-medium leading-tight text-light-text">
+            Vendete direttamente al consumatore finale?
+            <svg class="h-5 w-5 flex-shrink-0 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Sì. Per legna, fieno, mais e prodotti stagionali il ritiro in cascina avviene su appuntamento. Per disponibilità specifiche vale la sezione Shop.</p>
+        </details>
+        <details class="coin-panel p-6">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 font-heading text-xl font-medium leading-tight text-light-text">
+            Accettate pagamenti con bonifico?
+            <svg class="h-5 w-5 flex-shrink-0 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Sì. Bonifico e contanti nei limiti di legge, con ricevuta fiscale per ogni operazione.</p>
+        </details>
+        <details class="coin-panel p-6">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 font-heading text-xl font-medium leading-tight text-light-text">
+            Organizzate visite guidate?
+            <svg class="h-5 w-5 flex-shrink-0 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Su richiesta, per scuole agrarie, associazioni e gruppi tecnici.</p>
+        </details>
+        <details class="coin-panel p-6">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 font-heading text-xl font-medium leading-tight text-light-text">
+            I macchinari in vendita sono revisionati?
+            <svg class="h-5 w-5 flex-shrink-0 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Ogni annuncio indica stato, dotazioni e informazioni disponibili. Le prove sul posto restano possibili prima dell'acquisto.</p>
+        </details>
+        <details class="coin-panel p-6">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 font-heading text-xl font-medium leading-tight text-light-text">
+            Fornite trasporto e consegna?
+            <svg class="h-5 w-5 flex-shrink-0 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Di norma no. Il ritiro è in cascina. Per forniture continuative si valutano accordi dedicati.</p>
+        </details>
+        <details class="coin-panel p-6">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 font-heading text-xl font-medium leading-tight text-light-text">
+            Come ricevere aggiornamenti sugli annunci?
+            <svg class="h-5 w-5 flex-shrink-0 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="mt-4 text-sm leading-7 text-light-muted">La pagina aggiornamenti e lo Shop leggono direttamente i dati pubblicati. Per richieste mirate conviene contattarci via email o telefono.</p>
+        </details>
       </div>
     </div>
-    <div id="galleryGrid" class="home-gallery">
-      <div style="grid-column:1/-1;text-align:center;padding:3rem 0;color:#657060;">Caricamento galleria...</div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- TESTIMONIAL -->
-<section id="testimonial" class="py-20 sm:py-28">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">VOCI DALLA FILIERA</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-        Chi lavora <span class="gradient-text">con noi</span>
-      </h2>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      <blockquote class="glass rounded-2xl p-6">
-        <svg class="w-8 h-8 text-primary/40 mb-3" fill="currentColor" viewBox="0 0 24 24"><path d="M10 8v6a4 4 0 01-4 4H4v-4h2V8h4zm10 0v6a4 4 0 01-4 4h-2v-4h2V8h4z"/></svg>
-        <p class="text-dark-text mb-4">"Fieno costante, raccolta puntuale. Dieci anni di fornitura senza un passo falso."</p>
-        <footer class="text-xs text-dark-muted">— Casearia padana · Cliente dal 2015</footer>
-      </blockquote>
-      <blockquote class="glass rounded-2xl p-6">
-        <svg class="w-8 h-8 text-primary/40 mb-3" fill="currentColor" viewBox="0 0 24 24"><path d="M10 8v6a4 4 0 01-4 4H4v-4h2V8h4zm10 0v6a4 4 0 01-4 4h-2v-4h2V8h4z"/></svg>
-        <p class="text-dark-text mb-4">"Rapporto diretto, prezzi chiari, qualità visibile già al ritiro."</p>
-        <footer class="text-xs text-dark-muted">— Allevamento bovino · Mantova</footer>
-      </blockquote>
-      <blockquote class="glass rounded-2xl p-6">
-        <svg class="w-8 h-8 text-primary/40 mb-3" fill="currentColor" viewBox="0 0 24 24"><path d="M10 8v6a4 4 0 01-4 4H4v-4h2V8h4zm10 0v6a4 4 0 01-4 4h-2v-4h2V8h4z"/></svg>
-        <p class="text-dark-text mb-4">"La manutenzione del territorio che fanno è esemplare. Mano ferma, tempi giusti."</p>
-        <footer class="text-xs text-dark-muted">— Amministrazione locale</footer>
-      </blockquote>
-    </div>
-  </div>
-</section>
+  <section id="campinos" class="section-dark hidden py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-14 max-w-3xl">
+        <div class="section-label mb-4">Campino's Member</div>
+        <h2 class="section-heading mb-5 text-white">Area riservata ai membri attivi.</h2>
+        <p class="section-copy">Questa sezione rimane invisibile finché la sessione utente non conferma una membership Campino's attiva. Nessuna scorciatoia client-side, solo sessione autenticata e regole RLS.</p>
+      </div>
 
-<!-- FAQ -->
-<section id="faq" class="py-20 sm:py-28 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">FAQ</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
-        Domande <span class="gradient-text">frequenti</span>
-      </h2>
+      <div class="grid gap-5 md:grid-cols-3">
+        <article class="coin-panel p-7">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">Accesso</div>
+          <h3 class="mt-4 font-heading text-[28px] font-normal leading-[1.06] tracking-[-0.05em] text-light-text">Membership attiva.</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Il tuo profilo ha una membership Campino's attiva e può vedere i moduli dedicati.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">Priorità</div>
+          <h3 class="mt-4 font-heading text-[28px] font-normal leading-[1.06] tracking-[-0.05em] text-light-text">Annunci prima degli altri.</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Vantaggi dedicati per nuove disponibilità, materiali limitati e aggiornamenti anticipati.</p>
+        </article>
+        <article class="coin-panel p-7">
+          <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">Canale</div>
+          <h3 class="mt-4 font-heading text-[28px] font-normal leading-[1.06] tracking-[-0.05em] text-light-text">Contatto privilegiato.</h3>
+          <p class="mt-4 text-sm leading-7 text-light-muted">Un'area predisposta per offerte e contenuti esclusivi senza esporli al pubblico generale.</p>
+        </article>
+      </div>
     </div>
-    <div class="space-y-3">
-      <details class="glass rounded-2xl p-5 group" open>
-        <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-dark-text">
-          Vendete direttamente al consumatore finale?
-          <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="text-sm text-dark-muted mt-3">Sì, per prodotti come legna, fieno e mais si può ritirare in cascina su appuntamento. Per annunci specifici si veda lo Shop.</p>
-      </details>
-      <details class="glass rounded-2xl p-5 group">
-        <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-dark-text">
-          Accettate pagamenti con bonifico?
-          <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="text-sm text-dark-muted mt-3">Sì. Bonifico, contanti entro i limiti di legge, ricevuta fiscale per ogni transazione.</p>
-      </details>
-      <details class="glass rounded-2xl p-5 group">
-        <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-dark-text">
-          Organizzate visite guidate?
-          <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="text-sm text-dark-muted mt-3">Su richiesta, per scuole agrarie, associazioni e gruppi tecnici.</p>
-      </details>
-      <details class="glass rounded-2xl p-5 group">
-        <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-dark-text">
-          I macchinari in vendita sono revisionati?
-          <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="text-sm text-dark-muted mt-3">Ogni annuncio indica lo stato e l'eventuale revisione. Prove sul posto prima dell'acquisto.</p>
-      </details>
-      <details class="glass rounded-2xl p-5 group">
-        <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-dark-text">
-          Fornite trasporto e consegna?
-          <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="text-sm text-dark-muted mt-3">Non di norma. Ritiro in cascina. Per forniture continuative valutiamo accordi specifici.</p>
-      </details>
-      <details class="glass rounded-2xl p-5 group">
-        <summary class="flex items-center justify-between cursor-pointer font-heading font-semibold text-dark-text">
-          Come ricevere aggiornamenti sugli annunci?
-          <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <p class="text-sm text-dark-muted mt-3">Iscriviti alla newsletter. Inviamo solo nuovi annunci, niente altro.</p>
-      </details>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- CTA CONTATTI -->
-<section id="contatti" class="py-20 sm:py-28 relative overflow-hidden">
-  <div class="absolute inset-0 bg-grid opacity-60"></div>
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <div class="text-center mb-12">
-      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">CONTATTI</div>
-      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-dark-text mb-6">
-        Pronto a <span class="gradient-text">lavorare insieme?</span>
-      </h2>
-      <p class="text-base sm:text-lg text-dark-muted max-w-2xl mx-auto">Rodigo, Mantova. Scrivici per forniture, annunci dello shop o visite in cascina.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="glass rounded-2xl p-6 sm:p-8">
-        <h3 class="font-heading text-xl font-bold text-dark-text mb-5">Dove trovarci</h3>
-        <div class="space-y-4 text-sm">
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+  <section id="contatti" class="section-dark py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 max-w-3xl">
+        <div class="section-label mb-4">Contatti</div>
+        <h2 class="section-heading mb-5 text-white">Contatto diretto, struttura essenziale.</h2>
+        <p class="section-copy">Telefono, email, PEC e form sono raccolti in un unico modulo finale. Il principio resta invariato: chiarezza operativa prima di tutto.</p>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)]">
+        <div class="coin-panel coin-panel--dark border border-white/10 p-7 sm:p-8">
+          <div class="space-y-7 text-sm">
             <div>
-              <div class="text-dark-text font-medium">Via Belvedere 1</div>
-              <div class="text-dark-muted">46040 Rodigo (MN) · Italia</div>
+              <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Indirizzo</div>
+              <p class="mt-3 text-base leading-7 text-white">Via Belvedere 1<br>46040 Rodigo (MN) · Italia</p>
             </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-            <a href="tel:+390376681052" class="text-dark-text hover:text-primary transition">+39 0376 681052</a>
-          </div>
-          <div class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             <div>
-              <a href="mailto:pzkko@yahoo.com" class="block text-dark-text hover:text-primary transition">pzkko@yahoo.com</a>
-              <a href="mailto:cascinafontana@pec.it" class="block text-dark-muted hover:text-primary transition">cascinafontana@pec.it</a>
+              <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Telefono</div>
+              <a href="tel:+390376681052" class="mt-3 block text-base leading-7 text-white transition hover:text-[#93b5ff]">+39 0376 681052</a>
+            </div>
+            <div>
+              <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Email</div>
+              <a href="mailto:pzkko@yahoo.com" class="mt-3 block text-base leading-7 text-white transition hover:text-[#93b5ff]">pzkko@yahoo.com</a>
+              <a href="mailto:cascinafontana@pec.it" class="block text-base leading-7 text-white/70 transition hover:text-[#93b5ff]">cascinafontana@pec.it</a>
+            </div>
+            <div>
+              <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#93b5ff]">Orari</div>
+              <div class="mt-3 space-y-2 text-sm leading-6 text-white/72">
+                <div class="flex items-center justify-between gap-4"><span>Lun – Ven</span><span class="text-white">08:00–12:30 · 14:30–18:00</span></div>
+                <div class="flex items-center justify-between gap-4"><span>Sabato</span><span class="text-white">08:00–12:00 su appuntamento</span></div>
+                <div class="flex items-center justify-between gap-4"><span>Domenica</span><span class="text-white">Chiuso</span></div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="mt-6 pt-6 border-t border-dark-border">
-          <h4 class="text-xs font-medium text-primary mb-3 tracking-widest">ORARI</h4>
-          <div class="space-y-1 text-xs text-dark-muted">
-            <div class="flex justify-between"><span>Lun – Ven</span><span class="text-dark-text">08:00–12:30 · 14:30–18:00</span></div>
-            <div class="flex justify-between"><span>Sabato</span><span class="text-dark-text">08:00–12:00 (appuntamento)</span></div>
-            <div class="flex justify-between"><span>Domenica</span><span class="text-dark-text">Chiuso</span></div>
-          </div>
-        </div>
-      </div>
 
-      <form class="glass rounded-2xl p-6 sm:p-8" method="POST" action="https://api.web3forms.com/submit" novalidate>
-        <input type="hidden" name="access_key" value="YOUR_KEY">
-        <input type="hidden" name="subject" value="Contatto — Cascina Fontana">
-        <input type="hidden" name="from_name" value="Sito Cascina Fontana">
-        <input type="checkbox" name="botcheck" style="display:none">
-        <h3 class="font-heading text-xl font-bold text-dark-text mb-5">Scrivici</h3>
-        <div class="space-y-3">
-          <div>
-            <label for="nome" class="block text-xs font-medium text-dark-muted mb-1">Nome</label>
-            <input type="text" id="nome" name="nome" required maxlength="120" autocomplete="name"
-              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border text-dark-text focus:border-primary focus:outline-none transition">
+        <form class="coin-panel p-7 sm:p-8" method="POST" action="https://api.web3forms.com/submit" novalidate>
+          <input type="hidden" name="access_key" value="YOUR_KEY">
+          <input type="hidden" name="subject" value="Contatto — Cascina Fontana">
+          <input type="hidden" name="from_name" value="Sito Cascina Fontana">
+          <input type="checkbox" name="botcheck" style="display:none">
+
+          <div class="mb-6">
+            <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">Form diretto</div>
+            <h3 class="mt-4 font-heading text-[36px] font-normal leading-none tracking-[-0.05em] text-light-text">Scrivici</h3>
           </div>
-          <div>
-            <label for="email" class="block text-xs font-medium text-dark-muted mb-1">Email</label>
-            <input type="email" id="email" name="email" required maxlength="254" autocomplete="email"
-              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border text-dark-text focus:border-primary focus:outline-none transition">
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="sm:col-span-1">
+              <label for="nome" class="mb-2 block font-heading text-xs font-semibold uppercase tracking-[0.18em] text-light-muted">Nome</label>
+              <input type="text" id="nome" name="nome" required maxlength="120" autocomplete="name" class="w-full rounded-[20px] border border-light-border bg-white px-4 py-3 text-light-text outline-none transition focus:border-primary">
+            </div>
+            <div class="sm:col-span-1">
+              <label for="email" class="mb-2 block font-heading text-xs font-semibold uppercase tracking-[0.18em] text-light-muted">Email</label>
+              <input type="email" id="email" name="email" required maxlength="254" autocomplete="email" class="w-full rounded-[20px] border border-light-border bg-white px-4 py-3 text-light-text outline-none transition focus:border-primary">
+            </div>
+            <div class="sm:col-span-2">
+              <label for="oggetto" class="mb-2 block font-heading text-xs font-semibold uppercase tracking-[0.18em] text-light-muted">Oggetto</label>
+              <select id="oggetto" name="oggetto" class="w-full rounded-[20px] border border-light-border bg-white px-4 py-3 text-light-text outline-none transition focus:border-primary">
+                <option>Informazioni generali</option>
+                <option>Annuncio shop</option>
+                <option>Fornitura fieno</option>
+                <option>Fornitura mais / grano</option>
+                <option>Manutenzione territorio</option>
+                <option>Visita / gruppo</option>
+                <option>Altro</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label for="messaggio" class="mb-2 block font-heading text-xs font-semibold uppercase tracking-[0.18em] text-light-muted">Messaggio</label>
+              <textarea id="messaggio" name="messaggio" required maxlength="2000" rows="5" class="w-full resize-none rounded-[24px] border border-light-border bg-white px-4 py-3 text-light-text outline-none transition focus:border-primary"></textarea>
+            </div>
           </div>
-          <div>
-            <label for="oggetto" class="block text-xs font-medium text-dark-muted mb-1">Oggetto</label>
-            <select id="oggetto" name="oggetto"
-              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border text-dark-text focus:border-primary focus:outline-none transition">
-              <option>Informazioni generali</option>
-              <option>Annuncio shop</option>
-              <option>Fornitura fieno</option>
-              <option>Fornitura mais / grano</option>
-              <option>Manutenzione territorio</option>
-              <option>Visita / gruppo</option>
-              <option>Altro</option>
-            </select>
-          </div>
-          <div>
-            <label for="messaggio" class="block text-xs font-medium text-dark-muted mb-1">Messaggio</label>
-            <textarea id="messaggio" name="messaggio" required maxlength="2000" rows="4"
-              class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border text-dark-text focus:border-primary focus:outline-none transition resize-none"></textarea>
-          </div>
-          <label class="flex items-start gap-2 text-xs text-dark-muted">
-            <input type="checkbox" required class="mt-0.5 accent-primary">
-            Acconsento al trattamento dei dati per rispondere alla mia richiesta.
+
+          <label class="mt-4 flex items-start gap-3 text-sm leading-6 text-light-muted">
+            <input type="checkbox" required class="mt-1 accent-primary">
+            Acconsento al trattamento dei dati personali per ricevere una risposta alla richiesta inviata.
           </label>
-          <button type="submit" class="w-full px-6 py-3 rounded-xl bg-primary text-dark-bg font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">
-            Invia richiesta
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
 
-<!-- FOOTER -->
-<footer class="border-t border-dark-border py-12">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div class="mt-6 flex flex-wrap gap-4">
+            <button type="submit" class="pill-btn pill-btn--primary">invia richiesta</button>
+            <a href="mailto:pzkko@yahoo.com" class="pill-btn pill-btn--secondary">scrivi via mail</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-light-border py-12">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)_minmax(0,0.8fr)]">
       <div>
-        <div class="flex items-center gap-3 mb-4">
-          <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center font-heading font-bold text-dark-bg text-sm">CF</span>
+        <div class="flex items-center gap-3">
+          <span class="flex h-11 w-11 items-center justify-center rounded-full border border-primary/15 bg-surface font-heading text-sm font-bold text-primary">CF</span>
           <div>
-            <p class="font-heading font-bold text-dark-text">Cascina Fontana</p>
-            <p class="text-xs text-dark-muted">Società Agricola · Rodigo, Mantova</p>
+            <p class="font-heading text-[18px] font-semibold tracking-[-0.04em] text-light-text">Cascina Fontana</p>
+            <p class="text-sm text-light-muted">Società Agricola · Rodigo, Mantova</p>
           </div>
         </div>
-        <p class="text-sm text-dark-muted max-w-xs">Società Agricola dal 2007. Prato stabile, filiera Grana Padano DOP, gestione del territorio padano.</p>
+        <p class="mt-5 max-w-sm text-sm leading-7 text-light-muted">Prato stabile, filiera Grana Padano DOP, gestione del territorio padano e disponibilità reali pubblicate online senza sovrastrutture inutili.</p>
       </div>
+
       <div>
-        <h4 class="text-xs font-medium text-primary mb-3 tracking-widest">NAVIGAZIONE</h4>
-        <nav class="space-y-2 text-sm text-dark-muted">
-          <a href="#attivita" class="block hover:text-primary transition">Attività</a>
-          <a href="#produzione" class="block hover:text-primary transition">Produzione</a>
-          <a href="#filiera" class="block hover:text-primary transition">Filiera</a>
-          <a href="#galleria" class="block hover:text-primary transition">Galleria</a>
-          <a href="#shop" class="block hover:text-primary transition">Shop</a>
-          <a href="#contatti" class="block hover:text-primary transition">Contatti</a>
+        <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">Navigazione</div>
+        <nav class="mt-5 space-y-3 text-sm text-light-muted">
+          <a href="#attivita" class="block transition hover:text-primary">Attività</a>
+          <a href="#produzione" class="block transition hover:text-primary">Produzione</a>
+          <a href="#filiera" class="block transition hover:text-primary">Filiera</a>
+          <a href="#shop" class="block transition hover:text-primary">Shop</a>
+          <a href="#galleria" class="block transition hover:text-primary">Galleria</a>
+          <a href="#contatti" class="block transition hover:text-primary">Contatti</a>
         </nav>
       </div>
+
       <div>
-        <h4 class="text-xs font-medium text-primary mb-3 tracking-widest">RISORSE</h4>
-        <nav class="space-y-2 text-sm text-dark-muted">
-          <a href="https://www.ufficiocamerale.it/9790/societa-agricola-cascina-fontana-ss" target="_blank" rel="noopener" class="block hover:text-primary transition">Registro Imprese</a>
-          <a href="https://github.com/albertoxpecchini/" target="_blank" rel="noopener" class="block hover:text-primary transition">GitHub</a>
-          <a href="https://www.instagram.com/albertoxpecchini/" target="_blank" rel="noopener" class="block hover:text-primary transition">Instagram</a>
-          <a href="https://www.vinted.it/member/237170304" target="_blank" rel="noopener" class="block hover:text-primary transition">Vinted</a>
+        <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary">Risorse</div>
+        <nav class="mt-5 space-y-3 text-sm text-light-muted">
+          <a href="https://www.ufficiocamerale.it/9790/societa-agricola-cascina-fontana-ss" target="_blank" rel="noopener" class="block transition hover:text-primary">Registro Imprese</a>
+          <a href="https://github.com/albertoxpecchini/" target="_blank" rel="noopener" class="block transition hover:text-primary">GitHub</a>
+          <a href="https://www.instagram.com/albertoxpecchini/" target="_blank" rel="noopener" class="block transition hover:text-primary">Instagram</a>
+          <a href="https://www.vinted.it/member/237170304" target="_blank" rel="noopener" class="block transition hover:text-primary">Vinted</a>
         </nav>
       </div>
     </div>
-    <div class="pt-6 border-t border-dark-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-dark-muted">
+
+    <div class="mt-10 flex flex-col gap-3 border-t border-light-border pt-6 text-xs text-light-muted sm:flex-row sm:items-center sm:justify-between">
       <p>© 2007–2026 Società Agricola Cascina Fontana S.S.</p>
-      <p>P.IVA 02196490201 · VAT IT02196490201 · <a href="mailto:cascinafontana@pec.it" class="hover:text-primary">cascinafontana@pec.it</a></p>
+      <p>P.IVA 02196490201 · VAT IT02196490201 · <a href="mailto:cascinafontana@pec.it" class="transition hover:text-primary">cascinafontana@pec.it</a></p>
     </div>
+
     <div class="mt-6 flex justify-center">
-      <a href="/flashplayer" class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs text-dark-muted hover:text-primary transition-all group" title="Flash Mode" aria-label="Flash Mode">
+      <a href="/flashplayer" class="pill-btn pill-btn--secondary gap-2" title="Flash Mode" aria-label="Flash Mode">
         <img src="/public/images/flash_128.jpg" width="20" height="20" alt="" class="rounded-full">
-        <span>Flash Mode</span>
-        <svg class="w-3 h-3 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        Flash Mode
       </a>
     </div>
   </div>
 </footer>
 
 <script>
-  // Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) nav.classList.add('nav-scrolled');
     else nav.classList.remove('nav-scrolled');
   });
 
-  // Mobile menu
   const burger = document.getElementById('burger');
   const mobileNav = document.getElementById('mobileNav');
   burger.addEventListener('click', () => {
     mobileNav.classList.toggle('hidden');
     mobileNav.classList.toggle('flex');
   });
-
-  // Shop filter + render logic handled by js/shop-loader.js (Supabase)
 </script>
 
-<!-- Supabase SDK + loaders -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-client.js"></script>
 <script src="/js/gallery-data.js"></script>
 <script src="/js/gallery-loader.js"></script>
 <script src="/js/shop-loader.js"></script>
 <script src="/js/updates-loader.js"></script>
+<script src="/js/campinos-member.js"></script>
+<script>
+  (async () => {
+    const { isActive } = await getIsCampinosMember();
+    if (!isActive) return;
+
+    var navEl = document.getElementById('campinosNav');
+    var navMob = document.getElementById('campinosNavMobile');
+    var section = document.getElementById('campinos');
+
+    if (navEl) {
+      navEl.classList.remove('hidden');
+      navEl.classList.add('inline');
+    }
+    if (navMob) {
+      navMob.classList.remove('hidden');
+      navMob.classList.add('block');
+    }
+    if (section) {
+      section.classList.remove('hidden');
+    }
+  })();
+</script>
 
 </body>
 </html>

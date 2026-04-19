@@ -1,540 +1,286 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" style="color-scheme: light;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
-<title>Admin · Cascina Fontana</title>
+<title>Console Operativa · Cascina Fontana</title>
 <link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: { extend: {
+      colors: {
+        primary: '#0052ff', 'primary-dark': '#578bfa',
+        'dark-bg': '#ffffff', 'dark-card': '#eef0f3',
+        'dark-text': '#0a0b0d', 'dark-muted': '#5b616e',
+        'dark-border': 'rgba(91, 97, 110, 0.2)'
+      },
+      fontFamily: {
+        sans: ['Public Sans','system-ui','sans-serif'],
+        heading: ['Manrope','Public Sans','sans-serif']
+      }
+    } }
+  };
+</script>
 <style>
-:root { --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  font-family: var(--sans);
-  font-size: 13px; line-height: 1.5; color: #333;
-  background: #f0f0f0; min-height: 100vh;
-}
-img { display: block; max-width: 100%; }
-a { color: #1473e6; text-decoration: none; }
-a:hover { text-decoration: underline; }
-h2, h3 { margin: 0; font-family: var(--sans); font-weight: 600; color: #222; }
-h2 { font-size: 22px; }
-h3 { font-size: 15px; }
-p { margin: 0; }
-
-/* ── HEADER ── */
-.site-header {
-  background: linear-gradient(to bottom, #fafafa, #eaeaea);
-  border-bottom: 1px solid #c9c9c9;
-  box-shadow: inset 0 -1px 0 #fff, 0 1px 0 rgba(0,0,0,.03);
-  position: sticky; top: 0; z-index: 40;
-}
-.header-inner {
-  max-width: 980px; margin: 0 auto; padding: 12px 24px;
-  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
-}
-.header-brand { display: flex; align-items: center; gap: 10px; color: #222; text-decoration: none; }
-.header-brand:hover { text-decoration: none; }
-.logo-mark {
-  width: 30px; height: 30px;
-  background: linear-gradient(135deg, #1473e6, #0d5cb8);
-  border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-weight: 700; font-size: 12px;
-}
-.header-brand span { font-size: 15px; font-weight: 600; color: #222; }
-.header-right { display: flex; align-items: center; gap: 10px; font-size: 12px; }
-#userEmail { color: #777; }
-.btn-secondary {
-  display: inline-block; padding: 6px 14px;
-  font-family: var(--sans); font-size: 12px; font-weight: 600;
-  color: #444; cursor: pointer; border-radius: 3px;
-  border: 1px solid #c0c0c0;
-  background: linear-gradient(to bottom, #fff, #ececec);
-  box-shadow: inset 0 1px 0 #fff;
-  transition: .15s;
-}
-.btn-secondary:hover {
-  background: linear-gradient(to bottom, #1473e6, #0d5cb8);
-  border-color: #0a4f9e; color: #fff;
-}
-
-/* ── MAIN ── */
-.main-content { max-width: 980px; margin: 0 auto; padding: 24px; }
-
-/* ── BOOT ── */
-#bootLoader { text-align: center; color: #777; padding: 80px 0; font-size: 14px; }
-
-/* ── TABS ── */
-.tabs-bar {
-  display: flex; gap: 6px; flex-wrap: wrap;
-  padding: 10px; background: #f5f5f5;
-  border: 1px solid #d0d0d0; border-radius: 3px;
-  margin-bottom: 20px;
-  box-shadow: inset 0 1px 0 #fff;
-}
-.tab-btn {
-  cursor: pointer; border: 1px solid #c0c0c0;
-  background: linear-gradient(to bottom, #fff, #ececec);
-  padding: 7px 18px; font-size: 13px; color: #444; font-family: inherit;
-  border-radius: 2px;
-  box-shadow: inset 0 1px 0 #fff;
-  transition: .15s;
-}
-.tab-btn:hover { background: linear-gradient(to bottom, #fdfdfd, #e4e4e4); }
-.tab-btn.active {
-  background: linear-gradient(to bottom, #1473e6, #0d5cb8);
-  color: #fff; border-color: #0a4f9e;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-}
-
-/* ── PANEL ── */
-.panel {
-  background: #fdfdfd; border: 1px solid #d0d0d0; border-radius: 3px;
-  box-shadow: inset 0 1px 0 #fff, 0 2px 4px rgba(0,0,0,.04);
-  margin-bottom: 20px; overflow: hidden;
-}
-.panel__head {
-  background: linear-gradient(to bottom, #f7f7f7, #f0f0f0);
-  border-bottom: 1px solid #d5d5d5;
-  padding: 16px 24px;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-}
-.panel__head-left .TextStep {
-  display: inline-block;
-  background: #1473e6; color: #fff; font-size: 10px; font-weight: 700;
-  letter-spacing: .08em; text-transform: uppercase;
-  padding: 3px 9px; border-radius: 2px; margin-bottom: 6px;
-}
-.panel__head h2 { font-size: 20px; }
-.panel__head h2 b { color: #1473e6; font-weight: 700; }
-.panel__body { padding: 24px; }
-
-/* ── FORM ── */
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.col-full { grid-column: 1 / -1; }
-.col-3 { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-
-.field { display: flex; flex-direction: column; gap: 4px; }
-.field label {
-  font-size: 11px; color: #555; text-transform: uppercase;
-  letter-spacing: .08em; font-weight: 600;
-}
-.field input, .field select, .field textarea {
-  padding: 9px 12px; font: inherit;
-  border: 1px solid #c0c0c0; border-radius: 3px;
-  background: #fff;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
-}
-.field input:focus, .field select:focus, .field textarea:focus {
-  outline: none; border-color: #1473e6;
-  box-shadow: 0 0 0 3px rgba(20,115,230,.2);
-}
-.field textarea { resize: vertical; }
-
-.checkbox-label {
-  display: flex; align-items: center; gap: 8px;
-  padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 3px;
-  background: #fff; cursor: pointer;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
-  font-size: 13px; color: #444;
-}
-.checkbox-label:hover { border-color: #1473e6; }
-.checkbox-label input[type=checkbox] { accent-color: #1473e6; }
-
-.upload-status { font-size: 11px; color: #777; margin-top: 6px; }
-.images-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.thumb {
-  width: 80px; height: 80px; object-fit: cover;
-  border-radius: 3px; border: 1px solid #d0d0d0;
-  display: block;
-}
-.thumb-wrap { position: relative; }
-.thumb-rm {
-  position: absolute; top: -6px; right: -6px;
-  width: 18px; height: 18px; border-radius: 50%;
-  background: #e34850; color: #fff; border: none; cursor: pointer;
-  font-size: 11px; font-weight: 700; line-height: 1;
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity .15s;
-}
-.thumb-wrap:hover .thumb-rm { opacity: 1; }
-.thumb-new-badge {
-  position: absolute; top: -6px; right: -6px;
-  background: #1473e6; color: #fff;
-  font-size: 9px; font-weight: 700; letter-spacing: .05em;
-  padding: 2px 5px; border-radius: 2px;
-}
-
-.error-box {
-  display: none;
-  background: #fff3f3; border: 1px solid #f5a3a3; border-radius: 3px;
-  padding: 9px 12px; font-size: 13px; color: #c0392b;
-}
-.error-box.visible { display: block; }
-
-.form-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-
-.Button {
-  display: inline-block; padding: 10px 28px;
-  font-family: var(--sans); font-size: 14px; font-weight: 700;
-  color: #fff; cursor: pointer; border-radius: 3px;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-  border: 1px solid #4f4f4f;
-  background: linear-gradient(to bottom, #888 0%, #5a5a5a 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.15);
-  transition: .15s;
-}
-.Button:hover {
-  background: linear-gradient(to bottom, #1473e6 0%, #0d5cb8 100%);
-  border-color: #0a4f9e; color: #fff; text-decoration: none;
-}
-.Button:disabled { opacity: .5; cursor: default; }
-
-.btn-ghost {
-  display: inline-block; padding: 9px 20px;
-  font-family: var(--sans); font-size: 13px; font-weight: 600;
-  color: #444; cursor: pointer; border-radius: 3px;
-  border: 1px solid #c0c0c0;
-  background: linear-gradient(to bottom, #fff, #ececec);
-  box-shadow: inset 0 1px 0 #fff;
-  transition: .15s;
-}
-.btn-ghost:hover { border-color: #999; background: linear-gradient(to bottom, #f5f5f5, #e4e4e4); }
-
-/* ── ROWS (listings) ── */
-.rows-list { border-top: 1px solid #e0e0e0; }
-.row-item {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 4px; border-bottom: 1px solid #e0e0e0;
-  flex-wrap: wrap;
-}
-.row-item:hover { background: #f8f8f8; }
-.row-thumb {
-  width: 60px; height: 60px; object-fit: cover;
-  border-radius: 3px; border: 1px solid #d5d5d5; flex-shrink: 0;
-}
-.row-no-thumb {
-  width: 60px; height: 60px; flex-shrink: 0;
-  border: 1px solid #d5d5d5; border-radius: 3px;
-  background: #f5f5f5;
-  display: flex; align-items: center; justify-content: center;
-  color: #bbb; font-size: 18px;
-}
-.row-info { flex: 1; min-width: 0; }
-.row-title { font-size: 14px; font-weight: 600; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.row-meta { font-size: 12px; color: #888; margin-top: 2px; }
-.row-badge {
-  display: inline-block;
-  background: #eaf3ff; color: #0d5cb8; border: 1px solid #bcd5f1;
-  font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-  padding: 2px 7px; border-radius: 2px; margin-left: 6px; vertical-align: middle;
-}
-.row-badge--count { color: #777; border-color: #d0d0d0; background: #f5f5f5; }
-.row-actions { display: flex; gap: 6px; }
-.btn-edit {
-  padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
-  border: 1px solid #bcd5f1; border-radius: 2px;
-  background: #eaf3ff; color: #0d5cb8;
-  font-family: inherit; transition: .15s;
-}
-.btn-edit:hover { background: #1473e6; color: #fff; border-color: #0a4f9e; }
-.btn-delete {
-  padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
-  border: 1px solid #f5a3a3; border-radius: 2px;
-  background: #fff3f3; color: #c0392b;
-  font-family: inherit; transition: .15s;
-}
-.btn-delete:hover { background: #e34850; color: #fff; border-color: #b32b2b; }
-
-.empty-state { padding: 32px; text-align: center; color: #999; font-size: 13px; }
-.loading-state { padding: 32px; text-align: center; color: #aaa; font-size: 13px; }
-
-/* ── PANEL LIST HEADER ── */
-.list-head {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 24px; border-bottom: 1px solid #d5d5d5;
-  background: linear-gradient(to bottom, #f7f7f7, #f0f0f0);
-}
-.list-head h2 { font-size: 17px; }
-.list-head h2 span { font-weight: 400; color: #999; font-size: 14px; margin-left: 6px; }
-.btn-refresh {
-  padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
-  border: 1px solid #c0c0c0; border-radius: 2px;
-  background: linear-gradient(to bottom, #fff, #ececec); color: #444;
-  font-family: inherit;
-  box-shadow: inset 0 1px 0 #fff;
-  transition: .15s;
-}
-.btn-refresh:hover { background: linear-gradient(to bottom, #1473e6, #0d5cb8); color: #fff; border-color: #0a4f9e; }
-
-.btn-cancel-edit {
-  display: none; padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
-  border: 1px solid #f5a3a3; border-radius: 2px;
-  background: #fff3f3; color: #c0392b;
-  font-family: inherit; transition: .15s;
-}
-.btn-cancel-edit:hover { background: #e34850; color: #fff; border-color: #b32b2b; }
-
-/* ── TOAST ── */
-#toast {
-  position: fixed; bottom: 24px; right: 24px; z-index: 100;
-  padding: 12px 18px; border-radius: 3px;
-  background: #fff;
-  border: 1px solid #d0d0d0;
-  box-shadow: 0 4px 14px rgba(0,0,0,.12);
-  font-size: 13px; color: #333;
-  opacity: 0; transform: translateY(8px); transition: all .3s ease;
-  max-width: 340px;
-}
-#toast.show { opacity: 1; transform: translateY(0); }
-#toast.success { border-color: #2d9d55; color: #1a6e38; background: #f0faf4; }
-#toast.error { border-color: #e34850; color: #c0392b; background: #fff3f3; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 640px) {
-  .form-grid { grid-template-columns: 1fr; }
-  .col-3 { grid-template-columns: 1fr; }
-}
+  body { font-family: 'Public Sans', system-ui, sans-serif; background: #ffffff; color: #0a0b0d; }
+  .font-heading { font-family: 'Manrope','Public Sans',sans-serif; letter-spacing: -0.04em; }
+  .gradient-text {
+    background: linear-gradient(135deg, #0052ff 0%, #2f6fff 55%, #578bfa 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(91, 97, 110, 0.2);
+    border-radius: 32px;
+    box-shadow: 0 20px 48px rgba(10, 11, 13, 0.06);
+  }
+  input, select, textarea { color-scheme: light; }
+  .tab-btn {
+    transition: all .2s;
+    border-radius: 999px;
+    font-family: 'Manrope','Public Sans',sans-serif;
+  }
+  .tab-btn.active {
+    background: rgba(0, 82, 255, 0.08);
+    color: #0052ff;
+    border-color: rgba(0, 82, 255, 0.22);
+  }
+  .thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 18px; border: 1px solid rgba(91, 97, 110, 0.2); }
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    padding: 14px 18px; border-radius: 24px;
+    background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px);
+    border: 1px solid rgba(91, 97, 110, 0.2);
+    box-shadow: 0 20px 48px rgba(10,11,13,0.12);
+    opacity: 0; transform: translateY(8px); transition: all .3s ease;
+    max-width: 360px;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.success { border-color: rgba(34, 197, 94, 0.35); }
+  .toast.error { border-color: rgba(239, 68, 68, 0.35); }
 </style>
 </head>
-<body>
+<body class="min-h-screen bg-dark-bg text-dark-text">
 
-<header class="site-header">
-  <div class="header-inner">
-    <a href="/" class="header-brand">
-      <div class="logo-mark">CF</div>
-      <span>Admin · Cascina Fontana</span>
+<header class="sticky top-0 z-40 bg-dark-bg/95 backdrop-blur border-b border-dark-border">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap gap-3">
+    <a href="/flashplayer/" class="flex items-center gap-2 group">
+      <span class="w-10 h-10 rounded-full bg-dark-card border border-dark-border flex items-center justify-center font-heading font-bold text-primary text-xs">CF</span>
+      <span class="font-heading font-semibold text-base group-hover:text-primary transition">Console operativa · Cascina Fontana</span>
     </a>
-    <div class="header-right">
-      <span id="userEmail"></span>
-      <button id="logoutBtn" class="btn-secondary">Esci</button>
+    <div class="flex items-center gap-3 text-xs">
+      <span id="userEmail" class="text-dark-muted hidden sm:inline"></span>
+      <button id="logoutBtn" class="px-4 py-2 rounded-full bg-dark-card border border-dark-border hover:border-primary hover:text-primary transition font-semibold">Esci</button>
     </div>
   </div>
 </header>
 
-<div class="main-content">
+<main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+  <div id="bootLoader" class="text-center text-dark-muted py-20">Verifica accesso…</div>
 
-  <div id="bootLoader">Verifica sessione…</div>
-
-  <div id="adminRoot" style="display:none;">
-
-    <!-- Tabs -->
-    <nav class="tabs-bar">
-      <button data-tab="listings" class="tab-btn active">Annunci</button>
-      <button data-tab="updates"  class="tab-btn">Aggiornamenti</button>
+  <div id="adminRoot" class="hidden space-y-6">
+    <nav class="flex items-center gap-2 glass rounded-full p-1 w-fit">
+      <button data-tab="listings" class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium border border-transparent">Annunci</button>
+      <button data-tab="updates" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium border border-transparent">Aggiornamenti</button>
     </nav>
 
-    <!-- ══════════════════════════════════════ -->
-    <!-- TAB: LISTINGS                          -->
-    <!-- ══════════════════════════════════════ -->
-    <div id="tab-listings">
-
-      <!-- Form panel -->
-      <div class="panel">
-        <div class="panel__head">
-          <div class="panel__head-left">
-            <div class="TextStep">Annunci</div>
-            <h2 id="listingFormTitle">Nuovo <b>annuncio</b></h2>
+    <div id="tab-listings" class="space-y-6">
+      <section class="glass rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <div>
+            <div class="text-xs font-medium text-primary tracking-[0.18em] uppercase">Gestione annunci</div>
+            <h2 id="listingFormTitle" class="font-heading text-2xl font-bold">Nuovo <span class="gradient-text">annuncio</span></h2>
           </div>
-          <button id="listingCancelEdit" class="btn-cancel-edit">Annulla modifica</button>
+          <button id="listingCancelEdit" class="hidden px-3 py-1.5 text-xs rounded-lg border border-dark-border hover:border-primary hover:text-primary transition">Annulla modifica</button>
         </div>
-        <div class="panel__body">
-          <form id="listingForm" novalidate>
-            <input type="hidden" id="l_id">
-            <div class="form-grid">
 
-              <div class="field col-full">
-                <label for="l_title">Titolo *</label>
-                <input type="text" id="l_title" required maxlength="200">
-              </div>
+        <form id="listingForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="hidden" id="l_id">
 
-              <div class="field">
-                <label for="l_category">Categoria</label>
-                <select id="l_category">
-                  <option value="macchine">Macchinari</option>
-                  <option value="prodotti">Prodotti</option>
-                  <option value="materiali">Materiali</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="l_brand">Marca</label>
-                <input type="text" id="l_brand">
-              </div>
-
-              <div class="field">
-                <label for="l_model">Modello</label>
-                <input type="text" id="l_model">
-              </div>
-
-              <div class="field">
-                <label for="l_displacement">Cilindrata</label>
-                <input type="text" id="l_displacement" placeholder="es. 2500 cc">
-              </div>
-
-              <div class="field">
-                <label for="l_hp">Cavalli (HP)</label>
-                <input type="text" id="l_hp" placeholder="es. 85 CV">
-              </div>
-
-              <div class="field">
-                <label for="l_fuel">Alimentazione</label>
-                <select id="l_fuel">
-                  <option value="">—</option>
-                  <option value="diesel">Diesel</option>
-                  <option value="benzina">Benzina</option>
-                  <option value="gpl">GPL</option>
-                  <option value="metano">Metano</option>
-                  <option value="elettrico">Elettrico</option>
-                  <option value="ibrido">Ibrido</option>
-                  <option value="altro">Altro</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="l_usage_hours">Ore di utilizzo</label>
-                <input type="text" id="l_usage_hours" placeholder="es. 4200 h">
-              </div>
-
-              <div class="field">
-                <label for="l_condition">Condizione</label>
-                <select id="l_condition">
-                  <option value="">—</option>
-                  <option value="nuovo">Nuovo</option>
-                  <option value="ottimo">Ottimo</option>
-                  <option value="buono">Buono</option>
-                  <option value="discreto">Discreto</option>
-                  <option value="da_revisionare">Da revisionare</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="l_color">Colore</label>
-                <input type="text" id="l_color">
-              </div>
-
-              <div class="col-3">
-                <label class="checkbox-label">
-                  <input type="checkbox" id="l_registered"> Immatricolato
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox" id="l_documents"> Documenti
-                </label>
-                <label class="checkbox-label">
-                  <input type="checkbox" id="l_insured"> Assicurato
-                </label>
-              </div>
-
-              <div class="field col-full">
-                <label>Immagini (più file — compressione automatica)</label>
-                <input type="file" id="l_images" accept="image/*" multiple>
-                <div id="l_imagesPreview" class="images-preview"></div>
-                <p id="l_uploadStatus" class="upload-status"></p>
-              </div>
-
-              <div id="l_formError" class="error-box col-full"></div>
-
-              <div class="form-actions col-full">
-                <button type="submit" id="l_saveBtn" class="Button">Salva annuncio</button>
-                <button type="reset"  id="l_resetBtn" class="btn-ghost">Pulisci</button>
-              </div>
-
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- List panel -->
-      <div class="panel">
-        <div class="list-head">
-          <h2>Annunci esistenti <span id="l_count"></span></h2>
-          <button id="l_refreshBtn" class="btn-refresh">↻ Aggiorna</button>
-        </div>
-        <div id="listingsContainer" class="rows-list">
-          <div class="loading-state">Caricamento…</div>
-        </div>
-      </div>
-
-    </div><!-- /tab-listings -->
-
-    <!-- ══════════════════════════════════════ -->
-    <!-- TAB: UPDATES                           -->
-    <!-- ══════════════════════════════════════ -->
-    <div id="tab-updates" style="display:none;">
-
-      <!-- Form panel -->
-      <div class="panel">
-        <div class="panel__head">
-          <div class="panel__head-left">
-            <div class="TextStep">Aggiornamenti</div>
-            <h2 id="updateFormTitle">Nuovo <b>aggiornamento</b></h2>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Titolo *</label>
+            <input type="text" id="l_title" required maxlength="200" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
           </div>
-          <button id="updateCancelEdit" class="btn-cancel-edit">Annulla modifica</button>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Categoria</label>
+            <select id="l_category" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+              <option value="macchine">Macchinari</option>
+              <option value="prodotti">Prodotti</option>
+              <option value="materiali">Materiali</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Marca</label>
+            <input type="text" id="l_brand" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Modello</label>
+            <input type="text" id="l_model" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Cilindrata</label>
+            <input type="text" id="l_displacement" placeholder="es. 2500 cc" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Cavalli (HP)</label>
+            <input type="text" id="l_hp" placeholder="es. 85 CV" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Alimentazione</label>
+            <select id="l_fuel" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+              <option value="">—</option>
+              <option value="diesel">Diesel</option>
+              <option value="benzina">Benzina</option>
+              <option value="gpl">GPL</option>
+              <option value="metano">Metano</option>
+              <option value="elettrico">Elettrico</option>
+              <option value="ibrido">Ibrido</option>
+              <option value="altro">Altro</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Ore di utilizzo</label>
+            <input type="text" id="l_usage_hours" placeholder="es. 4200 h" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Condizione</label>
+            <select id="l_condition" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+              <option value="">—</option>
+              <option value="nuovo">Nuovo</option>
+              <option value="ottimo">Ottimo</option>
+              <option value="buono">Buono</option>
+              <option value="discreto">Discreto</option>
+              <option value="da_revisionare">Da revisionare</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Colore</label>
+            <input type="text" id="l_color" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label class="flex items-center gap-2 text-sm bg-dark-bg border border-dark-border rounded-lg px-3 py-2.5 cursor-pointer hover:border-primary transition">
+              <input type="checkbox" id="l_registered" class="accent-primary">
+              <span>Immatricolato</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm bg-dark-bg border border-dark-border rounded-lg px-3 py-2.5 cursor-pointer hover:border-primary transition">
+              <input type="checkbox" id="l_documents" class="accent-primary">
+              <span>Documenti</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm bg-dark-bg border border-dark-border rounded-lg px-3 py-2.5 cursor-pointer hover:border-primary transition">
+              <input type="checkbox" id="l_insured" class="accent-primary">
+              <span>Assicurato</span>
+            </label>
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Immagini (più file — compressione automatica)</label>
+            <input type="file" id="l_images" accept="image/*" multiple class="text-sm text-dark-muted file:mr-3 file:px-3 file:py-2 file:rounded-lg file:border-0 file:bg-primary file:text-white file:font-medium file:cursor-pointer hover:file:bg-primary-dark">
+            <div id="l_imagesPreview" class="mt-3 flex flex-wrap gap-2"></div>
+            <p id="l_uploadStatus" class="text-xs text-dark-muted mt-2"></p>
+          </div>
+
+          <div id="l_formError" class="hidden md:col-span-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"></div>
+
+          <div class="md:col-span-2 flex items-center gap-3 flex-wrap">
+            <button type="submit" id="l_saveBtn" class="px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">Salva annuncio</button>
+            <button type="reset" id="l_resetBtn" class="px-6 py-3 rounded-full border border-dark-border hover:border-primary hover:text-primary transition">Pulisci</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="glass rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <h2 class="font-heading text-xl font-bold">Annunci esistenti <span id="l_count" class="text-dark-muted text-sm font-normal"></span></h2>
+          <button id="l_refreshBtn" class="text-xs px-3 py-1.5 rounded-full border border-dark-border hover:border-primary hover:text-primary transition">↻ Aggiorna</button>
         </div>
-        <div class="panel__body">
-          <form id="updateForm" novalidate>
-            <input type="hidden" id="u_id">
-            <div class="form-grid">
-
-              <div class="field col-full">
-                <label for="u_title">Titolo *</label>
-                <input type="text" id="u_title" required maxlength="200">
-              </div>
-
-              <div class="field col-full">
-                <label for="u_description">Descrizione</label>
-                <textarea id="u_description" rows="4" maxlength="4000"></textarea>
-              </div>
-
-              <div class="field">
-                <label for="u_city">Città</label>
-                <input type="text" id="u_city">
-              </div>
-
-              <div class="field">
-                <label for="u_country">Paese</label>
-                <input type="text" id="u_country">
-              </div>
-
-              <div class="field col-full">
-                <label>Immagini (più file — compressione automatica)</label>
-                <input type="file" id="u_images" accept="image/*" multiple>
-                <div id="u_imagesPreview" class="images-preview"></div>
-                <p id="u_uploadStatus" class="upload-status"></p>
-              </div>
-
-              <div id="u_formError" class="error-box col-full"></div>
-
-              <div class="form-actions col-full">
-                <button type="submit" id="u_saveBtn" class="Button">Salva aggiornamento</button>
-                <button type="reset"  id="u_resetBtn" class="btn-ghost">Pulisci</button>
-              </div>
-
-            </div>
-          </form>
+        <div id="listingsContainer" class="space-y-3">
+          <div class="text-center text-dark-muted py-6 text-sm">Caricamento…</div>
         </div>
-      </div>
+      </section>
+    </div>
 
-      <!-- List panel -->
-      <div class="panel">
-        <div class="list-head">
-          <h2>Aggiornamenti pubblicati <span id="u_count"></span></h2>
-          <button id="u_refreshBtn" class="btn-refresh">↻ Aggiorna</button>
+    <div id="tab-updates" class="hidden space-y-6">
+      <section class="glass rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <div>
+            <div class="text-xs font-medium text-primary tracking-[0.18em] uppercase">Gestione aggiornamenti</div>
+            <h2 id="updateFormTitle" class="font-heading text-2xl font-bold">Nuovo <span class="gradient-text">aggiornamento</span></h2>
+          </div>
+          <button id="updateCancelEdit" class="hidden px-3 py-1.5 text-xs rounded-lg border border-dark-border hover:border-primary hover:text-primary transition">Annulla modifica</button>
         </div>
-        <div id="updatesContainer" class="rows-list">
-          <div class="loading-state">Caricamento…</div>
+
+        <form id="updateForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="hidden" id="u_id">
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Titolo *</label>
+            <input type="text" id="u_title" required maxlength="200" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Descrizione</label>
+            <textarea id="u_description" rows="4" maxlength="4000" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition resize-none"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Città</label>
+            <input type="text" id="u_city" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-dark-muted mb-1">Paese</label>
+            <input type="text" id="u_country" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border focus:border-primary focus:outline-none transition">
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-xs font-medium text-dark-muted mb-1">Immagini (più file — compressione automatica)</label>
+            <input type="file" id="u_images" accept="image/*" multiple class="text-sm text-dark-muted file:mr-3 file:px-3 file:py-2 file:rounded-lg file:border-0 file:bg-primary file:text-white file:font-medium file:cursor-pointer hover:file:bg-primary-dark">
+            <div id="u_imagesPreview" class="mt-3 flex flex-wrap gap-2"></div>
+            <p id="u_uploadStatus" class="text-xs text-dark-muted mt-2"></p>
+          </div>
+
+          <div id="u_formError" class="hidden md:col-span-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"></div>
+
+          <div class="md:col-span-2 flex items-center gap-3 flex-wrap">
+            <button type="submit" id="u_saveBtn" class="px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">Salva aggiornamento</button>
+            <button type="reset" id="u_resetBtn" class="px-6 py-3 rounded-full border border-dark-border hover:border-primary hover:text-primary transition">Pulisci</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="glass rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+          <h2 class="font-heading text-xl font-bold">Aggiornamenti pubblicati <span id="u_count" class="text-dark-muted text-sm font-normal"></span></h2>
+          <button id="u_refreshBtn" class="text-xs px-3 py-1.5 rounded-full border border-dark-border hover:border-primary hover:text-primary transition">↻ Aggiorna</button>
         </div>
-      </div>
+        <div id="updatesContainer" class="space-y-3">
+          <div class="text-center text-dark-muted py-6 text-sm">Caricamento…</div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
 
-    </div><!-- /tab-updates -->
-
-  </div><!-- /adminRoot -->
-</div><!-- /main-content -->
-
-<div id="toast" role="status" aria-live="polite"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-client.js"></script>

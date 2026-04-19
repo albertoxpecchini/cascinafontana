@@ -26,7 +26,7 @@
       : (CAT_LABEL[l.category]
           ? `<em class="badge badge--blue">${esc(CAT_LABEL[l.category]).toUpperCase()}</em>`
           : '');
-    const subj  = encodeURIComponent('Shop | ' + l.title);
+    const subj  = encodeURIComponent('Richiesta disponibilita | ' + l.title);
     const price = l.price ? esc(l.price) : '—';
     const desc  = l.description ? `<p class="product__meta">${esc(l.description)}</p>` : '';
     return `
@@ -39,7 +39,7 @@
           <h3>${esc(l.title)}</h3>
           ${desc}
           <p class="product__price">${price}</p>
-          <a class="Button" href="mailto:pzkko@yahoo.com?subject=${subj}">Richiedi info</a>
+          <a class="Button" href="mailto:pzkko@yahoo.com?subject=${subj}">Richiedi informazioni</a>
         </div>
       </article>
     `;
@@ -51,17 +51,17 @@
 
   function render() {
     const list = currentCat === 'all' ? allListings : allListings.filter(l => l.category === currentCat);
-    if (!list.length) { empty('Nessun annuncio disponibile.'); return; }
+    if (!list.length) { empty('Nessuna disponibilita pubblicata al momento.'); return; }
     grid.innerHTML = list.map(cardHTML).join('');
   }
 
   async function load() {
-    if (!window.sb) { empty('Backend non configurato.'); return; }
+    if (!window.sb) { empty('Archivio non disponibile.'); return; }
     const { data, error } = await window.sb
       .from('listings')
       .select('*')
       .order('created_at', { ascending: false });
-    if (error) { empty('Errore: ' + error.message); return; }
+    if (error) { empty('Errore di caricamento: ' + error.message); return; }
     allListings = data || [];
     render();
   }

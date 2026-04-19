@@ -25,7 +25,7 @@
       ? `<img src="${esc(first)}" alt="${esc(u.title)}" loading="lazy">`
       : `<span>${esc(u.title)}</span>`;
     const countBadge = imgs.length > 1
-      ? `<em class="badge">${imgs.length} foto</em>`
+      ? `<em class="badge">${imgs.length} immagini</em>`
       : '';
     const place = [u.city, u.country].filter(Boolean).join(', ');
     const meta  = [fmtDate(u.created_at), place].filter(Boolean).join(' · ');
@@ -50,7 +50,7 @@
   let allUpdates = [];
 
   function render() {
-    if (!allUpdates.length) { empty('Nessun aggiornamento al momento.'); return; }
+    if (!allUpdates.length) { empty('Nessun aggiornamento pubblicato al momento.'); return; }
     grid.innerHTML = allUpdates.map((u, i) => cardHTML(u, i)).join('');
     grid.querySelectorAll('.update--clickable').forEach(card => {
       card.addEventListener('click', () => {
@@ -61,12 +61,12 @@
   }
 
   async function load() {
-    if (!window.sb) { empty('Backend non configurato.'); return; }
+    if (!window.sb) { empty('Archivio non disponibile.'); return; }
     const { data, error } = await window.sb
       .from('updates')
       .select('*')
       .order('created_at', { ascending: false });
-    if (error) { empty('Errore: ' + error.message); return; }
+    if (error) { empty('Errore di caricamento: ' + error.message); return; }
     allUpdates = data || [];
     render();
   }

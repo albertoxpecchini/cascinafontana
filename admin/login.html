@@ -5,47 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
-<title>Admin · Login · Cascina Fontana</title>
+<title>Console Operativa · Accesso · Cascina Fontana</title>
 <link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
   tailwind.config = {
     darkMode: 'class',
     theme: { extend: {
       colors: {
-        primary: '#6f8b57', 'primary-dark': '#557244',
-        'dark-bg': '#f4f7ef', 'dark-card': '#ffffff',
-        'dark-text': '#2f3b2d', 'dark-muted': '#657060',
-        'dark-border': '#d7dfcd'
+        primary: '#0052ff', 'primary-dark': '#578bfa',
+        'dark-bg': '#ffffff', 'dark-card': '#eef0f3',
+        'dark-text': '#0a0b0d', 'dark-muted': '#5b616e',
+        'dark-border': 'rgba(91, 97, 110, 0.2)'
       },
       fontFamily: {
-        sans: ['DM Sans','system-ui','sans-serif'],
-        heading: ['Space Grotesk','DM Sans','sans-serif']
+        sans: ['Public Sans','system-ui','sans-serif'],
+        heading: ['Manrope','Public Sans','sans-serif']
       }
     } }
   };
 </script>
 <style>
-  body { font-family: 'DM Sans', system-ui, sans-serif; background: #f4f7ef; color: #2f3b2d; }
-  .font-heading { font-family: 'Space Grotesk','DM Sans',sans-serif; letter-spacing: -0.02em; }
+  body { font-family: 'Public Sans', system-ui, sans-serif; background: #ffffff; color: #0a0b0d; }
+  .font-heading { font-family: 'Manrope','Public Sans',sans-serif; letter-spacing: -0.04em; }
   .gradient-text {
-    background: linear-gradient(135deg, #8da776 0%, #6f8b57 45%, #4f6841 100%);
+    background: linear-gradient(135deg, #0052ff 0%, #2f6fff 55%, #578bfa 100%);
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent; color: transparent;
   }
   .glass {
-    background: rgba(255, 255, 255, 0.84);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(111, 139, 87, 0.22);
+    border: 1px solid rgba(91, 97, 110, 0.2);
+    border-radius: 32px;
+    box-shadow: 0 20px 48px rgba(10, 11, 13, 0.06);
   }
   .bg-grid {
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(127, 160, 100, 0.2), transparent),
-      linear-gradient(rgba(127, 160, 100, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(127, 160, 100, 0.05) 1px, transparent 1px);
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 82, 255, 0.12), transparent),
+      linear-gradient(rgba(0, 82, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 82, 255, 0.04) 1px, transparent 1px);
     background-size: 100% 100%, 40px 40px, 40px 40px;
   }
 </style>
@@ -54,16 +56,17 @@
 
 <div class="w-full max-w-md">
   <a href="/" class="flex items-center gap-3 justify-center mb-8 group">
-    <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center font-heading font-bold text-white text-sm">CF</span>
+    <span class="w-10 h-10 rounded-full bg-dark-card border border-dark-border flex items-center justify-center font-heading font-bold text-primary text-sm">CF</span>
     <span class="font-heading font-bold text-lg group-hover:text-primary transition">Cascina Fontana</span>
   </a>
 
   <div class="glass rounded-2xl p-6 sm:p-8">
     <div class="text-center mb-6">
-      <div class="inline-block text-xs font-medium text-primary mb-2 tracking-widest">AREA RISERVATA</div>
+      <div class="inline-block text-xs font-medium text-primary mb-2 tracking-[0.18em] uppercase">Console operativa</div>
       <h1 class="font-heading text-2xl sm:text-3xl font-bold">
-        Accedi all'<span class="gradient-text">admin</span>
+        Accedi alla <span class="gradient-text">console</span>
       </h1>
+      <p class="text-sm text-dark-muted mt-3">Accesso riservato alla gestione annunci e al registro aggiornamenti della cascina.</p>
     </div>
 
     <form id="loginForm" class="space-y-4" novalidate>
@@ -79,7 +82,7 @@
       </div>
       <div id="loginError" class="hidden text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"></div>
       <button type="submit" id="loginBtn"
-        class="w-full px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
+        class="w-full px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
         Accedi
       </button>
     </form>

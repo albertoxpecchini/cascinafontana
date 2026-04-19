@@ -1,20 +1,15 @@
 // Cascina Fontana — Admin dashboard /flashplayer variant (listings + updates)
-// Same logic as /admin/admin.js — Flash/Adobe 2012 UI style, no Tailwind
 (function () {
   const $ = (id) => document.getElementById(id);
-
   const LOGIN_URL = '/flashplayer/admin/login.html';
 
-  // ============================================================
-  // Boot / auth gate
-  // ============================================================
   const bootLoader = $('bootLoader');
   const adminRoot  = $('adminRoot');
 
   function bootFail(msg) {
     bootLoader.innerHTML =
-      `<p style="color:#c0392b;">${msg}</p>` +
-      `<p style="margin-top:10px;"><a href="${LOGIN_URL}" style="color:#1473e6;">Login</a></p>`;
+      `<p class="text-red-400">${msg}</p>` +
+      `<p class="mt-3"><a href="${LOGIN_URL}" class="text-primary underline">Login</a></p>`;
   }
 
   async function boot() {
@@ -25,8 +20,8 @@
       return;
     }
     $('userEmail').textContent = data.session.user.email || '';
-    bootLoader.style.display = 'none';
-    adminRoot.style.display  = '';
+    bootLoader.classList.add('hidden');
+    adminRoot.classList.remove('hidden');
 
     wireGlobal();
     Listings.init();
@@ -37,9 +32,6 @@
     });
   }
 
-  // ============================================================
-  // Utilities
-  // ============================================================
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, c =>
       ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
@@ -57,7 +49,6 @@
     toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
   }
 
-  // Compress file client-side: max 1200px longest side, JPEG quality 0.7
   async function compressImage(file, maxSize = 1200, quality = 0.7) {
     if (!file.type.startsWith('image/')) return file;
     const dataUrl = await new Promise((res, rej) => {
@@ -108,9 +99,10 @@
 
   function renderThumbs(container, urls, onRemove) {
     container.innerHTML = urls.map((u, i) => `
-      <div class="thumb-wrap">
+      <div class="relative group">
         <img src="${esc(u)}" alt="" class="thumb">
-        <button type="button" data-rm="${i}" class="thumb-rm" title="Rimuovi">×</button>
+        <button type="button" data-rm="${i}"
+          class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition">×</button>
       </div>
     `).join('');
     container.querySelectorAll('[data-rm]').forEach(btn => {
@@ -118,16 +110,13 @@
     });
   }
 
-  // ============================================================
-  // Global UI wiring (tabs, logout)
-  // ============================================================
   function wireGlobal() {
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const tab = btn.dataset.tab;
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
-        $('tab-listings').style.display = tab === 'listings' ? '' : 'none';
-        $('tab-updates').style.display  = tab === 'updates'  ? '' : 'none';
+        $('tab-listings').classList.toggle('hidden', tab !== 'listings');
+        $('tab-updates').classList.toggle('hidden',  tab !== 'updates');
       });
     });
 
@@ -137,19 +126,12 @@
     });
   }
 
-  // ============================================================
-  // LISTINGS controller
-  // ============================================================
   const Listings = (() => {
     let editingId = null;
     let currentUrls = [];
 
-    function showErr(msg) {
-      const el = $('l_formError');
-      el.textContent = msg;
-      el.classList.add('visible');
-    }
-    function clearErr() { $('l_formError').classList.remove('visible'); }
+    function showErr(msg) { const el = $('l_formError'); el.textContent = msg; el.classList.remove('hidden'); }
+    function clearErr()   { $('l_formError').classList.add('hidden'); }
 
     function reset() {
       $('listingForm').reset();
@@ -158,8 +140,8 @@
       currentUrls = [];
       $('l_imagesPreview').innerHTML = '';
       $('l_uploadStatus').textContent = '';
-      $('listingFormTitle').innerHTML = 'Nuovo <b>annuncio</b>';
-      $('listingCancelEdit').style.display = 'none';
+      $('listingFormTitle').innerHTML = 'Nuovo <span class="gradient-text">annuncio</span>';
+      $('listingCancelEdit').classList.add('hidden');
       clearErr();
     }
 
@@ -183,8 +165,8 @@
         : (l.image_url ? [l.image_url] : []);
       renderThumbs($('l_imagesPreview'), currentUrls, removeUrl);
       editingId = l.id;
-      $('listingFormTitle').innerHTML = 'Modifica <b>annuncio</b>';
-      $('listingCancelEdit').style.display = '';
+      $('listingFormTitle').innerHTML = 'Modifica <span class="gradient-text">annuncio</span>';
+      $('listingCancelEdit').classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -195,15 +177,12 @@
 
     async function load() {
       const c = $('listingsContainer');
-      c.innerHTML = `<div class="loading-state">Caricamento…</div>`;
+      c.innerHTML = `<div class="text-center text-dark-muted py-6 text-sm">Caricamento…</div>`;
       const { data, error } = await window.sb.from('listings').select('*').order('created_at', { ascending: false });
-      if (error) {
-        c.innerHTML = `<div class="loading-state" style="color:#c0392b;">Errore: ${esc(error.message)}</div>`;
-        return;
-      }
+      if (error) { c.innerHTML = `<div class="text-red-400 py-4 text-sm">Errore: ${esc(error.message)}</div>`; return; }
       $('l_count').textContent = data.length ? `· ${data.length}` : '';
       if (!data.length) {
-        c.innerHTML = `<div class="empty-state">Nessun annuncio.</div>`;
+        c.innerHTML = `<div class="text-dark-muted py-6 text-sm text-center">Nessun annuncio.</div>`;
         return;
       }
       c.innerHTML = data.map(row).join('');
@@ -218,25 +197,25 @@
     function row(l) {
       const firstImg = (l.image_urls && l.image_urls[0]) || l.image_url;
       const thumb = firstImg
-        ? `<img src="${esc(firstImg)}" alt="" class="row-thumb">`
-        : `<div class="row-no-thumb">—</div>`;
+        ? `<img src="${esc(firstImg)}" alt="" class="w-16 h-16 object-cover rounded-lg border border-dark-border flex-shrink-0">`
+        : `<div class="w-16 h-16 rounded-lg bg-primary/10 border border-dark-border flex items-center justify-center text-primary/60 text-xs flex-shrink-0">—</div>`;
       const catLabel = { macchine:'Macchinario', prodotti:'Prodotto', materiali:'Materiale' }[l.category] || l.category || '—';
       const imgCount = (l.image_urls && l.image_urls.length) || (l.image_url ? 1 : 0);
       const meta = [l.brand, l.model].filter(Boolean).join(' ') || '';
       return `
-        <div class="row-item">
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-dark-bg/40 border border-dark-border hover:border-primary/30 transition flex-wrap sm:flex-nowrap">
           ${thumb}
-          <div class="row-info">
-            <div class="row-title">
-              ${esc(l.title)}
-              <span class="row-badge">${esc(catLabel)}</span>
-              ${imgCount ? `<span class="row-badge row-badge--count">${imgCount} foto</span>` : ''}
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="font-heading font-semibold text-dark-text truncate">${esc(l.title)}</h3>
+              <span class="px-2 py-0.5 text-[10px] font-medium bg-primary/10 text-primary rounded-full">${esc(catLabel)}</span>
+              ${imgCount ? `<span class="text-[10px] text-dark-muted">${imgCount} foto</span>` : ''}
             </div>
-            ${meta ? `<div class="row-meta">${esc(meta)}</div>` : ''}
+            <p class="text-xs text-dark-muted mt-0.5">${esc(meta)}</p>
           </div>
-          <div class="row-actions">
-            <button data-edit="${esc(l.id)}" class="btn-edit">Modifica</button>
-            <button data-delete="${esc(l.id)}" data-title="${esc(l.title)}" class="btn-delete">Elimina</button>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button data-edit="${esc(l.id)}" class="px-2.5 py-1.5 text-xs rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition">Modifica</button>
+            <button data-delete="${esc(l.id)}" data-title="${esc(l.title)}" class="px-2.5 py-1.5 text-xs rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition">Elimina</button>
           </div>
         </div>
       `;
@@ -313,11 +292,11 @@
         const combined = [...currentUrls, ...previews];
         const container = $('l_imagesPreview');
         container.innerHTML = combined.map((u, i) => `
-          <div class="thumb-wrap">
-            <img src="${esc(u)}" alt="" class="thumb">
+          <div class="relative group">
+            <img src="${esc(u)}" alt="" class="thumb ${i >= currentUrls.length ? 'ring-2 ring-primary/40' : ''}">
             ${i < currentUrls.length
-              ? `<button type="button" data-rm="${i}" class="thumb-rm" title="Rimuovi">×</button>`
-              : `<span class="thumb-new-badge">NEW</span>`
+              ? `<button type="button" data-rm="${i}" class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition">×</button>`
+              : `<span class="absolute -top-2 -right-2 px-1.5 py-0.5 rounded-full bg-primary text-white text-[9px] font-bold">NEW</span>`
             }
           </div>
         `).join('');
@@ -339,19 +318,12 @@
     return { init };
   })();
 
-  // ============================================================
-  // UPDATES controller
-  // ============================================================
   const Updates = (() => {
     let editingId = null;
     let currentUrls = [];
 
-    function showErr(msg) {
-      const el = $('u_formError');
-      el.textContent = msg;
-      el.classList.add('visible');
-    }
-    function clearErr() { $('u_formError').classList.remove('visible'); }
+    function showErr(msg) { const el = $('u_formError'); el.textContent = msg; el.classList.remove('hidden'); }
+    function clearErr()   { $('u_formError').classList.add('hidden'); }
 
     function reset() {
       $('updateForm').reset();
@@ -360,8 +332,8 @@
       currentUrls = [];
       $('u_imagesPreview').innerHTML = '';
       $('u_uploadStatus').textContent = '';
-      $('updateFormTitle').innerHTML = 'Nuovo <b>aggiornamento</b>';
-      $('updateCancelEdit').style.display = 'none';
+      $('updateFormTitle').innerHTML = 'Nuovo <span class="gradient-text">aggiornamento</span>';
+      $('updateCancelEdit').classList.add('hidden');
       clearErr();
     }
 
@@ -374,8 +346,8 @@
       currentUrls = Array.isArray(u.image_urls) ? [...u.image_urls] : [];
       renderThumbs($('u_imagesPreview'), currentUrls, removeUrl);
       editingId = u.id;
-      $('updateFormTitle').innerHTML = 'Modifica <b>aggiornamento</b>';
-      $('updateCancelEdit').style.display = '';
+      $('updateFormTitle').innerHTML = 'Modifica <span class="gradient-text">aggiornamento</span>';
+      $('updateCancelEdit').classList.remove('hidden');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -386,15 +358,12 @@
 
     async function load() {
       const c = $('updatesContainer');
-      c.innerHTML = `<div class="loading-state">Caricamento…</div>`;
+      c.innerHTML = `<div class="text-center text-dark-muted py-6 text-sm">Caricamento…</div>`;
       const { data, error } = await window.sb.from('updates').select('*').order('created_at', { ascending: false });
-      if (error) {
-        c.innerHTML = `<div class="loading-state" style="color:#c0392b;">Errore: ${esc(error.message)}</div>`;
-        return;
-      }
+      if (error) { c.innerHTML = `<div class="text-red-400 py-4 text-sm">Errore: ${esc(error.message)}</div>`; return; }
       $('u_count').textContent = data.length ? `· ${data.length}` : '';
       if (!data.length) {
-        c.innerHTML = `<div class="empty-state">Nessun aggiornamento.</div>`;
+        c.innerHTML = `<div class="text-dark-muted py-6 text-sm text-center">Nessun aggiornamento.</div>`;
         return;
       }
       c.innerHTML = data.map(row).join('');
@@ -409,24 +378,24 @@
     function row(u) {
       const first = (u.image_urls && u.image_urls[0]);
       const thumb = first
-        ? `<img src="${esc(first)}" alt="" class="row-thumb">`
-        : `<div class="row-no-thumb">—</div>`;
+        ? `<img src="${esc(first)}" alt="" class="w-16 h-16 object-cover rounded-lg border border-dark-border flex-shrink-0">`
+        : `<div class="w-16 h-16 rounded-lg bg-primary/10 border border-dark-border flex items-center justify-center text-primary/60 text-xs flex-shrink-0">—</div>`;
       const place = [u.city, u.country].filter(Boolean).join(', ');
       const imgCount = (u.image_urls && u.image_urls.length) || 0;
       const when = u.created_at ? new Date(u.created_at).toLocaleDateString('it-IT') : '';
       return `
-        <div class="row-item">
+        <div class="flex items-center gap-3 p-3 rounded-xl bg-dark-bg/40 border border-dark-border hover:border-primary/30 transition flex-wrap sm:flex-nowrap">
           ${thumb}
-          <div class="row-info">
-            <div class="row-title">
-              ${esc(u.title)}
-              ${imgCount ? `<span class="row-badge row-badge--count">${imgCount} foto</span>` : ''}
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="font-heading font-semibold text-dark-text truncate">${esc(u.title)}</h3>
+              ${imgCount ? `<span class="text-[10px] text-dark-muted">${imgCount} immagini</span>` : ''}
             </div>
-            <div class="row-meta">${esc(place) || '—'} · ${esc(when)}</div>
+            <p class="text-xs text-dark-muted mt-0.5">${esc(place) || '—'} · ${esc(when)}</p>
           </div>
-          <div class="row-actions">
-            <button data-edit="${esc(u.id)}" class="btn-edit">Modifica</button>
-            <button data-delete="${esc(u.id)}" data-title="${esc(u.title)}" class="btn-delete">Elimina</button>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <button data-edit="${esc(u.id)}" class="px-2.5 py-1.5 text-xs rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition">Modifica</button>
+            <button data-delete="${esc(u.id)}" data-title="${esc(u.title)}" class="px-2.5 py-1.5 text-xs rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition">Elimina</button>
           </div>
         </div>
       `;
@@ -494,11 +463,11 @@
         const combined = [...currentUrls, ...previews];
         const container = $('u_imagesPreview');
         container.innerHTML = combined.map((u, i) => `
-          <div class="thumb-wrap">
-            <img src="${esc(u)}" alt="" class="thumb">
+          <div class="relative group">
+            <img src="${esc(u)}" alt="" class="thumb ${i >= currentUrls.length ? 'ring-2 ring-primary/40' : ''}">
             ${i < currentUrls.length
-              ? `<button type="button" data-rm="${i}" class="thumb-rm" title="Rimuovi">×</button>`
-              : `<span class="thumb-new-badge">NEW</span>`
+              ? `<button type="button" data-rm="${i}" class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red-500 text-white text-xs font-bold opacity-0 group-hover:opacity-100 transition">×</button>`
+              : `<span class="absolute -top-2 -right-2 px-1.5 py-0.5 rounded-full bg-primary text-white text-[9px] font-bold">NEW</span>`
             }
           </div>
         `).join('');

@@ -1,143 +1,90 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" style="color-scheme: light;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
-<title>Admin · Login · Cascina Fontana</title>
+<title>Console Operativa · Accesso · Cascina Fontana</title>
 <link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: { extend: {
+      colors: {
+        primary: '#0052ff', 'primary-dark': '#578bfa',
+        'dark-bg': '#ffffff', 'dark-card': '#eef0f3',
+        'dark-text': '#0a0b0d', 'dark-muted': '#5b616e',
+        'dark-border': 'rgba(91, 97, 110, 0.2)'
+      },
+      fontFamily: {
+        sans: ['Public Sans','system-ui','sans-serif'],
+        heading: ['Manrope','Public Sans','sans-serif']
+      }
+    } }
+  };
+</script>
 <style>
-:root { --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  font-family: var(--sans);
-  font-size: 13px; line-height: 1.5; color: #333;
-  background: #ebebeb;
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-}
-a { color: #1473e6; text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-.login-header {
-  background: linear-gradient(to bottom, #fafafa, #eaeaea);
-  border-bottom: 1px solid #c9c9c9;
-  box-shadow: inset 0 -1px 0 #fff, 0 1px 0 rgba(0,0,0,.03);
-  padding: 14px 24px;
-  display: flex; align-items: center; gap: 12px;
-}
-.logo-mark {
-  width: 32px; height: 32px;
-  background: linear-gradient(135deg, #1473e6, #0d5cb8);
-  border-radius: 3px;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-weight: 700; font-size: 13px;
-}
-.login-header .site-name { font-size: 16px; font-weight: 600; color: #222; }
-
-.login-main {
-  flex: 1;
-  display: flex; align-items: center; justify-content: center;
-  padding: 48px 24px;
-}
-
-.login-card {
-  width: 100%; max-width: 380px;
-  background: #fff;
-  border: 1px solid #d0d0d0;
-  border-radius: 3px;
-  box-shadow: inset 0 1px 0 #fff, 0 2px 8px rgba(0,0,0,.09);
-  overflow: hidden;
-}
-.login-card__head {
-  background: linear-gradient(to bottom, #f7f7f7, #efefef);
-  border-bottom: 1px solid #d5d5d5;
-  padding: 18px 24px;
-}
-.TextStep {
-  display: inline-block;
-  background: #1473e6; color: #fff; font-size: 11px; font-weight: 700;
-  letter-spacing: .08em; text-transform: uppercase;
-  padding: 4px 10px; border-radius: 2px; margin-bottom: 10px;
-}
-.login-card__head h1 { font-size: 20px; color: #222; margin: 0; font-weight: 600; }
-.login-card__body { padding: 24px; }
-
-.field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
-.field label {
-  font-size: 11px; color: #555; text-transform: uppercase;
-  letter-spacing: .08em; font-weight: 600;
-}
-.field input {
-  padding: 9px 12px; font: inherit;
-  border: 1px solid #c0c0c0; border-radius: 3px;
-  background: #fff;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
-}
-.field input:focus {
-  outline: none; border-color: #1473e6;
-  box-shadow: 0 0 0 3px rgba(20,115,230,.2);
-}
-
-.error-box {
-  display: none;
-  background: #fff3f3; border: 1px solid #f5a3a3; border-radius: 3px;
-  padding: 9px 12px; font-size: 13px; color: #c0392b; margin-bottom: 14px;
-}
-.error-box.visible { display: block; }
-
-.Button {
-  display: inline-block; width: 100%; padding: 10px 28px;
-  font-family: var(--sans); font-size: 14px; font-weight: 700;
-  color: #fff; cursor: pointer; border-radius: 3px;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-  border: 1px solid #4f4f4f;
-  background: linear-gradient(to bottom, #888 0%, #5a5a5a 100%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.15);
-  transition: .15s;
-}
-.Button:hover {
-  background: linear-gradient(to bottom, #1473e6 0%, #0d5cb8 100%);
-  border-color: #0a4f9e; color: #fff; text-decoration: none;
-}
-.Button:disabled { opacity: .5; cursor: default; }
-
-.back-link { display: block; text-align: center; margin-top: 18px; font-size: 12px; color: #777; }
+  body { font-family: 'Public Sans', system-ui, sans-serif; background: #ffffff; color: #0a0b0d; }
+  .font-heading { font-family: 'Manrope','Public Sans',sans-serif; letter-spacing: -0.04em; }
+  .gradient-text {
+    background: linear-gradient(135deg, #0052ff 0%, #2f6fff 55%, #578bfa 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(91, 97, 110, 0.2);
+    border-radius: 32px;
+    box-shadow: 0 20px 48px rgba(10, 11, 13, 0.06);
+  }
+  .bg-grid {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 82, 255, 0.12), transparent),
+      linear-gradient(rgba(0, 82, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 82, 255, 0.04) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+  }
 </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center bg-dark-bg text-dark-text bg-grid px-4">
 
-<header class="login-header">
-  <div class="logo-mark">CF</div>
-  <span class="site-name">Cascina Fontana</span>
-</header>
+<div class="w-full max-w-md">
+  <a href="/flashplayer/" class="flex items-center gap-3 justify-center mb-8 group">
+    <span class="w-10 h-10 rounded-full bg-dark-card border border-dark-border flex items-center justify-center font-heading font-bold text-primary text-sm">CF</span>
+    <span class="font-heading font-bold text-lg group-hover:text-primary transition">Cascina Fontana</span>
+  </a>
 
-<main class="login-main">
-  <div>
-    <div class="login-card">
-      <div class="login-card__head">
-        <div class="TextStep">Area Riservata</div>
-        <h1>Accesso amministratore</h1>
-      </div>
-      <div class="login-card__body">
-        <form id="loginForm" novalidate>
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required autocomplete="current-password">
-          </div>
-          <div id="loginError" class="error-box"></div>
-          <button type="submit" id="loginBtn" class="Button">Accedi</button>
-        </form>
-      </div>
+  <div class="glass rounded-2xl p-6 sm:p-8">
+    <div class="text-center mb-6">
+      <div class="inline-block text-xs font-medium text-primary mb-2 tracking-[0.18em] uppercase">Console operativa</div>
+      <h1 class="font-heading text-2xl sm:text-3xl font-bold">Accedi alla <span class="gradient-text">console</span></h1>
+      <p class="text-sm text-dark-muted mt-3">Accesso riservato alla gestione annunci e al registro aggiornamenti della cascina.</p>
     </div>
-    <p class="back-link"><a href="/flashplayer/">← Torna a /flashplayer</a></p>
+
+    <form id="loginForm" class="space-y-4" novalidate>
+      <div>
+        <label for="email" class="block text-xs font-medium text-dark-muted mb-1">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border text-dark-text focus:border-primary focus:outline-none transition">
+      </div>
+      <div>
+        <label for="password" class="block text-xs font-medium text-dark-muted mb-1">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password" class="w-full px-3 py-2.5 rounded-lg bg-dark-bg border border-dark-border text-dark-text focus:border-primary focus:outline-none transition">
+      </div>
+      <div id="loginError" class="hidden text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"></div>
+      <button type="submit" id="loginBtn" class="w-full px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">Accedi</button>
+    </form>
   </div>
-</main>
+
+  <p class="text-center text-xs text-dark-muted mt-6">
+    <a href="/flashplayer/" class="hover:text-primary transition">← Torna alla presentazione</a>
+  </p>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-client.js"></script>
@@ -148,7 +95,7 @@ a:hover { text-decoration: underline; }
 
   function showError(msg) {
     errEl.textContent = msg;
-    errEl.classList.add('visible');
+    errEl.classList.remove('hidden');
   }
 
   (async () => {
@@ -159,7 +106,7 @@ a:hover { text-decoration: underline; }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    errEl.classList.remove('visible');
+    errEl.classList.add('hidden');
     if (!window.sb) { showError('Backend non configurato.'); return; }
     btn.disabled = true;
     btn.textContent = 'Accesso…';
