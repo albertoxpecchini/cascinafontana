@@ -88,6 +88,7 @@
         <a href="#produzione" class="hover:text-primary transition">Produzione</a>
         <a href="#filiera" class="hover:text-primary transition">Filiera</a>
         <a href="#shop" class="hover:text-primary transition">Shop</a>
+        <a href="#aggiornamenti" class="hover:text-primary transition">Aggiornamenti</a>
         <a href="#faq" class="hover:text-primary transition">FAQ</a>
         <a href="#contatti" class="px-4 py-2 rounded-lg bg-primary text-dark-bg font-medium hover:bg-primary-dark transition">Contatti</a>
       </nav>
@@ -101,6 +102,7 @@
       <a href="#produzione" class="block py-2 hover:text-primary">Produzione</a>
       <a href="#filiera" class="block py-2 hover:text-primary">Filiera</a>
       <a href="#shop" class="block py-2 hover:text-primary">Shop</a>
+      <a href="#aggiornamenti" class="block py-2 hover:text-primary">Aggiornamenti</a>
       <a href="#faq" class="block py-2 hover:text-primary">FAQ</a>
       <a href="#contatti" class="block py-2 text-primary font-medium">Contatti</a>
     </nav>
@@ -315,6 +317,23 @@
 
     <div id="shopGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       <div class="col-span-full text-center py-12 text-dark-muted">Caricamento annunci…</div>
+    </div>
+  </div>
+</section>
+
+<!-- AGGIORNAMENTI (news / blog) -->
+<section id="aggiornamenti" class="py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">AGGIORNAMENTI</div>
+      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
+        Dalla <span class="gradient-text">cascina</span>
+      </h2>
+      <p class="text-dark-muted max-w-2xl mx-auto">Novità, lavori in campo, eventi. Piccoli frammenti di vita rurale in tempo reale.</p>
+    </div>
+
+    <div id="updatesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="col-span-full text-center py-12 text-dark-muted">Caricamento aggiornamenti…</div>
     </div>
   </div>
 </section>
@@ -663,10 +682,11 @@
   // Shop filter + render logic handled by js/shop-loader.js (Supabase)
 </script>
 
-<!-- Supabase SDK + shop loader -->
+<!-- Supabase SDK + loaders -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-client.js"></script>
 <script src="/js/shop-loader.js"></script>
+<script src="/js/updates-loader.js"></script>
 
 </body>
 </html>
