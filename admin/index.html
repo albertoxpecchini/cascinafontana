@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it" class="dark" style="color-scheme: dark;">
+<html lang="it" style="color-scheme: light;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
 <title>Admin · Cascina Fontana</title>
 <link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
@@ -16,10 +16,10 @@
     darkMode: 'class',
     theme: { extend: {
       colors: {
-        primary: '#c7a763', 'primary-dark': '#a8894a',
-        'dark-bg': '#0d0d0b', 'dark-card': '#17170f',
-        'dark-text': '#f4f1e6', 'dark-muted': '#8a867a',
-        'dark-border': '#2a2920'
+        primary: '#6f8b57', 'primary-dark': '#557244',
+        'dark-bg': '#f4f7ef', 'dark-card': '#ffffff',
+        'dark-text': '#2f3b2d', 'dark-muted': '#657060',
+        'dark-border': '#d7dfcd'
       },
       fontFamily: {
         sans: ['DM Sans','system-ui','sans-serif'],
@@ -29,28 +29,28 @@
   };
 </script>
 <style>
-  body { font-family: 'DM Sans', system-ui, sans-serif; background: #0d0d0b; color: #f4f1e6; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; background: #f4f7ef; color: #2f3b2d; }
   .font-heading { font-family: 'Space Grotesk','DM Sans',sans-serif; letter-spacing: -0.02em; }
   .gradient-text {
-    background: linear-gradient(135deg, #e8c97a 0%, #c7a763 40%, #9ab574 100%);
+    background: linear-gradient(135deg, #8da776 0%, #6f8b57 45%, #4f6841 100%);
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent; color: transparent;
   }
   .glass {
-    background: rgba(23, 23, 15, 0.65);
+    background: rgba(255, 255, 255, 0.82);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(199, 167, 99, 0.12);
+    border: 1px solid rgba(111, 139, 87, 0.22);
   }
-  input, select, textarea { color-scheme: dark; }
+  input, select, textarea { color-scheme: light; }
   .tab-btn { transition: all .2s; }
-  .tab-btn.active { background: rgba(199, 167, 99, 0.12); color: #c7a763; border-color: rgba(199, 167, 99, 0.4); }
-  .thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #2a2920; }
+  .tab-btn.active { background: rgba(111, 139, 87, 0.14); color: #557244; border-color: rgba(111, 139, 87, 0.38); }
+  .thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #d7dfcd; }
   .toast {
     position: fixed; bottom: 24px; right: 24px; z-index: 100;
     padding: 12px 18px; border-radius: 12px;
-    background: rgba(23, 23, 15, 0.95); backdrop-filter: blur(12px);
-    border: 1px solid rgba(199, 167, 99, 0.3);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px);
+    border: 1px solid rgba(111, 139, 87, 0.3);
+    box-shadow: 0 8px 32px rgba(47,59,45,0.14);
     opacity: 0; transform: translateY(8px); transition: all .3s ease;
     max-width: 360px;
   }
@@ -62,10 +62,10 @@
 <body class="min-h-screen bg-dark-bg text-dark-text">
 
 <!-- Top bar -->
-<header class="sticky top-0 z-40 bg-dark-bg/90 backdrop-blur border-b border-dark-border">
+<header class="sticky top-0 z-40 bg-dark-bg/90 backdrop-blur border-b border-dark-border shadow-sm shadow-primary/5">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap gap-3">
     <a href="/" class="flex items-center gap-2 group">
-      <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center font-heading font-bold text-dark-bg text-xs">CF</span>
+      <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center font-heading font-bold text-white text-xs">CF</span>
       <span class="font-heading font-bold text-sm group-hover:text-primary transition">Admin · Cascina Fontana</span>
     </a>
     <div class="flex items-center gap-3 text-xs">
@@ -207,7 +207,7 @@
 
           <div class="md:col-span-2 flex items-center gap-3 flex-wrap">
             <button type="submit" id="l_saveBtn"
-              class="px-6 py-3 rounded-xl bg-primary text-dark-bg font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
+              class="px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
               Salva annuncio
             </button>
             <button type="reset" id="l_resetBtn"
@@ -282,7 +282,7 @@
 
           <div class="md:col-span-2 flex items-center gap-3 flex-wrap">
             <button type="submit" id="u_saveBtn"
-              class="px-6 py-3 rounded-xl bg-primary text-dark-bg font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
+              class="px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
               Salva aggiornamento
             </button>
             <button type="reset" id="u_resetBtn"

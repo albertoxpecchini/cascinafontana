@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it" class="dark" style="color-scheme: dark;">
+<html lang="it" style="color-scheme: light;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
 <meta name="description" content="Cascina Fontana — azienda agricola a Rodigo (MN). 63 biolche di prato stabile, fornitore della filiera Grana Padano DOP.">
 <title>Cascina Fontana · Società Agricola · Rodigo (MN)</title>
 <link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
@@ -18,18 +18,18 @@
     theme: {
       extend: {
         colors: {
-          primary: '#c7a763',
-          'primary-dark': '#a8894a',
-          'light-bg': '#f5f3ef',
+          primary: '#6f8b57',
+          'primary-dark': '#557244',
+          'light-bg': '#f4f7ef',
           'light-card': '#ffffff',
-          'light-text': '#1a1a17',
-          'light-muted': '#5c5a54',
-          'light-border': '#e6e2d8',
-          'dark-bg': '#0d0d0b',
-          'dark-card': '#17170f',
-          'dark-text': '#f4f1e6',
-          'dark-muted': '#8a867a',
-          'dark-border': '#2a2920'
+          'light-text': '#2f3b2d',
+          'light-muted': '#657060',
+          'light-border': '#d7dfcd',
+          'dark-bg': '#f4f7ef',
+          'dark-card': '#ffffff',
+          'dark-text': '#2f3b2d',
+          'dark-muted': '#657060',
+          'dark-border': '#d7dfcd'
         },
         fontFamily: {
           sans: ['DM Sans', 'system-ui', 'sans-serif'],
@@ -40,28 +40,28 @@
   }
 </script>
 <style>
-  body { font-family: 'DM Sans', system-ui, sans-serif; background: #0d0d0b; color: #f4f1e6; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; background: #f4f7ef; color: #2f3b2d; }
   .font-heading { font-family: 'Space Grotesk', 'DM Sans', sans-serif; letter-spacing: -0.02em; }
   .gradient-text {
-    background: linear-gradient(135deg, #e8c97a 0%, #c7a763 40%, #9ab574 100%);
+    background: linear-gradient(135deg, #8da776 0%, #6f8b57 45%, #4f6841 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
   .glass {
-    background: rgba(23, 23, 15, 0.65);
+    background: rgba(255, 255, 255, 0.76);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(199, 167, 99, 0.12);
+    border: 1px solid rgba(111, 139, 87, 0.22);
   }
-  .glass:hover { border-color: rgba(199, 167, 99, 0.28); }
+  .glass:hover { border-color: rgba(111, 139, 87, 0.42); }
   .bg-grid {
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(199, 167, 99, 0.18), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 30%, rgba(154, 181, 116, 0.12), transparent),
-      linear-gradient(rgba(199, 167, 99, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(199, 167, 99, 0.04) 1px, transparent 1px);
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(127, 160, 100, 0.2), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 30%, rgba(191, 208, 171, 0.25), transparent),
+      linear-gradient(rgba(127, 160, 100, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(127, 160, 100, 0.05) 1px, transparent 1px);
     background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
   }
   details[open] summary svg { transform: rotate(180deg); }
@@ -69,8 +69,8 @@
   summary::-webkit-details-marker { display: none; }
   .hidden-cat { display: none !important; }
   html { scroll-behavior: smooth; }
-  .nav-scrolled { background: rgba(13, 13, 11, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(199, 167, 99, 0.12); }
-  input, select, textarea { color-scheme: dark; }
+  .nav-scrolled { background: rgba(244, 247, 239, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(111, 139, 87, 0.18); }
+  input, select, textarea { color-scheme: light; }
 </style>
 </head>
 <body class="font-sans antialiased bg-dark-bg text-dark-text">
@@ -90,14 +90,14 @@
         <a href="#shop" class="hover:text-primary transition">Shop</a>
         <a href="#aggiornamenti" class="hover:text-primary transition">Aggiornamenti</a>
         <a href="#faq" class="hover:text-primary transition">FAQ</a>
-        <a href="#contatti" class="px-4 py-2 rounded-lg bg-primary text-dark-bg font-medium hover:bg-primary-dark transition">Contatti</a>
+        <a href="#contatti" class="px-4 py-2 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition">Contatti</a>
       </nav>
       <button id="burger" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5" aria-label="Menu">
         <span class="block w-5 h-0.5 bg-dark-text transition"></span>
         <span class="block w-5 h-0.5 bg-dark-text transition"></span>
       </button>
     </div>
-    <nav id="mobileNav" class="hidden md:hidden pb-4 flex-col gap-3 text-sm text-dark-muted">
+    <nav id="mobileNav" class="hidden md:hidden pb-4 flex-col gap-3 text-sm text-dark-muted bg-light-card/80 rounded-xl px-3">
       <a href="#attivita" class="block py-2 hover:text-primary">Attività</a>
       <a href="#produzione" class="block py-2 hover:text-primary">Produzione</a>
       <a href="#filiera" class="block py-2 hover:text-primary">Filiera</a>
@@ -115,14 +115,14 @@
     <div class="max-w-4xl mx-auto text-center">
       <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-6">
         <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-        Rodigo · Mantova · dal 2007
+        Fondata nel 2007, a Rodigo (MN)
       </div>
       <h1 class="font-heading font-bold text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-dark-text mb-6 leading-[1.05]">
-        <span class="block">Agricoltura</span>
-        <span class="gradient-text">di Precisione.</span>
+        <span class="block">Società Agricola</span>
+        <span class="gradient-text">Cascina Fontana</span>
       </h1>
       <p class="text-base sm:text-lg md:text-xl text-dark-muted max-w-2xl mx-auto mb-8 leading-relaxed">
-        Società Agricola a Rodigo (MN). 63 biolche di prato stabile dedicate alla filiera Grana Padano DOP. Un sistema che mantiene costanza nel tempo.
+        63 biolche di prato stabile al servizio della filiera Grana Padano DOP, con un impegno costante per qualità e continuità.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
         <span class="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20">Grana Padano DOP</span>
@@ -132,7 +132,7 @@
         <span class="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20">Pianura Padana</span>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3">
-        <a href="#shop" class="px-6 py-3 rounded-xl bg-primary text-dark-bg font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">Vedi lo Shop</a>
+        <a href="#shop" class="px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">Vedi lo Shop</a>
         <a href="#contatti" class="px-6 py-3 rounded-xl glass text-dark-text font-semibold hover:bg-primary/10 transition-all">Contattaci →</a>
       </div>
     </div>

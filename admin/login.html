@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it" class="dark" style="color-scheme: dark;">
+<html lang="it" style="color-scheme: light;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="light">
 <meta name="robots" content="noindex, nofollow">
 <title>Admin · Login · Cascina Fontana</title>
 <link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
@@ -16,10 +16,10 @@
     darkMode: 'class',
     theme: { extend: {
       colors: {
-        primary: '#c7a763', 'primary-dark': '#a8894a',
-        'dark-bg': '#0d0d0b', 'dark-card': '#17170f',
-        'dark-text': '#f4f1e6', 'dark-muted': '#8a867a',
-        'dark-border': '#2a2920'
+        primary: '#6f8b57', 'primary-dark': '#557244',
+        'dark-bg': '#f4f7ef', 'dark-card': '#ffffff',
+        'dark-text': '#2f3b2d', 'dark-muted': '#657060',
+        'dark-border': '#d7dfcd'
       },
       fontFamily: {
         sans: ['DM Sans','system-ui','sans-serif'],
@@ -29,23 +29,23 @@
   };
 </script>
 <style>
-  body { font-family: 'DM Sans', system-ui, sans-serif; background: #0d0d0b; color: #f4f1e6; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; background: #f4f7ef; color: #2f3b2d; }
   .font-heading { font-family: 'Space Grotesk','DM Sans',sans-serif; letter-spacing: -0.02em; }
   .gradient-text {
-    background: linear-gradient(135deg, #e8c97a 0%, #c7a763 40%, #9ab574 100%);
+    background: linear-gradient(135deg, #8da776 0%, #6f8b57 45%, #4f6841 100%);
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent; color: transparent;
   }
   .glass {
-    background: rgba(23, 23, 15, 0.65);
+    background: rgba(255, 255, 255, 0.84);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(199, 167, 99, 0.12);
+    border: 1px solid rgba(111, 139, 87, 0.22);
   }
   .bg-grid {
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(199, 167, 99, 0.18), transparent),
-      linear-gradient(rgba(199, 167, 99, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(199, 167, 99, 0.04) 1px, transparent 1px);
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(127, 160, 100, 0.2), transparent),
+      linear-gradient(rgba(127, 160, 100, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(127, 160, 100, 0.05) 1px, transparent 1px);
     background-size: 100% 100%, 40px 40px, 40px 40px;
   }
 </style>
@@ -54,7 +54,7 @@
 
 <div class="w-full max-w-md">
   <a href="/" class="flex items-center gap-3 justify-center mb-8 group">
-    <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center font-heading font-bold text-dark-bg text-sm">CF</span>
+    <span class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center font-heading font-bold text-white text-sm">CF</span>
     <span class="font-heading font-bold text-lg group-hover:text-primary transition">Cascina Fontana</span>
   </a>
 
@@ -79,7 +79,7 @@
       </div>
       <div id="loginError" class="hidden text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"></div>
       <button type="submit" id="loginBtn"
-        class="w-full px-6 py-3 rounded-xl bg-primary text-dark-bg font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
+        class="w-full px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 disabled:opacity-50">
         Accedi
       </button>
     </form>
