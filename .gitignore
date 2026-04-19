@@ -2,3 +2,12 @@
 .vercel
 .env
 .env*.local
+
+# Node
+node_modules/
+package-lock.json
+
+# Supabase CLI local state
+supabase/.branches
+supabase/.temp
+supabase/.env

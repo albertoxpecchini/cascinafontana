@@ -1,0 +1,25 @@
+{
+  "name": "cascinafontana",
+  "version": "1.0.0",
+  "description": "> Sito ufficiale — Società Agricola Cascina Fontana S.S., Rodigo (MN)",
+  "main": "main.js",
+  "scripts": {
+    "db:apply": "node scripts/apply-schema.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertoxpecchini/cascinafontana.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/albertoxpecchini/cascinafontana/issues"
+  },
+  "homepage": "https://github.com/albertoxpecchini/cascinafontana#readme",
+  "devDependencies": {
+    "pg": "^8.20.0"
+  }
+}
