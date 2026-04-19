@@ -8,9 +8,9 @@ Questo file e` allineato ai commit versionati presenti nella history Git: cosa e
 ---
 
 ## In sviluppo
-- Ripristinata la galleria foto nella home principale e in `/flashplayer`.
-- Le due pagine ora leggono la stessa lista immagini condivisa da `js/gallery-data.js`.
-- Documentato il flusso per aggiungere nuove foto in `public/images/` e pubblicarle nelle gallerie.
+- Ripristinata la galleria foto nella home principale.
+- Le foto vengono lette dalla lista condivisa in `js/gallery-data.js`.
+- Documentato il flusso per aggiungere nuove foto in `public/images/` e pubblicarle in galleria.
 
 ## 2026.04.18.23
 - Integrato loader aggiornamenti live nella root:

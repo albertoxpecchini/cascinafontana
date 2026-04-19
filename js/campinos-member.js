@@ -63,7 +63,7 @@ async function guardCampinosMember(containerEl, opts) {
 
   // --- Loading state ---
   containerEl.innerHTML =
-    '<div style="text-align:center;padding:2rem;color:#657060;font-size:14px;">' +
+    '<div style="text-align:center;padding:2rem;color:#5b616e;font-size:14px;">' +
       '<div style="margin-bottom:8px;">⏳</div>Verifica membership…' +
     '</div>';
 
@@ -113,18 +113,18 @@ function _esc(s) {
 }
 
 function _guardBox(title, msg, type, loginUrl) {
-  var colors = { error: '#c0392b', warn: '#e67e22', blocked: '#7f8c8d' };
+  var colors = { error: '#0a0b0d', warn: '#0a0b0d', blocked: '#5b616e' };
   var icons  = { error: '⚠️', warn: '🔒', blocked: '🚫' };
-  var c = colors[type] || '#333';
+  var c = colors[type] || '#0a0b0d';
   var html =
     '<div style="max-width:420px;margin:3rem auto;text-align:center;padding:2rem;' +
-      'border:1px solid ' + c + '33;border-radius:12px;background:#fff;">' +
+      'border:1px solid ' + c + '33;border-radius:12px;background:#ffffff;">' +
       '<div style="font-size:2rem;margin-bottom:8px;">' + (icons[type] || '') + '</div>' +
       '<h3 style="margin:0 0 8px;font-size:18px;color:' + c + ';">' + _esc(title) + '</h3>' +
-      '<p style="margin:0;font-size:14px;color:#555;">' + _esc(msg) + '</p>';
+      '<p style="margin:0;font-size:14px;color:#5b616e;">' + _esc(msg) + '</p>';
   if (loginUrl) {
     html += '<p style="margin-top:16px;"><a href="' + _esc(loginUrl) +
-            '" style="color:#1473e6;font-size:13px;">Vai al login →</a></p>';
+            '" style="color:#0667d0;font-size:13px;">Vai al login →</a></p>';
   }
   html += '</div>';
   return html;

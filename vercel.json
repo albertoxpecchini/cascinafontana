@@ -5,7 +5,6 @@
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
     { "source": "/home", "destination": "/index.html" },
-    { "source": "/flashplayer", "destination": "/flashplayer/index.html" },
     { "source": "/admin", "destination": "/admin/index.html" },
     { "source": "/admin/login", "destination": "/admin/login.html" },
     { "source": "/(.*)", "destination": "/$1" }

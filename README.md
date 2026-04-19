@@ -3,7 +3,6 @@
 > Sito ufficiale — Società Agricola Cascina Fontana S.S., Rodigo (MN)
 
 - Home: https://cascinafontana.xyz
-- Flash mode: https://cascinafontana.xyz/flashplayer
 
 Versioning: `AAAA.MM.GG.NN` (data + numero del giorno, zero-padded). Attuale: vedi [`VERSION`](./VERSION).
 
@@ -49,8 +48,6 @@ chmod +x .githooks/commit-msg
 - Vanilla JS (navigazione, reveal, mailer client-side, mappa)
 - Nessuna dipendenza runtime lato sorgente
 - CDN esterne caricate dal browser:
-  - Leaflet 1.9.4 (solo `/flashplayer`, mappa)
-  - OpenStreetMap tile server (mappa)
   - FormSubmit AJAX (invio form)
 
 ## Font
@@ -72,36 +69,26 @@ Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif
 
 ```
 cascinafontana/
-├── index.html            # splash minimale + CTA a /flashplayer (CSS inline, zero asset esterni)
-├── style.css             # [dormiente] vecchi stili root, non referenziato da index.html
-├── main.js               # [dormiente] vecchio JS root, non referenziato da index.html
+├── index.html            # homepage Coinbase-inspired, singlepage
 ├── vercel.json           # rewrites
-├── public/images/        # favicon + immagini usate dalle gallerie condivise
-└── flashplayer/
-    ├── index.html        # singlepage con tutti i contenuti
-    ├── style.css
-    └── logo.svg
+├── admin/
+│   ├── index.html        # admin dashboard
+│   ├── login.html        # admin login
+│   └── admin.js          # admin logic
+├── js/                   # loader e helper scripts
+├── public/images/        # favicon + immagini galleria
+└── supabase/             # migration e config
 ```
-
-> Nota: `style.css` e `main.js` in root sono conservati ma **non più referenziati** dalla nuova home. Tutto il contenuto esteso vive in `/flashplayer`.
 
 ## Home root (`/`)
 
-Schermata iniziale minimale in stile landing:
-- Sfondo scuro con gradient-blob animati e grain SVG
-- Card in vetro (backdrop-filter) con titolo, sottotitolo e unico CTA → `/flashplayer`
-- CSS tutto inline in `<head>`, nessun file o font esterno caricato
+Homepage Coinbase-inspired con sezioni: attività, galleria, shop, aggiornamenti, Campino's e contatti.
 
-## Sezioni `/flashplayer`
+## Galleria foto
 
-Topnav · Storia · Certificazioni · Galleria · Shop · Testimonial · Orari & Mappa · FAQ · Newsletter · Preventivo · Downloads · Footer
-
-## Galleria foto condivisa
-
-- Le gallerie di `/` e `/flashplayer` usano la stessa lista immagini lato client.
 - File sorgente immagini: `public/images/`.
 - File dati galleria: `js/gallery-data.js`.
-- Renderer condiviso: `js/gallery-loader.js`.
+- Renderer: `js/gallery-loader.js`.
 - Workflow: si copiano le nuove foto in `public/images/`, poi si aggiorna `js/gallery-data.js` per decidere quali immagini pubblicare e in che ordine.
 - Nota: `public/images/` puo` contenere anche file tecnici (per esempio favicon). La presenza nella cartella non implica pubblicazione automatica in galleria.
 
@@ -110,14 +97,12 @@ Topnav · Storia · Certificazioni · Galleria · Shop · Testimonial · Orari &
 ## Mappa
 
 - Coordinate: `45.178311, 10.660775` (Via Belvedere 1, 46040 Rodigo MN)
-- `/flashplayer`: Leaflet + OSM tiles, marker con popup indirizzo
-- Root: nessuna mappa (splash minimale)
 
 ---
 
 ## Form — CFMailer
 
-Modulo client-side in `flashplayer/index.html`. Applicato a:
+Modulo client-side in `index.html`. Applicato a:
 
 - Newsletter (`#nl-form`)
 - Preventivo (`#q-form`)
@@ -146,7 +131,9 @@ Attivazione una tantum: la prima richiesta a `formsubmit.co/ajax/<email>` invia 
 {
   "rewrites": [
     { "source": "/",             "destination": "/index.html" },
-    { "source": "/flashplayer",  "destination": "/flashplayer/index.html" },
+    { "source": "/home",          "destination": "/index.html" },
+    { "source": "/admin",         "destination": "/admin/index.html" },
+    { "source": "/admin/login",   "destination": "/admin/login.html" },
     { "source": "/(.*)",         "destination": "/$1" }
   ]
 }

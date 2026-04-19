@@ -48,35 +48,5 @@
     }
   }
 
-  function renderFlashGallery() {
-    var grid = document.getElementById('galleryGridFp');
-    var counter = document.getElementById('galleryCountFp');
-
-    if (!grid) {
-      return;
-    }
-
-    grid.innerHTML = items.map(function (item, index) {
-      var url = imageUrl(item.file);
-      var featuredClass = item.featured ? ' gal__item--lg' : '';
-
-      return '' +
-        '<figure class="gal__item' + featuredClass + '">' +
-          '<a class="gal__button" href="' + url + '" target="_blank" rel="noopener">' +
-            '<img class="gal__img" src="' + url + '" alt="' + escapeHtml(item.alt) + '" loading="lazy">' +
-          '</a>' +
-          '<figcaption>' +
-            '<strong>Foto ' + String(index + 1).padStart(2, '0') + ' · ' + escapeHtml(item.title) + '</strong>' +
-            '<span>' + escapeHtml(item.caption) + '</span>' +
-          '</figcaption>' +
-        '</figure>';
-    }).join('');
-
-    if (counter) {
-      counter.textContent = items.length + ' foto caricate';
-    }
-  }
-
   renderRootGallery();
-  renderFlashGallery();
 })();
