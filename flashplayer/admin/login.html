@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · Login · Cascina Fontana</title>
+<link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
+<style>
+:root { --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  font-size: 13px; line-height: 1.5; color: #333;
+  background: #ebebeb;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+a { color: #1473e6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.login-header {
+  background: linear-gradient(to bottom, #fafafa, #eaeaea);
+  border-bottom: 1px solid #c9c9c9;
+  box-shadow: inset 0 -1px 0 #fff, 0 1px 0 rgba(0,0,0,.03);
+  padding: 14px 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.logo-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #1473e6, #0d5cb8);
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 13px;
+}
+.login-header .site-name { font-size: 16px; font-weight: 600; color: #222; }
+
+.login-main {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 48px 24px;
+}
+
+.login-card {
+  width: 100%; max-width: 380px;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 #fff, 0 2px 8px rgba(0,0,0,.09);
+  overflow: hidden;
+}
+.login-card__head {
+  background: linear-gradient(to bottom, #f7f7f7, #efefef);
+  border-bottom: 1px solid #d5d5d5;
+  padding: 18px 24px;
+}
+.TextStep {
+  display: inline-block;
+  background: #1473e6; color: #fff; font-size: 11px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px; margin-bottom: 10px;
+}
+.login-card__head h1 { font-size: 20px; color: #222; margin: 0; font-weight: 600; }
+.login-card__body { padding: 24px; }
+
+.field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+.field label {
+  font-size: 11px; color: #555; text-transform: uppercase;
+  letter-spacing: .08em; font-weight: 600;
+}
+.field input {
+  padding: 9px 12px; font: inherit;
+  border: 1px solid #c0c0c0; border-radius: 3px;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
+}
+.field input:focus {
+  outline: none; border-color: #1473e6;
+  box-shadow: 0 0 0 3px rgba(20,115,230,.2);
+}
+
+.error-box {
+  display: none;
+  background: #fff3f3; border: 1px solid #f5a3a3; border-radius: 3px;
+  padding: 9px 12px; font-size: 13px; color: #c0392b; margin-bottom: 14px;
+}
+.error-box.visible { display: block; }
+
+.Button {
+  display: inline-block; width: 100%; padding: 10px 28px;
+  font-family: var(--sans); font-size: 14px; font-weight: 700;
+  color: #fff; cursor: pointer; border-radius: 3px;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  border: 1px solid #4f4f4f;
+  background: linear-gradient(to bottom, #888 0%, #5a5a5a 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.15);
+  transition: .15s;
+}
+.Button:hover {
+  background: linear-gradient(to bottom, #1473e6 0%, #0d5cb8 100%);
+  border-color: #0a4f9e; color: #fff; text-decoration: none;
+}
+.Button:disabled { opacity: .5; cursor: default; }
+
+.back-link { display: block; text-align: center; margin-top: 18px; font-size: 12px; color: #777; }
+</style>
+</head>
+<body>
+
+<header class="login-header">
+  <div class="logo-mark">CF</div>
+  <span class="site-name">Cascina Fontana</span>
+</header>
+
+<main class="login-main">
+  <div>
+    <div class="login-card">
+      <div class="login-card__head">
+        <div class="TextStep">Area Riservata</div>
+        <h1>Accesso amministratore</h1>
+      </div>
+      <div class="login-card__body">
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required autocomplete="current-password">
+          </div>
+          <div id="loginError" class="error-box"></div>
+          <button type="submit" id="loginBtn" class="Button">Accedi</button>
+        </form>
+      </div>
+    </div>
+    <p class="back-link"><a href="/flashplayer/">← Torna a /flashplayer</a></p>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/js/supabase-client.js"></script>
+<script>
+  const form  = document.getElementById('loginForm');
+  const errEl = document.getElementById('loginError');
+  const btn   = document.getElementById('loginBtn');
+
+  function showError(msg) {
+    errEl.textContent = msg;
+    errEl.classList.add('visible');
+  }
+
+  (async () => {
+    if (!window.sb) { showError('Backend non configurato. Vedi js/supabase-client.js'); return; }
+    const { data } = await window.sb.auth.getSession();
+    if (data.session) window.location.href = '/flashplayer/admin/';
+  })();
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errEl.classList.remove('visible');
+    if (!window.sb) { showError('Backend non configurato.'); return; }
+    btn.disabled = true;
+    btn.textContent = 'Accesso…';
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const { error } = await window.sb.auth.signInWithPassword({ email, password });
+    if (error) {
+      showError(error.message);
+      btn.disabled = false;
+      btn.textContent = 'Accedi';
+      return;
+    }
+    window.location.href = '/flashplayer/admin/';
+  });
+</script>
+
+</body>
+</html>

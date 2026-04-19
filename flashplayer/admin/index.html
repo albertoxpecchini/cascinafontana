@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · Cascina Fontana</title>
+<link rel="icon" type="image/jpeg" sizes="128x128" href="/public/images/flash_128.jpg">
+<style>
+:root { --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  font-size: 13px; line-height: 1.5; color: #333;
+  background: #f0f0f0; min-height: 100vh;
+}
+img { display: block; max-width: 100%; }
+a { color: #1473e6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+h2, h3 { margin: 0; font-family: var(--sans); font-weight: 600; color: #222; }
+h2 { font-size: 22px; }
+h3 { font-size: 15px; }
+p { margin: 0; }
+
+/* ── HEADER ── */
+.site-header {
+  background: linear-gradient(to bottom, #fafafa, #eaeaea);
+  border-bottom: 1px solid #c9c9c9;
+  box-shadow: inset 0 -1px 0 #fff, 0 1px 0 rgba(0,0,0,.03);
+  position: sticky; top: 0; z-index: 40;
+}
+.header-inner {
+  max-width: 980px; margin: 0 auto; padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+.header-brand { display: flex; align-items: center; gap: 10px; color: #222; text-decoration: none; }
+.header-brand:hover { text-decoration: none; }
+.logo-mark {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #1473e6, #0d5cb8);
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 12px;
+}
+.header-brand span { font-size: 15px; font-weight: 600; color: #222; }
+.header-right { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+#userEmail { color: #777; }
+.btn-secondary {
+  display: inline-block; padding: 6px 14px;
+  font-family: var(--sans); font-size: 12px; font-weight: 600;
+  color: #444; cursor: pointer; border-radius: 3px;
+  border: 1px solid #c0c0c0;
+  background: linear-gradient(to bottom, #fff, #ececec);
+  box-shadow: inset 0 1px 0 #fff;
+  transition: .15s;
+}
+.btn-secondary:hover {
+  background: linear-gradient(to bottom, #1473e6, #0d5cb8);
+  border-color: #0a4f9e; color: #fff;
+}
+
+/* ── MAIN ── */
+.main-content { max-width: 980px; margin: 0 auto; padding: 24px; }
+
+/* ── BOOT ── */
+#bootLoader { text-align: center; color: #777; padding: 80px 0; font-size: 14px; }
+
+/* ── TABS ── */
+.tabs-bar {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  padding: 10px; background: #f5f5f5;
+  border: 1px solid #d0d0d0; border-radius: 3px;
+  margin-bottom: 20px;
+  box-shadow: inset 0 1px 0 #fff;
+}
+.tab-btn {
+  cursor: pointer; border: 1px solid #c0c0c0;
+  background: linear-gradient(to bottom, #fff, #ececec);
+  padding: 7px 18px; font-size: 13px; color: #444; font-family: inherit;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 #fff;
+  transition: .15s;
+}
+.tab-btn:hover { background: linear-gradient(to bottom, #fdfdfd, #e4e4e4); }
+.tab-btn.active {
+  background: linear-gradient(to bottom, #1473e6, #0d5cb8);
+  color: #fff; border-color: #0a4f9e;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2);
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
+/* ── PANEL ── */
+.panel {
+  background: #fdfdfd; border: 1px solid #d0d0d0; border-radius: 3px;
+  box-shadow: inset 0 1px 0 #fff, 0 2px 4px rgba(0,0,0,.04);
+  margin-bottom: 20px; overflow: hidden;
+}
+.panel__head {
+  background: linear-gradient(to bottom, #f7f7f7, #f0f0f0);
+  border-bottom: 1px solid #d5d5d5;
+  padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.panel__head-left .TextStep {
+  display: inline-block;
+  background: #1473e6; color: #fff; font-size: 10px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 2px; margin-bottom: 6px;
+}
+.panel__head h2 { font-size: 20px; }
+.panel__head h2 b { color: #1473e6; font-weight: 700; }
+.panel__body { padding: 24px; }
+
+/* ── FORM ── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.col-full { grid-column: 1 / -1; }
+.col-3 { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label {
+  font-size: 11px; color: #555; text-transform: uppercase;
+  letter-spacing: .08em; font-weight: 600;
+}
+.field input, .field select, .field textarea {
+  padding: 9px 12px; font: inherit;
+  border: 1px solid #c0c0c0; border-radius: 3px;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: #1473e6;
+  box-shadow: 0 0 0 3px rgba(20,115,230,.2);
+}
+.field textarea { resize: vertical; }
+
+.checkbox-label {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 12px; border: 1px solid #c0c0c0; border-radius: 3px;
+  background: #fff; cursor: pointer;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+  font-size: 13px; color: #444;
+}
+.checkbox-label:hover { border-color: #1473e6; }
+.checkbox-label input[type=checkbox] { accent-color: #1473e6; }
+
+.upload-status { font-size: 11px; color: #777; margin-top: 6px; }
+.images-preview { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.thumb {
+  width: 80px; height: 80px; object-fit: cover;
+  border-radius: 3px; border: 1px solid #d0d0d0;
+  display: block;
+}
+.thumb-wrap { position: relative; }
+.thumb-rm {
+  position: absolute; top: -6px; right: -6px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #e34850; color: #fff; border: none; cursor: pointer;
+  font-size: 11px; font-weight: 700; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .15s;
+}
+.thumb-wrap:hover .thumb-rm { opacity: 1; }
+.thumb-new-badge {
+  position: absolute; top: -6px; right: -6px;
+  background: #1473e6; color: #fff;
+  font-size: 9px; font-weight: 700; letter-spacing: .05em;
+  padding: 2px 5px; border-radius: 2px;
+}
+
+.error-box {
+  display: none;
+  background: #fff3f3; border: 1px solid #f5a3a3; border-radius: 3px;
+  padding: 9px 12px; font-size: 13px; color: #c0392b;
+}
+.error-box.visible { display: block; }
+
+.form-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.Button {
+  display: inline-block; padding: 10px 28px;
+  font-family: var(--sans); font-size: 14px; font-weight: 700;
+  color: #fff; cursor: pointer; border-radius: 3px;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  border: 1px solid #4f4f4f;
+  background: linear-gradient(to bottom, #888 0%, #5a5a5a 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 2px rgba(0,0,0,.15);
+  transition: .15s;
+}
+.Button:hover {
+  background: linear-gradient(to bottom, #1473e6 0%, #0d5cb8 100%);
+  border-color: #0a4f9e; color: #fff; text-decoration: none;
+}
+.Button:disabled { opacity: .5; cursor: default; }
+
+.btn-ghost {
+  display: inline-block; padding: 9px 20px;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: #444; cursor: pointer; border-radius: 3px;
+  border: 1px solid #c0c0c0;
+  background: linear-gradient(to bottom, #fff, #ececec);
+  box-shadow: inset 0 1px 0 #fff;
+  transition: .15s;
+}
+.btn-ghost:hover { border-color: #999; background: linear-gradient(to bottom, #f5f5f5, #e4e4e4); }
+
+/* ── ROWS (listings) ── */
+.rows-list { border-top: 1px solid #e0e0e0; }
+.row-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 4px; border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+}
+.row-item:hover { background: #f8f8f8; }
+.row-thumb {
+  width: 60px; height: 60px; object-fit: cover;
+  border-radius: 3px; border: 1px solid #d5d5d5; flex-shrink: 0;
+}
+.row-no-thumb {
+  width: 60px; height: 60px; flex-shrink: 0;
+  border: 1px solid #d5d5d5; border-radius: 3px;
+  background: #f5f5f5;
+  display: flex; align-items: center; justify-content: center;
+  color: #bbb; font-size: 18px;
+}
+.row-info { flex: 1; min-width: 0; }
+.row-title { font-size: 14px; font-weight: 600; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row-meta { font-size: 12px; color: #888; margin-top: 2px; }
+.row-badge {
+  display: inline-block;
+  background: #eaf3ff; color: #0d5cb8; border: 1px solid #bcd5f1;
+  font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 2px; margin-left: 6px; vertical-align: middle;
+}
+.row-badge--count { color: #777; border-color: #d0d0d0; background: #f5f5f5; }
+.row-actions { display: flex; gap: 6px; }
+.btn-edit {
+  padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+  border: 1px solid #bcd5f1; border-radius: 2px;
+  background: #eaf3ff; color: #0d5cb8;
+  font-family: inherit; transition: .15s;
+}
+.btn-edit:hover { background: #1473e6; color: #fff; border-color: #0a4f9e; }
+.btn-delete {
+  padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+  border: 1px solid #f5a3a3; border-radius: 2px;
+  background: #fff3f3; color: #c0392b;
+  font-family: inherit; transition: .15s;
+}
+.btn-delete:hover { background: #e34850; color: #fff; border-color: #b32b2b; }
+
+.empty-state { padding: 32px; text-align: center; color: #999; font-size: 13px; }
+.loading-state { padding: 32px; text-align: center; color: #aaa; font-size: 13px; }
+
+/* ── PANEL LIST HEADER ── */
+.list-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; border-bottom: 1px solid #d5d5d5;
+  background: linear-gradient(to bottom, #f7f7f7, #f0f0f0);
+}
+.list-head h2 { font-size: 17px; }
+.list-head h2 span { font-weight: 400; color: #999; font-size: 14px; margin-left: 6px; }
+.btn-refresh {
+  padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+  border: 1px solid #c0c0c0; border-radius: 2px;
+  background: linear-gradient(to bottom, #fff, #ececec); color: #444;
+  font-family: inherit;
+  box-shadow: inset 0 1px 0 #fff;
+  transition: .15s;
+}
+.btn-refresh:hover { background: linear-gradient(to bottom, #1473e6, #0d5cb8); color: #fff; border-color: #0a4f9e; }
+
+.btn-cancel-edit {
+  display: none; padding: 5px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+  border: 1px solid #f5a3a3; border-radius: 2px;
+  background: #fff3f3; color: #c0392b;
+  font-family: inherit; transition: .15s;
+}
+.btn-cancel-edit:hover { background: #e34850; color: #fff; border-color: #b32b2b; }
+
+/* ── TOAST ── */
+#toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 100;
+  padding: 12px 18px; border-radius: 3px;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 4px 14px rgba(0,0,0,.12);
+  font-size: 13px; color: #333;
+  opacity: 0; transform: translateY(8px); transition: all .3s ease;
+  max-width: 340px;
+}
+#toast.show { opacity: 1; transform: translateY(0); }
+#toast.success { border-color: #2d9d55; color: #1a6e38; background: #f0faf4; }
+#toast.error { border-color: #e34850; color: #c0392b; background: #fff3f3; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .col-3 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="header-brand">
+      <div class="logo-mark">CF</div>
+      <span>Admin · Cascina Fontana</span>
+    </a>
+    <div class="header-right">
+      <span id="userEmail"></span>
+      <button id="logoutBtn" class="btn-secondary">Esci</button>
+    </div>
+  </div>
+</header>
+
+<div class="main-content">
+
+  <div id="bootLoader">Verifica sessione…</div>
+
+  <div id="adminRoot" style="display:none;">
+
+    <!-- Tabs -->
+    <nav class="tabs-bar">
+      <button data-tab="listings" class="tab-btn active">Annunci</button>
+      <button data-tab="updates"  class="tab-btn">Aggiornamenti</button>
+    </nav>
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- TAB: LISTINGS                          -->
+    <!-- ══════════════════════════════════════ -->
+    <div id="tab-listings">
+
+      <!-- Form panel -->
+      <div class="panel">
+        <div class="panel__head">
+          <div class="panel__head-left">
+            <div class="TextStep">Annunci</div>
+            <h2 id="listingFormTitle">Nuovo <b>annuncio</b></h2>
+          </div>
+          <button id="listingCancelEdit" class="btn-cancel-edit">Annulla modifica</button>
+        </div>
+        <div class="panel__body">
+          <form id="listingForm" novalidate>
+            <input type="hidden" id="l_id">
+            <div class="form-grid">
+
+              <div class="field col-full">
+                <label for="l_title">Titolo *</label>
+                <input type="text" id="l_title" required maxlength="200">
+              </div>
+
+              <div class="field">
+                <label for="l_category">Categoria</label>
+                <select id="l_category">
+                  <option value="macchine">Macchinari</option>
+                  <option value="prodotti">Prodotti</option>
+                  <option value="materiali">Materiali</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="l_brand">Marca</label>
+                <input type="text" id="l_brand">
+              </div>
+
+              <div class="field">
+                <label for="l_model">Modello</label>
+                <input type="text" id="l_model">
+              </div>
+
+              <div class="field">
+                <label for="l_displacement">Cilindrata</label>
+                <input type="text" id="l_displacement" placeholder="es. 2500 cc">
+              </div>
+
+              <div class="field">
+                <label for="l_hp">Cavalli (HP)</label>
+                <input type="text" id="l_hp" placeholder="es. 85 CV">
+              </div>
+
+              <div class="field">
+                <label for="l_fuel">Alimentazione</label>
+                <select id="l_fuel">
+                  <option value="">—</option>
+                  <option value="diesel">Diesel</option>
+                  <option value="benzina">Benzina</option>
+                  <option value="gpl">GPL</option>
+                  <option value="metano">Metano</option>
+                  <option value="elettrico">Elettrico</option>
+                  <option value="ibrido">Ibrido</option>
+                  <option value="altro">Altro</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="l_usage_hours">Ore di utilizzo</label>
+                <input type="text" id="l_usage_hours" placeholder="es. 4200 h">
+              </div>
+
+              <div class="field">
+                <label for="l_condition">Condizione</label>
+                <select id="l_condition">
+                  <option value="">—</option>
+                  <option value="nuovo">Nuovo</option>
+                  <option value="ottimo">Ottimo</option>
+                  <option value="buono">Buono</option>
+                  <option value="discreto">Discreto</option>
+                  <option value="da_revisionare">Da revisionare</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="l_color">Colore</label>
+                <input type="text" id="l_color">
+              </div>
+
+              <div class="col-3">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="l_registered"> Immatricolato
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="l_documents"> Documenti
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="l_insured"> Assicurato
+                </label>
+              </div>
+
+              <div class="field col-full">
+                <label>Immagini (più file — compressione automatica)</label>
+                <input type="file" id="l_images" accept="image/*" multiple>
+                <div id="l_imagesPreview" class="images-preview"></div>
+                <p id="l_uploadStatus" class="upload-status"></p>
+              </div>
+
+              <div id="l_formError" class="error-box col-full"></div>
+
+              <div class="form-actions col-full">
+                <button type="submit" id="l_saveBtn" class="Button">Salva annuncio</button>
+                <button type="reset"  id="l_resetBtn" class="btn-ghost">Pulisci</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- List panel -->
+      <div class="panel">
+        <div class="list-head">
+          <h2>Annunci esistenti <span id="l_count"></span></h2>
+          <button id="l_refreshBtn" class="btn-refresh">↻ Aggiorna</button>
+        </div>
+        <div id="listingsContainer" class="rows-list">
+          <div class="loading-state">Caricamento…</div>
+        </div>
+      </div>
+
+    </div><!-- /tab-listings -->
+
+    <!-- ══════════════════════════════════════ -->
+    <!-- TAB: UPDATES                           -->
+    <!-- ══════════════════════════════════════ -->
+    <div id="tab-updates" style="display:none;">
+
+      <!-- Form panel -->
+      <div class="panel">
+        <div class="panel__head">
+          <div class="panel__head-left">
+            <div class="TextStep">Aggiornamenti</div>
+            <h2 id="updateFormTitle">Nuovo <b>aggiornamento</b></h2>
+          </div>
+          <button id="updateCancelEdit" class="btn-cancel-edit">Annulla modifica</button>
+        </div>
+        <div class="panel__body">
+          <form id="updateForm" novalidate>
+            <input type="hidden" id="u_id">
+            <div class="form-grid">
+
+              <div class="field col-full">
+                <label for="u_title">Titolo *</label>
+                <input type="text" id="u_title" required maxlength="200">
+              </div>
+
+              <div class="field col-full">
+                <label for="u_description">Descrizione</label>
+                <textarea id="u_description" rows="4" maxlength="4000"></textarea>
+              </div>
+
+              <div class="field">
+                <label for="u_city">Città</label>
+                <input type="text" id="u_city">
+              </div>
+
+              <div class="field">
+                <label for="u_country">Paese</label>
+                <input type="text" id="u_country">
+              </div>
+
+              <div class="field col-full">
+                <label>Immagini (più file — compressione automatica)</label>
+                <input type="file" id="u_images" accept="image/*" multiple>
+                <div id="u_imagesPreview" class="images-preview"></div>
+                <p id="u_uploadStatus" class="upload-status"></p>
+              </div>
+
+              <div id="u_formError" class="error-box col-full"></div>
+
+              <div class="form-actions col-full">
+                <button type="submit" id="u_saveBtn" class="Button">Salva aggiornamento</button>
+                <button type="reset"  id="u_resetBtn" class="btn-ghost">Pulisci</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- List panel -->
+      <div class="panel">
+        <div class="list-head">
+          <h2>Aggiornamenti pubblicati <span id="u_count"></span></h2>
+          <button id="u_refreshBtn" class="btn-refresh">↻ Aggiorna</button>
+        </div>
+        <div id="updatesContainer" class="rows-list">
+          <div class="loading-state">Caricamento…</div>
+        </div>
+      </div>
+
+    </div><!-- /tab-updates -->
+
+  </div><!-- /adminRoot -->
+</div><!-- /main-content -->
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/js/supabase-client.js"></script>
+<script src="/flashplayer/admin/admin.js"></script>
+
+</body>
+</html>
