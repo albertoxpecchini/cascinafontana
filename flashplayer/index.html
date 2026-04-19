@@ -27,6 +27,7 @@
       <a href="#certificazioni">Certificazioni</a>
       <a href="#galleria">Galleria</a>
       <a href="#passaggio-3">Shop</a>
+      <a href="#aggiornamenti">Aggiornamenti</a>
       <a href="#faq">FAQ</a>
       <a href="#contatti" class="topnav__cta">Contatti</a>
     </nav>
@@ -122,75 +123,25 @@
       <p class="TextGrey shop__lead">Macchinari, attrezzature e produzioni in eccedenza.
         Prezzi su richiesta, ritiro sul posto salvo diverso accordo.</p>
 
-      <div class="shop__filter">
+      <div id="shopFilter" class="shop__filter">
         <button class="chip is-on" data-cat="all">Tutti</button>
         <button class="chip" data-cat="macchine">Macchinari</button>
         <button class="chip" data-cat="prodotti">Prodotti</button>
         <button class="chip" data-cat="materiali">Materiali</button>
       </div>
 
-      <div class="shop__grid">
+      <div id="shopGrid" class="shop__grid">
+        <p style="color:#888;text-align:center;padding:32px;font-style:italic;grid-column:1/-1">Caricamento annunci…</p>
+      </div>
+    </article>
 
-        <article class="product" data-cat="macchine">
-          <div class="product__img"><span>Trattore Landini</span><em class="badge">Usato</em></div>
-          <div class="product__body">
-            <h3>Trattore Landini 85 CV</h3>
-            <p class="product__meta">Anno 2004 · 4200 h · buono stato</p>
-            <p class="product__price">€ 14.500</p>
-            <a class="Button ButtonGrey" href="mailto:pzkko@yahoo.com?subject=Shop%20%7C%20Trattore%20Landini">Richiedi info</a>
-          </div>
-        </article>
-
-        <article class="product" data-cat="macchine">
-          <div class="product__img"><span>Rotoimballatrice</span></div>
-          <div class="product__body">
-            <h3>Rotoimballatrice Claas</h3>
-            <p class="product__meta">Camera variabile · revisionata 2024</p>
-            <p class="product__price">€ 8.900</p>
-            <a class="Button ButtonGrey" href="mailto:pzkko@yahoo.com?subject=Shop%20%7C%20Rotoimballatrice">Richiedi info</a>
-          </div>
-        </article>
-
-        <article class="product" data-cat="prodotti">
-          <div class="product__img"><span>Fieno · ballone</span><em class="badge badge--green">Stagione</em></div>
-          <div class="product__body">
-            <h3>Fieno di prato stabile</h3>
-            <p class="product__meta">Balloni 2,5 q · taglio primaverile</p>
-            <p class="product__price">€ 18 / ql</p>
-            <a class="Button ButtonGrey" href="mailto:pzkko@yahoo.com?subject=Shop%20%7C%20Fieno">Richiedi info</a>
-          </div>
-        </article>
-
-        <article class="product" data-cat="prodotti">
-          <div class="product__img"><span>Mais essiccato</span></div>
-          <div class="product__body">
-            <h3>Mais da granella</h3>
-            <p class="product__meta">Essiccato · in sacconi o sfuso</p>
-            <p class="product__price">Prezzo giornaliero</p>
-            <a class="Button ButtonGrey" href="mailto:pzkko@yahoo.com?subject=Shop%20%7C%20Mais">Richiedi info</a>
-          </div>
-        </article>
-
-        <article class="product" data-cat="materiali">
-          <div class="product__img"><span>Legna da ardere</span></div>
-          <div class="product__body">
-            <h3>Legna da ardere</h3>
-            <p class="product__meta">Bosco di Rivalta · stagionata 2 anni</p>
-            <p class="product__price">€ 140 / ql</p>
-            <a class="Button ButtonGrey" href="mailto:pzkko@yahoo.com?subject=Shop%20%7C%20Legna">Richiedi info</a>
-          </div>
-        </article>
-
-        <article class="product" data-cat="materiali">
-          <div class="product__img"><span>Letame bovino</span></div>
-          <div class="product__body">
-            <h3>Letame bovino</h3>
-            <p class="product__meta">Maturo · carico in azienda</p>
-            <p class="product__price">Da concordare</p>
-            <a class="Button ButtonGrey" href="mailto:pzkko@yahoo.com?subject=Shop%20%7C%20Letame">Richiedi info</a>
-          </div>
-        </article>
-
+    <!-- ── AGGIORNAMENTI ── -->
+    <article class="step" id="aggiornamenti">
+      <p class="TextStep TextStep--alt">Novità · Aggiornamenti</p>
+      <h2 class="step__title">Notizie dalla cascina.</h2>
+      <p class="TextGrey shop__lead">Comunicazioni, eventi e aggiornamenti dal lavoro in cascina.</p>
+      <div id="updatesGrid" class="updates-grid">
+        <p style="color:#888;text-align:center;padding:32px;font-style:italic;grid-column:1/-1">Caricamento aggiornamenti…</p>
       </div>
     </article>
 
@@ -471,9 +422,6 @@
     }), { threshold: 0.35 });
     steps.forEach(s => io.observe(s));
   }
-  /* shop filter */
-  const chips = document.querySelectorAll('.chip');
-  const products = document.querySelectorAll('.product');
   /* ── CF Mailer: validate, sanitize, rate-limit, offline queue, retry, mailto fallback, log ── */
   var CFMailer = (function(){
     var ENDPOINT = 'https://formsubmit.co/ajax/pzkko@yahoo.com';
@@ -639,12 +587,10 @@
       });
     });
   })();
-  chips.forEach(c => c.addEventListener('click', () => {
-    chips.forEach(x => x.classList.remove('is-on'));
-    c.classList.add('is-on');
-    const cat = c.dataset.cat;
-    products.forEach(p => p.classList.toggle('is-hidden', cat !== 'all' && p.dataset.cat !== cat));
-  }));
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/js/supabase-client.js"></script>
+<script src="/js/shop-loader-fp.js"></script>
+<script src="/js/updates-loader-fp.js"></script>
 </body>
 </html>
