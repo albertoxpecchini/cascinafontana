@@ -76,7 +76,7 @@ cascinafontana/
 ├── style.css             # [dormiente] vecchi stili root, non referenziato da index.html
 ├── main.js               # [dormiente] vecchio JS root, non referenziato da index.html
 ├── vercel.json           # rewrites
-├── public/images/        # asset legacy (favicon usata da index.html)
+├── public/images/        # favicon + immagini usate dalle gallerie condivise
 └── flashplayer/
     ├── index.html        # singlepage con tutti i contenuti
     ├── style.css
@@ -95,6 +95,15 @@ Schermata iniziale minimale in stile landing:
 ## Sezioni `/flashplayer`
 
 Topnav · Storia · Certificazioni · Galleria · Shop · Testimonial · Orari & Mappa · FAQ · Newsletter · Preventivo · Downloads · Footer
+
+## Galleria foto condivisa
+
+- Le gallerie di `/` e `/flashplayer` usano la stessa lista immagini lato client.
+- File sorgente immagini: `public/images/`.
+- File dati galleria: `js/gallery-data.js`.
+- Renderer condiviso: `js/gallery-loader.js`.
+- Workflow: si copiano le nuove foto in `public/images/`, poi si aggiorna `js/gallery-data.js` per decidere quali immagini pubblicare e in che ordine.
+- Nota: `public/images/` puo` contenere anche file tecnici (per esempio favicon). La presenza nella cartella non implica pubblicazione automatica in galleria.
 
 ---
 

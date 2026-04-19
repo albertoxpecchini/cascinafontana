@@ -71,6 +71,76 @@
   html { scroll-behavior: smooth; }
   .nav-scrolled { background: rgba(244, 247, 239, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(111, 139, 87, 0.18); }
   input, select, textarea { color-scheme: light; }
+  .home-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .home-gallery__item {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-height: 280px;
+    border-radius: 28px;
+    border: 1px solid rgba(111, 139, 87, 0.2);
+    background: #ffffff;
+    box-shadow: 0 24px 60px rgba(111, 139, 87, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .home-gallery__item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 70px rgba(111, 139, 87, 0.18);
+  }
+  .home-gallery__item--featured { grid-column: span 2; }
+  .home-gallery__media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: rgba(111, 139, 87, 0.1);
+  }
+  .home-gallery__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .home-gallery__item:hover .home-gallery__image { transform: scale(1.04); }
+  .home-gallery__overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 56px 20px 20px;
+    background: linear-gradient(to top, rgba(19, 34, 14, 0.92) 0%, rgba(19, 34, 14, 0.52) 52%, rgba(19, 34, 14, 0) 100%);
+    color: #ffffff;
+  }
+  .home-gallery__kicker {
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.56);
+  }
+  .home-gallery__title {
+    margin: 0;
+    font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    line-height: 1.1;
+    color: #ffffff;
+  }
+  .home-gallery__caption {
+    margin: 10px 0 0;
+    max-width: 40ch;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78);
+  }
+  @media (max-width: 1100px) {
+    .home-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .home-gallery__item--featured { grid-column: span 2; }
+  }
+  @media (max-width: 640px) {
+    .home-gallery { grid-template-columns: 1fr; }
+    .home-gallery__item--featured { grid-column: auto; }
+  }
 </style>
 </head>
 <body class="font-sans antialiased bg-dark-bg text-dark-text">
@@ -87,6 +157,7 @@
         <a href="#attivita" class="hover:text-primary transition">Attività</a>
         <a href="#produzione" class="hover:text-primary transition">Produzione</a>
         <a href="#filiera" class="hover:text-primary transition">Filiera</a>
+        <a href="#galleria" class="hover:text-primary transition">Galleria</a>
         <a href="#shop" class="hover:text-primary transition">Shop</a>
         <a href="#aggiornamenti" class="hover:text-primary transition">Aggiornamenti</a>
         <a href="#faq" class="hover:text-primary transition">FAQ</a>
@@ -101,6 +172,7 @@
       <a href="#attivita" class="block py-2 hover:text-primary">Attività</a>
       <a href="#produzione" class="block py-2 hover:text-primary">Produzione</a>
       <a href="#filiera" class="block py-2 hover:text-primary">Filiera</a>
+      <a href="#galleria" class="block py-2 hover:text-primary">Galleria</a>
       <a href="#shop" class="block py-2 hover:text-primary">Shop</a>
       <a href="#aggiornamenti" class="block py-2 hover:text-primary">Aggiornamenti</a>
       <a href="#faq" class="block py-2 hover:text-primary">FAQ</a>
@@ -438,6 +510,29 @@
   </div>
 </section>
 
+<!-- GALLERIA -->
+<section id="galleria" class="py-20 sm:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between mb-12">
+      <div class="max-w-3xl">
+        <div class="inline-block text-xs font-medium text-primary mb-3 tracking-widest">GALLERIA</div>
+        <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-dark-text mb-4">
+          Archivio <span class="gradient-text">fotografico</span>
+        </h2>
+        <p class="text-dark-muted max-w-2xl">Scatti reali della cascina: campi, strutture, mezzi e dettagli raccolti dall'archivio immagini e pubblicati sia qui sia in Flash Mode.</p>
+      </div>
+      <div class="glass rounded-2xl p-5 max-w-sm">
+        <div class="text-xs font-medium text-primary mb-2 tracking-widest">STATO ARCHIVIO</div>
+        <p id="galleryCount" class="font-heading text-2xl text-dark-text mb-2">Caricamento foto...</p>
+        <p class="text-sm text-dark-muted">Le immagini si aprono in grande in una nuova scheda, senza cambiare il layout della pagina.</p>
+      </div>
+    </div>
+    <div id="galleryGrid" class="home-gallery">
+      <div style="grid-column:1/-1;text-align:center;padding:3rem 0;color:#657060;">Caricamento galleria...</div>
+    </div>
+  </div>
+</section>
+
 <!-- TESTIMONIAL -->
 <section id="testimonial" class="py-20 sm:py-28">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -635,6 +730,7 @@
           <a href="#attivita" class="block hover:text-primary transition">Attività</a>
           <a href="#produzione" class="block hover:text-primary transition">Produzione</a>
           <a href="#filiera" class="block hover:text-primary transition">Filiera</a>
+          <a href="#galleria" class="block hover:text-primary transition">Galleria</a>
           <a href="#shop" class="block hover:text-primary transition">Shop</a>
           <a href="#contatti" class="block hover:text-primary transition">Contatti</a>
         </nav>
@@ -685,6 +781,8 @@
 <!-- Supabase SDK + loaders -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-client.js"></script>
+<script src="/js/gallery-data.js"></script>
+<script src="/js/gallery-loader.js"></script>
 <script src="/js/shop-loader.js"></script>
 <script src="/js/updates-loader.js"></script>
 
