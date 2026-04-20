@@ -161,6 +161,6 @@ Push su `main` → deploy automatico Vercel. Nessun build command.
 
 ## Changelog
 
-Vedi [`CHANGELOG.md`](./CHANGELOG.md).
+Vedi [`CHANGELOG.md`](../CHANGELOG.md).
 
 Convenzione commit: messaggio = versione sola (`MAJOR.MINOR.PATCH`, es. `1.0.1`). Tutti i dettagli nel changelog.
