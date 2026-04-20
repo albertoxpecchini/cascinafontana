@@ -21,5 +21,9 @@
   "homepage": "https://github.com/albertoxpecchini/cascinafontana#readme",
   "devDependencies": {
     "pg": "^8.20.0"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "simple-icons": "^16.17.0"
   }
 }

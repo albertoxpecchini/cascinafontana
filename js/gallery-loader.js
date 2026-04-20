@@ -26,19 +26,13 @@
       return;
     }
 
-    grid.innerHTML = items.map(function (item, index) {
+    grid.innerHTML = items.map(function (item) {
       var url = imageUrl(item.file);
-      var featuredClass = item.featured ? ' home-gallery__item--featured' : '';
 
       return '' +
-        '<a class="home-gallery__item' + featuredClass + '" href="' + url + '" target="_blank" rel="noopener">' +
+        '<a class="home-gallery__item" href="' + url + '" target="_blank" rel="noopener">' +
           '<div class="home-gallery__media">' +
             '<img class="home-gallery__image" src="' + url + '" alt="' + escapeHtml(item.alt) + '" loading="lazy">' +
-          '</div>' +
-          '<div class="home-gallery__overlay">' +
-            '<div class="home-gallery__kicker">Foto ' + String(index + 1).padStart(2, '0') + '</div>' +
-            '<p class="home-gallery__title">' + escapeHtml(item.title) + '</p>' +
-            '<p class="home-gallery__caption">' + escapeHtml(item.caption) + '</p>' +
           '</div>' +
         '</a>';
     }).join('');

@@ -7,10 +7,13 @@ Questo file e` allineato ai commit versionati presenti nella history Git: cosa e
 
 ---
 
-## In sviluppo
-- Ripristinata la galleria foto nella home principale.
-- Le foto vengono lette dalla lista condivisa in `js/gallery-data.js`.
-- Documentato il flusso per aggiungere nuove foto in `public/images/` e pubblicarle in galleria.
+## 2026.04.20.01
+- Logo Grana Padano DOP potenziato nella visibilità su tutta la homepage:
+  - opacità aumentata su tutti i punti già esistenti (da 20–35 % a 45–60 %),
+  - aggiunto logo in 6 nuove sezioni: hero aside (Prato stabile), Attività (01 Fieno), Filiera (02 Raccolta, 03 Alimentazione), Storia (2010Prato stabile), Testimonial (Casearia padana),
+  - nel ticker le macchine il Grana Padano appare a colori naturali, più alto e visibile rispetto ai loghi grigi degli altri brand,
+  - totale: 13 posizioni statiche + 4 nel ticker.
+- Effetto: Grana Padano DOP riconoscibile come business principale in ogni blocco chiave, sempre con tono sobrio.
 
 ## 2026.04.18.23
 - Integrato loader aggiornamenti live nella root:

@@ -51,12 +51,6 @@
       alt: 'Foto di archivio 4 della Cascina Fontana'
     },
     {
-      file: 'HPIM0730.JPG',
-      title: 'Archivio 05',
-      caption: 'Scatto di archivio della cascina.',
-      alt: 'Foto di archivio 5 della Cascina Fontana'
-    },
-    {
       file: 'HPIM0893.JPG',
       title: 'Archivio 06',
       caption: 'Scatto di archivio della cascina.',
