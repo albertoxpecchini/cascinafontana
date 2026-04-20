@@ -4,7 +4,7 @@
 
 - Home: https://cascinafontana.xyz
 
-Versioning: `AAAA.MM.GG.NN` (data + numero del giorno, zero-padded). Attuale: vedi [`VERSION`](./VERSION).
+Versioning: `MAJOR.MINOR.PATCH` (es. `1.0.1`). Attuale: vedi [`VERSION`](./VERSION).
 
 **Regola di lavoro:** ogni modifica → si aggiorna `README.md` dove serve **e** si scrive una voce in `CHANGELOG.md` in italiano semplice. Il messaggio del commit è solo il numero di versione.
 
@@ -20,7 +20,7 @@ git add <files>
 sh script/release.sh
 ```
 
-Lo script calcola automaticamente la prossima sequenza del giorno (`NN` zero-padded) leggendo tag e log.
+Lo script legge la versione attuale da `VERSION` e incrementa automaticamente la patch: `1.0.1`, `1.0.2`, `1.0.3`, ecc.
 
 ### Hook di validazione commit
 
@@ -163,4 +163,4 @@ Push su `main` → deploy automatico Vercel. Nessun build command.
 
 Vedi [`CHANGELOG.md`](./CHANGELOG.md).
 
-Convenzione commit: messaggio = versione sola (`AAAA.MM.GG.N`). Tutti i dettagli nel changelog.
+Convenzione commit: messaggio = versione sola (`MAJOR.MINOR.PATCH`, es. `1.0.1`). Tutti i dettagli nel changelog.

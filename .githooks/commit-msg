@@ -1,12 +1,12 @@
 #!/bin/sh
-# Enforce commit messages = version only. Format: N[.N]+  (es. 2026.04.18.10 o 1.4.1)
+# Enforce commit messages = version only. Format: N[.N]+  (es. 1.0.1 o 1.4.1)
 msg=$(head -n1 "$1" | sed 's/[[:space:]]*$//')
 if ! printf '%s' "$msg" | grep -qE '^[0-9]+(\.[0-9]+)+$'; then
   echo "" >&2
   echo "✖ commit-msg rifiutato." >&2
   echo "  Il messaggio deve essere SOLO il numero di versione." >&2
   echo "  Ricevuto : \"$msg\"" >&2
-  echo "  Atteso   : formato N[.N]+  (es. 2026.04.18.10, 1.4.1)" >&2
+  echo "  Atteso   : formato N[.N]+  (es. 1.0.1, 1.4.1)" >&2
   echo "  Dettagli vanno in CHANGELOG.md." >&2
   exit 1
 fi

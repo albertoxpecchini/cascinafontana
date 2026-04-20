@@ -1,23 +1,50 @@
 #!/bin/sh
 # Release script: bump VERSION, commit (version-only msg), tag, push.
-# Version format: YYYY.MM.DD.NN (NN zero-padded, resets each day).
+# Version format: MAJOR.MINOR.PATCH. Default behavior bumps the patch level.
 # Usage:
 #   Stage your real changes first (git add ...), then run:  sh script/release.sh
+#   Or pass a specific version explicitly: sh script/release.sh 1.0.3
 # Requires: a clean or staged working tree (no unrelated unstaged changes).
 
 set -e
 cd "$(git rev-parse --show-toplevel)"
 
-today=$(date +%Y.%m.%d)
+normalize_version() {
+  ver="$1"
+  if ! printf '%s' "$ver" | grep -qE '^[0-9]+(\.[0-9]+){1,2}$'; then
+    return 1
+  fi
+  if [ "$(printf '%s' "$ver" | awk -F. '{print NF}')" -eq 2 ]; then
+    ver="$ver.0"
+  fi
+  printf '%s' "$ver"
+}
 
-# Find highest sequence for today across tags and commit subjects.
-last_tag=$(git tag --list "${today}.*" | awk -F. 'length($NF) && $NF+0==$NF {print $NF+0}' | sort -n | tail -1)
-last_log=$(git log --format=%s | grep -E "^${today}\.[0-9]+$" | awk -F. '{print $NF+0}' | sort -n | tail -1)
-last=0
-[ -n "$last_tag" ] && [ "$last_tag" -gt "$last" ] && last="$last_tag"
-[ -n "$last_log" ] && [ "$last_log" -gt "$last" ] && last="$last_log"
-next=$(( last + 1 ))
-ver=$(printf "%s.%02d" "$today" "$next")
+read_version() {
+  if [ -f VERSION ]; then
+    cat VERSION
+  else
+    echo "0.0.0"
+  fi
+}
+
+current=$(read_version)
+if [ "$#" -gt 0 ]; then
+  ver=$(normalize_version "$1") || {
+    echo "release: invalid version format, expected MAJOR.MINOR.PATCH" >&2
+    exit 1
+  }
+else
+  current=$(normalize_version "$current") || {
+    echo "release: invalid current VERSION file: $current" >&2
+    exit 1
+  }
+  major=$(printf '%s' "$current" | awk -F. '{print $1}')
+  minor=$(printf '%s' "$current" | awk -F. '{print $2}')
+  patch=$(printf '%s' "$current" | awk -F. '{print $3}')
+  patch=$(( patch + 1 ))
+  ver="$major.$minor.$patch"
+fi
 
 echo "$ver" > VERSION
 git add VERSION
