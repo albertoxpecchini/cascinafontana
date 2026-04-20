@@ -103,10 +103,12 @@
     .gs-ambient-layer, .svg-bg-layer, .cursor-canvas, .cursor-ring, .cursor-core { display: none !important; }
   }
 
-  /* ── Hide glow on touch devices ── */
+  /* ── Hide glow + SVG bg on touch devices ── */
   @media (pointer: coarse) {
     .gs-glow { display: none !important; }
     .cursor-canvas, .cursor-ring, .cursor-core { display: none !important; }
+    .svg-bg-layer { display: none !important; }
+    .gs-ambient-layer { display: none !important; }
     .nav-wa-btn {
       max-width: 180px !important;
       opacity: 1 !important;
@@ -177,6 +179,7 @@
   @media (max-width: 639px) {
     .logo-ticker__track { gap: 2rem; animation-duration: 18s; }
     .logo-ticker__img { height: 16px; max-width: 70px; }
+    .logo-ticker__img[alt="Grana Padano"] { height: 22px; max-width: 90px; }
   }
 
   .gs-ambient-layer {
@@ -464,7 +467,7 @@
   .section-heading {
     margin: 0;
     font-family: 'Manrope', 'Public Sans', sans-serif;
-    font-size: clamp(2.4rem, 5vw, 4.9rem);
+    font-size: clamp(1.8rem, 5vw, 4.9rem);
     font-weight: 400;
     line-height: 1.02;
     letter-spacing: -0.05em;
@@ -479,7 +482,7 @@
   .display-title {
     margin: 0;
     font-family: 'Manrope', 'Public Sans', sans-serif;
-    font-size: clamp(3.4rem, 8vw, 6rem);
+    font-size: clamp(2.4rem, 8vw, 6rem);
     font-weight: 400;
     line-height: 1;
     letter-spacing: -0.07em;
@@ -708,6 +711,10 @@
   }
   @media (max-width: 500px) {
     .home-gallery { columns: 1; }
+    .coin-panel { border-radius: 24px; }
+    .pill-btn { font-size: 15px; min-height: 50px; }
+    .metric-value { font-size: clamp(2rem, 8vw, 3rem); }
+    .prod-card-emoji { font-size: 1.8rem; top: -10px; right: 10px; }
   }
 </style>
 </head>
@@ -773,7 +780,7 @@
 </header>
 
 <main>
-  <section class="pb-16 pt-32 sm:pb-24 sm:pt-40">
+  <section class="pb-12 pt-24 sm:pb-24 sm:pt-40">
     <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] lg:px-8">
       <div class="flex flex-col justify-end">
         <div class="section-label mb-6 gs-reveal">
@@ -782,13 +789,13 @@
         </div>
         <h1 class="display-title mb-8 gs-hero-title">Cascina Fontana, struttura agricola leggibile e verificabile.</h1>
         <p class="body-lead mb-8 gs-hero-lead">Sessantatré biolche di prato stabile, filiera Grana Padano DOP, manutenzione del territorio e una presenza digitale costruita per esporre in modo ordinato disponibilità, aggiornamenti, contatti e tracciabilità.</p>
-        <div class="mb-12 flex flex-wrap items-center gap-4">
-          <a href="#shop" class="pill-btn pill-btn--primary gs-hero-cta">consulta annunci</a>
-          <a href="#contatti" class="pill-btn pill-btn--secondary gs-hero-cta">richiedi contatto</a>
-          <a href="#aggiornamenti" class="pill-btn pill-btn--outline gs-hero-cta">leggi aggiornamenti</a>
+        <div class="mb-10 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4">
+          <a href="#shop" class="pill-btn pill-btn--primary gs-hero-cta w-full sm:w-auto justify-center">consulta annunci</a>
+          <a href="#contatti" class="pill-btn pill-btn--secondary gs-hero-cta w-full sm:w-auto justify-center">richiedi contatto</a>
+          <a href="#aggiornamenti" class="pill-btn pill-btn--outline gs-hero-cta w-full sm:w-auto justify-center">leggi aggiornamenti</a>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-3">
+        <div class="grid grid-cols-3 sm:grid-cols-3 gap-3 sm:gap-4">
           <div class="coin-panel p-6 gs-hero-metric">
             <div class="section-label !border-0 !bg-transparent !px-0 !py-0 !text-[11px] !tracking-[0.18em]">BIOLCHE</div>
             <div class="metric-value mt-4">63</div>
@@ -808,7 +815,7 @@
         </div>
       </div>
 
-      <aside class="coin-panel overflow-hidden bg-surface border-transparent p-8 sm:p-10 gs-hero-aside">
+      <aside class="coin-panel overflow-hidden bg-surface border-transparent p-8 sm:p-10 gs-hero-aside hidden lg:block">
         <p class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-6">Come funziona</p>
         <h2 class="font-heading text-4xl font-normal leading-none tracking-[-0.06em] text-ink sm:text-5xl">Produzione, territorio, energia, disponibilità.</h2>
         <p class="mt-5 text-[17px] leading-[1.56] text-light-muted">L'azienda non viene presentata come immagine simbolica. Ogni blocco corrisponde a una funzione verificabile: produzione, manutenzione, certificazione, archivio e contatto diretto.</p>
@@ -964,7 +971,7 @@
         <p class="section-copy">Cinque colture, funzioni distinte, stesso approccio operativo. Il cursore ti accompagna — muovilo sui riquadri.</p>
       </div>
 
-      <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-5 prod-cards">
+      <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 prod-cards">
         <article class="coin-panel coin-panel--dark p-7 prod-card" data-emoji="🌾">
           <span class="prod-card-emoji">🌾</span>
           <div class="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-[#578bfa]">Core</div>

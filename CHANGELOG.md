@@ -7,6 +7,20 @@ Questo file e` allineato ai commit versionati presenti nella history Git: cosa e
 
 ---
 
+## 2026.04.20.02
+- Fix mobile (iPhone 16 Pro / touch, <500px):
+  - SVG background animato e ambient blob layer disabilitati su `pointer: coarse` (risparmio CPU/GPU pesante),
+  - `display-title` clamp ridotto da `3.4rem` a `2.4rem` per evitare testo che sfora su 393px,
+  - `section-heading` clamp ridotto da `2.4rem` a `1.8rem`,
+  - hero aside nascosto su mobile (`hidden lg:block`), rendeva la pagina inutilmente lunga,
+  - CTA hero convertiti in colonna full-width su <640px,
+  - metric cards hero fissate a 3 colonne compatte su tutti i breakpoint,
+  - griglia Produzione settata a 1 colonna su mobile invece di 2,
+  - `.coin-panel` border-radius ridotto a 24px su <500px,
+  - `.pill-btn` altezza minima aumentata a 50px su <500px (touch target),
+  - logo Grana Padano nel ticker ridimensionato su mobile (22px/90px),
+  - valori metric (`metric-value`) scalati con clamp su <500px.
+
 ## 2026.04.20.01
 - Logo Grana Padano DOP potenziato nella visibilità su tutta la homepage:
   - opacità aumentata su tutti i punti già esistenti (da 20–35 % a 45–60 %),
