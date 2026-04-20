@@ -716,11 +716,150 @@
     .metric-value { font-size: clamp(2rem, 8vw, 3rem); }
     .prod-card-emoji { font-size: 1.8rem; top: -10px; right: 10px; }
   }
+
+  /* ══════════════════════════════════════════
+     PREMIUM UX — micro-interactions layer
+     ══════════════════════════════════════════ */
+
+  /* ── Page loader ── */
+  #page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .page-loader__logo {
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,82,255,0.2);
+    background: var(--cb-surface);
+    font-family: 'Manrope', 'Public Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cb-blue);
+    box-shadow: 0 8px 40px rgba(0,82,255,0.14);
+    will-change: transform, opacity;
+  }
+  .page-loader__dots { display: flex; gap: 10px; }
+  .page-loader__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cb-blue);
+    opacity: 0.3;
+    will-change: transform, opacity;
+  }
+
+  /* ── Animated gradient hero title ── */
+  .hero-gradient-text {
+    background: linear-gradient(
+      93deg,
+      var(--cb-ink) 0%,
+      var(--cb-ink) 32%,
+      #0052ff 46%,
+      #578bfa 56%,
+      var(--cb-ink) 66%,
+      var(--cb-ink) 100%
+    );
+    background-size: 260% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: hero-text-shimmer 7s linear infinite;
+  }
+  @keyframes hero-text-shimmer {
+    0%   { background-position: 200% center; }
+    100% { background-position: -100% center; }
+  }
+
+  /* ── Panel shimmer on scroll reveal ── */
+  .coin-panel--shimmer {
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .coin-panel--shimmer::before {
+    content: '';
+    position: absolute;
+    top: -10%; bottom: -10%; left: -70%;
+    width: 55%;
+    background: linear-gradient(
+      105deg,
+      transparent 28%,
+      rgba(255,255,255,0.44) 47%,
+      rgba(255,255,255,0.60) 52%,
+      rgba(255,255,255,0.44) 57%,
+      transparent 72%
+    );
+    transform: skewX(-18deg);
+    animation: panel-shimmer-sweep 0.75s ease forwards;
+    pointer-events: none;
+    z-index: 20;
+  }
+  @keyframes panel-shimmer-sweep {
+    from { left: -70%; }
+    to   { left: 130%; }
+  }
+
+  /* ── Card hover glow (desktop only) ── */
+  @media (pointer: fine) {
+    #attivita .coin-panel,
+    #filiera .coin-panel,
+    #certificazioni .coin-panel,
+    #storia .coin-panel,
+    #testimonial .coin-panel {
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    #attivita .coin-panel:hover,
+    #filiera .coin-panel:hover,
+    #certificazioni .coin-panel:hover,
+    #storia .coin-panel:hover,
+    #testimonial .coin-panel:hover {
+      box-shadow:
+        0 20px 48px rgba(10,11,13,0.06),
+        0 0 0 1.5px rgba(0,82,255,0.12),
+        0 0 40px rgba(0,82,255,0.07);
+    }
+  }
+
+  /* ── Click ripple ── */
+  .ripple-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.36);
+    transform: scale(0);
+    animation: ripple-expand 0.55s ease-out forwards;
+    pointer-events: none;
+    z-index: 15;
+  }
+  @keyframes ripple-expand {
+    to { transform: scale(4); opacity: 0; }
+  }
+
+  /* ── Scroll progress bar glow ── */
+  .gs-progress-bar { box-shadow: 0 0 8px rgba(0,82,255,0.4); }
 </style>
 </head>
 <body class="font-sans antialiased bg-light-bg text-light-text">
 <div class="gs-progress-bar" aria-hidden="true"></div>
 <div class="gs-glow" aria-hidden="true"></div>
+
+<!-- ═══ AMBIENT BACKGROUND BLOBS ═══ -->
+<div class="gs-ambient-layer" aria-hidden="true">
+  <div class="gs-ambient-blob gs-ambient-blob--one"></div>
+  <div class="gs-ambient-blob gs-ambient-blob--two"></div>
+  <div class="gs-ambient-blob gs-ambient-blob--three"></div>
+  <div class="gs-ambient-blob gs-ambient-blob--four"></div>
+  <div class="gs-ambient-grid"></div>
+</div>
 
 <!-- ═══ FULL-PAGE ANIMATED SVG BACKGROUND (Simple Icons) ═══ -->
 <div id="svgBg" class="svg-bg-layer" aria-hidden="true"></div>
@@ -2267,7 +2406,157 @@ document.querySelectorAll('#contatti input, #contatti textarea, #contatti select
     gsap.to(this, { boxShadow: '0 0 0 0px rgba(0,82,255,0)', duration: 0.3 });
   });
 });
+
+/* ─── 26. PAGE LOADER EXIT ─── */
+(function() {
+  const loader = document.getElementById('page-loader');
+  if (!loader) return;
+  const logo  = loader.querySelector('.page-loader__logo');
+  const dots  = loader.querySelectorAll('.page-loader__dot');
+  gsap.from(logo, { scale: 0.78, opacity: 0, duration: 0.5, ease: 'back.out(1.4)' });
+  gsap.fromTo(dots,
+    { opacity: 0.3, y: 0 },
+    { opacity: 1, y: -5, duration: 0.5, stagger: 0.14, repeat: -1, yoyo: true, ease: 'sine.inOut' }
+  );
+  function exitLoader() {
+    gsap.timeline()
+      .to(logo, { scale: 1.12, opacity: 0, duration: 0.35, ease: 'power2.in' })
+      .to(dots, { opacity: 0, y: -6, stagger: 0.07, duration: 0.25 }, '-=0.25')
+      .to(loader, { opacity: 0, duration: 0.4, ease: 'power2.in',
+        onComplete: () => { loader.style.display = 'none'; }
+      }, '-=0.1');
+  }
+  if (document.readyState === 'complete') gsap.delayedCall(0.28, exitLoader);
+  else window.addEventListener('load', () => gsap.delayedCall(0.2, exitLoader), { once: true });
+})();
+
+/* ─── 27. ACTIVE NAV SECTION INDICATOR ─── */
+(function() {
+  const navLinks = document.querySelectorAll('#nav nav:not(#mobileNav) a[href^="#"]');
+  if (!navLinks.length) return;
+  document.querySelectorAll('section[id]').forEach(sec => {
+    ScrollTrigger.create({
+      trigger: sec, start: 'top 52%', end: 'bottom 48%',
+      onToggle: ({ isActive }) => {
+        if (!isActive) return;
+        const href = '#' + sec.id;
+        navLinks.forEach(link => {
+          const active = link.getAttribute('href') === href;
+          gsap.to(link, { color: active ? 'var(--cb-blue)' : '', duration: 0.25 });
+          if (active) gsap.fromTo(link, { y: -3 }, { y: 0, duration: 0.4, ease: 'elastic.out(1, 0.5)' });
+        });
+      }
+    });
+  });
+})();
+
+/* ─── 28. BUTTON CLICK RIPPLE ─── */
+(function() {
+  document.querySelectorAll('.pill-btn').forEach(btn => {
+    btn.addEventListener('pointerdown', function(e) {
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height) * 2;
+      const circle = document.createElement('span');
+      circle.className = 'ripple-circle';
+      circle.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size / 2}px;top:${e.clientY - rect.top - size / 2}px`;
+      this.appendChild(circle);
+      circle.addEventListener('animationend', () => circle.remove(), { once: true });
+    });
+  });
+})();
+
+/* ─── 29. PANEL SHIMMER ON REVEAL ─── */
+(function() {
+  const sel = '#attivita .coin-panel,#filiera .coin-panel,#certificazioni .coin-panel,#storia .coin-panel';
+  document.querySelectorAll(sel).forEach(panel => {
+    ScrollTrigger.create({
+      trigger: panel, start: 'top 87%', once: true,
+      onEnter: () => {
+        panel.classList.add('coin-panel--shimmer');
+        setTimeout(() => panel.classList.remove('coin-panel--shimmer'), 950);
+      }
+    });
+  });
+})();
+
+/* ─── 30. SCROLL VELOCITY CURSOR STRETCH ─── */
+(function() {
+  const ring = document.querySelector('.cursor-ring');
+  if (!ring || !window.matchMedia('(pointer: fine)').matches) return;
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const vel = Math.abs(window.scrollY - lastY);
+    lastY = window.scrollY;
+    const sy = Math.min(1.8, 1 + vel * 0.018);
+    const sx = Math.max(0.58, 1 / sy);
+    gsap.to(ring, { scaleX: sx, scaleY: sy, duration: 0.08, overwrite: true });
+    gsap.to(ring, { scaleX: 1, scaleY: 1, duration: 0.55, delay: 0.1, ease: 'elastic.out(1, 0.4)', overwrite: false });
+  }, { passive: true });
+})();
+
+/* ─── 31. AMBIENT BLOB SECTION PULSE ─── */
+(function() {
+  const blobs = document.querySelectorAll('.gs-ambient-blob');
+  if (!blobs.length) return;
+  const steps = [
+    { id: 'produzione',    idx: 1, op: 0.34 },
+    { id: 'filiera',       idx: 2, op: 0.29 },
+    { id: 'shop',          idx: 3, op: 0.30 },
+    { id: 'aggiornamenti', idx: 0, op: 0.14 }
+  ];
+  steps.forEach(({ id, idx, op }) => {
+    const el   = document.getElementById(id);
+    const blob = blobs[idx];
+    if (!el || !blob) return;
+    const orig = 0.20;
+    ScrollTrigger.create({
+      trigger: el, start: 'top 60%', end: 'bottom 40%',
+      onEnter:     () => gsap.to(blob, { opacity: op, duration: 0.9 }),
+      onLeave:     () => gsap.to(blob, { opacity: orig, duration: 0.9 }),
+      onEnterBack: () => gsap.to(blob, { opacity: op, duration: 0.9 }),
+      onLeaveBack: () => gsap.to(blob, { opacity: orig, duration: 0.9 })
+    });
+  });
+})();
+
+/* ─── 32. HERO GRADIENT TEXT (after typewriter) ─── */
+(function() {
+  const el = document.querySelector('.display-title');
+  if (!el || !heroTitleText) return;
+  const delay = heroTitleText.length * 0.045 + 2.0;
+  gsap.delayedCall(delay, () => el.classList.add('hero-gradient-text'));
+})();
+
+/* ─── 33. LIVE CLOCK IN CONTACT SECTION ─── */
+(function() {
+  const orari = document.querySelector('#contatti .space-y-2');
+  if (!orari) return;
+  const row = document.createElement('div');
+  row.className = 'flex items-center justify-between gap-4';
+  row.innerHTML = '<span>Ora locale</span><span id="live-clock" class="text-white font-heading tracking-[-0.03em]"></span>';
+  orari.appendChild(row);
+  function tick() {
+    const el = document.getElementById('live-clock');
+    if (!el) return;
+    el.textContent = new Date().toLocaleTimeString('it-IT', {
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      timeZone: 'Europe/Rome'
+    });
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
 </script>
+
+<!-- ═══ PAGE LOADER ═══ -->
+<div id="page-loader" role="status" aria-label="Caricamento Cascina Fontana">
+  <div class="page-loader__logo">CF</div>
+  <div class="page-loader__dots">
+    <div class="page-loader__dot"></div>
+    <div class="page-loader__dot"></div>
+    <div class="page-loader__dot"></div>
+  </div>
+</div>
 
 </body>
 </html>
