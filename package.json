@@ -107,8 +107,8 @@
     "slash": "^3.0.0",
     "split2": "^4.2.0",
     "stream-meter": "^1.0.4",
-    "string-width": "^4.2.3",
     "string_decoder": "^1.1.1",
+    "string-width": "^4.2.3",
     "strip-ansi": "^6.0.1",
     "strip-json-comments": "^2.0.1",
     "supports-color": "^7.2.0",
@@ -130,9 +130,14 @@
     "yargs": "^16.2.0",
     "yargs-parser": "^20.2.9"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "serve": "^14.2.6"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev":     "node script/dev.js",
+    "start":   "serve . -p 3000",
+    "release": "sh script/release.sh",
+    "test":    "echo \"no tests\" && exit 0"
   },
   "repository": {
     "type": "git",
