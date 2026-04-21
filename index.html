@@ -271,62 +271,8 @@
     filter: drop-shadow(0 0 18px rgba(0, 82, 255, 0.1));
   }
 
-  /* ── Global cursor particle canvas ── */
-  .cursor-canvas {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 10;
-  }
-  .cursor-ring,
-  .cursor-core {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    border-radius: 999px;
-    z-index: 11;
-    opacity: 0;
-    will-change: transform, opacity;
-  }
-  .cursor-ring {
-    width: 92px;
-    height: 92px;
-    margin-left: -46px;
-    margin-top: -46px;
-    border: 1px solid rgba(0, 82, 255, 0.22);
-    background:
-      radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(0, 82, 255, 0.08) 55%, transparent 72%);
-    box-shadow: 0 0 34px rgba(0, 82, 255, 0.14), inset 0 0 24px rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .cursor-core {
-    width: 12px;
-    height: 12px;
-    margin-left: -6px;
-    margin-top: -6px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.96) 0%, rgba(87, 139, 250, 0.95) 45%, rgba(0, 82, 255, 0.2) 100%);
-    box-shadow: 0 0 20px rgba(0, 82, 255, 0.4);
-    z-index: 12;
-  }
-
-  /* ── Glow cursor ── */
-  .gs-glow {
-    position: fixed;
-    width: 460px;
-    height: 460px;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle, rgba(0,82,255,0.11) 0%, rgba(87,139,250,0.08) 22%, rgba(87,139,250,0.03) 46%, transparent 74%);
-    pointer-events: none;
-    z-index: 0;
-    transform: translate(-50%, -50%);
-    will-change: transform;
-    mix-blend-mode: normal;
-  }
+  /* ── Glow cursor — rimosso, pesante su CPU ── */
+  .gs-glow { display: none !important; }
 
   /* ── Section divider line ── */
   .gs-divider {
@@ -867,7 +813,6 @@
 </div>
 
 <div class="gs-progress-bar" aria-hidden="true"></div>
-<div class="gs-glow" aria-hidden="true"></div>
 
 <!-- ═══ AMBIENT BACKGROUND BLOBS ═══ -->
 <div class="gs-ambient-layer" aria-hidden="true">
@@ -880,8 +825,6 @@
 
 <!-- ═══ FULL-PAGE ANIMATED SVG BACKGROUND (Simple Icons) ═══ -->
 <div id="svgBg" class="svg-bg-layer" aria-hidden="true"></div>
-<!-- ═══ GLOBAL CURSOR PARTICLES ═══ -->
-<canvas id="cursorCanvas" class="cursor-canvas" aria-hidden="true"></canvas>
 
 <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-all duration-300">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -1794,77 +1737,8 @@ document.querySelectorAll('#attivita .coin-panel, #filiera .coin-panel, #certifi
     }
   });
 
-  /* --- C) emoji cursor trail + touch support --- */
-  const trailLayer = prodSection.querySelector('.prod-emoji-trail');
-  let activeEmoji = '🌾';
-  let lastTrailTime = 0;
-  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  /* --- C) emoji cursor trail — rimossa, pesante su mobile --- */
 
-  function spawnEmoji(px, py) {
-    if (!trailLayer) return;
-    const particle = document.createElement('span');
-    particle.className = 'prod-trail-particle';
-    particle.textContent = activeEmoji;
-    particle.style.left = px + 'px';
-    particle.style.top = py + 'px';
-    trailLayer.appendChild(particle);
-    gsap.fromTo(particle, {
-      opacity: 1, scale: 0.5, rotation: gsap.utils.random(-20, 20)
-    }, {
-      opacity: 0,
-      scale: gsap.utils.random(1.1, 1.6),
-      y: gsap.utils.random(-50, -100),
-      x: gsap.utils.random(-30, 30),
-      rotation: gsap.utils.random(-60, 60),
-      duration: gsap.utils.random(0.8, 1.3),
-      ease: 'power2.out',
-      onComplete: () => particle.remove()
-    });
-  }
-
-  /* desktop: mouseenter + mousemove */
-  if (isFinePointer) {
-    cards.forEach(card => {
-      card.addEventListener('mouseenter', function() {
-        activeEmoji = this.dataset.emoji || '🌾';
-      });
-    });
-    prodSection.addEventListener('mousemove', function(e) {
-      const now = Date.now();
-      if (now - lastTrailTime < 80) return;
-      lastTrailTime = now;
-      const rect = prodSection.getBoundingClientRect();
-      spawnEmoji(e.clientX - rect.left, e.clientY - rect.top);
-    });
-  }
-
-  /* mobile: touchmove trail + tap card to change emoji */
-  if (!isFinePointer) {
-    cards.forEach(card => {
-      card.addEventListener('touchstart', function() {
-        activeEmoji = this.dataset.emoji || '🌾';
-        cards.forEach(c => c.classList.remove('touch-active'));
-        this.classList.add('touch-active');
-        /* burst 3 emojis around the card */
-        const rect = this.getBoundingClientRect();
-        const sRect = prodSection.getBoundingClientRect();
-        for (let b = 0; b < 3; b++) {
-          spawnEmoji(
-            rect.left - sRect.left + rect.width / 2 + gsap.utils.random(-30, 30),
-            rect.top - sRect.top + gsap.utils.random(-10, 20)
-          );
-        }
-      }, { passive: true });
-    });
-    prodSection.addEventListener('touchmove', function(e) {
-      const now = Date.now();
-      if (now - lastTrailTime < 100) return;
-      lastTrailTime = now;
-      const t = e.touches[0];
-      const rect = prodSection.getBoundingClientRect();
-      spawnEmoji(t.clientX - rect.left, t.clientY - rect.top);
-    }, { passive: true });
-  }
 })();
 
 /* ─── 6. SHOP filter chips ─── */
@@ -1986,62 +1860,7 @@ if (progressBar) {
   });
 }
 
-/* ─── 14. GLOW CURSOR FOLLOW ─── */
-const glow = document.querySelector('.gs-glow');
-const cursorRing = document.querySelector('.cursor-ring');
-const cursorCore = document.querySelector('.cursor-core');
-if (glow && cursorRing && cursorCore && window.matchMedia('(pointer: fine)').matches) {
-  const moveGlowX = gsap.quickTo(glow, 'x', { duration: 0.9, ease: 'power3.out' });
-  const moveGlowY = gsap.quickTo(glow, 'y', { duration: 0.9, ease: 'power3.out' });
-  const moveRingX = gsap.quickTo(cursorRing, 'x', { duration: 0.26, ease: 'power3.out' });
-  const moveRingY = gsap.quickTo(cursorRing, 'y', { duration: 0.26, ease: 'power3.out' });
-  const moveCoreX = gsap.quickTo(cursorCore, 'x', { duration: 0.1, ease: 'power2.out' });
-  const moveCoreY = gsap.quickTo(cursorCore, 'y', { duration: 0.1, ease: 'power2.out' });
-  let lastX = window.innerWidth * 0.5;
-  let lastY = window.innerHeight * 0.5;
-  let lastTime = performance.now();
-
-  gsap.set([glow, cursorRing, cursorCore], { opacity: 1 });
-
-  document.addEventListener('pointermove', e => {
-    const now = performance.now();
-    const dt = Math.max(16, now - lastTime);
-    const speed = Math.hypot(e.clientX - lastX, e.clientY - lastY) / dt;
-    const scale = Math.min(1.5, 1 + speed * 0.22);
-
-    moveGlowX(e.clientX);
-    moveGlowY(e.clientY);
-    moveRingX(e.clientX);
-    moveRingY(e.clientY);
-    moveCoreX(e.clientX);
-    moveCoreY(e.clientY);
-
-    gsap.to(glow, { scale: Math.min(1.35, 1 + speed * 0.12), opacity: 0.8, duration: 0.28, overwrite: true });
-    gsap.to(cursorRing, { scaleX: scale, scaleY: 2 - scale * 0.35, opacity: 0.96, duration: 0.18, overwrite: true });
-    gsap.to(cursorCore, { scale: Math.min(2.1, 1 + speed * 0.25), duration: 0.14, overwrite: true });
-
-    lastX = e.clientX;
-    lastY = e.clientY;
-    lastTime = now;
-  }, { passive: true });
-
-  document.addEventListener('pointerdown', e => {
-    moveRingX(e.clientX);
-    moveRingY(e.clientY);
-    moveCoreX(e.clientX);
-    moveCoreY(e.clientY);
-    gsap.fromTo(cursorRing, { scale: 0.78, opacity: 1 }, { scale: 1.34, opacity: 0.92, duration: 0.22, overwrite: true });
-    gsap.fromTo(cursorCore, { scale: 1.9 }, { scale: 1, duration: 0.24, overwrite: true, ease: 'power3.out' });
-  });
-
-  document.addEventListener('pointerleave', () => {
-    gsap.to([cursorRing, cursorCore], { opacity: 0, duration: 0.2, overwrite: true });
-  });
-
-  document.addEventListener('pointerenter', () => {
-    gsap.to([cursorRing, cursorCore], { opacity: 1, duration: 0.2, overwrite: true });
-  });
-}
+/* ─── 14. GLOW CURSOR FOLLOW — rimosso ─── */
 
 /* ═══ FULL-PAGE SVG ANIMATED BACKGROUND ═══ */
 (function() {
@@ -2334,41 +2153,9 @@ document.querySelectorAll('.stat-strip').forEach(strip => {
   });
 });
 
-/* ─── 17. MAGNETIC HOVER on pill buttons ─── */
-if (window.matchMedia('(pointer: fine)').matches) {
-  document.querySelectorAll('.pill-btn').forEach(btn => {
-    btn.addEventListener('mouseenter', function() {
-      gsap.to(this, { scale: 1.05, duration: 0.25, ease: 'power2.out' });
-    });
-    btn.addEventListener('mouseleave', function() {
-      gsap.to(this, { scale: 1, x: 0, y: 0, duration: 0.4, ease: 'elastic.out(1, 0.4)' });
-    });
-    btn.addEventListener('mousemove', function(e) {
-      const rect = this.getBoundingClientRect();
-      const dx = (e.clientX - rect.left - rect.width / 2) * 0.15;
-      const dy = (e.clientY - rect.top - rect.height / 2) * 0.15;
-      gsap.to(this, { x: dx, y: dy, duration: 0.25, ease: 'power2.out' });
-    });
-  });
-}
+/* ─── 17. MAGNETIC HOVER — rimosso ─── */
 
-/* ─── 18. 3D TILT on coin-panel cards (desktop only) ─── */
-if (window.matchMedia('(pointer: fine)').matches) {
-  document.querySelectorAll('#attivita .coin-panel, #filiera .coin-panel, #certificazioni .coin-panel').forEach(card => {
-    card.style.transformStyle = 'preserve-3d';
-    card.addEventListener('mousemove', function(e) {
-      const rect = this.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const rx = -(e.clientY - cy) / 14;
-      const ry = (e.clientX - cx) / 14;
-      gsap.to(this, { rotateX: rx, rotateY: ry, duration: 0.35, ease: 'power2.out' });
-    });
-    card.addEventListener('mouseleave', function() {
-      gsap.to(this, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
-    });
-  });
-}
+/* ─── 18. 3D TILT — rimosso ─── */
 
 /* ─── 19. STAGGER REVEAL for year badges in storia ─── */
 document.querySelectorAll('#storia .coin-panel .text-primary').forEach((year, i) => {
@@ -2499,20 +2286,7 @@ document.querySelectorAll('#contatti input, #contatti textarea, #contatti select
   });
 })();
 
-/* ─── 28. BUTTON CLICK RIPPLE ─── */
-(function() {
-  document.querySelectorAll('.pill-btn').forEach(btn => {
-    btn.addEventListener('pointerdown', function(e) {
-      const rect = this.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height) * 2;
-      const circle = document.createElement('span');
-      circle.className = 'ripple-circle';
-      circle.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size / 2}px;top:${e.clientY - rect.top - size / 2}px`;
-      this.appendChild(circle);
-      circle.addEventListener('animationend', () => circle.remove(), { once: true });
-    });
-  });
-})();
+/* ─── 28. BUTTON CLICK RIPPLE — rimosso ─── */
 
 /* ─── 29. PANEL SHIMMER ON REVEAL ─── */
 (function() {
@@ -2528,20 +2302,7 @@ document.querySelectorAll('#contatti input, #contatti textarea, #contatti select
   });
 })();
 
-/* ─── 30. SCROLL VELOCITY CURSOR STRETCH ─── */
-(function() {
-  const ring = document.querySelector('.cursor-ring');
-  if (!ring || !window.matchMedia('(pointer: fine)').matches) return;
-  let lastY = window.scrollY;
-  window.addEventListener('scroll', () => {
-    const vel = Math.abs(window.scrollY - lastY);
-    lastY = window.scrollY;
-    const sy = Math.min(1.8, 1 + vel * 0.018);
-    const sx = Math.max(0.58, 1 / sy);
-    gsap.to(ring, { scaleX: sx, scaleY: sy, duration: 0.08, overwrite: true });
-    gsap.to(ring, { scaleX: 1, scaleY: 1, duration: 0.55, delay: 0.1, ease: 'elastic.out(1, 0.4)', overwrite: false });
-  }, { passive: true });
-})();
+/* ─── 30. SCROLL VELOCITY CURSOR STRETCH — rimosso ─── */
 
 /* ─── 31. AMBIENT BLOB SECTION PULSE ─── */
 (function() {
