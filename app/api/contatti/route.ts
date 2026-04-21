@@ -5,9 +5,8 @@ const MAX_NOME = 60;
 const MAX_EMAIL = 60;
 const MAX_MESSAGGIO = 20000;
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const body = await request.json();
 

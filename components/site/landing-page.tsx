@@ -132,6 +132,16 @@ export function LandingPage() {
       <main>
         {/* ── Hero ── */}
         <section id="top" className={styles.hero}>
+          <div className={styles.heroBg} aria-hidden="true">
+            <Image
+              src="/images/campo.jpg"
+              alt=""
+              fill
+              className={styles.heroBgImg}
+              priority
+            />
+            <div className={styles.heroOverlay} />
+          </div>
           <div className={styles.container}>
             <p className={styles.eyebrow}>Agricoltura di sistema · Rodigo, Mantova</p>
             <h1 className={styles.heroTitle}>Cascina Fontana</h1>

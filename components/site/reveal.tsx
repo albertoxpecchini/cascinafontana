@@ -33,8 +33,8 @@ export function Reveal({
 
   useEffect(() => {
     if (reduceMotion) {
-      setIsVisible(true);
-      return;
+      const t = setTimeout(() => setIsVisible(true), 0);
+      return () => clearTimeout(t);
     }
 
     const node = rootRef.current;

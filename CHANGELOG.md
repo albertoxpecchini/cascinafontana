@@ -7,6 +7,15 @@ Questo file e` allineato ai commit versionati presenti nella history Git: cosa e
 
 ---
 
+## 2026.04.22.01
+- Hero section `landing-page.tsx` convertita in full-screen visivo:
+  - sfondo `campo.jpg` a tutta altezza viewport (`100svh`) con overlay scuro sfumato,
+  - titolo e testi hero bianchi su sfondo immagine,
+  - statistiche (biolche, mezzi, pannelli, fondazione) in verde `#c5f17f` con separatori verticali,
+  - `eyebrow` in verde tenue su sfondo scuro.
+- Rimosso `scroll-behavior: smooth` da `globals.css`: navigazione da header istantanea senza delay.
+- Aggiunto `PUBLISHING.md` con checklist pre-release (codice, sicurezza, git, qualità visiva).
+
 ## 2026.04.20.02
 - Fix mobile (iPhone 16 Pro / touch, <500px):
   - SVG background animato e ambient blob layer disabilitati su `pointer: coarse` (risparmio CPU/GPU pesante),
