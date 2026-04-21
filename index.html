@@ -855,6 +855,17 @@
 </style>
 </head>
 <body class="font-sans antialiased bg-light-bg text-light-text">
+
+<!-- ═══ PAGE LOADER — primo elemento del body, copre tutto da subito ═══ -->
+<div id="page-loader" role="status" aria-label="Caricamento Cascina Fontana">
+  <div class="page-loader__logo">CF</div>
+  <div class="page-loader__dots">
+    <div class="page-loader__dot"></div>
+    <div class="page-loader__dot"></div>
+    <div class="page-loader__dot"></div>
+  </div>
+</div>
+
 <div class="gs-progress-bar" aria-hidden="true"></div>
 <div class="gs-glow" aria-hidden="true"></div>
 
@@ -2585,16 +2596,6 @@ document.querySelectorAll('#contatti input, #contatti textarea, #contatti select
   setInterval(tick, 1000);
 })();
 </script>
-
-<!-- ═══ PAGE LOADER ═══ -->
-<div id="page-loader" role="status" aria-label="Caricamento Cascina Fontana">
-  <div class="page-loader__logo">CF</div>
-  <div class="page-loader__dots">
-    <div class="page-loader__dot"></div>
-    <div class="page-loader__dot"></div>
-    <div class="page-loader__dot"></div>
-  </div>
-</div>
 
 </body>
 </html>
