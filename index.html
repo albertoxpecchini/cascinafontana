@@ -732,6 +732,12 @@
     justify-content: center;
     flex-direction: column;
     gap: 22px;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+  }
+  #page-loader.is-hidden {
+    opacity: 0;
+    pointer-events: none;
   }
   .page-loader__logo {
     width: 68px;
@@ -1586,43 +1592,33 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/TextPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollToPlugin.min.js"></script>
 
-<!-- ── Loader exit — script isolato, immune da errori del blocco principale ── -->
+<!-- ── Loader exit — zero dipendenze, immune da qualsiasi errore JS ── -->
 <script>
 (function () {
   var loader = document.getElementById('page-loader');
   if (!loader) return;
 
-  /* Animazione attesa dei dots (GSAP già caricato qui) */
-  var logo = loader.querySelector('.page-loader__logo');
-  var dots = loader.querySelectorAll('.page-loader__dot');
-  gsap.from(logo, { scale: 0.78, opacity: 0, duration: 0.5, ease: 'back.out(1.4)' });
-  gsap.fromTo(dots,
-    { opacity: 0.3, y: 0 },
-    { opacity: 1, y: -5, duration: 0.5, stagger: 0.14, repeat: -1, yoyo: true, ease: 'sine.inOut' }
-  );
-
   function exitLoader() {
-    if (!loader || loader.dataset.dismissed === '1') return;
+    if (loader.dataset.dismissed === '1') return;
     loader.dataset.dismissed = '1';
-    gsap.timeline()
-      .to(logo, { scale: 1.12, opacity: 0, duration: 0.35, ease: 'power2.in' })
-      .to(dots, { opacity: 0, y: -6, stagger: 0.07, duration: 0.25 }, '-=0.25')
-      .to(loader, { opacity: 0, duration: 0.4, ease: 'power2.in',
-        onComplete: function () { loader.style.display = 'none'; }
-      }, '-=0.1');
+    loader.classList.add('is-hidden');
+    loader.addEventListener('transitionend', function () {
+      loader.style.display = 'none';
+    }, { once: true });
+    /* Fallback se transitionend non scatta (es. transition disabilitata) */
+    setTimeout(function () { loader.style.display = 'none'; }, 600);
   }
 
-  /* Rimozione al load — principale */
   if (document.readyState === 'complete') {
-    gsap.delayedCall(0.28, exitLoader);
+    setTimeout(exitLoader, 200);
   } else {
     window.addEventListener('load', function () {
-      gsap.delayedCall(0.2, exitLoader);
+      setTimeout(exitLoader, 200);
     }, { once: true });
   }
 
-  /* Safety net: mai più di 5 s di attesa */
-  setTimeout(function () { exitLoader(); }, 5000);
+  /* Garanzia assoluta: rimosso entro 5 s in qualsiasi caso */
+  setTimeout(exitLoader, 5000);
 })();
 </script>
 
