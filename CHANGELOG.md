@@ -7,6 +7,10 @@ Questo file e` allineato ai commit versionati presenti nella history Git: cosa e
 
 ---
 
+## 2026.04.22.03
+- `index.html`: aggiunta versione `v2026.04.22` nel footer accanto alla P.IVA.
+- `package.json`: versione allineata a `2026.04.22.02`.
+
 ## 2026.04.22.01
 - Hero section `landing-page.tsx` convertita in full-screen visivo:
   - sfondo `campo.jpg` a tutta altezza viewport (`100svh`) con overlay scuro sfumato,
