@@ -43,9 +43,16 @@
 
 .loadingFill {
   height: 100%;
-  width: 0;
+  width: 100%;
   background: linear-gradient(90deg, #8dbf55, #2d6a30);
-  transition: width 0.02s linear;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: loadFill 2s linear forwards;
+}
+
+@keyframes loadFill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
 .loadingPercent {
