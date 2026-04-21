@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "./contact-form";
@@ -46,8 +49,68 @@ const activities = [
 ] as const;
 
 export function LandingPage() {
+  const [progress, setProgress] = useState(0);
+  const [showLoader, setShowLoader] = useState(true);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+  const isFinalPhase = progress >= 90;
+
+  useEffect(() => {
+    const durationMs = 2000;
+    const tickMs = 20;
+    const steps = durationMs / tickMs;
+    let dismissTimer = 0;
+
+    const timer = window.setInterval(() => {
+      setProgress((current) => {
+        const next = current + 100 / steps;
+        if (next >= 100) {
+          window.clearInterval(timer);
+          setIsFadingOut(true);
+          dismissTimer = window.setTimeout(() => setShowLoader(false), 320);
+          return 100;
+        }
+        return next;
+      });
+    }, tickMs);
+
+    return () => {
+      window.clearInterval(timer);
+      if (dismissTimer) {
+        window.clearTimeout(dismissTimer);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!showLoader) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [showLoader]);
+
   return (
     <div className={styles.page}>
+      {showLoader && (
+        <div
+          className={`${styles.loadingScreen} ${isFadingOut ? styles.loadingScreenExit : ""}`}
+          role="status"
+          aria-live="polite"
+          aria-label="Caricamento pagina"
+        >
+          <p className={styles.loadingTitle}>{isFinalPhase ? "Pronto" : "Caricamento"}</p>
+          <div className={styles.loadingTrack} aria-hidden="true">
+            <div className={styles.loadingFill} style={{ width: `${Math.round(progress)}%` }} />
+          </div>
+          <p className={styles.loadingPercent}>{Math.round(progress)}%</p>
+        </div>
+      )}
+
       {/* ── Header ── */}
       <header className={styles.header}>
         <div className={styles.container}>

@@ -5,6 +5,56 @@
   color: #1a1a1a;
 }
 
+.loadingScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #fff;
+  opacity: 1;
+  transition: opacity 0.32s ease;
+}
+
+.loadingScreenExit {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loadingTitle {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2d6a30;
+}
+
+.loadingTrack {
+  width: min(320px, calc(100% - 56px));
+  height: 8px;
+  border-radius: 999px;
+  background: #e8efe9;
+  overflow: hidden;
+}
+
+.loadingFill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #8dbf55, #2d6a30);
+  transition: width 0.02s linear;
+}
+
+.loadingPercent {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
 /* ── Container ── */
 .container {
   width: min(960px, calc(100% - 40px));
