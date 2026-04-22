@@ -1611,9 +1611,10 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       mob.classList.add('hidden');
     }
     gsap.to(window, {
-      duration: 1.2,
+      duration: 0.7,
       scrollTo: { y: target, offsetY: 80 },
-      ease: 'power3.inOut'
+      ease: 'power2.out',
+      overwrite: true
     });
   });
 });
