@@ -1610,12 +1610,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       mob.classList.remove('flex');
       mob.classList.add('hidden');
     }
-    gsap.to(window, {
-      duration: 0.7,
-      scrollTo: { y: target, offsetY: 80 },
-      ease: 'power2.out',
-      overwrite: true
-    });
+    gsap.set(window, { scrollTo: { y: target, offsetY: 80 } });
   });
 });
 
