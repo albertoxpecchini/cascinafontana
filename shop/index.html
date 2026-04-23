@@ -105,15 +105,12 @@
   </footer>
 
   <script type="module">
-    import { initNav }    from '/js/nav.js';
-    import { loadShopAll } from '/js/shop.js';
-
+    import { initNav } from '/js/nav.js';
     initNav('shop');
-
-    // Initial load
+  </script>
+  <script type="module">
+    import { loadShopAll } from '/js/shop.js';
     loadShopAll('shop-grid');
-
-    // Category filters
     document.getElementById('shop-filters')?.addEventListener('click', (e) => {
       const btn = e.target.closest('.filter-btn');
       if (!btn) return;

@@ -257,16 +257,17 @@
   </footer>
 
   <script type="module">
-    import { initNav }         from '/js/nav.js';
-    import { initMap }         from '/js/map.js';
+    import { initNav } from '/js/nav.js';
+    import { initMap } from '/js/map.js';
+    initNav('main');
+    initMap('hero-map', 45.178186, 10.661154);
+  </script>
+  <script type="module">
     import { initCarousel }    from '/js/gallery.js';
     import { loadProdotti }    from '/js/prodotti.js';
     import { loadNovita }      from '/js/novita.js';
     import { loadShopPreview } from '/js/shop.js';
     import { initContactForm } from '/js/contact.js';
-
-    initNav('main');
-    initMap('hero-map', 45.178186, 10.661154);
     initCarousel('main-carousel', 'main-carousel-track', 'carousel-prev', 'carousel-next', 'carousel-dots');
     loadProdotti('prodotti-preview', { limit: 3, featuredFirst: true });
     loadNovita('novita-preview', 2);

@@ -7,20 +7,23 @@ if (!url || !anon) {
   console.warn('[supabase] Env mancanti — imposta window.__ENV__ prima di questo modulo.');
 }
 
-export const supabase = createClient(url, anon, {
-  auth: {
-    autoRefreshToken:   true,
-    persistSession:     true,
-    detectSessionInUrl: true,
-  },
-});
+export const supabase = (url && anon)
+  ? createClient(url, anon, {
+      auth: {
+        autoRefreshToken:   true,
+        persistSession:     true,
+        detectSessionInUrl: true,
+      },
+    })
+  : null;
 
 // Avvia il loop di refresh anche senza un listener attivo (pagine non-admin).
-supabase.auth.startAutoRefresh();
+if (supabase) supabase.auth.startAutoRefresh();
 
 // ── Auth helpers ─────────────────────────────────────────────────────────────
 
 export async function getSession() {
+  if (!supabase) return null;
   const { data } = await supabase.auth.getSession();
   return data.session ?? null;
 }
