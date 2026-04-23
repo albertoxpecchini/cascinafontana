@@ -18,8 +18,13 @@
     button:hover { background: #555; }
     button.secondary { background: #666; }
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
-    .gallery-item { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .gallery-item img { width: 100%; height: 200px; object-fit: cover; }
+    .gallery-item { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); cursor: grab; }
+    .gallery-item img { width: 100%; height: 200px; object-fit: cover; pointer-events: none; }
+    .gallery-item.dragging { opacity: 0.35; cursor: grabbing; }
+    .gallery-item.drag-over { outline: 3px solid #333; outline-offset: 2px; }
+    .drag-handle { display: block; text-align: center; padding: 4px 0; font-size: 1rem; color: #bbb; letter-spacing: 4px; background: #f9f9f9; cursor: grab; }
+    #saveOrderBtn { background: #2e7d32; }
+    #saveOrderBtn:hover { background: #388e3c; }
     .gallery-item-info { padding: 15px; }
     .gallery-item-info p { margin: 5px 0; font-size: 0.9em; color: #666; }
     .gallery-item-actions { display: flex; gap: 10px; margin-top: 10px; }
@@ -68,7 +73,11 @@
       <button onclick="uploadImages()">Carica immagini</button>
     </div>
 
-    <h2 style="margin-bottom: 20px;">Immagini caricate</h2>
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+      <h2>Immagini caricate</h2>
+      <button id="saveOrderBtn" onclick="saveOrder()" style="display:none;">💾 Salva ordine</button>
+    </div>
+    <p style="font-size:0.85em; color:#999; margin-bottom:16px;">Trascina le immagini per riordinarle, poi premi "Salva ordine".</p>
     <div id="galleryList" class="gallery-grid">
       <div class="loading">Caricamento...</div>
     </div>
@@ -175,23 +184,89 @@
         }
 
         container.innerHTML = data.map(img => `
-          <div class="gallery-item">
+          <div class="gallery-item" draggable="true" data-id="${img.id}">
+            <span class="drag-handle">⠿ ⠿ ⠿</span>
             <img src="${img.url}" alt="${img.caption || ''}">
             <div class="gallery-item-info">
-              <p><strong>Ordine:</strong> ${img.ordine}</p>
               ${img.caption ? `<p><strong>Didascalia:</strong> ${img.caption}</p>` : ''}
               <div class="gallery-item-actions">
-                <button onclick="deleteImage(${img.id})" class="secondary">🗑️ Elimina</button>
+                <button onclick="deleteImage('${img.id}')" class="secondary">🗑️ Elimina</button>
               </div>
             </div>
           </div>
         `).join('');
+        initDragSort(container);
       } catch (err) {
         container.innerHTML = `<div class="error" style="grid-column: 1/-1;">Errore: ${err.message}</div>`;
       }
     }
 
+    // ── Drag-to-reorder ──────────────────────────────────────────────────────
+    let draggedEl = null;
+
+    function initDragSort(container) {
+      container.addEventListener('dragstart', e => {
+        const item = e.target.closest('.gallery-item');
+        if (!item) return;
+        draggedEl = item;
+        item.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      container.addEventListener('dragend', () => {
+        draggedEl?.classList.remove('dragging');
+        container.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+        draggedEl = null;
+      });
+      container.addEventListener('dragover', e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        const target = e.target.closest('.gallery-item');
+        if (!target || target === draggedEl) return;
+        container.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+        target.classList.add('drag-over');
+      });
+      container.addEventListener('dragleave', e => {
+        e.target.closest?.('.gallery-item')?.classList.remove('drag-over');
+      });
+      container.addEventListener('drop', e => {
+        e.preventDefault();
+        const target = e.target.closest('.gallery-item');
+        if (!target || target === draggedEl) return;
+        target.classList.remove('drag-over');
+        const rect = target.getBoundingClientRect();
+        if (e.clientY < rect.top + rect.height / 2) {
+          container.insertBefore(draggedEl, target);
+        } else {
+          container.insertBefore(draggedEl, target.nextSibling);
+        }
+        document.getElementById('saveOrderBtn').style.display = 'inline-block';
+      });
+    }
+
+    async function saveOrder() {
+      const container = document.getElementById('galleryList');
+      const items = Array.from(container.querySelectorAll('.gallery-item[data-id]'));
+      const btn = document.getElementById('saveOrderBtn');
+      btn.textContent = 'Salvataggio...';
+      btn.disabled = true;
+      try {
+        await Promise.all(items.map((el, i) =>
+          supabase.from('galleria').update({ ordine: i + 1 }).eq('id', el.dataset.id)
+        ));
+        btn.style.display = 'none';
+        const msg = document.getElementById('message');
+        msg.innerHTML = '<div class="success">✓ Ordine salvato!</div>';
+        setTimeout(() => { msg.innerHTML = ''; }, 2500);
+      } catch (err) {
+        alert('Errore nel salvataggio: ' + err.message);
+      } finally {
+        btn.textContent = '💾 Salva ordine';
+        btn.disabled = false;
+      }
+    }
+
     window.uploadImages = uploadImages;
+    window.saveOrder = saveOrder;
     window.deleteImage = async (id) => {
       if (!confirm('Eliminare questa immagine?')) return;
 
