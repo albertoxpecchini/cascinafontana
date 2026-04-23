@@ -37,7 +37,7 @@ export function initMap(containerId, lat, lng, zoom = 14) {
 
   L.marker([lat, lng], { icon })
     .addTo(map)
-    .bindPopup('<strong>Cascina Fontana</strong><br>Azienda Agricola')
+    .bindPopup('<strong>Cascina Fontana</strong><br>Società Agricola S.S.')
     .openPopup();
 
   return map;
