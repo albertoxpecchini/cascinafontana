@@ -99,7 +99,7 @@ export async function loadShopAll(containerId, filterCategory = null) {
 
   try {
     const all   = await getItems();
-    const items = filterCategory ? all.filter(i => i.category === filterCategory) : all;
+    const items = filterCategory ? all.filter(i => (i.category ?? '').toLowerCase() === filterCategory.toLowerCase()) : all;
     renderItems(container, items, false);
     renderPaypalButtons(items);
   } catch (err) {
