@@ -56,7 +56,7 @@ export function initCarousel(carouselId, trackId, prevBtnId, nextBtnId, dotsId) 
         `<img class="carousel-slide" src="${img.url}" alt="${img.caption ?? ''}" loading="lazy">`
       ).join('');
     }
-    slides = track.querySelectorAll('.carousel-slide');
+    slides = Array.from(track.querySelectorAll('.carousel-slide'));
     buildDots();
   }).catch(err => {
     console.error('[gallery]', err);
