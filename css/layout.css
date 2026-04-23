@@ -274,6 +274,19 @@ main {
   color: var(--color-placeholder);
 }
 
+.footer-admin {
+  font-size: 0.75rem;
+  color: var(--color-placeholder);
+  opacity: 0.45;
+  margin-left: auto;
+  transition: opacity 0.2s ease;
+}
+
+.footer-admin:hover {
+  opacity: 0.8;
+  color: var(--color-muted);
+}
+
 @media (min-width: 768px) {
   .site-footer .container {
     flex-direction: row;
