@@ -4,11 +4,13 @@
   "description": "Sito ufficiale Cascina Fontana — azienda agricola lombarda",
   "private": true,
   "scripts": {
+    "dev": "serve .",
     "start": "serve ."
   },
   "dependencies": {
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.104.1",
     "gsap": "^3.15.0",
     "resend": "^4.0.0"
-  },
-  "devDependencies": {}
+  }
 }

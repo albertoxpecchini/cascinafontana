@@ -1,15 +1,10 @@
-import { supabase } from '/js/supabase.js';
+import { fetchListings } from '/js/supabase.js';
 
 let cachedItems = null;
 
-async function fetchItems() {
+async function getItems() {
   if (cachedItems) return cachedItems;
-  const { data } = await supabase
-    .from('listings')
-    .select('id,title,price,description,category,image_url')
-    .eq('status', 'available')
-    .order('created_at', { ascending: false });
-  cachedItems = data ?? [];
+  cachedItems = await fetchListings({ availableOnly: true });
   return cachedItems;
 }
 
@@ -30,8 +25,8 @@ function productCard(item, preview = false) {
           <h3>${item.title}</h3>
           ${item.price ? `<span class="product-price">€${item.price}</span>` : ''}
         </div>
-        ${item.category ? `<span class="badge badge-gray">${item.category}</span>` : ''}
-        ${item.description ? `<p class="product-card-desc">${item.description}</p>` : ''}
+        ${item.category    ? `<span class="badge badge-gray">${item.category}</span>` : ''}
+        ${item.description ? `<p class="product-card-desc">${item.description}</p>`   : ''}
         <div class="product-card-footer">${paypalHtml}</div>
       </div>
     </div>
@@ -89,19 +84,28 @@ function renderPaypalButtons(items) {
 export async function loadShopPreview(containerId, limit = 3) {
   const container = document.getElementById(containerId);
   if (!container) return;
-  const items = (await fetchItems()).slice(0, limit);
-  renderItems(container, items, true);
+  try {
+    const items = (await getItems()).slice(0, limit);
+    renderItems(container, items, true);
+  } catch (err) {
+    console.error('[shop]', err);
+    container.innerHTML = `<div class="empty-state"><p>Errore nel caricamento.</p></div>`;
+  }
 }
 
 export async function loadShopAll(containerId, filterCategory = null) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const all = await fetchItems();
-  const items = filterCategory ? all.filter(i => i.category === filterCategory) : all;
-
-  renderItems(container, items, false);
-  renderPaypalButtons(items);
+  try {
+    const all   = await getItems();
+    const items = filterCategory ? all.filter(i => i.category === filterCategory) : all;
+    renderItems(container, items, false);
+    renderPaypalButtons(items);
+  } catch (err) {
+    console.error('[shop]', err);
+    container.innerHTML = `<div class="empty-state"><p>Errore nel caricamento.</p></div>`;
+  }
 }
 
 function showConfirmation(title) {

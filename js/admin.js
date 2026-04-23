@@ -1,9 +1,4 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-const supabase = createClient(
-  window.__ENV__?.SUPABASE_URL  ?? '',
-  window.__ENV__?.SUPABASE_ANON ?? ''
-);
+import { supabase } from '/js/supabase.js';
 
 // ── DOM ──────────────────────────────────────────────────────────────────────
 const $ = id => document.getElementById(id);

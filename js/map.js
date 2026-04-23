@@ -17,10 +17,10 @@ export function initMap(containerId, lat, lng, zoom = 14) {
     zoomControl: true,
   });
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  maxZoom: 19,
+  attribution: '&copy; OpenStreetMap &copy; CARTO'
+}).addTo(map);
 
   const icon = L.divIcon({
     className: '',
@@ -37,7 +37,7 @@ export function initMap(containerId, lat, lng, zoom = 14) {
 
   L.marker([lat, lng], { icon })
     .addTo(map)
-    .bindPopup('<strong>Cascina Fontana</strong><br>Società Agricola S.S.')
+    .bindPopup('<strong>Società Agricola Cascina Fontana</strong><br>Strada Vedusino 4, 46040 Rodigo MN')
     .openPopup();
 
   return map;

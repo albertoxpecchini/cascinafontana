@@ -320,6 +320,10 @@
   box-shadow: var(--shadow-card);
 }
 
+.leaflet-attribution-flag {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .map-container {
     aspect-ratio: 16 / 10;
