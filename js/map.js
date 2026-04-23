@@ -14,11 +14,19 @@ export function initMap(containerId, lat, lng, zoom = 14) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
     const map = L.map(containerId, {
       center: [lat, lng],
       zoom,
-      scrollWheelZoom: false,
-      zoomControl: true,
+      scrollWheelZoom:   false,
+      zoomControl:       !isMobile,
+      dragging:          !isMobile,
+      touchZoom:         !isMobile,
+      doubleClickZoom:   !isMobile,
+      boxZoom:           !isMobile,
+      keyboard:          !isMobile,
+      tap:               !isMobile,
     });
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
