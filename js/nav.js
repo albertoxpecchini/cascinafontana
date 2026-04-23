@@ -5,7 +5,6 @@ const NAV_ITEMS = [
   { href: '/galleria', label: 'Galleria' },
   { href: '/prodotti', label: 'Prodotti' },
   { href: '/novita',   label: 'Novità' },
-  { href: '/shop',     label: 'Shop' },
   { href: '/contatti', label: 'Contatti' },
 ];
 
