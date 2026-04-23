@@ -53,6 +53,17 @@ export function initMap(containerId, lat, lng, zoom = 14) {
       .openPopup();
 
     map.invalidateSize();
+
+    if (isMobile) {
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
+      map.boxZoom.disable();
+      map.keyboard.disable();
+      if (map.tap) map.tap.disable();
+      container.style.pointerEvents = 'none';
+    }
   }
 
   // Aspetta che Leaflet (caricato con defer) sia disponibile
