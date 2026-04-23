@@ -27,6 +27,14 @@
     .loading { color: #999; }
     .error { color: #d32f2f; padding: 10px; background: #ffebee; border-radius: 4px; margin-bottom: 15px; }
     .success { color: #388e3c; padding: 10px; background: #e8f5e9; border-radius: 4px; margin-bottom: 15px; }
+    .drop-zone { border: 2px dashed #aaa; border-radius: 8px; padding: 40px 20px; text-align: center; cursor: pointer; background: #fafafa; transition: border-color .2s, background .2s; user-select: none; }
+    .drop-zone:hover, .drop-zone.drag-over { border-color: #333; background: #f0f0f0; }
+    .drop-zone input[type="file"] { display: none; }
+    .drop-zone .dz-icon { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+    .drop-zone .dz-text { font-size: 1rem; color: #555; }
+    .drop-zone .dz-sub { font-size: 0.82rem; color: #999; margin-top: 6px; }
+    .file-list { margin-top: 10px; font-size: 0.85em; color: #555; }
+    .file-list span { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; margin: 2px; }
   </style>
 </head>
 <body>
@@ -48,10 +56,16 @@
         <input type="number" id="order" value="999" min="0">
       </div>
       <div class="upload-group">
-        <label for="imageFile">Seleziona immagine</label>
-        <input type="file" id="imageFile" accept="image/*">
+        <label>Immagini (anche più di una)</label>
+        <div class="drop-zone" id="dropZone">
+          <input type="file" id="imageFile" accept="image/*" multiple>
+          <span class="dz-icon">🖼️</span>
+          <div class="dz-text">Clicca per caricare immagini (anche più di una)</div>
+          <div class="dz-sub">oppure trascina i file qui · JPG, PNG, WebP</div>
+        </div>
+        <div class="file-list" id="fileList"></div>
       </div>
-      <button onclick="uploadImage()">Carica immagine</button>
+      <button onclick="uploadImages()">Carica immagini</button>
     </div>
 
     <h2 style="margin-bottom: 20px;">Immagini caricate</h2>
@@ -79,50 +93,70 @@
   <script type="module">
     import { supabase } from '/js/supabase.js';
 
-    async function uploadImage() {
-      const fileInput = document.getElementById('imageFile');
-      const caption = document.getElementById('caption').value.trim();
-      const order = parseInt(document.getElementById('order').value) || 999;
-      const messageEl = document.getElementById('message');
+    // Drop zone wiring
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('imageFile');
+    const fileList  = document.getElementById('fileList');
 
-      if (!fileInput.files.length) {
-        messageEl.innerHTML = '<div class="error">Seleziona un file</div>';
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      // Assign dropped files to the input via DataTransfer
+      fileInput.files = e.dataTransfer.files;
+      updateFileList();
+    });
+    fileInput.addEventListener('change', updateFileList);
+
+    function updateFileList() {
+      const files = Array.from(fileInput.files);
+      fileList.innerHTML = files.map(f => `<span>${f.name}</span>`).join('');
+    }
+
+    async function uploadImages() {
+      const caption  = document.getElementById('caption').value.trim();
+      const order    = parseInt(document.getElementById('order').value) || 999;
+      const messageEl = document.getElementById('message');
+      const files    = Array.from(fileInput.files);
+
+      if (!files.length) {
+        messageEl.innerHTML = '<div class="error">Seleziona almeno un file</div>';
         return;
       }
 
-      const file = fileInput.files[0];
-      const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${file.name.split('.').pop()}`;
+      messageEl.innerHTML = `<div class="loading">Caricamento ${files.length} immagine/i in corso...</div>`;
 
-      messageEl.innerHTML = '<div class="loading">Caricamento in corso...</div>';
+      let ok = 0; const errors = [];
+      for (const file of files) {
+        const ext      = file.name.split('.').pop().toLowerCase();
+        const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+        try {
+          const { error: uploadErr } = await supabase.storage.from('galleria').upload(fileName, file);
+          if (uploadErr) throw uploadErr;
 
-      try {
-        // Upload file
-        const { data, error: uploadErr } = await supabase.storage
-          .from('galleria')
-          .upload(fileName, file);
+          const { data: { publicUrl } } = supabase.storage.from('galleria').getPublicUrl(fileName);
 
-        if (uploadErr) throw uploadErr;
-
-        // Get public URL
-        const { data: { publicUrl } } = supabase.storage
-          .from('galleria')
-          .getPublicUrl(fileName);
-
-        // Insert into DB
-        const { error: dbErr } = await supabase
-          .from('galleria')
-          .insert([{ url: publicUrl, caption, ordine: order }]);
-
-        if (dbErr) throw dbErr;
-
-        messageEl.innerHTML = '<div class="success">✓ Immagine caricata con successo!</div>';
-        fileInput.value = '';
-        document.getElementById('caption').value = '';
-        document.getElementById('order').value = '999';
-        loadGallery();
-      } catch (err) {
-        messageEl.innerHTML = `<div class="error">Errore: ${err.message}</div>`;
+          const { error: dbErr } = await supabase.from('galleria')
+            .insert([{ url: publicUrl, caption, ordine: order }]);
+          if (dbErr) throw dbErr;
+          ok++;
+        } catch (err) {
+          errors.push(`${file.name}: ${err.message}`);
+        }
       }
+
+      if (errors.length) {
+        messageEl.innerHTML = `<div class="error">Errori:<br>${errors.join('<br>')}</div>`;
+      } else {
+        messageEl.innerHTML = `<div class="success">✓ ${ok} immagine/i caricate con successo!</div>`;
+      }
+      fileInput.value = '';
+      fileList.innerHTML = '';
+      document.getElementById('caption').value = '';
+      document.getElementById('order').value = '999';
+      loadGallery();
     }
 
     async function loadGallery() {
@@ -157,7 +191,7 @@
       }
     }
 
-    window.uploadImage = uploadImage;
+    window.uploadImages = uploadImages;
     window.deleteImage = async (id) => {
       if (!confirm('Eliminare questa immagine?')) return;
 
