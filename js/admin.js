@@ -15,7 +15,6 @@ const tabBtns       = document.querySelectorAll('.tab-btn');
 const tabShop       = $('tab-shop');
 const tabNovita     = $('tab-novita');
 const tabGalleria   = $('tab-galleria');
-const tabProdotti   = $('tab-prodotti');
 
 const shopGrid      = $('shop-grid');
 const btnNewProduct = $('btn-new-product');
@@ -40,22 +39,7 @@ const galleryModalCancel    = $('gallery-modal-cancel');
 const galleryModalSave      = $('gallery-modal-save');
 
 // Prodotti catalogo
-const prodottiGrid       = $('prodotti-grid');
-const btnNewProdotto     = $('btn-new-prodotto');
-const prodottoModal      = $('prodotto-modal');
-const prodottoModalTitle = $('prodotto-modal-title');
-const prodottoModalClose = $('prodotto-modal-close');
-const prodottoModalCncl  = $('prodotto-modal-cancel');
-const prodottoModalSave  = $('prodotto-modal-save');
-const prodottoId         = $('prodotto-id');
-const prodTitolo         = $('prod-titolo');
-const prodCategoria      = $('prod-categoria');
-const prodDescrizione    = $('prod-descrizione');
-const prodEvidenza       = $('prod-evidenza');
-const prodImageFile      = $('prod-image-file');
-const prodImgUploadArea  = $('prod-img-upload-area');
-const prodImgPreview     = $('prod-img-preview');
-const prodImgPh          = $('prod-img-ph');
+// (tab rimosso)
 
 const productModal  = $('product-modal');
 const modalTitleEl  = $('modal-title-text');
@@ -112,7 +96,6 @@ function showDashboard(user) {
   loadShop();
   loadNovita();
   loadGalleria();
-  loadProdottiAdmin();
 }
 
 // ── TABS ─────────────────────────────────────────────────────────────────────
@@ -124,7 +107,6 @@ tabBtns.forEach(btn => btn.addEventListener('click', () => {
   tabShop.hidden     = t !== 'shop';
   tabNovita.hidden   = t !== 'novita';
   tabGalleria.hidden = t !== 'galleria';
-  tabProdotti.hidden = t !== 'prodotti';
 }));
 
 // ── SHOP — LOAD ───────────────────────────────────────────────────────────────
@@ -370,6 +352,120 @@ async function deletePost(id) {
   if (error) { alert('Errore: ' + error.message); return; }
   loadNovita();
 }
+
+// ── GALLERIA — LOAD ───────────────────────────────────────────────────────────
+async function loadGalleria() {
+  galleryGrid.innerHTML = '<p style="color:var(--muted);font-size:.9rem;padding:.5rem 0">Caricamento…</p>';
+
+  const { data, error } = await supabase
+    .from('galleria')
+    .select('*')
+    .order('ordine', { ascending: true });
+
+  if (error) {
+    galleryGrid.innerHTML = `<p style="color:var(--danger)">Errore: ${esc(error.message)}</p>`;
+    return;
+  }
+
+  if (!data.length) {
+    galleryGrid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1">
+        <div style="font-size:2.5rem">🖼️</div>
+        <p>Nessuna immagine. Carica la prima!</p>
+      </div>`;
+    return;
+  }
+
+  galleryGrid.innerHTML = data.map(galleryCard).join('');
+
+  galleryGrid.querySelectorAll('[data-edit-img]').forEach(btn =>
+    btn.addEventListener('click', () => openGalleryModal(data.find(i => i.id === btn.dataset.editImg)))
+  );
+  galleryGrid.querySelectorAll('[data-del-img]').forEach(btn =>
+    btn.addEventListener('click', () => deleteGalleryItem(btn.dataset.delImg))
+  );
+}
+
+function galleryCard(item) {
+  return `
+    <div class="gallery-admin-item">
+      <img src="${esc(item.url)}" alt="${esc(item.caption ?? '')}" loading="lazy">
+      <div class="gallery-item-footer">
+        <span class="gallery-item-caption">${esc(item.caption ?? '—')}</span>
+        <button class="gallery-item-btn" data-edit-img="${item.id}" title="Modifica">✏️</button>
+        <button class="gallery-item-btn del" data-del-img="${item.id}" title="Elimina">🗑️</button>
+      </div>
+    </div>`;
+}
+
+async function deleteGalleryItem(id) {
+  if (!confirm('Eliminare questa immagine?')) return;
+  const { error } = await supabase.from('galleria').delete().eq('id', id);
+  if (error) { alert('Errore: ' + error.message); return; }
+  loadGalleria();
+}
+
+// ── GALLERIA — UPLOAD ─────────────────────────────────────────────────────────
+galleryUploadZone.addEventListener('click', () => galleryFileInput.click());
+
+galleryFileInput.addEventListener('change', async () => {
+  const files = Array.from(galleryFileInput.files);
+  if (!files.length) return;
+
+  galleryUploadProgress.hidden = false;
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    galleryUploadProgress.textContent = `Caricamento ${i + 1}/${files.length}: ${file.name}`;
+
+    const path = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+    const { data, error } = await supabase.storage.from('galleria').upload(path, file, { upsert: true });
+
+    if (error) { alert(`Errore upload ${esc(file.name)}: ${error.message}`); continue; }
+
+    const { data: { publicUrl } } = supabase.storage.from('galleria').getPublicUrl(data.path);
+    await supabase.from('galleria').insert([{ url: publicUrl, ordine: 999 }]);
+  }
+
+  galleryUploadProgress.hidden = true;
+  galleryFileInput.value = '';
+  loadGalleria();
+});
+
+// ── GALLERIA — MODAL ──────────────────────────────────────────────────────────
+function openGalleryModal(item) {
+  galleryItemId.value        = item.id;
+  galleryModalPreview.src    = item.url;
+  galleryCaptionEl.value     = item.caption ?? '';
+  galleryOrdineEl.value      = item.ordine ?? 999;
+  galleryModal.hidden        = false;
+}
+
+function closeGalleryModal() {
+  galleryModal.hidden = true;
+}
+
+galleryModalClose.addEventListener('click', closeGalleryModal);
+galleryModalCancel.addEventListener('click', closeGalleryModal);
+galleryModal.addEventListener('click', e => { if (e.target === galleryModal) closeGalleryModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !galleryModal.hidden) closeGalleryModal(); });
+
+galleryModalSave.addEventListener('click', async () => {
+  galleryModalSave.disabled    = true;
+  galleryModalSave.textContent = 'Salvataggio…';
+
+  const { error } = await supabase.from('galleria').update({
+    caption: galleryCaptionEl.value.trim() || null,
+    ordine:  parseInt(galleryOrdineEl.value) || 999,
+  }).eq('id', galleryItemId.value);
+
+  galleryModalSave.disabled    = false;
+  galleryModalSave.textContent = 'Salva';
+
+  if (error) { alert('Errore: ' + error.message); return; }
+  closeGalleryModal();
+  loadGalleria();
+});
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
 function esc(str) {

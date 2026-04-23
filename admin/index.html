@@ -487,7 +487,6 @@
       <button class="tab-btn active" data-tab="shop" role="tab" aria-selected="true">Shop</button>
       <button class="tab-btn"        data-tab="novita"   role="tab" aria-selected="false">Novità</button>
       <button class="tab-btn"        data-tab="galleria" role="tab" aria-selected="false">Galleria</button>
-      <button class="tab-btn"        data-tab="prodotti" role="tab" aria-selected="false">Prodotti</button>
     </nav>
 
     <div class="admin-content">
@@ -542,14 +541,7 @@
         <div class="gallery-admin-grid" id="gallery-grid"></div>
       </section>
 
-      <!-- PRODOTTI TAB -->
-      <section id="tab-prodotti" role="tabpanel" hidden>
-        <div class="section-header">
-          <h2 class="section-title">Prodotti</h2>
-          <button class="btn btn-primary" id="btn-new-prodotto">+ Nuovo prodotto</button>
-        </div>
-        <div class="shop-grid" id="prodotti-grid"></div>
-      </section>
+      <!-- PRODOTTI TAB rimosso -->
 
     </div>
   </div>
@@ -645,63 +637,6 @@
       <div class="modal-footer">
         <button class="btn btn-secondary" id="gallery-modal-cancel">Annulla</button>
         <button class="btn btn-primary"   id="gallery-modal-save">Salva</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── MODAL PRODOTTO CATALOGO ── -->
-  <div class="modal-overlay" id="prodotto-modal" hidden role="dialog" aria-modal="true" aria-labelledby="prodotto-modal-title">
-    <div class="modal">
-      <div class="modal-header">
-        <span class="modal-title" id="prodotto-modal-title">Nuovo prodotto</span>
-        <button class="modal-close" id="prodotto-modal-close" aria-label="Chiudi">&times;</button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="prodotto-id">
-
-        <div class="field">
-          <label>Immagine</label>
-          <div class="img-upload-area" id="prod-img-upload-area" title="Clicca per caricare">
-            <img id="prod-img-preview" class="img-preview" src="" alt="" hidden>
-            <div id="prod-img-ph">
-              <div style="font-size:2rem;margin-bottom:.4rem">📷</div>
-              <span class="img-hint">Clicca per caricare un file</span>
-            </div>
-          </div>
-          <input type="file" id="prod-image-file" accept="image/*" hidden>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="prod-titolo">Titolo *</label>
-            <input id="prod-titolo" type="text" required>
-          </div>
-          <div class="field">
-            <label for="prod-categoria">Categoria</label>
-            <select id="prod-categoria">
-              <option value="Formaggi">Formaggi</option>
-              <option value="Fieno">Fieno</option>
-              <option value="Legno">Legno</option>
-              <option value="Fiori">Fiori</option>
-              <option value="Legna">Legna da ardere</option>
-              <option value="Altro">Altro</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="prod-descrizione">Descrizione</label>
-          <textarea id="prod-descrizione" rows="3"></textarea>
-        </div>
-
-        <div class="field toggle-field">
-          <input type="checkbox" id="prod-evidenza">
-          <label for="prod-evidenza">In evidenza (mostrato in cima)</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" id="prodotto-modal-cancel">Annulla</button>
-        <button class="btn btn-primary"   id="prodotto-modal-save">Salva</button>
       </div>
     </div>
   </div>
