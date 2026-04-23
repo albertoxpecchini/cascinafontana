@@ -1,0 +1,15 @@
+{
+  "name": "cascinafontana",
+  "version": "2.0.0",
+  "description": "Sito ufficiale Cascina Fontana — azienda agricola lombarda",
+  "private": true,
+  "scripts": {
+    "start": "serve ."
+  },
+  "dependencies": {
+    "resend": "^4.0.0"
+  },
+  "devDependencies": {
+    "vercel": "^50.41.0"
+  }
+}

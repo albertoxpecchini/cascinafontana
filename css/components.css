@@ -1,0 +1,327 @@
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: var(--radius-pill);
+  padding: 8px 24px;
+  transition: opacity 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--color-text);
+  color: #ffffff;
+  box-shadow: var(--shadow-btn);
+}
+
+.btn-primary:hover {
+  opacity: 0.88;
+}
+
+.btn-ghost {
+  background: #ffffff;
+  color: var(--color-text);
+  border: var(--border-medium);
+}
+
+.btn-ghost:hover {
+  opacity: 0.88;
+}
+
+.btn-brand {
+  background: var(--color-brand);
+  color: var(--color-text);
+}
+
+.btn-brand:hover {
+  opacity: 0.88;
+}
+
+.btn-sm {
+  font-size: 0.875rem;
+  padding: 5px 16px;
+}
+
+/* ── Cards ── */
+.card {
+  background: #ffffff;
+  border: var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.15s ease;
+}
+
+.card:hover {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.card-featured {
+  background: #ffffff;
+  border: var(--border-subtle);
+  border-radius: var(--radius-featured);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+}
+
+.card-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.card h3 {
+  margin-bottom: var(--space-2);
+}
+
+.card p {
+  font-size: 0.9375rem;
+  color: var(--color-muted);
+}
+
+/* ── Metric cards ── */
+.metric-card {
+  background: var(--color-gray-50);
+  border: var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+  color: var(--color-text);
+  line-height: 1;
+  margin-bottom: var(--space-1);
+}
+
+.metric-label {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-light);
+  color: var(--color-brand-deep);
+}
+
+.badge-gray {
+  background: var(--color-gray-100);
+  color: var(--color-muted);
+}
+
+/* ── Forms ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  background: #ffffff;
+  border: var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 1rem;
+  color: var(--color-text);
+  transition: border-color 0.15s ease, outline 0.15s ease;
+  outline: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-placeholder);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--color-brand);
+  outline: 1px solid var(--color-brand);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-submit {
+  width: 100%;
+}
+
+.form-feedback {
+  font-size: 0.875rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  display: none;
+}
+
+.form-feedback.success {
+  display: block;
+  background: var(--color-brand-light);
+  color: var(--color-brand-deep);
+}
+
+.form-feedback.error {
+  display: block;
+  background: #fde8e8;
+  color: #c0392b;
+}
+
+/* ── Carousel ── */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.35s ease;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.carousel-controls {
+  position: absolute;
+  bottom: var(--space-3);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--space-2);
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.2s ease;
+}
+
+.carousel-dot.active {
+  background: #ffffff;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.85);
+  border: var(--border-subtle);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+  transition: background 0.15s ease;
+  z-index: 2;
+}
+
+.carousel-btn:hover {
+  background: #ffffff;
+}
+
+.carousel-btn-prev { left: var(--space-3); }
+.carousel-btn-next { right: var(--space-3); }
+
+/* ── Section divider ── */
+.divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.05);
+  margin-block: var(--space-7);
+}
+
+/* ── Loading skeleton ── */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-gray-100) 25%, var(--color-gray-50) 50%, var(--color-gray-100) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Hero gradient ── */
+.hero-gradient {
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(24, 226, 153, 0.12) 0%, transparent 70%),
+              #ffffff;
+}
+
+/* ── Link with arrow ── */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text);
+  transition: color 0.15s ease, gap 0.15s ease;
+}
+
+.link-arrow:hover {
+  color: var(--color-brand-deep);
+  gap: 10px;
+}
+
+/* ── Empty state ── */
+.empty-state {
+  text-align: center;
+  padding: var(--space-8) var(--space-5);
+  color: var(--color-muted);
+}
+
+.empty-state p {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+}
+
+/* ── Map container ── */
+.map-container {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-featured);
+  overflow: hidden;
+  border: var(--border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+@media (min-width: 768px) {
+  .map-container {
+    aspect-ratio: 16 / 10;
+  }
+}

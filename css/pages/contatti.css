@@ -1,0 +1,48 @@
+/* ── Contatti layout ── */
+.contatti-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7);
+}
+
+.contatti-info h3 {
+  margin-bottom: var(--space-4);
+}
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.contact-detail-icon {
+  width: 20px;
+  flex-shrink: 0;
+  color: var(--color-brand-deep);
+  margin-top: 2px;
+}
+
+.contact-detail-text {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+}
+
+.contact-detail-text strong {
+  display: block;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+/* ── Contact map ── */
+.contatti-map {
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .contatti-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}

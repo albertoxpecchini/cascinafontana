@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cascina Fontana — Azienda Agricola</title>
+  <meta name="description" content="Cascina Fontana: azienda agricola lombarda con 63 biolche coltivate, produzione di latte per Grana Padano, energia solare e filiera corta.">
+  <meta property="og:title" content="Cascina Fontana — Azienda Agricola">
+  <meta property="og:description" content="Agricoltura di precisione, filiera corta, sostenibilità. Scopri la nostra cascina.">
+  <meta property="og:url" content="https://www.cascinafontana.xyz/main">
+  <link rel="canonical" href="https://www.cascinafontana.xyz/main">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages/main.css">
+
+  <!-- Supabase env (sostituire con valori reali in produzione) -->
+  <script>
+    window.__ENV__ = {
+      SUPABASE_URL:  'https://YOUR_PROJECT.supabase.co',
+      SUPABASE_ANON: 'YOUR_ANON_KEY'
+    };
+  </script>
+</head>
+<body>
+
+  <!-- Navbar (iniettata da nav.js) -->
+  <div id="site-header"></div>
+
+  <main>
+
+    <!-- ══ HERO ══════════════════════════════════════════════ -->
+    <section class="hero hero-gradient">
+      <div class="container">
+        <div class="hero-inner">
+
+          <div class="hero-content">
+            <span class="label-upper">Azienda Agricola · Lombardia</span>
+            <h1>Cascina Fontana</h1>
+            <p>Coltiviamo la pianura padana con rispetto per la terra, precisione e passione. Latte di qualità, energia solare e una filiera corta che parte dal campo.</p>
+            <div class="hero-actions">
+              <a href="/storia" class="btn btn-primary">Scopri la storia</a>
+              <a href="/shop" class="btn btn-ghost">Visita lo shop</a>
+            </div>
+          </div>
+
+          <div class="hero-map">
+            <div class="map-container" id="hero-map"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 1. STORIA ══════════════════════════════════════════ -->
+    <section class="preview-section">
+      <div class="container">
+        <div class="preview-header">
+          <div>
+            <span class="label-upper">Storia</span>
+            <h2>Una cascina, secoli di storia</h2>
+          </div>
+          <a href="/storia" class="link-arrow">Leggi tutto →</a>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Le origini</h3>
+            <p>Cascina Fontana affonda le radici nell'agricoltura lombarda del XVII secolo. Generazioni di contadini hanno plasmato questi campi, costruendo una tradizione che ancora oggi guida ogni decisione agronomica.</p>
+          </div>
+          <div class="card">
+            <h3>Oggi</h3>
+            <p>Oggi la cascina coniuga tecnica moderna e rispetto per i ritmi naturali: colture rotazionali, gestione idrica ottimizzata e un approccio che mette al centro la biodiversità del suolo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 2. DATI ════════════════════════════════════════════ -->
+    <section class="preview-section">
+      <div class="container">
+        <div class="preview-header">
+          <div>
+            <span class="label-upper">Dati aziendali</span>
+            <h2>I numeri della cascina</h2>
+          </div>
+          <a href="/dati" class="link-arrow">Tutti i dati →</a>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-value">63</div>
+            <div class="metric-label">Biolche coltivate</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">30</div>
+            <div class="metric-label">Pannelli fotovoltaici</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">8</div>
+            <div class="metric-label">Trattori e macchine</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">2</div>
+            <div class="metric-label">Operatori</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 3. GALLERIA ════════════════════════════════════════ -->
+    <section class="preview-section">
+      <div class="container">
+        <div class="preview-header">
+          <div>
+            <span class="label-upper">Galleria</span>
+            <h2>La cascina in immagini</h2>
+          </div>
+          <a href="/galleria" class="link-arrow">Tutta la galleria →</a>
+        </div>
+        <div class="carousel" id="main-carousel">
+          <div class="carousel-track" id="main-carousel-track">
+            <!-- Immagini caricate da js/gallery.js -->
+          </div>
+          <button class="carousel-btn carousel-btn-prev" id="carousel-prev" aria-label="Precedente">&#8592;</button>
+          <button class="carousel-btn carousel-btn-next" id="carousel-next" aria-label="Successivo">&#8594;</button>
+          <div class="carousel-controls" id="carousel-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 4. PRODOTTI ════════════════════════════════════════ -->
+    <section class="preview-section">
+      <div class="container">
+        <div class="preview-header">
+          <div>
+            <span class="label-upper">Prodotti</span>
+            <h2>Dalla terra alla tavola</h2>
+          </div>
+          <a href="/prodotti" class="link-arrow">Tutti i prodotti →</a>
+        </div>
+        <div class="grid-3" id="prodotti-preview">
+          <!-- Card prodotti caricate da js/prodotti.js -->
+          <div class="card skeleton" style="height:200px;"></div>
+          <div class="card skeleton" style="height:200px;"></div>
+          <div class="card skeleton" style="height:200px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 5. NOVITÀ ══════════════════════════════════════════ -->
+    <section class="preview-section">
+      <div class="container">
+        <div class="preview-header">
+          <div>
+            <span class="label-upper">Novità</span>
+            <h2>Aggiornamenti dalla cascina</h2>
+          </div>
+          <a href="/novita" class="link-arrow">Tutte le novità →</a>
+        </div>
+        <div class="news-list" id="novita-preview">
+          <!-- News caricate da js/novita.js -->
+          <div class="news-item skeleton" style="height:80px;"></div>
+          <div class="news-item skeleton" style="height:80px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 6. SHOP ════════════════════════════════════════════ -->
+    <section class="preview-section">
+      <div class="container">
+        <div class="preview-header">
+          <div>
+            <span class="label-upper">Shop</span>
+            <h2>Prodotti in vendita</h2>
+          </div>
+          <a href="/shop" class="link-arrow">Vai allo shop →</a>
+        </div>
+        <div class="grid-3" id="shop-preview">
+          <!-- Prodotti shop caricati da js/shop.js (preview mode) -->
+          <div class="card skeleton" style="height:220px;"></div>
+          <div class="card skeleton" style="height:220px;"></div>
+          <div class="card skeleton" style="height:220px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 7. CONTATTI ════════════════════════════════════════ -->
+    <section class="preview-section">
+      <div class="container">
+        <div class="preview-header">
+          <div>
+            <span class="label-upper">Contatti</span>
+            <h2>Scrivici</h2>
+          </div>
+          <a href="/contatti" class="link-arrow">Pagina contatti →</a>
+        </div>
+        <div class="grid-2">
+          <div>
+            <form id="contact-form-main">
+              <div class="form-group">
+                <label class="form-label" for="nome-main">Nome</label>
+                <input class="form-input" type="text" id="nome-main" name="nome" placeholder="Il tuo nome" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email-main">Email</label>
+                <input class="form-input" type="email" id="email-main" name="email" placeholder="tua@email.it" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="msg-main">Messaggio</label>
+                <textarea class="form-textarea" id="msg-main" name="messaggio" placeholder="Come possiamo aiutarti?" required></textarea>
+              </div>
+              <div class="form-feedback" id="form-feedback-main"></div>
+              <button type="submit" class="btn btn-primary form-submit">Invia messaggio</button>
+            </form>
+          </div>
+          <div class="card">
+            <h3>Dove siamo</h3>
+            <p style="margin-top:8px;">Cascina Fontana<br>Lombardia, Italia</p>
+            <p style="margin-top:16px;">
+              <a href="mailto:info@cascinafontana.xyz" style="color:var(--color-brand-deep);">info@cascinafontana.xyz</a>
+            </p>
+            <p style="margin-top:8px;">
+              <a href="tel:+39000000000" style="color:var(--color-brand-deep);">+39 000 000 0000</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-brand">Cascina Fontana</span>
+      <nav class="footer-links">
+        <a href="/storia">Storia</a>
+        <a href="/dati">Dati</a>
+        <a href="/galleria">Galleria</a>
+        <a href="/prodotti">Prodotti</a>
+        <a href="/novita">Novità</a>
+        <a href="/shop">Shop</a>
+        <a href="/contatti">Contatti</a>
+      </nav>
+      <span class="footer-copy">&copy; 2026 Cascina Fontana. Tutti i diritti riservati.</span>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initNav }         from '/js/nav.js';
+    import { initMap }         from '/js/map.js';
+    import { initCarousel }    from '/js/gallery.js';
+    import { loadProdotti }    from '/js/prodotti.js';
+    import { loadNovita }      from '/js/novita.js';
+    import { loadShopPreview } from '/js/shop.js';
+    import { initContactForm } from '/js/contact.js';
+
+    initNav('main');
+    initMap('hero-map', 45.1564, 10.7929);
+    initCarousel('main-carousel', 'main-carousel-track', 'carousel-prev', 'carousel-next', 'carousel-dots');
+    loadProdotti('prodotti-preview', { limit: 3, featuredFirst: true });
+    loadNovita('novita-preview', 2);
+    loadShopPreview('shop-preview', 3);
+    initContactForm('contact-form-main', 'form-feedback-main');
+  </script>
+
+</body>
+</html>

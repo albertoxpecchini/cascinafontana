@@ -1,0 +1,103 @@
+/* ── Shop hero ── */
+.shop-hero {
+  padding-block: var(--space-7);
+  border-bottom: var(--border-subtle);
+}
+
+/* ── Product card ── */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: var(--border-subtle);
+  border-radius: var(--radius-featured);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.product-card:hover {
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 4px 12px;
+}
+
+.product-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.product-card-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--color-gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-placeholder);
+  font-size: 2rem;
+}
+
+.product-card-body {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--space-3);
+}
+
+.product-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.product-price {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--color-text);
+}
+
+.product-card-desc {
+  font-size: 0.9375rem;
+  color: var(--color-muted);
+  flex: 1;
+}
+
+.product-card-footer {
+  margin-top: auto;
+}
+
+/* PayPal button container */
+#paypal-button-container,
+[id^="paypal-btn-"] {
+  min-height: 45px;
+}
+
+/* Filter bar */
+.shop-filters {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
+}
+
+.filter-btn {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  border: var(--border-medium);
+  background: #ffffff;
+  color: var(--color-muted);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--color-brand-light);
+  color: var(--color-brand-deep);
+  border-color: transparent;
+}

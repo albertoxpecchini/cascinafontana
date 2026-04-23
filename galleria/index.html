@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galleria — Cascina Fontana</title>
+  <meta name="description" content="Galleria fotografica di Cascina Fontana: campi, strutture, macchinari e la vita quotidiana in cascina.">
+  <meta property="og:title" content="Galleria — Cascina Fontana">
+  <meta property="og:url" content="https://www.cascinafontana.xyz/galleria">
+  <link rel="canonical" href="https://www.cascinafontana.xyz/galleria">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages/galleria.css">
+  <script>
+    window.__ENV__ = {
+      SUPABASE_URL:  'https://YOUR_PROJECT.supabase.co',
+      SUPABASE_ANON: 'YOUR_ANON_KEY'
+    };
+  </script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <section class="gallery-hero hero-gradient">
+      <div class="container">
+        <span class="label-upper">Galleria fotografica</span>
+        <h1 style="margin-top:var(--space-3);">La cascina in immagini</h1>
+        <p style="font-size:1.125rem; max-width:560px; margin-top:var(--space-4);">
+          Campi, strutture, macchinari e la vita quotidiana della nostra azienda agricola nel cuore della Lombardia.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <!-- Gallery grid caricata da JS -->
+        <div class="gallery-grid" id="gallery-grid">
+          <!-- skeleton -->
+          <div class="gallery-item skeleton" style="aspect-ratio:4/3;"></div>
+          <div class="gallery-item skeleton" style="aspect-ratio:4/3;"></div>
+          <div class="gallery-item skeleton" style="aspect-ratio:4/3;"></div>
+          <div class="gallery-item skeleton" style="aspect-ratio:4/3;"></div>
+          <div class="gallery-item skeleton" style="aspect-ratio:4/3;"></div>
+          <div class="gallery-item skeleton" style="aspect-ratio:4/3;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Immagine ingrandita">
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Chiudi">✕</button>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="footer-brand">Cascina Fontana</span>
+      <nav class="footer-links">
+        <a href="/main">Home</a><a href="/storia">Storia</a><a href="/dati">Dati</a>
+        <a href="/prodotti">Prodotti</a><a href="/shop">Shop</a><a href="/contatti">Contatti</a>
+      </nav>
+      <span class="footer-copy">&copy; 2026 Cascina Fontana.</span>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initNav }        from '/js/nav.js';
+    import { loadGalleryGrid } from '/js/gallery.js';
+    initNav('galleria');
+    loadGalleryGrid('gallery-grid');
+  </script>
+</body>
+</html>
