@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin — Cascina Fontana</title>
+  <title>Admin Dashboard — Cascina Fontana</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -354,6 +354,87 @@
     }
     .img-hint { font-size: .82rem; color: var(--muted); }
 
+    /* ── GALLERIA ADMIN ── */
+    .gallery-upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+    .gallery-upload-zone:hover { border-color: var(--green); background: rgba(24,226,153,.04); }
+    .gallery-admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: .75rem;
+    }
+    .gallery-admin-item {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .gallery-admin-item img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-item-footer {
+      padding: .45rem .65rem;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+    .gallery-item-caption {
+      flex: 1;
+      font-size: .78rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .gallery-item-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1;
+      padding: .15rem;
+      transition: color .15s;
+      flex-shrink: 0;
+    }
+    .gallery-item-btn:hover { color: var(--text); }
+    .gallery-item-btn.del:hover { color: var(--danger); }
+    .upload-progress {
+      font-size: .83rem;
+      color: var(--muted);
+      margin-top: .65rem;
+    }
+
+    /* ── TOGGLE CHECKBOX ── */
+    .toggle-field {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .toggle-field input[type="checkbox"] {
+      width: auto;
+      accent-color: var(--green);
+      width: 1rem;
+      height: 1rem;
+    }
+    .toggle-field label {
+      margin: 0;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: .9rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
     /* ── STATES ── */
     .empty-state { text-align: center; padding: 3rem 1rem; color: var(--muted); }
     .empty-state p { margin-top: .5rem; font-size: .9rem; }
@@ -404,7 +485,9 @@
 
     <nav class="admin-tabs" role="tablist">
       <button class="tab-btn active" data-tab="shop" role="tab" aria-selected="true">Shop</button>
-      <button class="tab-btn"        data-tab="novita" role="tab" aria-selected="false">Novità</button>
+      <button class="tab-btn"        data-tab="novita"   role="tab" aria-selected="false">Novità</button>
+      <button class="tab-btn"        data-tab="galleria" role="tab" aria-selected="false">Galleria</button>
+      <button class="tab-btn"        data-tab="prodotti" role="tab" aria-selected="false">Prodotti</button>
     </nav>
 
     <div class="admin-content">
@@ -439,6 +522,33 @@
         </div>
 
         <div class="post-list" id="post-list"></div>
+      </section>
+
+      <!-- GALLERIA TAB -->
+      <section id="tab-galleria" role="tabpanel" hidden>
+        <div class="section-header">
+          <h2 class="section-title">Galleria</h2>
+        </div>
+
+        <div class="compose-box">
+          <div class="gallery-upload-zone" id="gallery-upload-zone">
+            <input type="file" id="gallery-file-input" accept="image/*" multiple hidden>
+            <div style="font-size:2rem;margin-bottom:.4rem">🖼️</div>
+            <span class="img-hint">Clicca per caricare immagini (anche più di una)</span>
+          </div>
+          <div id="gallery-upload-progress" class="upload-progress" hidden></div>
+        </div>
+
+        <div class="gallery-admin-grid" id="gallery-grid"></div>
+      </section>
+
+      <!-- PRODOTTI TAB -->
+      <section id="tab-prodotti" role="tabpanel" hidden>
+        <div class="section-header">
+          <h2 class="section-title">Prodotti</h2>
+          <button class="btn btn-primary" id="btn-new-prodotto">+ Nuovo prodotto</button>
+        </div>
+        <div class="shop-grid" id="prodotti-grid"></div>
       </section>
 
     </div>
@@ -509,6 +619,89 @@
       <div class="modal-footer">
         <button class="btn btn-secondary" id="modal-cancel">Annulla</button>
         <button class="btn btn-primary"   id="modal-save">Salva</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MODAL GALLERIA EDIT ── -->
+  <div class="modal-overlay" id="gallery-modal" hidden role="dialog" aria-modal="true" aria-labelledby="gallery-modal-title">
+    <div class="modal" style="max-width:420px">
+      <div class="modal-header">
+        <span class="modal-title" id="gallery-modal-title">Modifica immagine</span>
+        <button class="modal-close" id="gallery-modal-close" aria-label="Chiudi">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="gallery-item-id">
+        <img id="gallery-modal-preview" style="width:100%;max-height:160px;object-fit:cover;border-radius:6px;margin-bottom:1rem" src="" alt="">
+        <div class="field">
+          <label for="gallery-caption">Didascalia</label>
+          <input id="gallery-caption" type="text" placeholder="Descrivi la foto…">
+        </div>
+        <div class="field">
+          <label for="gallery-ordine">Ordine</label>
+          <input id="gallery-ordine" type="number" min="0" step="1" placeholder="0">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="gallery-modal-cancel">Annulla</button>
+        <button class="btn btn-primary"   id="gallery-modal-save">Salva</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MODAL PRODOTTO CATALOGO ── -->
+  <div class="modal-overlay" id="prodotto-modal" hidden role="dialog" aria-modal="true" aria-labelledby="prodotto-modal-title">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="prodotto-modal-title">Nuovo prodotto</span>
+        <button class="modal-close" id="prodotto-modal-close" aria-label="Chiudi">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="prodotto-id">
+
+        <div class="field">
+          <label>Immagine</label>
+          <div class="img-upload-area" id="prod-img-upload-area" title="Clicca per caricare">
+            <img id="prod-img-preview" class="img-preview" src="" alt="" hidden>
+            <div id="prod-img-ph">
+              <div style="font-size:2rem;margin-bottom:.4rem">📷</div>
+              <span class="img-hint">Clicca per caricare un file</span>
+            </div>
+          </div>
+          <input type="file" id="prod-image-file" accept="image/*" hidden>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="prod-titolo">Titolo *</label>
+            <input id="prod-titolo" type="text" required>
+          </div>
+          <div class="field">
+            <label for="prod-categoria">Categoria</label>
+            <select id="prod-categoria">
+              <option value="Formaggi">Formaggi</option>
+              <option value="Fieno">Fieno</option>
+              <option value="Legno">Legno</option>
+              <option value="Fiori">Fiori</option>
+              <option value="Legna">Legna da ardere</option>
+              <option value="Altro">Altro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="prod-descrizione">Descrizione</label>
+          <textarea id="prod-descrizione" rows="3"></textarea>
+        </div>
+
+        <div class="field toggle-field">
+          <input type="checkbox" id="prod-evidenza">
+          <label for="prod-evidenza">In evidenza (mostrato in cima)</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="prodotto-modal-cancel">Annulla</button>
+        <button class="btn btn-primary"   id="prodotto-modal-save">Salva</button>
       </div>
     </div>
   </div>

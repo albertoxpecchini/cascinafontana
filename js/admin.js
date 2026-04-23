@@ -14,6 +14,8 @@ const logoutBtn     = $('logout-btn');
 const tabBtns       = document.querySelectorAll('.tab-btn');
 const tabShop       = $('tab-shop');
 const tabNovita     = $('tab-novita');
+const tabGalleria   = $('tab-galleria');
+const tabProdotti   = $('tab-prodotti');
 
 const shopGrid      = $('shop-grid');
 const btnNewProduct = $('btn-new-product');
@@ -22,6 +24,38 @@ const postList      = $('post-list');
 const btnPublish    = $('btn-publish');
 const postTitleEl   = $('post-title');
 const postDescEl    = $('post-desc');
+
+// Galleria
+const galleryGrid           = $('gallery-grid');
+const galleryUploadZone     = $('gallery-upload-zone');
+const galleryFileInput      = $('gallery-file-input');
+const galleryUploadProgress = $('gallery-upload-progress');
+const galleryModal          = $('gallery-modal');
+const galleryItemId         = $('gallery-item-id');
+const galleryModalPreview   = $('gallery-modal-preview');
+const galleryCaptionEl      = $('gallery-caption');
+const galleryOrdineEl       = $('gallery-ordine');
+const galleryModalClose     = $('gallery-modal-close');
+const galleryModalCancel    = $('gallery-modal-cancel');
+const galleryModalSave      = $('gallery-modal-save');
+
+// Prodotti catalogo
+const prodottiGrid       = $('prodotti-grid');
+const btnNewProdotto     = $('btn-new-prodotto');
+const prodottoModal      = $('prodotto-modal');
+const prodottoModalTitle = $('prodotto-modal-title');
+const prodottoModalClose = $('prodotto-modal-close');
+const prodottoModalCncl  = $('prodotto-modal-cancel');
+const prodottoModalSave  = $('prodotto-modal-save');
+const prodottoId         = $('prodotto-id');
+const prodTitolo         = $('prod-titolo');
+const prodCategoria      = $('prod-categoria');
+const prodDescrizione    = $('prod-descrizione');
+const prodEvidenza       = $('prod-evidenza');
+const prodImageFile      = $('prod-image-file');
+const prodImgUploadArea  = $('prod-img-upload-area');
+const prodImgPreview     = $('prod-img-preview');
+const prodImgPh          = $('prod-img-ph');
 
 const productModal  = $('product-modal');
 const modalTitleEl  = $('modal-title-text');
@@ -77,6 +111,8 @@ function showDashboard(user) {
   adminEmailEl.textContent = user.email;
   loadShop();
   loadNovita();
+  loadGalleria();
+  loadProdottiAdmin();
 }
 
 // ── TABS ─────────────────────────────────────────────────────────────────────
@@ -84,8 +120,11 @@ tabBtns.forEach(btn => btn.addEventListener('click', () => {
   tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
   btn.classList.add('active');
   btn.setAttribute('aria-selected', 'true');
-  tabShop.hidden   = btn.dataset.tab !== 'shop';
-  tabNovita.hidden = btn.dataset.tab !== 'novita';
+  const t = btn.dataset.tab;
+  tabShop.hidden     = t !== 'shop';
+  tabNovita.hidden   = t !== 'novita';
+  tabGalleria.hidden = t !== 'galleria';
+  tabProdotti.hidden = t !== 'prodotti';
 }));
 
 // ── SHOP — LOAD ───────────────────────────────────────────────────────────────

@@ -76,7 +76,7 @@ export async function fetchProdotti({ limit = null, featuredFirst = false } = {}
 export async function fetchUpdates({ limit = null } = {}) {
   let q = supabase
     .from('updates')
-    .select('id,title,titolo,description,created_at')
+    .select('id,title,description,created_at')
     .order('created_at', { ascending: false });
 
   if (limit) q = q.limit(limit);
