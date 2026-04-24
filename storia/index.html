@@ -4,239 +4,134 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Storia — Cascina Fontana</title>
-  <meta name="description" content="La storia di Cascina Fontana: famiglia agricola a Rodigo (MN) dalle origini nel XVII secolo fino alla filiera Grana Padano DOP di oggi.">
-  <meta property="og:title" content="Storia — Cascina Fontana">
-  <meta property="og:url" content="https://www.cascinafontana.xyz/storia">
-  <link rel="canonical" href="https://www.cascinafontana.xyz/storia">
+  <meta name="description" content="La storia di Cascina Fontana: famiglia agricola a Rodigo (MN) dalle origini nel XVII secolo.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/variables.css">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/layout.css">
-  <link rel="stylesheet" href="/css/components.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{brand:'#3ECF8E'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <style>body{background-color:#0f0f0f!important;}</style>
 </head>
-<body>
-  <div id="site-header"></div>
+<body class="bg-[#0f0f0f] text-white font-sans antialiased">
 
-  <main>
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 h-16 border-b border-white/[0.07] bg-[#0f0f0f]/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-between gap-6">
+      <a href="/main" class="flex items-center gap-2.5 shrink-0">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M11.5 2.5L4 11.5h6.5L8.5 17.5l7.5-9H9.5L11.5 2.5z" fill="#3ECF8E"/></svg>
+        <span class="font-bold text-[15px] tracking-tight text-white">cascina fontana</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
+        <a href="/storia" class="text-[13px] text-brand px-3 py-2 rounded-md bg-white/[0.04]">Storia</a>
+        <a href="/dati" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Dati</a>
+        <a href="/galleria" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Galleria</a>
+        <a href="/prodotti" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Prodotti</a>
+        <a href="/novita" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Novità</a>
+        <a href="/shop" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Shop</a>
+        <a href="/contatti" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Contatti</a>
+      </nav>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/admin/login.html" class="hidden sm:inline-flex text-[13px] text-white/65 hover:text-white px-4 py-1.5 rounded-md hover:bg-white/[0.06] transition-all">Sign in</a>
+        <a href="/shop" class="inline-flex text-[13px] font-semibold bg-brand text-black px-4 py-1.5 rounded-md hover:bg-brand/90 transition-all">Start your project</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16">
 
     <!-- HERO -->
-    <section class="section hero-gradient" style="padding-top:var(--space-8);">
-      <div class="container">
-        <span class="label-upper">La nostra storia</span>
-        <h1 style="margin-top:var(--space-3); max-width:700px;">Una famiglia, la terra, Rodigo</h1>
-        <p style="font-size:1.125rem; max-width:620px; margin-top:var(--space-4);">
-          Cascina Fontana è un'azienda familiare radicata nella pianura mantovana da secoli. Non gestiamo terreni: li conosciamo nome per nome, solco per solco. Questa è la storia di quella continuità.
-        </p>
+    <section class="py-24 px-6 text-center">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-[11px] uppercase tracking-widest text-white/30 mb-4">La nostra storia</p>
+        <h1 class="font-extrabold tracking-tight leading-[1.05] mb-6" style="font-size:clamp(2.5rem,6vw,4rem);">
+          <span class="text-white/80">Una famiglia,</span><br>
+          <span class="text-brand">la terra, Rodigo</span>
+        </h1>
+        <p class="text-white/45 text-lg leading-relaxed max-w-xl mx-auto">Cascina Fontana è un'azienda familiare radicata nella pianura mantovana da secoli. Non gestiamo terreni: li conosciamo nome per nome, solco per solco.</p>
       </div>
     </section>
 
-    <div class="divider"></div>
+    <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
 
-    <!-- LE ORIGINI -->
-    <section class="section">
-      <div class="container">
-        <div class="grid-2" style="gap:var(--space-7); align-items:start;">
-          <div>
-            <span class="label-upper" style="margin-bottom:var(--space-3); display:block;">XVII secolo</span>
-            <h2>Le origini</h2>
-            <p style="margin-top:var(--space-4); font-size:1.0625rem; line-height:1.7;">
-              Cascina Fontana nasce come podere rurale nella pianura lombarda, nel comune di Rodigo, a pochi chilometri da Mantova. Le prime tracce documentate risalgono al XVII secolo, in un territorio che i Gonzaga avevano già trasformato in uno dei sistemi agricoli più organizzati d'Europa: canali di bonifica, marcite e prati stabili definivano il paesaggio.
-            </p>
-            <p style="margin-top:var(--space-4); font-size:1.0625rem; line-height:1.7;">
-              La fontana che dà il nome alla cascina era una sorgente naturale, punto di riferimento per i contadini della zona e ancora oggi parte visibile del sistema idrico originario. I campi strappati alle paludi e canalizzati con sapienza idraulica producevano cereali e foraggio: le stesse colture che, in forme aggiornate, occupano ancora oggi questi 16 ettari.
-            </p>
-            <p style="margin-top:var(--space-4); font-size:1.0625rem; line-height:1.7;">
-              Il territorio di Rodigo, adagiato tra l'Oglio e il Mincio, è da sempre vocato all'erba medica e al mais, due colture che alimentano la zootecnia da latte — la colonna portante dell'agroalimentare mantovano e lodigiano. Non è un caso che qui sia nata parte della tradizione del Grana Padano.
-            </p>
-          </div>
-          <div>
-            <div class="card-featured" style="background:var(--color-gray-50);">
-              <span class="mono">Timeline</span>
-              <div style="margin-top:var(--space-5); display:flex; flex-direction:column; gap:var(--space-5);">
-                <div style="display:flex; gap:var(--space-4);">
-                  <div style="width:4px; background:var(--color-brand); border-radius:2px; flex-shrink:0;"></div>
-                  <div>
-                    <p style="font-weight:600; color:var(--color-text);">XVII secolo</p>
-                    <p style="font-size:0.9375rem;">Fondazione come podere cerealicolo. La fontana diventa punto di riferimento del territorio di Rodigo.</p>
-                  </div>
-                </div>
-                <div style="display:flex; gap:var(--space-4);">
-                  <div style="width:4px; background:var(--color-brand); border-radius:2px; flex-shrink:0;"></div>
-                  <div>
-                    <p style="font-weight:600; color:var(--color-text);">XIX secolo</p>
-                    <p style="font-size:0.9375rem;">Introduzione dell'allevamento bovino da latte. Avvio dei primi conferimenti ai caseifici locali della filiera padana.</p>
-                  </div>
-                </div>
-                <div style="display:flex; gap:var(--space-4);">
-                  <div style="width:4px; background:var(--color-brand); border-radius:2px; flex-shrink:0;"></div>
-                  <div>
-                    <p style="font-weight:600; color:var(--color-text);">Anni '70</p>
-                    <p style="font-size:0.9375rem;">Meccanizzazione completa. I trattori sostituiscono i buoi, le superfici coltivate si espandono e si consolida la vendita diretta di fieno e legna.</p>
-                  </div>
-                </div>
-                <div style="display:flex; gap:var(--space-4);">
-                  <div style="width:4px; background:var(--color-brand); border-radius:2px; flex-shrink:0;"></div>
-                  <div>
-                    <p style="font-weight:600; color:var(--color-text);">Oggi</p>
-                    <p style="font-size:0.9375rem;">Energia solare, guida GPS di precisione e filiera corta. La stessa famiglia, gli stessi campi, strumenti migliori.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <!-- ORIGINI + TIMELINE -->
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <p class="text-[11px] uppercase tracking-widest text-brand mb-3">XVII secolo</p>
+          <h2 class="text-2xl font-bold text-white mb-6">Le origini</h2>
+          <p class="text-white/55 leading-relaxed mb-4">Cascina Fontana nasce come podere rurale nella pianura lombarda, nel comune di Rodigo, a pochi chilometri da Mantova. Le prime tracce documentate risalgono al XVII secolo, in un territorio che i Gonzaga avevano già trasformato in uno dei sistemi agricoli più organizzati d'Europa.</p>
+          <p class="text-white/55 leading-relaxed mb-4">La fontana che dà il nome alla cascina era una sorgente naturale, punto di riferimento per i contadini della zona e ancora oggi parte visibile del sistema idrico originario.</p>
+          <p class="text-white/55 leading-relaxed">Il territorio di Rodigo, adagiato tra l'Oglio e il Mincio, è da sempre vocato all'erba medica e al mais — la colonna portante dell'agroalimentare mantovano.</p>
+        </div>
+        <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-7">
+          <p class="text-[11px] uppercase tracking-widest text-white/30 mb-6">Timeline</p>
+          <div class="flex flex-col gap-6">
+            <div class="flex gap-4"><div class="w-1 bg-brand rounded-full shrink-0"></div><div><p class="text-white font-semibold text-sm mb-1">XVII secolo</p><p class="text-white/45 text-sm">Fondazione come podere cerealicolo. La fontana diventa punto di riferimento del territorio di Rodigo.</p></div></div>
+            <div class="flex gap-4"><div class="w-1 bg-brand rounded-full shrink-0"></div><div><p class="text-white font-semibold text-sm mb-1">XIX secolo</p><p class="text-white/45 text-sm">Introduzione dell'allevamento bovino da latte. Avvio dei primi conferimenti ai caseifici locali della filiera padana.</p></div></div>
+            <div class="flex gap-4"><div class="w-1 bg-brand rounded-full shrink-0"></div><div><p class="text-white font-semibold text-sm mb-1">Anni '70</p><p class="text-white/45 text-sm">Meccanizzazione completa. I trattori sostituiscono i buoi, le superfici coltivate si espandono.</p></div></div>
+            <div class="flex gap-4"><div class="w-1 bg-brand rounded-full shrink-0"></div><div><p class="text-white font-semibold text-sm mb-1">Oggi</p><p class="text-white/45 text-sm">Energia solare, guida GPS di precisione e filiera corta. La stessa famiglia, gli stessi campi, strumenti migliori.</p></div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="divider"></div>
+    <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
 
-    <!-- LA FAMIGLIA -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <span class="label-upper">La famiglia</span>
-          <h2>Chi siamo</h2>
-          <p>Cascina Fontana è una società agricola familiare. Siamo due operatori fissi — padre e figlio — che gestiscono direttamente ogni fase del lavoro, dai campi alla consegna.</p>
+    <!-- CHI SIAMO -->
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-14">
+          <p class="text-[11px] uppercase tracking-widest text-white/30 mb-3">La famiglia</p>
+          <h2 class="text-3xl font-bold text-white">Chi siamo</h2>
         </div>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Una gestione diretta</h3>
-            <p>Non abbiamo intermediari tra noi e chi acquista i nostri prodotti. Chi chiama per il fieno o la legna parla con chi l'ha tagliato. Questa prossimità non è marketing: è il modo in cui abbiamo sempre lavorato.</p>
-          </div>
-          <div class="card">
-            <h3>Continuità generazionale</h3>
-            <p>Ogni scelta agronomica che facciamo oggi porta il peso e la saggezza delle generazioni precedenti. La rotazione colturale che pratichiamo rispecchia pratiche affinate nel tempo su questi stessi terreni — non manuali importati.</p>
-          </div>
-          <div class="card">
-            <h3>Conoscenza del territorio</h3>
-            <p>Conosciamo ogni appezzamento della nostra superficie: dove l'acqua ristagna in primavera, dove il mais cresce meglio, quali parcelle vanno destinate all'erba medica. È una conoscenza che non si impara in aula.</p>
-          </div>
-          <div class="card">
-            <h3>Radicamento a Rodigo</h3>
-            <p>Rodigo è un piccolo comune della provincia di Mantova, nel cuore della Pianura Padana. Qui l'agricoltura non è folklore: è l'economia del territorio. Fare bene qui significa contribuire a un sistema produttivo che ha valore per tutta la zona.</p>
-          </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 hover:bg-white/[0.045] transition-colors"><h3 class="text-white font-semibold mb-2">Una gestione diretta</h3><p class="text-white/50 text-sm leading-relaxed">Non abbiamo intermediari tra noi e chi acquista i nostri prodotti. Chi chiama per il fieno o la legna parla con chi l'ha tagliato.</p></div>
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 hover:bg-white/[0.045] transition-colors"><h3 class="text-white font-semibold mb-2">Continuità generazionale</h3><p class="text-white/50 text-sm leading-relaxed">Ogni scelta agronomica porta il peso delle generazioni precedenti. La rotazione colturale che pratichiamo rispecchia pratiche affinate nel tempo su questi stessi terreni.</p></div>
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 hover:bg-white/[0.045] transition-colors"><h3 class="text-white font-semibold mb-2">Conoscenza del territorio</h3><p class="text-white/50 text-sm leading-relaxed">Conosciamo ogni appezzamento: dove l'acqua ristagna in primavera, dove il mais cresce meglio, quali parcelle vanno destinate all'erba medica.</p></div>
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 hover:bg-white/[0.045] transition-colors"><h3 class="text-white font-semibold mb-2">Radicamento a Rodigo</h3><p class="text-white/50 text-sm leading-relaxed">Rodigo è un piccolo comune della provincia di Mantova. Qui l'agricoltura non è folklore: è l'economia del territorio.</p></div>
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 hover:bg-white/[0.045] transition-colors"><h3 class="text-white font-semibold mb-2">Gestione idrica</h3><p class="text-white/50 text-sm leading-relaxed">Il sistema irriguo eredita la rete storica dei canali di bonifica, oggi integrata con sensori di umidità che ottimizzano i consumi in tempo reale.</p></div>
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 hover:bg-white/[0.045] transition-colors"><h3 class="text-white font-semibold mb-2">Energia solare</h3><p class="text-white/50 text-sm leading-relaxed">30 pannelli fotovoltaici sul capannone principale coprono circa il 60% del fabbisogno energetico annuale.</p></div>
         </div>
       </div>
     </section>
 
-    <div class="divider"></div>
-
-    <!-- PRODUZIONE -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <span class="label-upper">Il metodo</span>
-          <h2>Come produciamo</h2>
-          <p>L'agricoltura moderna non significa dimenticare la tradizione: significa rispettarla con strumenti migliori.</p>
-        </div>
-        <div class="grid-3">
-          <div class="card">
-            <h3>Rotazione colturale</h3>
-            <p>Mais, frumento, erba medica e soia si alternano nei campi secondo cicli pluriennali che mantengono la fertilità del suolo senza eccesso di input chimici. La sequenza è studiata sulla specificità dei nostri terreni argillosi.</p>
-          </div>
-          <div class="card">
-            <h3>Gestione idrica</h3>
-            <p>Il sistema irriguo eredita la rete storica dei canali di bonifica, oggi integrata con sensori di umidità che ottimizzano i consumi in tempo reale. L'acqua è una risorsa critica nella pianura mantovana d'estate: non ne sprechiamo.</p>
-          </div>
-          <div class="card">
-            <h3>Energia solare</h3>
-            <p>30 pannelli fotovoltaici sul capannone principale coprono circa il 60% del fabbisogno energetico annuale. Pompe irrigue, illuminazione e parte delle macchine operano con energia prodotta in cascina.</p>
-          </div>
-          <div class="card">
-            <h3>Filiera Grana Padano</h3>
-            <p>Il latte viene conferito quotidianamente al caseificio convenzionato. Parametri di qualità — cellule somatiche, carica batterica, composizione — sono monitorati con analisi periodiche. La DOP richiede standard che non ammetono scorciatoie.</p>
-          </div>
-          <div class="card">
-            <h3>Fieno e foraggio</h3>
-            <p>L'erba medica è falciata in più turni stagionali. Il fieno viene pressato e stoccato in cascina, poi venduto direttamente a privati e allevatori della zona. Non usciamo dalla provincia: la filiera corta funziona davvero.</p>
-          </div>
-          <div class="card">
-            <h3>Legna e prodotti diretti</h3>
-            <p>La legna da ardere e i fiori stagionali completano l'offerta di vendita diretta. Sono prodotti marginali in termini di volume, centrali nella relazione con i clienti locali: spesso chi compra la legna torna anche per il fieno.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- FILOSOFIA -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <span class="label-upper">Filosofia</span>
-          <h2>Perché facciamo quello che facciamo</h2>
-          <p>Non abbiamo un manifesto. Abbiamo un modo di lavorare che si è dimostrato giusto nel tempo.</p>
-        </div>
-        <div class="grid-2" style="gap:var(--space-6);">
-          <div class="card-featured">
-            <span class="mono" style="display:block; margin-bottom:var(--space-4);">Terra</span>
-            <h3 style="margin-bottom:var(--space-3);">La terra non si possiede, si gestisce</h3>
-            <p style="font-size:1.0625rem; line-height:1.7;">
-              Questi 16 ettari non ci appartengono nel senso profondo del termine: li abbiamo in gestione per il tempo che ci è dato. Il nostro compito è restituirli in condizioni migliori di come li abbiamo ricevuti. Fertilità del suolo, struttura idrica, biodiversità delle siepi campestri: sono investimenti a lungo termine che non tornano nel bilancio dell'anno.
-            </p>
-          </div>
-          <div class="card-featured">
-            <span class="mono" style="display:block; margin-bottom:var(--space-4);">Filiera</span>
-            <h3 style="margin-bottom:var(--space-3);">Corto è meglio</h3>
-            <p style="font-size:1.0625rem; line-height:1.7;">
-              Più è corta la distanza tra chi produce e chi usa, meglio funziona tutto: il prodotto è fresco, il prezzo è equo, la relazione è diretta. Per il latte siamo vincolati al caseificio convenzionato — è la filiera DOP. Per tutto il resto — fieno, fiori, legna — vendiamo direttamente, senza intermediari, spesso con consegna locale.
-            </p>
-          </div>
-          <div class="card-featured">
-            <span class="mono" style="display:block; margin-bottom:var(--space-4);">Famiglia</span>
-            <h3 style="margin-bottom:var(--space-3);">Due persone, tutto il lavoro</h3>
-            <p style="font-size:1.0625rem; line-height:1.7;">
-              Siamo in due. Questo significa che ogni cosa che esce da questa cascina è passata dalle nostre mani. Non deleghiamo la qualità: non ne avremmo il modo, anche se lo volessimo. La piccola scala non è un limite che dobbiamo superare — è la condizione che rende possibile il controllo diretto su ogni fase.
-            </p>
-          </div>
-          <div class="card-featured">
-            <span class="mono" style="display:block; margin-bottom:var(--space-4);">Continuità</span>
-            <h3 style="margin-bottom:var(--space-3);">Innovare senza dimenticare</h3>
-            <p style="font-size:1.0625rem; line-height:1.7;">
-              Il GPS di precisione e i pannelli fotovoltaici non contraddicono secoli di agricoltura padana: li prolungano. Ogni generazione ha adottato gli strumenti migliori disponibili — i nostri antenati non avrebbero rifiutato la mietitrebbia. Noi non rifiutiamo la telemetria. Il criterio è sempre lo stesso: funziona su questo suolo, con questo clima, per questa azienda?
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
 
     <!-- CTA -->
-    <section class="section" style="background:var(--color-gray-50); border-radius:var(--radius-featured); margin:0 var(--container-pad); text-align:center;">
-      <div class="container">
-        <span class="label-upper">Dal campo al Grana Padano</span>
-        <h2 style="margin-top:var(--space-3); margin-bottom:var(--space-4);">Vuoi vedere cosa produciamo?</h2>
-        <div style="display:flex; justify-content:center; gap:var(--space-3); flex-wrap:wrap;">
-          <a href="/prodotti" class="btn btn-primary">I nostri prodotti</a>
-          <a href="/contatti" class="btn btn-ghost">Contattaci</a>
+    <section class="py-24 px-6 text-center">
+      <div class="max-w-xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-4">Vuoi vedere cosa produciamo?</h2>
+        <p class="text-white/40 mb-8">Dal latte Grana Padano DOP al fieno, dai fiori alla legna da ardere.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="/prodotti" class="bg-brand text-black font-semibold px-6 py-3 rounded-lg hover:bg-brand/90 transition-all text-sm">I nostri prodotti</a>
+          <a href="/contatti" class="border border-white/[0.14] text-white/75 font-medium px-6 py-3 rounded-lg hover:bg-white/[0.06] transition-all text-sm">Contattaci</a>
         </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <span class="footer-brand">Cascina Fontana</span>
-      <nav class="footer-links">
-        <a href="/main">Home</a>
-        <a href="/dati">Dati</a>
-        <a href="/galleria">Galleria</a>
-        <a href="/prodotti">Prodotti</a>
-        <a href="/novita">Novità</a>
-        <a href="/shop">Shop</a>
-        <a href="/contatti">Contatti</a>
+  <!-- FOOTER -->
+  <footer class="border-t border-white/[0.07] py-10 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M11.5 2.5L4 11.5h6.5L8.5 17.5l7.5-9H9.5L11.5 2.5z" fill="#3ECF8E"/></svg>
+        <span class="text-white/60 text-xs font-semibold">cascina fontana</span>
+      </div>
+      <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+        <a href="/main" class="text-white/30 text-xs hover:text-white/60 transition-colors">Home</a>
+        <a href="/storia" class="text-brand text-xs">Storia</a>
+        <a href="/dati" class="text-white/30 text-xs hover:text-white/60 transition-colors">Dati</a>
+        <a href="/galleria" class="text-white/30 text-xs hover:text-white/60 transition-colors">Galleria</a>
+        <a href="/prodotti" class="text-white/30 text-xs hover:text-white/60 transition-colors">Prodotti</a>
+        <a href="/novita" class="text-white/30 text-xs hover:text-white/60 transition-colors">Novità</a>
+        <a href="/shop" class="text-white/30 text-xs hover:text-white/60 transition-colors">Shop</a>
+        <a href="/contatti" class="text-white/30 text-xs hover:text-white/60 transition-colors">Contatti</a>
+        <a href="/admin" class="text-white/20 text-xs hover:text-white/45 transition-colors">Admin</a>
       </nav>
-      <span class="footer-copy">&copy; 2026 Cascina Fontana. Tutti i diritti riservati.</span>
-      <a href="/admin" class="footer-admin">Admin</a>
+      <p class="text-white/20 text-xs">&copy; 2026 Cascina Fontana.</p>
     </div>
   </footer>
 
-  <script type="module">
-    import { initNav } from '/js/nav.js';
-    initNav('storia');
-  </script>
 </body>
 </html>
