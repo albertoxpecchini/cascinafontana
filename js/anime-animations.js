@@ -24,6 +24,8 @@ import {
 
 const BRAND     = '#3ECF8E';
 const BRAND_RGB = '62,207,142';
+const PATHNAME  = window.location.pathname;
+const isRiskPage = /\/(storia|prodotti)(\/|$)/.test(PATHNAME);
 
 // Engine — impostazioni globali
 engine.defaults.ease     = 'out(3)';
@@ -58,20 +60,41 @@ function initScrollProgress() {
 // ──────────────────────────────────────────────────────────────
 // 2. PARTICELLE HERO (createTimer per il loop canvas)
 // ──────────────────────────────────────────────────────────────
-function initHeroParticles() {
-  if (!document.getElementById('hero-title')) return;
-  const hero = document.querySelector('section');
-  if (!hero) return;
+function initFirefliesBackground() {
+  if (document.getElementById('fireflies-bg')) return;
 
+  const host = document.body;
   const canvas = document.createElement('canvas');
-  canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;';
-  hero.style.position = 'relative';
-  hero.insertBefore(canvas, hero.firstChild);
+  canvas.id = 'fireflies-bg';
+  canvas.style.cssText = [
+    'position:fixed',
+    'top:0',
+    'left:0',
+    'width:100vw',
+    'height:100vh',
+    'pointer-events:none',
+    'z-index:0',
+  ].join(';');
+  host.appendChild(canvas);
+
+  if (getComputedStyle(host).position === 'static') {
+    host.style.position = 'relative';
+  }
+
+  const elevated = document.querySelectorAll('header, main, footer');
+  elevated.forEach(el => {
+    if (getComputedStyle(el).position === 'static') {
+      el.style.position = 'relative';
+    }
+    if (!el.style.zIndex) {
+      el.style.zIndex = '1';
+    }
+  });
 
   const ctx = canvas.getContext('2d');
   function resize() {
-    canvas.width  = hero.offsetWidth;
-    canvas.height = hero.offsetHeight;
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
   }
   resize();
   window.addEventListener('resize', resize, { passive: true });
@@ -115,13 +138,40 @@ function initHeroParticles() {
           }
         }
 
-        const a = 0.10 + 0.20 * Math.sin(p.phase);
+        const a = 0.06 + 0.14 * Math.sin(p.phase);
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${BRAND_RGB},${a.toFixed(2)})`;
         ctx.fill();
       });
     },
+  });
+}
+
+function ensureCriticalVisibility() {
+  const selectors = [
+    'main',
+    'main section',
+    'main section > div',
+    'footer',
+    'footer div',
+    'footer nav',
+    'footer p',
+    'h1',
+    'h2',
+    '[id$="-grid"]',
+    '[id$="-grid"] > *',
+  ].join(',');
+
+  document.querySelectorAll(selectors).forEach(el => {
+    if (el.closest('.lightbox')) return;
+
+    if (el.style.opacity === '0') {
+      el.style.opacity = '1';
+    }
+    if (el.style.visibility === 'hidden') {
+      el.style.visibility = 'visible';
+    }
   });
 }
 
@@ -668,6 +718,7 @@ function init() {
   scope.add(() => {
     // ── Universali (tutte le pagine) ──
     initScrollProgress();
+    initFirefliesBackground();
     initCursorSparkle();
     initAmbientGlow();
     initCardGlow();
@@ -680,7 +731,7 @@ function init() {
     initNumberCounters();
 
     // ── Solo su pagine senza GSAP (storia, prodotti, contatti, novita) ──
-    if (!hasGsap) {
+    if (!hasGsap && !isRiskPage) {
       initHeadingReveal();
       initGridReveal();
       initSectionReveals();
@@ -689,12 +740,13 @@ function init() {
     }
 
     // ── Homepage (main) ──
-    initHeroParticles();
     initHeroSubtitleReveal();
     initPhotoDraggable();
 
     // ── Storia ──
-    initStoriaTimeline();
+    if (!isRiskPage) {
+      initStoriaTimeline();
+    }
 
     // ── Shop ──
     initShopLayout();
@@ -704,6 +756,10 @@ function init() {
 
     // ── Contatti ──
     initFormAnimations();
+
+    // Safety pass: ensure no section/footer remains hidden by conflicting effects
+    ensureCriticalVisibility();
+    setTimeout(ensureCriticalVisibility, 900);
   });
 }
 
