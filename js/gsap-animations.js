@@ -2,7 +2,9 @@
 // GSAP Animations — Cascina Fontana
 // ══════════════════════════════════════════════════════════════
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 // ──────────────────────────────────────────────────────────────
 // 1. HERO SECTION ANIMATION
@@ -186,14 +188,15 @@ function initFloatingAnimation() {
 // ──────────────────────────────────────────────────────────────
 // 6. INIT ALL ANIMATIONS
 // ──────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+function initAllAnimations() {
   // Add class for targeting
   const pill = document.querySelector('section a[href="/novita"]');
   if (pill && pill.querySelector('svg')) {
     pill.classList.add('pill-announcement');
   }
 
-  const subtitle = document.querySelector('section p.text-white\/50');
+  // Avoid class selectors with '/' to prevent invalid selector runtime errors
+  const subtitle = document.querySelector('#hero-title + p') || document.querySelector('section p[style*="clamp"]');
   if (subtitle) {
     subtitle.classList.add('hero-subtitle');
   }
@@ -204,7 +207,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initPillAnimation();
   initScrollTriggerAnimations();
   initFloatingAnimation();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAllAnimations);
+} else {
+  initAllAnimations();
+}
 
 // ──────────────────────────────────────────────────────────────
 // 7. REACTIVE ANIMATIONS FOR DYNAMIC ELEMENTS
