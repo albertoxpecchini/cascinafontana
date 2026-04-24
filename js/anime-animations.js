@@ -81,16 +81,6 @@ function initFirefliesBackground() {
     host.style.position = 'relative';
   }
 
-  const elevated = document.querySelectorAll('header, main, footer');
-  elevated.forEach(el => {
-    if (getComputedStyle(el).position === 'static') {
-      el.style.position = 'relative';
-    }
-    if (!el.style.zIndex) {
-      el.style.zIndex = '1';
-    }
-  });
-
   const ctx = canvas.getContext('2d');
   function resize() {
     canvas.width  = window.innerWidth;
@@ -150,12 +140,15 @@ function initFirefliesBackground() {
 
 function ensureCriticalVisibility() {
   const selectors = [
+    'header',
+    'header *',
     'main',
     'main section',
     'main section > div',
     'footer',
     'footer div',
     'footer nav',
+    'footer a',
     'footer p',
     'h1',
     'h2',
@@ -463,6 +456,14 @@ function initFooterReveal() {
   if (!grid) return;
 
   const cols = [...grid.children];
+  if (!cols.length) return;
+
+  // If footer is already near viewport, do not hide columns first.
+  const nearViewport = footer.getBoundingClientRect().top <= window.innerHeight * 1.1;
+  if (nearViewport) {
+    return;
+  }
+
   utils.set(cols, { opacity: 0, y: 22 });
 
   // createTimeline: sequenza coordinata per le colonne footer
@@ -474,6 +475,21 @@ function initFooterReveal() {
   cols.forEach((col, i) => {
     tl.add(col, { opacity: [0, 1], y: [22, 0] }, i * 65);
   });
+
+  // Hard fallback in case scroll trigger does not fire on some clients.
+  setTimeout(() => {
+    cols.forEach(col => {
+      if (col.style.opacity === '0') {
+        col.style.opacity = '1';
+      }
+      if (col.style.visibility === 'hidden') {
+        col.style.visibility = 'visible';
+      }
+      if (col.style.transform && col.style.transform.includes('translate')) {
+        col.style.transform = '';
+      }
+    });
+  }, 1400);
 }
 
 // ──────────────────────────────────────────────────────────────
