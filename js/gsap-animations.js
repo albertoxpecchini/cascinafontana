@@ -47,19 +47,25 @@ function initHeroAnimation() {
 
   // Button hover effect
   document.querySelectorAll('#hero-cta a').forEach(btn => {
+    const originalTransform = btn.style.transform || '';
+
     btn.addEventListener('mouseenter', function() {
       gsap.to(this, {
-        scale: 1.05,
-        duration: 0.3,
+        scale: 1.04,
+        duration: 0.2,
         ease: 'power2.out'
       });
     });
     btn.addEventListener('mouseleave', function() {
       gsap.to(this, {
         scale: 1,
-        duration: 0.3,
+        duration: 0.2,
         ease: 'power2.out'
       });
+
+      if (originalTransform) {
+        this.style.transform = originalTransform;
+      }
     });
   });
 }
@@ -91,7 +97,9 @@ function initNavbarAnimation() {
   });
 
   // Nav links hover animation
-  document.querySelectorAll('nav a').forEach(link => {
+  document.querySelectorAll('header nav a').forEach(link => {
+    const originalColor = getComputedStyle(link).color;
+
     link.addEventListener('mouseenter', function() {
       gsap.to(this, {
         color: '#3ECF8E',
@@ -100,7 +108,7 @@ function initNavbarAnimation() {
     });
     link.addEventListener('mouseleave', function() {
       gsap.to(this, {
-        color: 'rgba(255,255,255,0.65)',
+        color: originalColor,
         duration: 0.2
       });
     });
@@ -180,12 +188,12 @@ function initFloatingAnimation() {
 // ──────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   // Add class for targeting
-  const pill = document.querySelector('a[href="/novita"]');
+  const pill = document.querySelector('section a[href="/novita"]');
   if (pill && pill.querySelector('svg')) {
     pill.classList.add('pill-announcement');
   }
 
-  const subtitle = document.querySelector('p[style*="font-size"]');
+  const subtitle = document.querySelector('section p.text-white\/50');
   if (subtitle) {
     subtitle.classList.add('hero-subtitle');
   }
