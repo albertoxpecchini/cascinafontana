@@ -4,6 +4,183 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prodotti — Cascina Fontana</title>
+  <meta name="description" content="I prodotti di Cascina Fontana: Grana Padano DOP, erba/fieno, fiori e legna da ardere. Vendita diretta.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{brand:'#3ECF8E'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <style>body{background-color:#0f0f0f!important;}.skeleton{background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 75%);background-size:200% 100%;animation:shimmer 1.6s infinite;}@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}</style>
+  <script>
+    window.__ENV__ = {
+      SUPABASE_URL: 'https://fjdfxynwshejyjvxhqry.supabase.co',
+      SUPABASE_ANON: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqZGZ4eW53c2hlanlqdnhocXJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1ODUxMzMsImV4cCI6MjA5MjE2MTEzM30.T1-vWQbfHNjKEBN1jIpJ9gsj2xcOCdFGaRMZIJXkv80'
+    };
+  </script>
+</head>
+<body class="bg-[#0f0f0f] text-white font-sans antialiased">
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 h-16 border-b border-white/[0.07] bg-[#0f0f0f]/80 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-5 h-full flex items-center justify-between gap-6">
+      <a href="/main" class="flex items-center gap-2.5 shrink-0">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M11.5 2.5L4 11.5h6.5L8.5 17.5l7.5-9H9.5L11.5 2.5z" fill="#3ECF8E"/></svg>
+        <span class="font-bold text-[15px] tracking-tight text-white">cascina fontana</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
+        <a href="/storia" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Storia</a>
+        <a href="/dati" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Dati</a>
+        <a href="/galleria" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Galleria</a>
+        <a href="/prodotti" class="text-[13px] text-brand px-3 py-2 rounded-md bg-white/[0.04]">Prodotti</a>
+        <a href="/novita" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Novità</a>
+        <a href="/shop" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Shop</a>
+        <a href="/contatti" class="text-[13px] text-white/65 hover:text-white px-3 py-2 rounded-md hover:bg-white/[0.06] transition-all">Contatti</a>
+      </nav>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="/admin/login.html" class="hidden sm:inline-flex text-[13px] text-white/65 hover:text-white px-4 py-1.5 rounded-md hover:bg-white/[0.06] transition-all">Sign in</a>
+        <a href="/shop" class="inline-flex text-[13px] font-semibold bg-brand text-black px-4 py-1.5 rounded-md hover:bg-brand/90 transition-all">Start your project</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16">
+
+    <!-- HERO -->
+    <section class="py-24 px-6 text-center">
+      <div class="max-w-3xl mx-auto">
+        <p class="text-[11px] uppercase tracking-widest text-white/30 mb-4">Prodotti · Vendita diretta</p>
+        <h1 class="font-extrabold tracking-tight leading-[1.05] mb-6" style="font-size:clamp(2.5rem,6vw,4rem);">
+          <span class="text-white/80">Quello che produciamo,</span><br>
+          <span class="text-brand">direttamente da noi</span>
+        </h1>
+        <p class="text-white/45 text-lg leading-relaxed max-w-xl mx-auto">Latte per la filiera Grana Padano DOP, erba e fieno, fiori stagionali, legna da ardere. Produzione propria, vendita diretta, senza intermediari.</p>
+      </div>
+    </section>
+
+    <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
+
+    <!-- GRANA PADANO -->
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <p class="text-[11px] uppercase tracking-widest text-brand mb-3">Filiera latte</p>
+          <h2 class="text-2xl font-bold text-white mb-6">Grana Padano DOP</h2>
+          <p class="text-white/55 text-sm leading-relaxed mb-4">Il latte prodotto dalla nostra mandria viene conferito quotidianamente al caseificio convenzionato per la produzione di <span class="text-brand font-semibold">Grana Padano DOP</span>. È la nostra produzione principale: ogni litro porta con sé il lavoro di due persone e 16 ettari di campi.</p>
+          <p class="text-white/55 text-sm leading-relaxed mb-4">La DOP impone parametri precisi su cellule somatiche, carica batterica e composizione del latte. Li rispettiamo con analisi periodiche.</p>
+          <p class="text-white/55 text-sm leading-relaxed">Non vendiamo latte direttamente: la filiera prevede la trasformazione in caseificio. Il Grana Padano della zona include, con ogni probabilità, latte prodotto qui a Rodigo.</p>
+        </div>
+        <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-7 flex flex-col gap-5">
+          <p class="text-[11px] uppercase tracking-widest text-white/30">Caratteristiche</p>
+          <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand shrink-0 mt-1.5"></span><div><p class="text-white text-sm font-semibold mb-0.5">DOP certificata</p><p class="text-white/40 text-xs">Conformità al disciplinare Grana Padano</p></div></div>
+          <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand shrink-0 mt-1.5"></span><div><p class="text-white text-sm font-semibold mb-0.5">Conferimento quotidiano</p><p class="text-white/40 text-xs">Latte fresco, raccolta giornaliera</p></div></div>
+          <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand shrink-0 mt-1.5"></span><div><p class="text-white text-sm font-semibold mb-0.5">Alimentazione controllata</p><p class="text-white/40 text-xs">Mais, erba medica e soia prodotti in cascina</p></div></div>
+          <div class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-brand shrink-0 mt-1.5"></span><div><p class="text-white text-sm font-semibold mb-0.5">Monitoraggio qualità</p><p class="text-white/40 text-xs">Analisi periodiche su composizione e igiene</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
+
+    <!-- ERBA MEDICA -->
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+        <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-7 flex flex-col gap-5">
+          <p class="text-[11px] uppercase tracking-widest text-white/30">Disponibilità stagionale</p>
+          <div><p class="text-white text-sm font-semibold mb-1">Primo taglio — maggio</p><p class="text-white/40 text-xs">Erba medica pregiata, alto contenuto proteico. Ideale per bovini e equini.</p></div>
+          <div><p class="text-white text-sm font-semibold mb-1">Secondo taglio — luglio</p><p class="text-white/40 text-xs">Fibra più fine, ottima per conigli e piccoli animali.</p></div>
+          <div><p class="text-white text-sm font-semibold mb-1">Terzo taglio — settembre</p><p class="text-white/40 text-xs">Foraggio autunnale, disponibilità variabile in base alle condizioni climatiche.</p></div>
+          <div class="pt-4 border-t border-white/[0.07]"><p class="text-white/40 text-xs">Vendita a <span class="text-white/70">balloni cilindrici</span> e <span class="text-white/70">balle quadre</span>. Consegna locale su accordo.</p></div>
+        </div>
+        <div>
+          <p class="text-[11px] uppercase tracking-widest text-brand mb-3">Vendita diretta</p>
+          <h2 class="text-2xl font-bold text-white mb-6">Erba medica e fieno</h2>
+          <p class="text-white/55 text-sm leading-relaxed mb-4">L'erba medica è la seconda coltura per importanza della nostra rotazione. Falciata in tre turni stagionali, viene essiccata e pressata in cascina.</p>
+          <p class="text-white/55 text-sm leading-relaxed mb-6">Non lavoriamo con piattaforme o distributori: chi vuole il fieno ci chiama, concorda la quantità e viene a caricare.</p>
+          <a href="/contatti" class="inline-flex bg-brand text-black font-semibold px-5 py-2.5 rounded-lg hover:bg-brand/90 transition-all text-sm">Richiedi disponibilità</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
+
+    <!-- LEGNA -->
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <p class="text-[11px] uppercase tracking-widest text-brand mb-3">Vendita diretta</p>
+          <h2 class="text-2xl font-bold text-white mb-6">Legna da ardere</h2>
+          <p class="text-white/55 text-sm leading-relaxed mb-4">Legna di pianura padana — pioppo, robinia, qualche ciliegio selvatico — tagliata, spaccata e stagionata in cascina. La nostra viene lasciata asciugare almeno un'estate prima di essere venduta.</p>
+          <p class="text-white/55 text-sm leading-relaxed mb-6">Vendiamo a chi è nelle vicinanze di Rodigo. Consegna su accordo per quantità significative.</p>
+          <a href="/contatti" class="inline-flex bg-brand text-black font-semibold px-5 py-2.5 rounded-lg hover:bg-brand/90 transition-all text-sm">Contattaci per la legna</a>
+        </div>
+        <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-7 flex flex-col gap-5">
+          <p class="text-[11px] uppercase tracking-widest text-white/30">Disponibilità</p>
+          <div><p class="text-white text-sm font-semibold mb-1">Pronta in autunno</p><p class="text-white/40 text-xs">Legna già stagionata disponibile da settembre.</p></div>
+          <div><p class="text-white text-sm font-semibold mb-1">Vendita a quintale o metro cubo</p><p class="text-white/40 text-xs">Quantità minima e modalità di consegna concordate direttamente.</p></div>
+          <div><p class="text-white text-sm font-semibold mb-1">Essenze locali</p><p class="text-white/40 text-xs">Pioppo, robinia e altre essenze della pianura padana. Buona resa calorica.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
+
+    <!-- PRODOTTI SHOP DINAMICI -->
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="text-[11px] uppercase tracking-widest text-white/30 mb-3">Disponibile online</p>
+          <h2 class="text-2xl font-bold text-white">Prodotti nello shop</h2>
+        </div>
+        <div id="prodotti-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="skeleton rounded-xl" style="height:240px;"></div>
+          <div class="skeleton rounded-xl" style="height:240px;"></div>
+          <div class="skeleton rounded-xl" style="height:240px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 px-6 text-center">
+      <div class="max-w-xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-4">Vuoi acquistare?</h2>
+        <p class="text-white/40 mb-8">Per fieno, fiori e legna la strada più veloce è contattarci direttamente.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="/contatti" class="bg-brand text-black font-semibold px-6 py-3 rounded-lg hover:bg-brand/90 transition-all text-sm">Contattaci</a>
+          <a href="/shop" class="border border-white/[0.14] text-white/75 font-medium px-6 py-3 rounded-lg hover:bg-white/[0.06] transition-all text-sm">Vai allo shop</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/[0.07] py-10 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M11.5 2.5L4 11.5h6.5L8.5 17.5l7.5-9H9.5L11.5 2.5z" fill="#3ECF8E"/></svg>
+        <span class="text-white/60 text-xs font-semibold">cascina fontana</span>
+      </div>
+      <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+        <a href="/main" class="text-white/30 text-xs hover:text-white/60 transition-colors">Home</a>
+        <a href="/storia" class="text-white/30 text-xs hover:text-white/60 transition-colors">Storia</a>
+        <a href="/dati" class="text-white/30 text-xs hover:text-white/60 transition-colors">Dati</a>
+        <a href="/galleria" class="text-white/30 text-xs hover:text-white/60 transition-colors">Galleria</a>
+        <a href="/prodotti" class="text-brand text-xs">Prodotti</a>
+        <a href="/novita" class="text-white/30 text-xs hover:text-white/60 transition-colors">Novità</a>
+        <a href="/shop" class="text-white/30 text-xs hover:text-white/60 transition-colors">Shop</a>
+        <a href="/contatti" class="text-white/30 text-xs hover:text-white/60 transition-colors">Contatti</a>
+        <a href="/admin" class="text-white/20 text-xs hover:text-white/45 transition-colors">Admin</a>
+      </nav>
+      <p class="text-white/20 text-xs">&copy; 2026 Cascina Fontana.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { loadProdotti } from '/js/prodotti.js';
+    loadProdotti('prodotti-grid');
+  </script>
+</body>
+</html>
   <meta name="description" content="I prodotti di Cascina Fontana: latte per Grana Padano DOP, erba/fieno, fiori stagionali e legna da ardere. Vendita diretta a Rodigo (MN).">
   <meta property="og:title" content="Prodotti — Cascina Fontana">
   <meta property="og:url" content="https://www.cascinafontana.xyz/prodotti">
