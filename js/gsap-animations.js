@@ -162,8 +162,8 @@ function initPillAnimation() {
 function initFloatingAnimation() {
   // Animate hero title with subtle floating effect
   gsap.to('#hero-title', {
-    y: 10,
-    duration: 3,
+    y: 4,
+    duration: 6,
     repeat: -1,
     yoyo: true,
     ease: 'sine.inOut'
