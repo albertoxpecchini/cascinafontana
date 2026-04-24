@@ -10,6 +10,11 @@ if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undef
 // 1. HERO SECTION ANIMATION
 // ──────────────────────────────────────────────────────────────
 function initHeroAnimation() {
+  const ctaButtons = gsap.utils.toArray('#hero-cta a');
+
+  // Hard safety: buttons must always be visible before animating
+  gsap.set(ctaButtons, { autoAlpha: 1, clearProps: 'opacity,visibility' });
+
   const tl = gsap.timeline();
   
   // Pill announcement — fade in from bottom
@@ -39,17 +44,17 @@ function initHeroAnimation() {
   }, 0.3);
 
   // CTA buttons — stagger with bounce
-  tl.from('#hero-cta a', {
-    opacity: 0,
+  tl.from(ctaButtons, {
+    autoAlpha: 0,
     y: 15,
     duration: 0.6,
     stagger: 0.1,
-    ease: 'back.out(1.7)'
+    ease: 'back.out(1.7)',
+    immediateRender: false
   }, 0.5);
 
   // Button hover effect
-  document.querySelectorAll('#hero-cta a').forEach(btn => {
-    const originalTransform = btn.style.transform || '';
+  ctaButtons.forEach(btn => {
 
     btn.addEventListener('mouseenter', function() {
       gsap.to(this, {
@@ -64,10 +69,6 @@ function initHeroAnimation() {
         duration: 0.2,
         ease: 'power2.out'
       });
-
-      if (originalTransform) {
-        this.style.transform = originalTransform;
-      }
     });
   });
 }
@@ -98,23 +99,7 @@ function initNavbarAnimation() {
     lastScrollY = scrollY;
   });
 
-  // Nav links hover animation
-  document.querySelectorAll('header nav a').forEach(link => {
-    const originalColor = getComputedStyle(link).color;
-
-    link.addEventListener('mouseenter', function() {
-      gsap.to(this, {
-        color: '#3ECF8E',
-        duration: 0.2
-      });
-    });
-    link.addEventListener('mouseleave', function() {
-      gsap.to(this, {
-        color: originalColor,
-        duration: 0.2
-      });
-    });
-  });
+  // Keep nav link colors managed by CSS utility classes to avoid accidental invisibility.
 }
 
 // ──────────────────────────────────────────────────────────────
