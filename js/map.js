@@ -52,7 +52,7 @@ export function initMap(containerId, lat, lng, zoom = 14) {
       .bindPopup('<strong>Società Agricola Cascina Fontana</strong><br>Strada Vedusino 4, 46040 Rodigo MN')
       .openPopup();
 
-    map.invalidateSize();
+    setTimeout(() => map.invalidateSize(), 100);
 
     if (isMobile) {
       map.dragging.disable();
@@ -66,10 +66,9 @@ export function initMap(containerId, lat, lng, zoom = 14) {
     }
   }
 
-  // Aspetta che Leaflet (caricato con defer) sia disponibile
-  if (document.readyState === 'complete') {
-    _init();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _init, { once: true });
   } else {
-    window.addEventListener('load', _init, { once: true });
+    _init();
   }
 }
