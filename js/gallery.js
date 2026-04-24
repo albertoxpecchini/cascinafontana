@@ -85,9 +85,9 @@ export async function loadGalleryGrid(containerId) {
   }
 
   container.innerHTML = data.map((img, i) => `
-    <div class="gallery-item" data-index="${i}">
-      <img src="${img.url}" alt="${img.caption ?? ''}" loading="lazy">
-      ${img.caption ? `<span class="gallery-item-caption">${img.caption}</span>` : ''}
+    <div class="gallery-item break-inside-avoid mb-3 rounded-xl overflow-hidden cursor-zoom-in relative group" data-index="${i}">
+      <img src="${img.url}" alt="${img.caption ?? ''}" loading="lazy" class="w-full h-auto block object-cover transition-transform duration-300 group-hover:scale-[1.03]">
+      ${img.caption ? `<span class="absolute bottom-0 left-0 right-0 px-3 py-2 text-white text-xs font-medium bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">${img.caption}</span>` : ''}
     </div>
   `).join('');
 
