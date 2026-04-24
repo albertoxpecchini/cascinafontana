@@ -99,11 +99,11 @@ export async function loadGalleryGrid(containerId) {
   function openLightbox(i) {
     lbImg.src = data[i].url;
     lbImg.alt = data[i].caption ?? '';
-    lightbox.classList.add('is-open');
+    lightbox.classList.add('active');
   }
 
   function closeLightbox() {
-    lightbox.classList.remove('is-open');
+    lightbox.classList.remove('active');
   }
 
   container.querySelectorAll('.gallery-item').forEach((item, i) => {
