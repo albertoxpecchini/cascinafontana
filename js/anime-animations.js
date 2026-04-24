@@ -20,7 +20,7 @@ import {
   splitText,
   svg,
   utils,
-} from '/node_modules/animejs/dist/bundles/anime.esm.min.js';
+} from 'https://cdn.jsdelivr.net/npm/animejs@4.3.6/dist/bundles/anime.esm.min.js';
 
 const BRAND     = '#3ECF8E';
 const BRAND_RGB = '62,207,142';
