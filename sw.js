@@ -1,4 +1,4 @@
-const VERSION = '20260426-2';
+const VERSION = '20260426-3';
 const PRECACHE = `cascina-precache-${VERSION}`;
 const RUNTIME = `cascina-runtime-${VERSION}`;
 
