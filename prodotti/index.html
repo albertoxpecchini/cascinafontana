@@ -48,8 +48,17 @@
 
   <main class="pt-16">
 
+    <!-- BREADCRUMBS -->
+    <nav aria-label="Breadcrumb" class="max-w-6xl mx-auto px-6 pt-6">
+      <ol class="flex items-center gap-1.5 text-xs text-white/35">
+        <li><a href="/main" class="hover:text-white/70 transition-colors">Home</a></li>
+        <li aria-hidden="true" class="text-white/20">›</li>
+        <li class="text-white/70" aria-current="page">Prodotti</li>
+      </ol>
+    </nav>
+
     <!-- HERO -->
-    <section class="py-24 px-6 text-center">
+    <section class="pt-12 pb-24 px-6 text-center">
       <div class="max-w-3xl mx-auto">
         <p class="text-[11px] uppercase tracking-widest text-white/30 mb-4">Prodotti · Vendita diretta</p>
         <h1 class="font-extrabold tracking-tight leading-[1.05] mb-6" style="font-size:clamp(2.5rem,6vw,4rem);">
@@ -62,8 +71,20 @@
 
     <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
 
+    <!-- TABS — sticky product navigation -->
+    <div id="prodotti-tabs" class="sticky top-16 z-40 bg-[#0f0f0f]/85 backdrop-blur-md border-b border-white/[0.06]" role="tablist" aria-label="Categorie prodotti">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center gap-1 overflow-x-auto -mx-2 px-2 py-3 scrollbar-none" style="scrollbar-width:none;">
+          <a href="#grana-padano" data-tab="grana-padano" role="tab" aria-selected="true" class="tab-link shrink-0 text-[13px] font-medium px-4 py-1.5 rounded-full border border-brand bg-brand/10 text-brand transition-all">Grana Padano</a>
+          <a href="#erba-fieno"   data-tab="erba-fieno"   role="tab" aria-selected="false" class="tab-link shrink-0 text-[13px] font-medium px-4 py-1.5 rounded-full border border-white/[0.1] text-white/55 hover:border-white/25 hover:text-white/80 transition-all">Erba e fieno</a>
+          <a href="#legna"        data-tab="legna"        role="tab" aria-selected="false" class="tab-link shrink-0 text-[13px] font-medium px-4 py-1.5 rounded-full border border-white/[0.1] text-white/55 hover:border-white/25 hover:text-white/80 transition-all">Legna da ardere</a>
+          <a href="#shop-prod"    data-tab="shop-prod"    role="tab" aria-selected="false" class="tab-link shrink-0 text-[13px] font-medium px-4 py-1.5 rounded-full border border-white/[0.1] text-white/55 hover:border-white/25 hover:text-white/80 transition-all">Online</a>
+        </div>
+      </div>
+    </div>
+
     <!-- GRANA PADANO -->
-    <section class="py-20 px-6">
+    <section id="grana-padano" class="py-20 px-6 scroll-mt-32" role="tabpanel" aria-labelledby="grana-padano-tab">
       <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
         <div>
           <p class="text-[11px] uppercase tracking-widest text-brand mb-3">Filiera latte</p>
@@ -85,7 +106,7 @@
     <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
 
     <!-- ERBA MEDICA -->
-    <section class="py-20 px-6">
+    <section id="erba-fieno" class="py-20 px-6 scroll-mt-32">
       <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
         <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-7 flex flex-col gap-5">
           <p class="text-[11px] uppercase tracking-widest text-white/30">Disponibilità stagionale</p>
@@ -107,7 +128,7 @@
     <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
 
     <!-- LEGNA -->
-    <section class="py-20 px-6">
+    <section id="legna" class="py-20 px-6 scroll-mt-32">
       <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
         <div>
           <p class="text-[11px] uppercase tracking-widest text-brand mb-3">Vendita diretta</p>
@@ -128,7 +149,7 @@
     <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
 
     <!-- PRODOTTI SHOP DINAMICI -->
-    <section class="py-20 px-6">
+    <section id="shop-prod" class="py-20 px-6 scroll-mt-32">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
           <p class="text-[11px] uppercase tracking-widest text-white/30 mb-3">Disponibile online</p>
@@ -181,6 +202,53 @@
   <script type="module">
     import { loadProdotti } from '/js/prodotti.js';
     loadProdotti('prodotti-grid');
+  </script>
+
+  <!-- Tabs: scroll-spy + smooth scroll -->
+  <script>
+    (function () {
+      const tabs = document.querySelectorAll('.tab-link');
+      if (!tabs.length) return;
+
+      const setActive = (id) => {
+        tabs.forEach(t => {
+          const active = t.dataset.tab === id;
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+          if (active) {
+            t.classList.add('border-brand', 'bg-brand/10', 'text-brand');
+            t.classList.remove('border-white/[0.1]', 'text-white/55');
+            // Auto-scroll active tab into view on mobile
+            t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          } else {
+            t.classList.remove('border-brand', 'bg-brand/10', 'text-brand');
+            t.classList.add('border-white/[0.1]', 'text-white/55');
+          }
+        });
+      };
+
+      const sections = Array.from(tabs)
+        .map(t => document.getElementById(t.dataset.tab))
+        .filter(Boolean);
+
+      // Smooth scroll on click (preserves URL hash)
+      tabs.forEach(t => t.addEventListener('click', (e) => {
+        const id = t.dataset.tab;
+        const target = document.getElementById(id);
+        if (!target) return;
+        e.preventDefault();
+        history.replaceState(null, '', '#' + id);
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActive(id);
+      }));
+
+      // Track which section is currently in view
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+      sections.forEach(s => io.observe(s));
+    })();
   </script>
   <!-- Anime.js extra animations -->
   <script type="module" src="/js/anime-animations.js?v=dce3399"></script>
