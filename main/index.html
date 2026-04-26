@@ -427,16 +427,31 @@
   </footer>
 
   <script type="module">
-    import { fetchGalleria } from '/js/gallery.js';
-    fetchGalleria().then(data => {
-      if (!data.length) return;
-      const strip = document.getElementById('photo-strip');
-      if (!strip) return;
-      const doubled = [...data, ...data];
-      strip.innerHTML = doubled.map(img =>
-        `<img src="${img.url}" alt="${img.caption ?? ''}" class="h-56 w-auto rounded-xl object-cover shrink-0" loading="lazy">`
-      ).join('');
-    }).catch(() => {});
+    import { fetchGalleria } from '/js/supabase.js';
+
+    const strip = document.getElementById('photo-strip');
+    if (!strip) {
+      // no-op
+    } else {
+      const renderFallback = () => {
+        strip.innerHTML = Array.from({ length: 8 }, () =>
+          '<div class="h-56 w-72 rounded-xl shrink-0 border border-white/[0.12] bg-white/[0.05]"></div>'
+        ).join('');
+      };
+
+      fetchGalleria().then(data => {
+        if (!Array.isArray(data) || !data.length) {
+          renderFallback();
+          return;
+        }
+        const doubled = [...data, ...data];
+        strip.innerHTML = doubled.map(img =>
+          `<img src="${img.url}" alt="${img.caption ?? ''}" class="h-56 w-auto rounded-xl object-cover shrink-0" loading="lazy">`
+        ).join('');
+      }).catch(() => {
+        renderFallback();
+      });
+    }
   </script>
 
   <!-- GSAP animations library -->

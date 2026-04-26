@@ -78,7 +78,14 @@
       <div class="relative">
         <div class="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none" style="background:linear-gradient(to right,#0f0f0f,transparent)"></div>
         <div class="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none" style="background:linear-gradient(to left,#0f0f0f,transparent)"></div>
-        <div id="photo-strip" class="flex gap-3 animate-marquee" style="width:max-content;"></div>
+        <div id="photo-strip" class="flex gap-3 animate-marquee" style="width:max-content;">
+          <div class="h-56 w-72 rounded-xl shrink-0 border border-white/[0.12] bg-white/[0.05]"></div>
+          <div class="h-56 w-72 rounded-xl shrink-0 border border-white/[0.12] bg-white/[0.05]"></div>
+          <div class="h-56 w-72 rounded-xl shrink-0 border border-white/[0.12] bg-white/[0.05]"></div>
+          <div class="h-56 w-72 rounded-xl shrink-0 border border-white/[0.12] bg-white/[0.05]"></div>
+          <div class="h-56 w-72 rounded-xl shrink-0 border border-white/[0.12] bg-white/[0.05]"></div>
+          <div class="h-56 w-72 rounded-xl shrink-0 border border-white/[0.12] bg-white/[0.05]"></div>
+        </div>
       </div>
     </section>
 
@@ -108,15 +115,31 @@
 
   <script type="module">
     import { fetchGalleria } from '/js/supabase.js';
-    fetchGalleria().then(data => {
-      if (!data.length) return;
-      const strip = document.getElementById('photo-strip');
-      if (!strip) return;
-      const doubled = [...data, ...data];
-      strip.innerHTML = doubled.map(img =>
-        `<img src="${img.url}" alt="${img.caption ?? ''}" class="h-56 w-auto rounded-xl object-cover shrink-0" loading="lazy">`
-      ).join('');
-    }).catch(() => {});
+
+    const strip = document.getElementById('photo-strip');
+    if (!strip) {
+      // no-op
+    } else {
+      const renderFallback = () => {
+        strip.innerHTML = Array.from({ length: 8 }, () =>
+          '<div class="h-56 w-72 rounded-xl shrink-0 border border-white/[0.12] bg-white/[0.05]"></div>'
+        ).join('');
+      };
+
+      fetchGalleria().then(data => {
+        if (!Array.isArray(data) || !data.length) {
+          renderFallback();
+          return;
+        }
+
+        const doubled = [...data, ...data];
+        strip.innerHTML = doubled.map(img =>
+          `<img src="${img.url}" alt="${img.caption ?? ''}" class="h-56 w-auto rounded-xl object-cover shrink-0" loading="lazy">`
+        ).join('');
+      }).catch(() => {
+        renderFallback();
+      });
+    }
   </script>
 
   <!-- GSAP animations library -->
