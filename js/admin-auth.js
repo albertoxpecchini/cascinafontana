@@ -52,14 +52,14 @@ window.__ADMIN_AUTH__ = {
    */
   requireAuth() {
     if (!this.isAuthenticated()) {
-      window.location.replace('/admin/login.html');
+      window.location.replace('/admin/');
     }
   }
 };
 
 // Auto-check se siamo in una pagina admin
 if (window.location.pathname.includes('/admin/') && 
-    !window.location.pathname.endsWith('login.html') &&
+    !window.location.pathname.endsWith('login') &&
     !window.location.pathname.endsWith('index.html')) {
   window.__ADMIN_AUTH__.requireAuth();
 }

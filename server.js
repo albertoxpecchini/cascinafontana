@@ -42,6 +42,35 @@ const MIME = {
   '.webm'  : 'video/webm',
 };
 
+function staticHeaders(pathname, ext, mimeType) {
+  const headers = {
+    'Content-Type': mimeType,
+    'X-Content-Type-Options': 'nosniff',
+  };
+
+  if (pathname === '/sw.js') {
+    headers['Cache-Control'] = 'no-cache';
+    headers['Service-Worker-Allowed'] = '/';
+    return headers;
+  }
+
+  if (pathname.startsWith('/admin')) {
+    headers['Cache-Control'] = 'no-store, no-cache, must-revalidate';
+    headers['X-Robots-Tag'] = 'noindex, nofollow';
+    return headers;
+  }
+
+  if (ext === '.html') {
+    headers['Cache-Control'] = 'no-cache';
+  } else if (ext === '.js' || ext === '.css') {
+    headers['Cache-Control'] = 'public, max-age=86400, stale-while-revalidate=604800';
+  } else if (/\.(?:png|jpe?g|webp|svg|ico|woff2?|ttf)$/i.test(ext)) {
+    headers['Cache-Control'] = 'public, max-age=604800, stale-while-revalidate=2592000';
+  }
+
+  return headers;
+}
+
 // ── Server ───────────────────────────────────────────────────────────────────
 http.createServer((req, res) => {
   const pathname = new URL(req.url, `http://localhost:${PORT}`).pathname;
@@ -74,6 +103,12 @@ http.createServer((req, res) => {
     return res.end();
   }
 
+  // L'admin ha il login integrato in /admin/.
+  if (pathname === '/admin/login' || pathname === '/admin/login.html') {
+    res.writeHead(302, { Location: '/admin/' });
+    return res.end();
+  }
+
   // Prova directory → index.html
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
     filePath = path.join(filePath, 'index.html');
@@ -93,7 +128,7 @@ http.createServer((req, res) => {
     }
     const ext      = path.extname(resolved).toLowerCase();
     const mimeType = MIME[ext] || 'application/octet-stream';
-    res.writeHead(200, { 'Content-Type': mimeType });
+    res.writeHead(200, staticHeaders(pathname, ext, mimeType));
     res.end(data);
   });
 

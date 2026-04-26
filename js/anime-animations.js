@@ -26,6 +26,18 @@ const BRAND     = '#3ECF8E';
 const BRAND_RGB = '62,207,142';
 const PATHNAME  = window.location.pathname;
 const isRiskPage = /\/(storia|prodotti)(\/|$)/.test(PATHNAME);
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const saveData = navigator.connection?.saveData === true;
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+const enableDecorativeMotion = !prefersReducedMotion && !saveData;
+
+function runWhenIdle(fn, timeout = 1400) {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(fn, { timeout });
+    return;
+  }
+  window.setTimeout(fn, Math.min(timeout, 500));
+}
 
 // Engine — impostazioni globali
 engine.defaults.ease     = 'out(3)';
@@ -48,19 +60,37 @@ function initScrollProgress() {
   ].join(';');
   document.body.appendChild(bar);
 
-  // onScroll con sync:'linear' lega il progresso all'animazione allo scroll
-  animate(bar, {
-    width:    '100%',
-    ease:     'none',
-    duration: 1000,
-    autoplay: onScroll({ sync: 'linear' }),
-  });
+  let ticking = false;
+
+  function updateProgress() {
+    const maxScroll = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    ) - window.innerHeight;
+    const progress = maxScroll > 0
+      ? Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100))
+      : 0;
+
+    bar.style.width = `${progress}%`;
+    ticking = false;
+  }
+
+  function requestProgressUpdate() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateProgress);
+  }
+
+  updateProgress();
+  window.addEventListener('scroll', requestProgressUpdate, { passive: true });
+  window.addEventListener('resize', requestProgressUpdate, { passive: true });
 }
 
 // ──────────────────────────────────────────────────────────────
 // 2. PARTICELLE HERO (createTimer per il loop canvas)
 // ──────────────────────────────────────────────────────────────
 function initFirefliesBackground() {
+  if (!enableDecorativeMotion || isCoarsePointer) return;
   if (document.getElementById('fireflies-bg')) return;
 
   const host = document.body;
@@ -90,7 +120,8 @@ function initFirefliesBackground() {
   window.addEventListener('resize', resize, { passive: true });
 
   // Particelle con proprietà casuali (utils.random)
-  const pts = Array.from({ length: 70 }, () => ({
+  const density = window.innerWidth >= 1280 ? 46 : 32;
+  const pts = Array.from({ length: density }, () => ({
     x:     utils.random(0, canvas.width),
     y:     utils.random(0, canvas.height),
     r:     utils.random(0.3, 2.2),
@@ -172,7 +203,7 @@ function ensureCriticalVisibility() {
 // 3. SCIA CURSORE (animate + utils)
 // ──────────────────────────────────────────────────────────────
 function initCursorSparkle() {
-  if ('ontouchstart' in window) return;
+  if (!enableDecorativeMotion || 'ontouchstart' in window) return;
   let lastT = 0;
 
   document.addEventListener('mousemove', e => {
@@ -207,7 +238,7 @@ function initCursorSparkle() {
 // 4. ALONE AMBIENTALE (createAnimatable + spring)
 // ──────────────────────────────────────────────────────────────
 function initAmbientGlow() {
-  if ('ontouchstart' in window) return;
+  if (!enableDecorativeMotion || 'ontouchstart' in window) return;
 
   const glow = document.createElement('div');
   glow.style.cssText = [
@@ -458,38 +489,53 @@ function initFooterReveal() {
   const cols = [...grid.children];
   if (!cols.length) return;
 
-  // If footer is already near viewport, do not hide columns first.
-  const nearViewport = footer.getBoundingClientRect().top <= window.innerHeight * 1.1;
-  if (nearViewport) {
+  cols.forEach(col => {
+    col.style.opacity = '1';
+    col.style.visibility = 'visible';
+    col.style.willChange = enableDecorativeMotion ? 'transform, opacity' : '';
+  });
+
+  if (!enableDecorativeMotion) {
     return;
   }
 
-  utils.set(cols, { opacity: 0, y: 22 });
+  const reveal = () => {
+    if (footer._revealed) return;
+    footer._revealed = true;
 
-  // createTimeline: sequenza coordinata per le colonne footer
-  const tl = createTimeline({
-    autoplay: onScroll({ target: footer, enter: 'top 92%' }),
-    defaults: { ease: 'out(3)', duration: 600 },
-  });
-
-  cols.forEach((col, i) => {
-    tl.add(col, { opacity: [0, 1], y: [22, 0] }, i * 65);
-  });
-
-  // Hard fallback in case scroll trigger does not fire on some clients.
-  setTimeout(() => {
-    cols.forEach(col => {
-      if (col.style.opacity === '0') {
-        col.style.opacity = '1';
-      }
-      if (col.style.visibility === 'hidden') {
-        col.style.visibility = 'visible';
-      }
-      if (col.style.transform && col.style.transform.includes('translate')) {
-        col.style.transform = '';
-      }
+    animate(cols, {
+      opacity: [0.96, 1],
+      y:       [12, 0],
+      delay:   stagger(55, { from: 'first' }),
+      duration: 520,
+      ease:    'out(3)',
+      onComplete: () => {
+        cols.forEach(col => {
+          col.style.opacity = '1';
+          col.style.visibility = 'visible';
+          col.style.transform = '';
+          col.style.willChange = '';
+        });
+      },
     });
-  }, 1400);
+  };
+
+  if (footer.getBoundingClientRect().top <= window.innerHeight * 1.25) {
+    runWhenIdle(reveal, 500);
+    return;
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      observer.disconnect();
+      reveal();
+    }, { rootMargin: '240px 0px' });
+    observer.observe(footer);
+    return;
+  }
+
+  runWhenIdle(reveal, 900);
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -632,6 +678,7 @@ function initFormAnimations() {
 // 19. SHIMMER DIVISORI (animate loop)
 // ──────────────────────────────────────────────────────────────
 function initDividerShimmer() {
+  if (!enableDecorativeMotion) return;
   document.querySelectorAll('.h-px, [class*="h-px"]').forEach((div, i) => {
     animate(div, {
       opacity:   [0.3, 1, 0.3],
@@ -688,6 +735,7 @@ function initHeroSubtitleReveal() {
 // 22. PARALLASSE SEZIONI (onScroll scrub)
 // ──────────────────────────────────────────────────────────────
 function initParallaxImages() {
+  if (!enableDecorativeMotion) return;
   document.querySelectorAll('img[class*="object-cover"]').forEach(img => {
     if (img._px) return;
     img._px = true;
@@ -733,18 +781,22 @@ function init() {
 
   scope.add(() => {
     // ── Universali (tutte le pagine) ──
+    ensureCriticalVisibility();
     initScrollProgress();
-    initFirefliesBackground();
-    initCursorSparkle();
-    initAmbientGlow();
-    initCardGlow();
     initButtonRipple();
-    initMagneticCTA();
     initNavUnderline();
     initLogoAnimation();
     initFooterReveal();
     initDividerShimmer();
     initNumberCounters();
+
+    runWhenIdle(() => {
+      initFirefliesBackground();
+      initCursorSparkle();
+      initAmbientGlow();
+      initCardGlow();
+      initMagneticCTA();
+    }, 1200);
 
     // ── Solo su pagine senza GSAP (storia, prodotti, contatti, novita) ──
     if (!hasGsap && !isRiskPage) {

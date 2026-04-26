@@ -162,67 +162,11 @@ function initPillAnimation() {
 function initFloatingAnimation() {
   // Animate hero title with subtle floating effect
   gsap.to('#hero-title', {
-    y: 4,
-    duration: 6,
+    y: 10,
+    duration: 3,
     repeat: -1,
     yoyo: true,
     ease: 'sine.inOut'
-  });
-}
-
-// ──────────────────────────────────────────────────────────────
-// 5b. CERTIFICAZIONI BADGE ANIMATION
-// ──────────────────────────────────────────────────────────────
-function initCertBadges() {
-  const section = document.getElementById('cert-section');
-  if (!section) return;
-
-  const badges = section.querySelectorAll('.group');
-  if (!badges.length) return;
-
-  gsap.set(badges, { opacity: 0, y: 28, scale: 0.75 });
-
-  ScrollTrigger.create({
-    trigger: section,
-    start:   'top 78%',
-    once:    true,
-    onEnter: () => {
-      const tl = gsap.timeline();
-
-      tl.from(section.querySelector('p'), {
-        opacity: 0, y: 10, duration: 0.4, ease: 'power2.out',
-      }, 0);
-
-      tl.to(badges, {
-        opacity:  1,
-        y:        0,
-        scale:    1,
-        duration: 0.55,
-        stagger:  0.13,
-        ease:     'back.out(1.8)',
-      }, 0.25);
-
-      tl.to(section.querySelectorAll('svg'), {
-        scale:    [1, 1.28, 1],
-        duration: 0.4,
-        stagger:  0.13,
-        ease:     'power2.inOut',
-      }, 0.90);
-    },
-  });
-
-  badges.forEach(badge => {
-    const icon = badge.querySelector('svg');
-    const box  = badge.querySelector('div');
-
-    badge.addEventListener('mouseenter', () => {
-      gsap.to(icon, { scale: 1.22, rotate: 10, duration: 0.22, ease: 'back.out(2)' });
-      gsap.to(box,  { y: -5, duration: 0.22, ease: 'power2.out' });
-    });
-    badge.addEventListener('mouseleave', () => {
-      gsap.to(icon, { scale: 1, rotate: 0, duration: 0.35, ease: 'elastic.out(1, 0.4)' });
-      gsap.to(box,  { y: 0,  duration: 0.35, ease: 'elastic.out(1, 0.4)' });
-    });
   });
 }
 
@@ -248,7 +192,6 @@ function initAllAnimations() {
   initPillAnimation();
   initScrollTriggerAnimations();
   initFloatingAnimation();
-  initCertBadges();
 }
 
 if (document.readyState === 'loading') {

@@ -1,6 +1,8 @@
 {
   "redirects": [
-    { "source": "/", "destination": "/main", "permanent": true }
+    { "source": "/", "destination": "/main", "permanent": true },
+    { "source": "/admin/login", "destination": "/admin/", "permanent": true },
+    { "source": "/admin/login.html", "destination": "/admin/", "permanent": true }
   ],
   "headers": [
     {
@@ -21,15 +23,22 @@
       ]
     },
     {
+      "source": "/sw.js",
+      "headers": [
+        { "key": "Cache-Control",             "value": "no-cache" },
+        { "key": "Service-Worker-Allowed",    "value": "/" }
+      ]
+    },
+    {
       "source": "/js/(.*)",
       "headers": [
-        { "key": "Cache-Control",             "value": "public, max-age=0, must-revalidate" }
+        { "key": "Cache-Control",             "value": "public, max-age=86400, stale-while-revalidate=604800" }
       ]
     },
     {
       "source": "/css/(.*)",
       "headers": [
-        { "key": "Cache-Control",             "value": "public, max-age=3600, stale-while-revalidate=86400" }
+        { "key": "Cache-Control",             "value": "public, max-age=86400, stale-while-revalidate=604800" }
       ]
     }
   ]

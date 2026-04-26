@@ -6,7 +6,7 @@ Tutto il sistema è pronto! Ho creato:
 
 ### 📊 Admin Panels (gestione contenuti)
 - **`/admin/index.html`** — Dashboard principale
-- **`/admin/login.html`** — Login (PIN: `1234`)
+- **`/admin/`** — Login e dashboard admin
 - **`/admin/galleria.html`** — Gestisci immagini galleria
 - **`/admin/novita.html`** — Pubblica post/notizie
 - **`/admin/prodotti.html`** — Aggiungi prodotti con foto
@@ -50,7 +50,7 @@ Accedi a https://supabase.com/dashboard e:
 
 ### 3️⃣ Accedi ai Pannelli Admin
 
-**URL**: `/admin/login.html`
+**URL**: `/admin/`
 **PIN Default**: `1234` ⚠️ **CAMBIA PRIMA DI ANDARE IN PRODUZIONE!**
 
 Dopo il login → Dashboard (`/admin/index.html`)

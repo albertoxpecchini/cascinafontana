@@ -50,15 +50,6 @@
 
     /* Override base body background for this page */
     body { background-color: #0f0f0f !important; }
-
-    /* Gallery */
-    .gallery-item img{transition:transform .3s ease,opacity .3s ease;}
-    .gallery-item:hover img{transform:scale(1.03);opacity:.85;}
-    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;}
-    .lightbox.active{display:flex;}
-    .lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;}
-    .skeleton{background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 75%);background-size:200% 100%;animation:shimmer 1.6s infinite;}
-    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
   </style>
 </head>
 <body class="bg-[#0f0f0f] text-white font-sans antialiased">
@@ -124,39 +115,78 @@
 
     </section>
 
-    <!-- ══ MARQUEE LOGHI ══════════════════════════════════════ -->
-    <div class="relative overflow-hidden border-y border-white/[0.06] py-7">
-      <!-- Fade lato sinistro -->
-      <div class="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none" style="background:linear-gradient(to right,#0f0f0f,transparent)"></div>
-      <!-- Fade lato destro -->
-      <div class="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none" style="background:linear-gradient(to left,#0f0f0f,transparent)"></div>
+    <!-- ══ INFO CASCINA ═══════════════════════════════════════ -->
+    <section class="py-20 px-6 border-y border-white/[0.06]">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <p class="text-[11px] uppercase tracking-widest text-white/30 mb-4">Informazioni sulla cascina</p>
+          <h2 class="font-extrabold tracking-tight leading-[1.05] mb-5" style="font-size:clamp(2rem,4.5vw,3.25rem);">Tutte le informazioni principali, qui.</h2>
+          <p class="text-white/45 text-base sm:text-lg leading-relaxed">Cascina Fontana è un'azienda agricola familiare di Rodigo, in provincia di Mantova, attiva da secoli nella pianura mantovana tra coltivazioni, allevamento bovino e vendita diretta.</p>
+        </div>
 
-      <!-- Track duplicato per loop seamless -->
-      <div class="flex items-center gap-16 animate-marquee whitespace-nowrap px-8">
-        <span class="text-white/25 text-sm font-semibold tracking-wide">LangChain</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Resend</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Loops</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Mobbin</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Pika</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Krea</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Lemon Squeezy</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Dub.co</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Mintlify</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Trigger.dev</span>
-        <!-- Duplicate for seamless loop -->
-        <span class="text-white/25 text-sm font-semibold tracking-wide">LangChain</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Resend</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Loops</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Mobbin</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Pika</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Krea</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Lemon Squeezy</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Dub.co</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Mintlify</span>
-        <span class="text-white/25 text-sm font-semibold tracking-wide">Trigger.dev</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-4">
+          <article class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6">
+            <p class="text-[11px] uppercase tracking-widest text-brand mb-3">Identità</p>
+            <p class="text-white text-lg font-semibold mb-3">Società Agricola Cascina Fontana</p>
+            <p class="text-white/50 text-sm leading-relaxed">Azienda di famiglia radicata a Rodigo, con origini documentate dal XVII secolo e una continuità generazionale legata agli stessi campi.</p>
+          </article>
+
+          <article class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6">
+            <p class="text-[11px] uppercase tracking-widest text-brand mb-3">Dove siamo</p>
+            <p class="text-white text-lg font-semibold mb-3">Strada Vedusino, 4</p>
+            <p class="text-white/50 text-sm leading-relaxed">46040 Rodigo (MN). Siamo nel cuore della pianura mantovana, in un territorio storicamente vocato a mais, erba medica e allevamento.</p>
+          </article>
+
+          <article class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6">
+            <p class="text-[11px] uppercase tracking-widest text-brand mb-3">Contatti diretti</p>
+            <div class="space-y-2 text-sm">
+              <p class="text-white/75">Telefono: <a href="tel:+393420397473" class="text-brand hover:text-brand/80 transition-colors">+39 342 039 7473</a></p>
+              <p class="text-white/75">Email: <a href="mailto:pzkko@yahoo.com" class="text-brand hover:text-brand/80 transition-colors">pzkko@yahoo.com</a></p>
+              <p class="text-white/45">Riceviamo solo su appuntamento.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 text-center">
+            <p class="text-4xl font-extrabold text-brand mb-2">63</p>
+            <p class="text-white/40 text-sm">Biolche coltivate</p>
+          </div>
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 text-center">
+            <p class="text-4xl font-extrabold text-brand mb-2">~16</p>
+            <p class="text-white/40 text-sm">Ettari totali</p>
+          </div>
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 text-center">
+            <p class="text-4xl font-extrabold text-brand mb-2">30</p>
+            <p class="text-white/40 text-sm">Pannelli fotovoltaici</p>
+          </div>
+          <div class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6 text-center">
+            <p class="text-4xl font-extrabold text-brand mb-2">2</p>
+            <p class="text-white/40 text-sm">Operatori fissi</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <article class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6">
+            <p class="text-[11px] uppercase tracking-widest text-white/30 mb-4">Produzione e filiera</p>
+            <ul class="space-y-3 text-sm text-white/55 leading-relaxed">
+              <li>Produciamo latte destinato alla filiera del <span class="text-brand font-semibold">Grana Padano DOP</span>.</li>
+              <li>Le colture principali sono mais da granella e insilato, frumento tenero, erba medica e soia in rotazione.</li>
+              <li>Vendita diretta di fieno, fiori stagionali e legna da ardere.</li>
+            </ul>
+          </article>
+
+          <article class="rounded-xl border border-white/[0.08] bg-white/[0.025] p-6">
+            <p class="text-[11px] uppercase tracking-widest text-white/30 mb-4">Strutture e mezzi</p>
+            <ul class="space-y-3 text-sm text-white/55 leading-relaxed">
+              <li>Capannone principale con impianto fotovoltaico e circa <span class="text-white/75">60% di autosufficienza energetica</span>.</li>
+              <li>Stalla per bovini, deposito cereali con silos, officina e rimessa macchine.</li>
+              <li>Parco macchine composto da trattori, mietitrebbia, seminatrice GPS, ranghinatore, imballatrice e botte per liquami.</li>
+            </ul>
+          </article>
+        </div>
       </div>
-      <p class="text-center text-white/20 text-[11px] tracking-widest uppercase mt-4">Trusted by fast-growing companies worldwide</p>
-    </div>
+    </section>
 
     <!-- ══ SOCIAL PROOF ══════════════════════════════════════ -->
     <section class="py-24 px-6">
@@ -220,7 +250,7 @@
     <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
 
     <!-- ══ CERTIFICAZIONI ═════════════════════════════════════ -->
-    <section id="cert-section" class="py-20 px-6">
+    <section class="py-20 px-6">
       <div class="max-w-6xl mx-auto text-center">
         <p class="text-white/25 text-[11px] uppercase tracking-widest mb-10">Sicurezza e conformità</p>
         <div class="flex flex-wrap items-center justify-center gap-10 md:gap-20">
@@ -264,34 +294,17 @@
     <!-- Separatore gradiente -->
     <div class="h-px max-w-6xl mx-auto bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"></div>
 
-  
-
-    <!-- ══ GALLERIA FOTOGRAFICA ══════════════════════════════════ -->
-    <section class="py-24 px-6">
-      <div class="max-w-6xl mx-auto">
-        <p class="text-center text-white/30 text-[11px] uppercase tracking-widest mb-4">Galleria fotografica</p>
-        <h2 class="text-center font-extrabold tracking-tight leading-[1.05] mb-12" style="font-size:clamp(1.8rem,4vw,2.5rem);">
-          <span class="text-white/80">La cascina</span>
-          <span class="text-brand"> in immagini</span>
-        </h2>
-        <div id="gallery-grid" class="columns-2 sm:columns-3 lg:columns-4 gap-3 [column-gap:.75rem]">
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:220px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:280px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:220px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:260px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:200px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:240px;"></div>
-        </div>
+    <!-- ══ GALLERIA SCORREVOLE ══════════════════════════════════ -->
+    <section class="py-16 overflow-hidden">
+      <p class="text-center text-white/20 text-[11px] tracking-widest uppercase mb-8">La cascina in immagini</p>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none" style="background:linear-gradient(to right,#0f0f0f,transparent)"></div>
+        <div class="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none" style="background:linear-gradient(to left,#0f0f0f,transparent)"></div>
+        <div id="photo-strip" class="flex gap-3 animate-marquee" style="width:max-content;"></div>
       </div>
     </section>
 
   </main>
-
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-    <img id="lightbox-img" src="" alt="">
-    <button id="lightbox-close" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center text-white text-lg" aria-label="Chiudi">✕</button>
-  </div>
 
   <!-- ══ FOOTER ════════════════════════════════════════════════ -->
   <footer class="border-t border-white/[0.07] pt-14 pb-8 px-6">
@@ -414,8 +427,7 @@
   </footer>
 
   <script type="module">
-    import { fetchGalleria } from '/js/supabase.js';
-    import { loadGalleryGrid } from '/js/gallery.js';
+    import { fetchGalleria } from '/js/gallery.js';
     fetchGalleria().then(data => {
       if (!data.length) return;
       const strip = document.getElementById('photo-strip');
@@ -425,14 +437,11 @@
         `<img src="${img.url}" alt="${img.caption ?? ''}" class="h-56 w-auto rounded-xl object-cover shrink-0" loading="lazy">`
       ).join('');
     }).catch(() => {});
-    loadGalleryGrid('gallery-grid');
   </script>
 
   <!-- GSAP animations library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="/js/gsap-animations.js"></script>
-  <!-- Anime.js extra animations -->
-  <script type="module" src="/js/anime-animations.js?v=dce3399"></script>
 </body>
 </html>

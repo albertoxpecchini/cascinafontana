@@ -126,7 +126,7 @@ async function loadShop() {
   if (!data.length) {
     shopGrid.innerHTML = `
       <div class="empty-state" style="grid-column:1/-1">
-        <div style="font-size:2.5rem">📦</div>
+        <div class="empty-icon">${iconSvg('package')}</div>
         <p>Nessun prodotto. Aggiungi il primo!</p>
       </div>`;
     return;
@@ -151,7 +151,7 @@ function productCard(p) {
     ? `<img class="product-card-img" src="${esc(p.image_url)}" alt="${esc(p.title)}" loading="lazy"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
     : '';
-  const ph = `<div class="product-card-img-ph" ${p.image_url ? 'style="display:none"' : ''}>📷</div>`;
+  const ph = `<div class="product-card-img-ph" ${p.image_url ? 'style="display:none"' : ''}>${iconSvg('image')}</div>`;
 
   const excerpt = p.description
     ? `<div style="font-size:.82rem;color:var(--muted);margin-top:.2rem;line-height:1.4">
@@ -298,7 +298,7 @@ async function loadNovita() {
   if (!data.length) {
     postList.innerHTML = `
       <div class="empty-state">
-        <div style="font-size:2.5rem">📢</div>
+        <div class="empty-icon">${iconSvg('megaphone')}</div>
         <p>Nessun aggiornamento ancora.</p>
       </div>`;
     return;
@@ -370,7 +370,7 @@ async function loadGalleria() {
   if (!data.length) {
     galleryGrid.innerHTML = `
       <div class="empty-state" style="grid-column:1/-1">
-        <div style="font-size:2.5rem">🖼️</div>
+        <div class="empty-icon">${iconSvg('image')}</div>
         <p>Nessuna immagine. Carica la prima!</p>
       </div>`;
     return;
@@ -391,9 +391,9 @@ function galleryCard(item) {
     <div class="gallery-admin-item">
       <img src="${esc(item.url)}" alt="${esc(item.caption ?? '')}" loading="lazy">
       <div class="gallery-item-footer">
-        <span class="gallery-item-caption">${esc(item.caption ?? '—')}</span>
-        <button class="gallery-item-btn" data-edit-img="${item.id}" title="Modifica">✏️</button>
-        <button class="gallery-item-btn del" data-del-img="${item.id}" title="Elimina">🗑️</button>
+        <span class="gallery-item-caption">${esc(item.caption ?? '-')}</span>
+        <button class="gallery-item-btn" data-edit-img="${item.id}" title="Modifica" aria-label="Modifica">${iconSvg('edit')}</button>
+        <button class="gallery-item-btn del" data-del-img="${item.id}" title="Elimina" aria-label="Elimina">${iconSvg('trash')}</button>
       </div>
     </div>`;
 }
@@ -468,6 +468,18 @@ galleryModalSave.addEventListener('click', async () => {
 });
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
+function iconSvg(name) {
+  const attrs = 'class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"';
+  const icons = {
+    package: `<svg ${attrs}><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>`,
+    image: `<svg ${attrs}><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>`,
+    megaphone: `<svg ${attrs}><path d="m3 11 18-5v12L3 14v-3Z"/><path d="M11.6 16.8a3 3 0 0 1-5.8-1.6"/></svg>`,
+    edit: `<svg ${attrs}><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>`,
+    trash: `<svg ${attrs}><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v5"/><path d="M14 11v5"/></svg>`,
+  };
+  return icons[name] ?? '';
+}
+
 function esc(str) {
   return String(str ?? '')
     .replace(/&/g, '&amp;')

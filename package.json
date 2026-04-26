@@ -4,8 +4,8 @@
   "description": "Sito ufficiale Cascina Fontana — azienda agricola lombarda",
   "private": true,
   "scripts": {
-    "dev": "serve .",
-    "start": "serve ."
+    "dev": "node server.js",
+    "start": "node server.js"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

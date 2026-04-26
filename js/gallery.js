@@ -52,8 +52,8 @@ export function initCarousel(carouselId, trackId, prevBtnId, nextBtnId, dotsId) 
     if (!data.length) {
       track.innerHTML = `<div class="carousel-slide" style="background:var(--color-gray-100);display:flex;align-items:center;justify-content:center;color:var(--color-placeholder);">Nessuna immagine</div>`;
     } else {
-      track.innerHTML = data.map(img =>
-        `<img class="carousel-slide" src="${img.url}" alt="${img.caption ?? ''}" loading="lazy">`
+      track.innerHTML = data.map((img, i) =>
+        `<img class="carousel-slide" src="${img.url}" alt="${img.caption ?? ''}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async" ${i === 0 ? 'fetchpriority="high"' : ''}>`
       ).join('');
     }
     slides = Array.from(track.querySelectorAll('.carousel-slide'));
@@ -86,7 +86,7 @@ export async function loadGalleryGrid(containerId) {
 
   container.innerHTML = data.map((img, i) => `
     <div class="gallery-item" data-index="${i}">
-      <img src="${img.url}" alt="${img.caption ?? ''}" loading="lazy">
+      <img src="${img.url}" alt="${img.caption ?? ''}" loading="${i < 4 ? 'eager' : 'lazy'}" decoding="async" ${i === 0 ? 'fetchpriority="high"' : ''}>
       ${img.caption ? `<span class="gallery-item-caption">${img.caption}</span>` : ''}
     </div>
   `).join('');

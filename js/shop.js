@@ -8,9 +8,11 @@ async function getItems() {
   return cachedItems;
 }
 
-function productCard(item, preview = false) {
+function productCard(item, preview = false, index = 0) {
+  const loading = index < 4 ? 'eager' : 'lazy';
+  const priority = index === 0 ? ' fetchpriority="high"' : '';
   const imgHtml = item.image_url
-    ? `<img class="product-card-img" src="${item.image_url}" alt="${item.title}" loading="lazy">`
+    ? `<img class="product-card-img" src="${item.image_url}" alt="${item.title}" loading="${loading}" decoding="async"${priority}>`
     : `<div class="product-card-img-placeholder">📦</div>`;
 
   const paypalHtml = preview
@@ -38,7 +40,7 @@ function renderItems(container, items, preview) {
     container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><p>Nessun prodotto disponibile.</p></div>`;
     return;
   }
-  container.innerHTML = items.map(item => productCard(item, preview)).join('');
+  container.innerHTML = items.map((item, index) => productCard(item, preview, index)).join('');
 }
 
 function renderPaypalButtons(items) {
