@@ -17,13 +17,15 @@
   <script>tailwind.config={theme:{extend:{colors:{brand:'#3ECF8E'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
   <style>
     body{background-color:#0f0f0f!important;}
-    .gallery-item img{transition:transform .3s ease,opacity .3s ease;}
-    .gallery-item:hover img{transform:scale(1.03);opacity:.85;}
-    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;}
-    .lightbox.active{display:flex;}
-    .lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;}
-    .skeleton{background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 75%);background-size:200% 100%;animation:shimmer 1.6s infinite;}
-    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      animation: marquee 40s linear infinite;
+      will-change: transform;
+    }
+    .animate-marquee:hover { animation-play-state: paused; }
   </style>
   <script>
     window.__ENV__ = {
@@ -70,27 +72,17 @@
       </div>
     </section>
 
-    <!-- GALLERY GRID -->
-    <section class="pb-24 px-6">
-      <div class="max-w-6xl mx-auto">
-        <div id="gallery-grid" class="columns-2 sm:columns-3 lg:columns-4 gap-3 [column-gap:.75rem]">
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:220px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:280px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:220px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:260px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:200px;"></div>
-          <div class="skeleton break-inside-avoid mb-3 rounded-xl" style="aspect-ratio:4/3;height:240px;"></div>
-        </div>
+    <!-- GALLERIA SCORREVOLE -->
+    <section class="py-16 overflow-hidden">
+      <p class="text-center text-white/20 text-[11px] tracking-widest uppercase mb-8">La cascina in immagini</p>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 w-32 z-10 pointer-events-none" style="background:linear-gradient(to right,#0f0f0f,transparent)"></div>
+        <div class="absolute inset-y-0 right-0 w-32 z-10 pointer-events-none" style="background:linear-gradient(to left,#0f0f0f,transparent)"></div>
+        <div id="photo-strip" class="flex gap-3 animate-marquee" style="width:max-content;"></div>
       </div>
     </section>
 
   </main>
-
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-    <img id="lightbox-img" src="" alt="">
-    <button id="lightbox-close" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center text-white text-lg" aria-label="Chiudi">✕</button>
-  </div>
 
   <!-- FOOTER -->
   <footer class="border-t border-white/[0.07] py-10 px-6">
@@ -115,17 +107,16 @@
   </footer>
 
   <script type="module">
-    import { loadGalleryGrid } from '/js/gallery.js';
-    loadGalleryGrid('gallery-grid');
-    document.getElementById('lightbox-close').addEventListener('click', () => {
-      document.getElementById('lightbox').classList.remove('active');
-    });
-    document.getElementById('lightbox').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) e.currentTarget.classList.remove('active');
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
-    });
+    import { fetchGalleria } from '/js/supabase.js';
+    fetchGalleria().then(data => {
+      if (!data.length) return;
+      const strip = document.getElementById('photo-strip');
+      if (!strip) return;
+      const doubled = [...data, ...data];
+      strip.innerHTML = doubled.map(img =>
+        `<img src="${img.url}" alt="${img.caption ?? ''}" class="h-56 w-auto rounded-xl object-cover shrink-0" loading="lazy">`
+      ).join('');
+    }).catch(() => {});
   </script>
 
   <!-- GSAP animations library -->
