@@ -54,8 +54,17 @@
 
   <main class="pt-16">
 
+    <!-- BREADCRUMBS -->
+    <nav aria-label="Breadcrumb" class="max-w-6xl mx-auto px-6 pt-6">
+      <ol class="flex items-center gap-1.5 text-xs text-white/35">
+        <li><a href="/main" class="hover:text-white/70 transition-colors">Home</a></li>
+        <li aria-hidden="true" class="text-white/20">›</li>
+        <li class="text-white/70" aria-current="page">Contatti</li>
+      </ol>
+    </nav>
+
     <!-- HERO -->
-    <section class="py-24 px-6 text-center">
+    <section class="pt-12 pb-24 px-6 text-center">
       <div class="max-w-3xl mx-auto">
         <p class="text-[11px] uppercase tracking-widest text-white/30 mb-4">Contatti</p>
         <h1 class="font-extrabold tracking-tight leading-[1.05] mb-6" style="font-size:clamp(2.5rem,6vw,4rem);">
@@ -92,13 +101,36 @@
                 class="w-full bg-white/[0.05] border border-white/[0.1] rounded-lg px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-brand/60 focus:bg-white/[0.07] transition-all"
                 placeholder="+39 1234 567890">
             </div>
+
+            <!-- RADIO: tipo di richiesta -->
+            <fieldset>
+              <legend class="block text-xs text-white/40 mb-2">Tipo di richiesta</legend>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <label class="cursor-pointer">
+                  <input type="radio" name="tipo" value="generale" class="peer sr-only" checked>
+                  <span class="block text-center text-xs px-3 py-2 rounded-lg border border-white/[0.1] text-white/55 transition-all hover:border-white/25 peer-checked:border-brand peer-checked:bg-brand/10 peer-checked:text-brand peer-focus-visible:ring-2 peer-focus-visible:ring-brand/40">Generale</span>
+                </label>
+                <label class="cursor-pointer">
+                  <input type="radio" name="tipo" value="prodotti" class="peer sr-only">
+                  <span class="block text-center text-xs px-3 py-2 rounded-lg border border-white/[0.1] text-white/55 transition-all hover:border-white/25 peer-checked:border-brand peer-checked:bg-brand/10 peer-checked:text-brand peer-focus-visible:ring-2 peer-focus-visible:ring-brand/40">Prodotti</span>
+                </label>
+                <label class="cursor-pointer">
+                  <input type="radio" name="tipo" value="collaborazione" class="peer sr-only">
+                  <span class="block text-center text-xs px-3 py-2 rounded-lg border border-white/[0.1] text-white/55 transition-all hover:border-white/25 peer-checked:border-brand peer-checked:bg-brand/10 peer-checked:text-brand peer-focus-visible:ring-2 peer-focus-visible:ring-brand/40">Collaborazione</span>
+                </label>
+                <label class="cursor-pointer">
+                  <input type="radio" name="tipo" value="altro" class="peer sr-only">
+                  <span class="block text-center text-xs px-3 py-2 rounded-lg border border-white/[0.1] text-white/55 transition-all hover:border-white/25 peer-checked:border-brand peer-checked:bg-brand/10 peer-checked:text-brand peer-focus-visible:ring-2 peer-focus-visible:ring-brand/40">Altro</span>
+                </label>
+              </div>
+            </fieldset>
+
             <div>
               <label for="messaggio" class="block text-xs text-white/40 mb-1.5">Messaggio *</label>
               <textarea id="messaggio" name="messaggio" required rows="5"
                 class="w-full bg-white/[0.05] border border-white/[0.1] rounded-lg px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-brand/60 focus:bg-white/[0.07] transition-all resize-none"
                 placeholder="Come possiamo aiutarti?"></textarea>
             </div>
-            <div id="form-feedback" class="text-sm hidden"></div>
             <button type="submit"
               class="w-full bg-brand text-black font-semibold py-3 rounded-lg hover:bg-brand/90 transition-all text-sm mt-2">
               Invia messaggio
@@ -144,6 +176,59 @@
       </div>
     </section>
 
+    <!-- FAQ — ACCORDION -->
+    <section class="pb-24 px-6">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-10">
+          <p class="text-[11px] uppercase tracking-widest text-white/30 mb-3">Domande frequenti</p>
+          <h2 class="text-2xl font-bold text-white">Le risposte rapide</h2>
+        </div>
+        <div class="flex flex-col gap-3">
+
+          <details class="group rounded-xl border border-white/[0.08] bg-white/[0.025] open:bg-white/[0.04] transition-colors">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 text-white text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 rounded-xl">
+              <span>Quando posso venire in cascina?</span>
+              <svg class="w-4 h-4 text-white/40 transition-transform duration-200 group-open:rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-5 text-white/55 text-sm leading-relaxed">Riceviamo solo su appuntamento. Telefonaci o scrivici prima di passare: ti diamo un orario certo e ci assicuriamo che ci sia qualcuno per accoglierti.</div>
+          </details>
+
+          <details class="group rounded-xl border border-white/[0.08] bg-white/[0.025] open:bg-white/[0.04] transition-colors">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 text-white text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 rounded-xl">
+              <span>Vendete online?</span>
+              <svg class="w-4 h-4 text-white/40 transition-transform duration-200 group-open:rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-5 text-white/55 text-sm leading-relaxed">Una parte dei prodotti è disponibile sullo <a href="/shop" class="text-brand hover:text-brand/80">shop online</a>. Per fieno, fiori e legna in quantità maggiori la strada più rapida resta il telefono o l'email.</div>
+          </details>
+
+          <details class="group rounded-xl border border-white/[0.08] bg-white/[0.025] open:bg-white/[0.04] transition-colors">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 text-white text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 rounded-xl">
+              <span>Come si paga?</span>
+              <svg class="w-4 h-4 text-white/40 transition-transform duration-200 group-open:rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-5 text-white/55 text-sm leading-relaxed">Sullo shop il pagamento è gestito da PayPal. Per ritiro in cascina accettiamo bonifico o contanti su accordo.</div>
+          </details>
+
+          <details class="group rounded-xl border border-white/[0.08] bg-white/[0.025] open:bg-white/[0.04] transition-colors">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 text-white text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 rounded-xl">
+              <span>Fate consegne?</span>
+              <svg class="w-4 h-4 text-white/40 transition-transform duration-200 group-open:rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-5 text-white/55 text-sm leading-relaxed">Per quantità significative di fieno o legna organizziamo la consegna in zona Rodigo e dintorni. Per i prodotti dello shop spediamo in tutta Italia.</div>
+          </details>
+
+          <details class="group rounded-xl border border-white/[0.08] bg-white/[0.025] open:bg-white/[0.04] transition-colors">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-5 py-4 text-white text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 rounded-xl">
+              <span>Posso visitare la cascina con bambini o gruppi?</span>
+              <svg class="w-4 h-4 text-white/40 transition-transform duration-200 group-open:rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-5 text-white/55 text-sm leading-relaxed">Sì, su prenotazione. La cascina è una realtà di lavoro, non una fattoria didattica strutturata, ma siamo felici di mostrare quello che facciamo a chi è interessato.</div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
     <!-- MAPPA FULL WIDTH -->
     <section class="pb-24 px-6">
       <div class="max-w-6xl mx-auto">
@@ -180,7 +265,9 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script type="module">
     import { initContattiMap } from '/js/contatti.js';
+    import { initContactForm } from '/js/contact.js';
     initContattiMap('contatti-map');
+    initContactForm('contact-form');
   </script>
   <!-- Anime.js extra animations -->
   <script type="module" src="/js/anime-animations.js?v=dce3399"></script>
