@@ -1,6 +1,7 @@
-export function initContactForm(formId, feedbackId) {
-  const form     = document.getElementById(formId);
-  const feedback = document.getElementById(feedbackId);
+import { snackbar } from '/js/ui.js';
+
+export function initContactForm(formId) {
+  const form = document.getElementById(formId);
   if (!form) return;
 
   form.addEventListener('submit', async (e) => {
@@ -14,6 +15,8 @@ export function initContactForm(formId, feedbackId) {
     const body = {
       nome:      form.elements['nome']?.value?.trim(),
       email:     form.elements['email']?.value?.trim(),
+      telefono:  form.elements['telefono']?.value?.trim() || null,
+      tipo:      form.elements['tipo']?.value || 'generale',
       messaggio: form.elements['messaggio']?.value?.trim(),
     };
 
@@ -23,19 +26,17 @@ export function initContactForm(formId, feedbackId) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-      if (feedback) {
-        feedback.textContent = 'Messaggio inviato! Ti risponderemo presto.';
-        feedback.className   = 'form-feedback success';
-      }
+      snackbar({ message: 'Messaggio inviato — ti risponderemo presto.' });
       form.reset();
     } catch {
-      if (feedback) {
-        feedback.textContent = 'Errore nell\'invio. Riprova o contattaci via email.';
-        feedback.className   = 'form-feedback error';
-      }
+      snackbar({
+        message: 'Errore nell\'invio. Riprova o scrivici via email.',
+        variant: 'error',
+        action: 'Email',
+        onAction: () => { window.location.href = 'mailto:pzkko@yahoo.com'; },
+        duration: 7000,
+      });
     } finally {
       submitBtn.disabled    = false;
       submitBtn.textContent = original;
